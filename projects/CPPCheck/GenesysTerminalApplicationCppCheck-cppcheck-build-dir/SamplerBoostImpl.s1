@@ -1,0 +1,14 @@
+SamplerBoostImpl
+random
+sampleBeta
+sampleDiscrete
+sampleErlang
+sampleExponential
+sampleGamma
+sampleLogNormal
+sampleNormal
+sampleTriangular
+sampleUniform
+sampleWeibull
+setRNGparameters
+getRNGparameters

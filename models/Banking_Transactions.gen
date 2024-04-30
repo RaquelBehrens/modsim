@@ -1,0 +1,56 @@
+# Genesys Simulation Model
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=220517 
+0   ModelInfo  "Model 1" version="1.0" projectTitle="" description="" analystName="" 
+0   ModelSimulation "" traceLevel=9 warmUpTimeTimeUnit=7 warmUpTime=0.400000 replicationLength=8.000000 numberOfReplications=3 replicationLengthTimeUnit=7 
+
+# Model Data Definitions
+62  EntityType "AtmCustomer" 
+63  Station    "Estacao_de_Entrada" 
+64  Station    "Estacao_de_ATM" 
+66  Resource   "caixa" 
+67  Queue      "Fila_ATM" 
+71  Station    "Estacao_de_saida" 
+78  EntityType "TellerCustomer" 
+79  Station    "Door_Station" 
+81  Station    "Teller_Station" 
+84  Set        "Set_Tellers" member[1]="Nancy" member[0]="Judy" members=2 type="Resource" 
+85  Resource   "Judy" 
+86  Resource   "Nancy" 
+87  Queue      "Fila_Teller" 
+93  EntityType "DriveCustomer" 
+94  Station    "Drive_Station" 
+96  Station    "Window_Station" 
+99  Resource   "Window_Teller" 
+100 Queue      "Fila_Drive" 
+104 Station    "Drive_Exit" 
+
+# Model Components
+61  Create     "Create_1" entityType="AtmCustomer" timeBetweenCreationsTimeUnit=6 nextId=74 timeBetweenCreations="expo(60)" 
+65  Route      "Route_1" routeTimeTimeUnit=6 station="Estacao_de_ATM" routeTimeExpression="UNIF(4,6)" nexts=0 
+68  Seize      "Seize_1" queueable="Fila_ATM" nextId=69 requestSeizable[0]="caixa" 
+69  Delay      "Delay_1" delayExpressionTimeUnit=6 delayExpression="UNIF(7,12)" nextId=70 
+70  Release    "Release_1" nextId=72 requestSeizable[0]="caixa" 
+72  Route      "Route_2" routeTimeTimeUnit=6 station="Estacao_de_saida" routeTimeExpression="5" nexts=0 
+73  Dispose    "Dispose_1" nexts=0 
+74  Enter      "Enter_1" station="Estacao_de_Entrada" nextId=65 
+75  Enter      "Enter_2" station="Estacao_de_ATM" nextId=68 
+76  Enter      "Enter_3" station="Estacao_de_saida" nextId=73 
+77  Create     "Create_2" entityType="TellerCustomer" timeBetweenCreationsTimeUnit=6 nextId=80 timeBetweenCreations="expo(11)" 
+80  Enter      "Enter_4" station="Door_Station" nextId=83 
+82  Enter      "Enter_5" station="Teller_Station" nextId=88 
+83  Route      "Route_3" routeTimeTimeUnit=6 station="Teller_Station" routeTimeExpression="UNIF(5,7)" nexts=0 
+88  Seize      "Seize_2" requestSelectionRule[0]=1 requestSeizableType[0]=2 queueable="Fila_Teller" allocationType=1 nextId=89 requestSaveAttribute[0]="myTeller" requestSeizable[0]="Set_Tellers" 
+89  Delay      "Delay_2" delayExpressionTimeUnit=6 delayExpression="EXPO(17)" nextId=90 
+90  Release    "Release_2" requestSelectionRule[0]=3 requestSeizableType[0]=2 nextId=91 requestSaveAttribute[0]="myTeller" requestSeizable[0]="Set_Tellers" 
+91  Route      "Route_4" routeTimeTimeUnit=6 station="Estacao_de_saida" routeTimeExpression="5" nexts=0 
+92  Create     "Create_3" entityType="DriveCustomer" timeBetweenCreationsTimeUnit=6 nextId=95 timeBetweenCreations="expo(21)" 
+95  Enter      "Enter_6" station="Drive_Station" nextId=98 
+97  Enter      "Enter_7" station="Window_Station" nextId=101 
+98  Route      "Route_5" routeTimeTimeUnit=6 station="Window_Station" routeTimeExpression="UNIF(5,7)" nexts=0 
+101 Seize      "Seize_3" queueable="Fila_Drive" nextId=102 requestSeizable[0]="Window_Teller" 
+102 Delay      "Delay_3" delayExpressionTimeUnit=6 delayExpression="UNIF(5,20)" nextId=103 
+103 Release    "Release_3" nextId=106 requestSeizable[0]="Window_Teller" 
+105 Enter      "Enter_8" station="Drive_Exit" nextId=107 
+106 Route      "Route_6" routeTimeTimeUnit=6 station="Drive_Exit" routeTimeExpression="5" nexts=0 
+107 Dispose    "Dispose_2" nexts=0 

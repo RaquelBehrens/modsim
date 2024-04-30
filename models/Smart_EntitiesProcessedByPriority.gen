@@ -1,0 +1,21 @@
+# Genesys Simulation Model
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=220517 
+0   ModelInfo  "Model 1" version="1.0" projectTitle="" description="" analystName="" 
+0   ModelSimulation "" traceLevel=9 warmUpTimeTimeUnit=6 warmUpTime=13.500000 replicationLength=270.000000 numberOfReplications=3 replicationLengthTimeUnit=6 
+
+# Model Data Definitions
+61  Resource   "Packer" 
+63  EntityType "Regular_Job" 
+69  Queue      "Process1.Queue" 
+71  EntityType "Rush_Job" 
+77  Queue      "Process2.Queue" 
+
+# Model Components
+62  Create     "Create_1" entityType="Regular_Job" timeBetweenCreationsTimeUnit=6 nextId=64 timeBetweenCreations="expo(3)" 
+64  Assign     "Assign_1" assignExpr[0]="2" nextId=65 assignDest[0]="priority" 
+65  Process    "Process_1" delayExpression="expo(5)" delayExpressionTimeUnit=6 queueable="Process1.Queue" nextId=78 priorityExpression=="priority" requestSeizable[0]="Packer" 
+70  Create     "Create_2" entityType="Rush_Job" timeBetweenCreationsTimeUnit=6 nextId=72 timeBetweenCreations="expo(10)" 
+72  Assign     "Assign_2" assignExpr[0]="1" nextId=73 assignDest[0]="priority" 
+73  Process    "Process_2" delayExpression="expo(5)" delayExpressionTimeUnit=6 queueable="Process2.Queue" nextId=78 priorityExpression=="priority" requestSeizable[0]="Packer" 
+78  Dispose    "Dispose_1" nexts=0 

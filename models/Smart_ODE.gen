@@ -1,0 +1,14 @@
+# Genesys Simulation Model 
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=220131 
+0   ModelInfo  "Model 1" analystName="" description="" projectTitle="" version="1.0" 
+0   ModelSimulation "" replicationLength=2.000000 showReportsAfterReplicaton=0 showReportsAfterSimulation=0 
+
+# Model Data Definitions
+1579 Variable   "x" dimension[0]=2 dimensions=1 valuePos[1]="1" value[0]=1.000000 values=2 
+1580 Variable   "t" 
+
+# Model Components
+1577 Create     "Create_1" entityType="entitytype" timeBetweenCreations="0.5" nextId=1581 
+1578 Dispose    "Dispose_1" nexts=0 
+1581 LSODE      "LSODE_1" nextId=1578 

@@ -1,0 +1,4 @@
+#ifndef DEFINEGETTERSETTER_H
+#define DEFINEGETTERSETTER_H
+
+#endif

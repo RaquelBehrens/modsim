@@ -1,0 +1,26 @@
+# Genesys Simulation Model
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=220517 
+0   ModelInfo  "Model 1" version="1.0" projectTitle="" description="" analystName="" 
+0   ModelSimulation "" traceLevel=2 warmUpTimeTimeUnit=7 warmUpTime=0.400000 replicationBaseTimeUnit=6 replicationLength=8.000000 numberOfReplications=3 replicationLengthTimeUnit=7 
+
+# Model Data Definitions
+61  Attribute  "Wait_Time" 
+62  Attribute  "j" 
+63  Queue      "queue1" 
+64  Resource   "Machine" 
+65  Resource   "Machine_2" 
+76  Queue      "Queue_1" 
+
+# Model Components
+66  Create     "Entity_Create" entityType="entitytype" maxCreations="200" timeBetweenCreationsTimeUnit=6 nextId=67 timeBetweenCreations="tria(6,7,8)" 
+67  Assign     "Mark_the_time_before_it_enters_the_queue" assignExpr[0]="TNOW" nextId=68 assignDest[0]="Wait_Time" 
+68  Process    "Processing_On_Machine" delayExpression="unif(7,10)" delayExpressionTimeUnit=6 queueable="queue1" nextId=72 requestSeizable[0]="Machine" 
+72  Process    "Secondary_Process" delayExpression="unif(6,9)" delayExpressionTimeUnit=7 queueable="Queue_1" nextId=77 requestSeizable[0]="Machine_2" 
+77  Dispose    "Dispose_Entity" nexts=0 
+78  Create     "Create_Control_Entity" entityType="entitytype" timeBetweenCreationsTimeUnit=6 nextId=79 timeBetweenCreations="1" 
+79  Assign     "assign1" assignExpr[0]="0" nextId=80 assignDest[0]="j" 
+80  Search     "Search_Queue_for_entities_waiting_more_than_20_time_units" nextId[0]=81 nextId[1]=83 nexts=2 
+81  Remove     "Remove_entity_if_in_queue_longer_than_20_time_units" nextId[0]=83 nextId[1]=82 nexts=2 
+82  Assign     "Reassign_Picture_Priority_and_Attribute_Wait_Time" assignExpr[0]="1" assignments=2 nextId=68 assignExpr[2]="TNOW" assignDest[2]="Wait_Time" assignDest[0]="Priority" 
+83  Dispose    "Dispose_of_Control_Entity" nexts=0 

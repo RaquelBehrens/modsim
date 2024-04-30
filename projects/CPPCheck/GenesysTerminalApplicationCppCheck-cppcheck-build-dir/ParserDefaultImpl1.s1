@@ -1,0 +1,4 @@
+ParserDefaultImpl1
+parse call:[atof,c_str]
+getErrorMessage call:[string]
+parse call:[parse,temp]

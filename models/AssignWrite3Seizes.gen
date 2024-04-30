@@ -1,0 +1,21 @@
+# Genesys Simulation Model 
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=220131 
+0   ModelInfo  "Model 1" analystName="Your name" description="This simulation model tests the components and elements that have been implemented so far." projectTitle="The title of the project" version="1.0" 
+0   ModelSimulation "" numberOfReplications=30 replicationLength=10000.000000 replicationLengthTimeUnit=6 traceLevel=2 
+
+# Model Data Definitions
+3898 Attribute  "Attribute_1" 
+3899 Variable   "Variable_1" 
+3902 Resource   "Máquina 1" 
+3903 Queue      "Queue_1" 
+
+# Model Components
+3897 Create     "Create_1" entityType="entitytype" timeBetweenCreations="EXPO(5)" timeBetweenCreationsTimeUnit=6 nextId=3900 
+3900 Assign     "Assign_1" assignDest[0]="Variable_1" assignDest[2]="Attribute_1" assignExpr[0]="Variable_1 + 1" assignExpr[2]="Variable_1" assignments=2 nextId=3901 
+3901 Decide     "Decide_1" condition[0]="UNIF(0,1) > 0.5" conditions=1 nexts=2 nextId[0]=3904 nextId[1]=3908 
+3904 Seize      "Seize_1" queueable="Queue_1" requestSeizable[0]="Máquina 1" nextId=3905 
+3905 Delay      "Delay_1" delayExpression="NORM(5, 3)" delayExpressionTimeUnit=6 nextId=3906 
+3906 Release    "Release_1" requestSeizable[0]="Máquina 1" nextId=3907 
+3907 Record     "Record_1" expression="TNOW - Entity.ArrivalTime" expressionName="Tempo total no sistema" fileName="./temp/TotalTimeInSystem.gen" nextId=3908 
+3908 Dispose    "Dispose_1" nexts=0 
