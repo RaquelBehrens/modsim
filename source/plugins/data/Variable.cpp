@@ -12,6 +12,7 @@
  */
 
 #include "Variable.h"
+#include "../../kernel/simulator/Plugin.h"
 #include "../../kernel/simulator/Model.h"
 
 #ifdef PLUGINCONNECT_DYNAMIC
@@ -48,9 +49,9 @@ PluginInformation* Variable::GetPluginInformation() {
 	return info;
 }
 
-//double Variable::getValue() {
-//	return getValue("");
-//}
+double Variable::getValue() {
+	return getValue("");
+}
 
 double Variable::getValue(std::string index) {
 	std::map<std::string, double>::iterator it = _values->find(index);
@@ -61,11 +62,11 @@ double Variable::getValue(std::string index) {
 	}
 }
 
-//void Variable::setValue(double value) {
-//	setValue("", value);
-//}
+void Variable::setValue(double value) {
+	setValue("", value);
+}
 
-void Variable::setValue(double value,std::string index) {
+void Variable::setValue(std::string index, double value) {
 	std::map<std::string, double>::iterator it = _values->find(index);
 	if (it == _values->end()) {
 		// index does not exist. Create it.
@@ -101,12 +102,6 @@ void Variable::setInitialValue(double value, std::string index) {
 		_initialValues->insert(std::pair<std::string, double>(index, value));
 	} else {
 		it->second = value;
-	}
-}
-
-void Variable::setInitialValues(const std::vector<std::pair<std::string, double>> values) {
-	for(std::pair<std::string,double> pair: values) {
-		setInitialValue(pair.second, pair.first);
 	}
 }
 

@@ -4,16 +4,15 @@
  * and open the template in the editor.
  */
 
-/*
+/* 
  * File:   Record.cpp
  * Author: rafael.luiz.cancian
- *
+ * 
  * Created on 9 de Agosto de 2018, 13:52
  */
 
 #include "Record.h"
 #include "../../kernel/simulator/Model.h"
-#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include <fstream>
 #include <cstdio>
 #include <iostream>
@@ -30,29 +29,6 @@ ModelDataDefinition* Record::NewInstance(Model* model, std::string name) {
 }
 
 Record::Record(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Record>(), name) {
-	SimulationControlGeneric<bool>* propTime = new SimulationControlGeneric<bool>(
-									std::bind(&Record::getTimeDependent, this), std::bind(&Record::setTimeDependent, this, std::placeholders::_1),
-									Util::TypeOf<Record>(), getName(), "TimeDependent", "");
-	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
-									std::bind(&Record::getExpression, this), std::bind(&Record::setExpression, this, std::placeholders::_1),
-									Util::TypeOf<Record>(), getName(), "Expression", "");
-	SimulationControlGeneric<std::string>* propExpressionName = new SimulationControlGeneric<std::string>(
-									std::bind(&Record::getExpressionName, this), std::bind(&Record::setExpressionName, this, std::placeholders::_1),
-									Util::TypeOf<Record>(), getName(), "ExpressionName", "");
-	SimulationControlGeneric<std::string>* propFilename = new SimulationControlGeneric<std::string>(
-									std::bind(&Record::getFileName, this), std::bind(&Record::setFilename, this, std::placeholders::_1),
-									Util::TypeOf<Record>(), getName(), "Filename", "");
-
-	_parentModel->getControls()->insert(propTime);
-	_parentModel->getControls()->insert(propExpression);
-	_parentModel->getControls()->insert(propExpressionName);
-	_parentModel->getControls()->insert(propFilename);
-
-	// setting properties
-	_addProperty(propTime);
-	_addProperty(propExpression);
-	_addProperty(propExpressionName);
-	_addProperty(propFilename);
 }
 
 Record::~Record() {
@@ -187,3 +163,4 @@ ModelComponent* Record::LoadInstance(Model* model, PersistenceRecord *fields) {
 	return newComponent;
 
 }
+

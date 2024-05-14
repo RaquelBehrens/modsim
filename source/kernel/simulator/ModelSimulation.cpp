@@ -271,7 +271,7 @@ void ModelSimulation::_showSimulationHeader() {
 	// model controls and responses
 	std::string controls;
 	for (/*PropertyBase**/SimulationControl* control : * _model->getControls()->list()) {
-		//!@TODO IMPORTANT CONTROLS AND RESPONSES MUST WORK NO MATTER THE PROPERTIES //!@TODO PProperties ///
+		///@TODO IMPORTANT CONTROLS AND RESPONSES MUST WORK NO MATTER THE PROPERTIES ///@TODO PProperties ///
 		controls += control->getName()+"("+control->getClassname()+")="+control->getValue()+", ";
 	}
 	controls = controls.substr(0, controls.length()-2);

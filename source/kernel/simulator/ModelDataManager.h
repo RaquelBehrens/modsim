@@ -32,90 +32,19 @@ public:
 	ModelDataManager(Model* model);
 	virtual ~ModelDataManager() = default;
 public:
-	/*!
-	 * \brief insert
-	 * \param anElement
-	 * \return
-	 */
 	bool insert(ModelDataDefinition* anElement);
-	/*!
-	 * \brief remove
-	 * \param anElement
-	 */
-	void remove(ModelDataDefinition* anElement); //!< Deprected
-	/*!
-	 * \brief insert
-	 * \param datadefinitionTypename
-	 * \param anElement
-	 * \return
-	 */
-	bool insert(std::string datadefinitionTypename, ModelDataDefinition* anElement); //!< Deprected
-	/*!
-	 * \brief remove
-	 * \param datadefinitionTypename
-	 * \param anElement
-	 */
+	void remove(ModelDataDefinition* anElement); ///< Deprected
+	bool insert(std::string datadefinitionTypename, ModelDataDefinition* anElement); ///< Deprected
 	void remove(std::string datadefinitionTypename, ModelDataDefinition* anElement);
-	/*!
-	 * \brief check
-	 * \param datadefinitionTypename
-	 * \param anElement
-	 * \param expressionName
-	 * \param errorMessage
-	 * \return
-	 */
 	bool check(std::string datadefinitionTypename, ModelDataDefinition* anElement, std::string expressionName, std::string* errorMessage);
-	/*!
-	 * \brief check
-	 * \param datadefinitionTypename
-	 * \param elementName
-	 * \param expressionName
-	 * \param mandatory
-	 * \param errorMessage
-	 * \return
-	 */
 	bool check(std::string datadefinitionTypename, std::string elementName, std::string expressionName, bool mandatory, std::string* errorMessage);
-	/*!
-	 * \brief clear
-	 */
 	void clear();
 public:
-	/*!
-	 * \brief getDataDefinition
-	 * \param datadefinitionTypename
-	 * \param id
-	 * \return
-	 */
 	ModelDataDefinition* getDataDefinition(std::string datadefinitionTypename, Util::identification id);
-	/*!
-	 * \brief getDataDefinition
-	 * \param datadefinitionTypename
-	 * \param name
-	 * \return
-	 */
 	ModelDataDefinition* getDataDefinition(std::string datadefinitionTypename, std::string name);
-	/*!
-	 * \brief getNumberOfDataDefinitions
-	 * \param datadefinitionTypename
-	 * \return
-	 */
 	unsigned int getNumberOfDataDefinitions(std::string datadefinitionTypename);
-	/*!
-	 * \brief getNumberOfDataDefinitions
-	 * \return
-	 */
 	unsigned int getNumberOfDataDefinitions();
-	/*!
-	 * \brief getRankOf
-	 * \param datadefinitionTypename
-	 * \param name
-	 * \return
-	 */
-	int getRankOf(std::string datadefinitionTypename, std::string name); //!< returns the position (1st position=0) of the modeldatum if found, or negative value if not found
-	/*!
-	 * \brief getDataDefinitionClassnames
-	 * \return
-	 */
+	int getRankOf(std::string datadefinitionTypename, std::string name); ///< returns the position (1st position=0) of the modeldatum if found, or negative value if not found
 	std::list<std::string>* getDataDefinitionClassnames() const;
 
 	//private:

@@ -1079,18 +1079,23 @@ void ModelGraphicsScene::actualizeDiagramArrows() {
 
     if (existDiagram()) {
         QList<GraphicalDiagramConnection*>* connections = getAllGraphicalDiagramsConnections();
-        int size_connections = connections->size();
-        for (int i = 0; i < size_connections; i++) {
 
-            GraphicalDiagramConnection* itemConnection = connections->first();
+        if (connections) {
+            if (!connections->empty()) {
+                int size_connections = connections->size();
+                for (int i = 0; i < size_connections; i++) {
 
-            QGraphicsItem * item_1 = itemConnection->getDataDefinition();
-            QGraphicsItem * item_2 = itemConnection->getLinkedDataDefinition();
-            addGraphicalDiagramConnection(item_1, item_2, itemConnection->getConnectionType());
+                    GraphicalDiagramConnection* itemConnection = connections->first();
 
-            removeGraphicalDiagramConnection(itemConnection);
+                    QGraphicsItem * item_1 = itemConnection->getDataDefinition();
+                    QGraphicsItem * item_2 = itemConnection->getLinkedDataDefinition();
+                    addGraphicalDiagramConnection(item_1, item_2, itemConnection->getConnectionType());
+
+                    removeGraphicalDiagramConnection(itemConnection);
+                }
+                if (!visibleDiagram()) hideDiagrams();
+            }
         }
-        if (!visibleDiagram()) hideDiagrams();
     }
 }
 
@@ -1749,14 +1754,23 @@ void ModelGraphicsScene::arranjeModels(int direction) {
 //-------------------------
 
 bool ModelGraphicsScene::checkIgnoreEvent() {
-    if (_simulator->getModels()->current()->getSimulation()) {
-        if (_simulator->getModels()->current()->getSimulation()->isRunning()) {
-            return true;
-        } else {
-            return false;
+    if (_simulator) {
+        if (_simulator->getModels()) {
+            if (_simulator->getModels()->current()) {
+                if (_simulator->getModels()->current()->getSimulation()) {
+                    if (_simulator->getModels()->current()->getSimulation()->isRunning()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
         }
     }
+    
+    return false;
 }
+
 void ModelGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (checkIgnoreEvent()) {
         mouseEvent->ignore();
@@ -2003,6 +2017,8 @@ void ModelGraphicsScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEv
 
             if (counterSelected) {
                 animationCounter->setCounter(counterSelected);
+                animationCounter->setIdCounter(counterSelected->getId());
+                animationCounter->setNameCounter(counterSelected->getName());
             } else {
                 animationCounter->setCounter(nullptr);
             }
@@ -2019,6 +2035,8 @@ void ModelGraphicsScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEv
 
             if (variableSelected) {
                 animationVariable->setVariable(variableSelected);
+                animationVariable->setIdVariable(variableSelected->getId());
+                animationVariable->setNameVariable(variableSelected->getName());
             } else {
                 animationVariable->setVariable(nullptr);
             }
@@ -2470,7 +2488,7 @@ void ModelGraphicsScene::clearAnimationsValues() {
 
 
 
-void ModelGraphicsScene::setCounters() {
+void ModelGraphicsScene::setCounters(bool loaded) {
     Model* currentModel = _simulator->getModels()->current();
 
     QList<ModelDataDefinition *> *counters = nullptr;
@@ -2489,10 +2507,16 @@ void ModelGraphicsScene::setCounters() {
                 _counters->append(newCounter);
             }
         }
+
+        if (loaded) {
+            foreach(AnimationCounter *animationCounter, *_animationsCounter) {
+                animationCounter->setWhenLoaded(_counters);
+            }
+        }
     }
 }
 
-void ModelGraphicsScene::setVariables() {
+void ModelGraphicsScene::setVariables(bool loaded) {
     Model* currentModel = _simulator->getModels()->current();
 
     QList<ModelDataDefinition *> *variables = nullptr;
@@ -2509,6 +2533,12 @@ void ModelGraphicsScene::setVariables() {
 
             if (newVariable) {
                 _variables->append(newVariable);
+            }
+        }
+
+        if (loaded) {
+            foreach(AnimationVariable *animationVariable, *_animationsVariable) {
+                animationVariable->setWhenLoaded(_variables);
             }
         }
     }

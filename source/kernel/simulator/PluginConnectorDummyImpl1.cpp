@@ -19,13 +19,12 @@
 #include "../../plugins/components/Assign.h"
 #include "../../plugins/components/Batch.h"
 #include "../../plugins/components/Buffer.h"
-#include "../../plugins/components/CellularAutomataComp.h"
 #include "../../plugins/components/Clone.h"
 #include "../../plugins/components/CppForG.h"
 #include "../../plugins/components/Create.h"
 #include "../../plugins/components/Decide.h"
 #include "../../plugins/components/Delay.h"
-#include "../../plugins/components/DiffEquations.h"
+//#include "../../plugins/components/DiffEquations.h"
 #include "../../plugins/components/Dispose.h"
 #include "../../plugins/components/DropOff.h"
 #include "../../plugins/components/DummyComponent.h"
@@ -35,7 +34,6 @@
 #include "../../plugins/components/Leave.h"
 #include "../../plugins/components/Match.h"
 #include "../../plugins/components/MarkovChain.h"
-//#include "../../plugins/components/Octave.h"
 #include "../../plugins/components/PickStation.h"
 #include "../../plugins/components/PickUp.h"
 #include "../../plugins/components/Seize.h"
@@ -152,8 +150,6 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Access::GetPluginInformation;
 	else if (fn == "batch.so")
 		GetInfo = &Batch::GetPluginInformation;
-	else if (fn == "cellularautomata.so")
-		GetInfo = &CellularAutomataComp::GetPluginInformation;
 	else if (fn == "clone.so")
 		GetInfo = &Clone::GetPluginInformation;
 	else if (fn == "create.so")
@@ -170,8 +166,8 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Dispose::GetPluginInformation;
 	else if (fn == "dummy.so")
 		GetInfo = &DummyComponent::GetPluginInformation;
-	else if (fn == "diffequations.so")
-		GetInfo = &DiffEquations::GetPluginInformation;
+//	else if (fn == "diffequations.so")
+//		GetInfo = &DiffEquations::GetPluginInformation;
 	else if (fn == "dropoff.so")
 		GetInfo = &DropOff::GetPluginInformation;
 	else if (fn == "efsmData.so")
@@ -228,9 +224,6 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Unstore::GetPluginInformation;
 	else if (fn == "write.so")
 		GetInfo = &Write::GetPluginInformation;
-	//else if (fn == "octave.so")
-	//	GetInfo = &Octave::GetPluginInformation;
-
 	//    GetInfo = &Conveyour::GetPluginInformation;
 	//else if (fn == "segment.so")
 	//    GetInfo = &Segment::GetPluginInformation;

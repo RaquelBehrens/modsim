@@ -28,34 +28,18 @@ public:
 	virtual ~Counter() = default;
 public:
 	virtual std::string show();
-public: // public static methods
+public:
 	static PluginInformation* GetPluginInformation();
 	static ModelDataDefinition* LoadInstance(Model* model, PersistenceRecord *fields);
 	static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
 public:
-	/*!
-	 * \brief clear
-	 */
 	void clear();
-	/*!
-	 * \brief incCountValue
-	 * \param value
-	 */
 	void incCountValue(/*int*/double value = 1.0);
-	/*!
-	 * \brief getCountValue
-	 * \return
-	 */
 	double /*unsigned long*/ getCountValue() const;
-	/*!
-	 * \brief getParent
-	 * \return
-	 */
 	ModelDataDefinition* getParent() const;
-protected: //! must be overriden by derived classes
+protected: // from ModelDataDefinition
 	virtual bool _loadInstance(PersistenceRecord *fields);
 	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
-protected: //! could be overriden by derived classes
 	virtual bool _check(std::string* errorMessage);
 	virtual void _initBetweenReplications();
 private:

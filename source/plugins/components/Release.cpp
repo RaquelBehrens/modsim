@@ -31,14 +31,6 @@ ModelDataDefinition* Release::NewInstance(Model* model, std::string name) {
 }
 
 Release::Release(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Release>(), name) {
-	SimulationControlGeneric<unsigned short>* propPriority = new SimulationControlGeneric<unsigned short>(
-									std::bind(&Release::priority, this), std::bind(&Release::setPriority, this, std::placeholders::_1),
-									Util::TypeOf<Release>(), getName(), "Priority", "");
-
-	_parentModel->getControls()->insert(propPriority);
-
-	// setting properties
-	_addProperty(propPriority);
 }
 
 std::string Release::show() {
@@ -193,8 +185,7 @@ void Release::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 			double allocationEntityResource = entity->getAttributeValue("Entity.Allocation."+resource->getName()); //@TODO: Seize is not setting this attribute. Fiz it.
 			std::string allocationCategory = Util::StrAllocation(static_cast<Util::AllocationType>((int) allocationEntityResource));
 			entity->getEntityType()->addGetStatisticsCollector(entity->getEntityTypeName() + "."+allocationCategory+"Time")->getStatistics()->getCollector()->addValue(timeSeized);
-			std::string index="";
-			entity->setAttributeValue("Entity.Total"+allocationCategory+"Time", entity->getAttributeValue("Entity.Total"+allocationCategory+"Time") + timeSeized, index, true);
+			entity->setAttributeValue("Entity.Total"+allocationCategory+"Time", entity->getAttributeValue("Entity.Total"+allocationCategory+"Time") + timeSeized, true);			
 		}
 	}
 	_parentModel->sendEntityToComponent(entity, this->getConnections()->getFrontConnection());

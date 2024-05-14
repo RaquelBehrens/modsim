@@ -53,9 +53,6 @@ public:
 
 	//@TODO: Should be insde ModelSimulation, where time goes on
 
-	/*!
-	 * \brief The TimeUnit enum
-	 */
 	enum class TimeUnit : int {
 		unknown = 0,
 		picosecond = 1,
@@ -68,17 +65,7 @@ public:
 		day = 8,
 		week = 9
 	};
-	/*!
-	 * \brief StrTimeUnitShort
-	 * \param timeUnit
-	 * \return
-	 */
 	static std::string StrTimeUnitShort(Util::TimeUnit timeUnit);
-	/*!
-	 * \brief StrTimeUnitLong
-	 * \param timeUnit
-	 * \return
-	 */
 	static std::string StrTimeUnitLong(Util::TimeUnit timeUnit);
 
 	// TODO check: here? Shouldn´t it be on SimulationReport interface?
@@ -86,6 +73,11 @@ public:
 		ValueAdded = 1, NonValueAdded = 2, Transfer = 3, Wait = 4, Others = 5
 	};
 	static std::string StrAllocation(Util::AllocationType allocation);
+
+    enum class TimeFormat : unsigned int {
+        twelve = 12,
+        twentyFour = 24,
+    };
 
 private:
 	static unsigned int _S_indentation;

@@ -248,12 +248,16 @@ bool MainWindow::_saveGraphicalModel(QString filename)
                     int id = 0;
                     for (AnimationCounter *counter : *counters) {
                         int idCounter = -1;
+                        QString counterName = "None";
+
                         if (counter->getCounter() != nullptr) {
                             idCounter = counter->getCounter()->getId();
+                            counterName = QString::fromStdString(counter->getCounter()->getName());
                         }
-                        line = QString("Counter_%1 \t id=%2 \t position=(%3,%4) \t width=%5 \t height=%6")
+                        line = QString("Counter_%1 \t id=%2 \t name=%3 \t position=(%4,%5) \t width=%6 \t height=%7")
                                    .arg(id)
                                    .arg(idCounter)
+                                   .arg(counterName)
                                    .arg(counter->scenePos().x(), 0, 'f', 2)
                                    .arg(counter->scenePos().y(), 0, 'f', 2)
                                    .arg(counter->boundingRect().width(), 0, 'f', 2)
@@ -274,12 +278,16 @@ bool MainWindow::_saveGraphicalModel(QString filename)
                     int id = 0;
                     for (AnimationVariable *variable : *variables) {
                         int idVariable = -1;
+                        QString variableName = "None";
+
                         if (variable->getVariable() != nullptr) {
                             idVariable = variable->getVariable()->getId();
+                            variableName = QString::fromStdString(variable->getVariable()->getName());
                         }
-                        line = QString("Variable_%1 \t id=%2 \t position=(%3,%4) \t width=%5 \t height=%6")
+                        line = QString("Variable_%1 \t id=%2 \t name=%3 \t position=(%4,%5) \t width=%6 \t height=%7")
                                    .arg(id)
                                    .arg(idVariable)
+                                   .arg(variableName)
                                    .arg(variable->scenePos().x(), 0, 'f', 2)
                                    .arg(variable->scenePos().y(), 0, 'f', 2)
                                    .arg(variable->boundingRect().width(), 0, 'f', 2)
@@ -455,6 +463,8 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
     QFile::remove(tempFile.fileName());
 
     if (model != nullptr) {
+        int zoom = ui->horizontalSlider_ZoomGraphical->maximum() / 2;
+
         std::list<ModelComponent*> c = * model->getComponents()->getAllComponents();
 
         _clearModelEditors();
@@ -465,14 +475,13 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
             if (line.trimmed().isEmpty()) {
                 continue;
             }
-
             if (firstLine) {
                 QRegularExpression regex("(\\d+)\\s*View\\s*zoom=(\\d+),\\s*grid=(\\d+),\\s*rule=(\\d+),\\s*snap=(\\d+),\\s*viewpoint=\\(([^,]+),([^\\)]+)\\)");
                 QRegularExpressionMatch match = regex.match(line);
 
                 if (match.hasMatch()) {
                     int index = match.captured(1).toInt();
-                    int zoom = match.captured(2).toInt();
+                    zoom = match.captured(2).toInt();
                     int grid = match.captured(3).toInt();
                     int rule = match.captured(4).toInt();
                     int snap = match.captured(5).toInt();
@@ -485,15 +494,12 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
                     }
 
                     if (snap) {
+                        ui->actionShowSnap->setCheckable(true);
                         ui->actionShowSnap->setChecked(true);
                         myScene()->setSnapToGrid(true);
+                    } else {
+                        myScene()->setSnapToGrid(false);
                     }
-
-                    ui->horizontalSlider_ZoomGraphical->setValue(zoom + TraitsGUI<GMainWindow>::zoomButtonChange);
-                    double factor = ((double) zoom / 100.0)*(2 - 0.5) + 0.5;
-                    double scaleFactor = 1.0;
-                    scaleFactor *= factor;
-                    //ui->label_ModelGraphic->resize(scaleFactor * ui->label_ModelGraphic->pixmap()->size());
                 }
                 firstLine = false;
                 continue;
@@ -570,24 +576,40 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
                 Connection* connection = it->second;
 
                 GraphicalModelComponent* destination = ui->graphicsView->getScene()->findGraphicalModelComponent(connection->component->getId());
-                unsigned int portDestination = destination->getGraphicalInputPorts().at(0)->portNum();
 
-                source->setOcupiedOutputPorts(source->getOcupiedOutputPorts() + 1);
-                destination->setOcupiedInputPorts(destination->getOcupiedInputPorts() + 1);
+                if (destination) {
+                    unsigned int portDestination;
 
-                std::string nameSource = source->getComponent()->getName();
-                GraphicalComponentPort* sourceport = source->getGraphicalOutputPorts().at(portSource);
+                    if (!destination->getGraphicalInputPorts().empty()) {
+                        portDestination = destination->getGraphicalInputPorts().at(0)->portNum();
+                    } else {
+                        continue;
+                    }
 
-                std::string nameDestination = destination->getComponent()->getName();
-                GraphicalComponentPort* destport = destination->getGraphicalInputPorts().at(portDestination);
+                    source->setOcupiedOutputPorts(source->getOcupiedOutputPorts() + 1);
+                    destination->setOcupiedInputPorts(destination->getOcupiedInputPorts() + 1);
 
-                ui->graphicsView->getScene()->addGraphicalConnection(sourceport, destport, portSource, portDestination);
+                    std::string nameSource = source->getComponent()->getName();
+
+                    GraphicalComponentPort* sourceport;
+
+                    if (!source->getGraphicalOutputPorts().empty()) {
+                        sourceport = source->getGraphicalOutputPorts().at(portSource);
+                    } else {
+                        continue;
+                    }
+
+                    std::string nameDestination = destination->getComponent()->getName();
+                    GraphicalComponentPort* destport = destination->getGraphicalInputPorts().at(portDestination);
+
+                    ui->graphicsView->getScene()->addGraphicalConnection(sourceport, destport, portSource, portDestination);
+                }
             }
         }
 
 
         if (!counters.empty()) {
-            QRegularExpression regex("Counter_(\\d+) \\t id=(-?\\d+) \\t position=\\(([^,]+),([^\\)]+)\\) \\t width=([^\\t]+) \\t height=([^\\t]+)");
+            QRegularExpression regex("Counter_(\\d+) \\t id=(-?\\d+) \\t name=([^\\t]+) \\t position=\\(([^,]+),([^\\)]+)\\) \\t width=([^\\t]+) \\t height=([^\\t]+)");
 
             for (const QString& line : counters) {
                 if (line.trimmed().isEmpty()) {
@@ -600,12 +622,14 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
 
                 if (match.hasMatch()) {
                     int id = match.captured(2).toInt();
-                    qreal posX = match.captured(3).toDouble();
-                    qreal posY = match.captured(4).toDouble();
-                    int width = match.captured(5).toDouble();
-                    int height = match.captured(6).toDouble();
+                    QString name = match.captured(3);
+                    qreal posX = match.captured(4).toDouble();
+                    qreal posY = match.captured(5).toDouble();
+                    int width = match.captured(6).toDouble();
+                    int height = match.captured(7).toDouble();
 
                     counter->setIdCounter(id);
+                    counter->setNameCounter(name.toStdString());
 
                     QRectF newRect = QRectF(0, 0, width, height);
                     counter->setRect(newRect.normalized());
@@ -621,7 +645,7 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
         }
 
         if (!variables.empty()) {
-            QRegularExpression regex("Variable_(\\d+) \\t id=(-?\\d+) \\t position=\\(([^,]+),([^\\)]+)\\) \\t width=([^\\t]+) \\t height=([^\\t]+)");
+            QRegularExpression regex("Variable_(\\d+) \\t id=(-?\\d+) \\t name=([^\\t]+) \\t position=\\(([^,]+),([^\\)]+)\\) \\t width=([^\\t]+) \\t height=([^\\t]+)");
 
             for (const QString& line : variables) {
                 if (line.trimmed().isEmpty()) {
@@ -634,12 +658,14 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
 
                 if (match.hasMatch()) {
                     int id = match.captured(2).toInt();
-                    qreal posX = match.captured(3).toDouble();
-                    qreal posY = match.captured(4).toDouble();
-                    int width = match.captured(5).toDouble();
-                    int height = match.captured(6).toDouble();
+                    QString name = match.captured(3);
+                    qreal posX = match.captured(4).toDouble();
+                    qreal posY = match.captured(5).toDouble();
+                    int width = match.captured(6).toDouble();
+                    int height = match.captured(7).toDouble();
 
                     variable->setIdVariable(id);
+                    variable->setNameVariable(name.toStdString());
 
                     QRectF newRect = QRectF(0, 0, width, height);
                     variable->setRect(newRect.normalized());
@@ -699,6 +725,12 @@ Model *MainWindow::_loadGraphicalModel(std::string filename) {
 
         ui->textEdit_Console->append("\n");
         _modelfilename = QString::fromStdString(filename);
+
+        _zoomValue = ui->horizontalSlider_ZoomGraphical->maximum() / 2;
+
+        ui->horizontalSlider_ZoomGraphical->setValue(zoom);
+
+        myScene()->update();
     }
     return model;
 }
@@ -850,6 +882,12 @@ void MainWindow::_actualizeActions() {
     if (_modelWasOpened && !opened) {
         _clearModelEditors();
     }
+
+    ui->actionDiagrams->setEnabled(opened && !running);
+    ui->actionShowSnap->setEnabled(opened && !running);
+    ui->actionShowSnap->setCheckable(opened);
+
+    ui->menuTools->setEnabled(!running);
 
     //slider animation speed
     ui->horizontalSliderAnimationSpeed->setEnabled(running && !paused);
@@ -1246,8 +1284,8 @@ void MainWindow::_recursiveCreateModelGraphicPicture(ModelDataDefinition* compon
         std::string nodeComponent = "shape=record, fontsize=12, fontcolor=black, style=filled, fillcolor=bisque";
         //std::string nodeComponentOtherLevel = "shape=record, fontsize=12, fontcolor=black, style=filled, fillcolor=goldenrod3";
         std::string edgeComponent = "style=solid, arrowhead=\"normal\" color=black, fontcolor=black, fontsize=7";
-        std::string nodeDataDefInternal = "shape=record, fontsize=8, color=gray50, fontcolor=gray50, style=filled, fillcolor=#d9ebbd";
-        std::string nodeDataDefAttached = "shape=record, fontsize=10, color=gray50, fontcolor=gray50, style=filled, fillcolor=#a2cd5a";
+        std::string nodeDataDefInternal = "shape=record, fontsize=8, color=gray50, fontcolor=gray50";
+        std::string nodeDataDefAttached = "shape=record, fontsize=10, color=gray50, fontcolor=gray50, style=filled, fillcolor=darkolivegreen3";
         std::string edgeDataDefInternal = "style=dashed, arrowhead=\"diamond\", color=gray55, fontcolor=gray55, fontsize=7";
         std::string edgeDataDefAttached = "style=dashed, arrowhead=\"ediamond\", color=gray50, fontcolor=gray50, fontsize=7";
         unsigned int rankSource = 0;
@@ -2304,6 +2342,11 @@ void MainWindow::on_actionSimulationStart_triggered() {
     AnimationTransition::setRunning(true);
     AnimationTransition::setPause(false);
 
+    if (myScene()->existDiagram()) {
+        ui->actionDiagrams->setChecked(false);
+        myScene()->hideDiagrams();
+    }
+
     bool res = true;
 
     // Checha o modelo antes de começar
@@ -2321,6 +2364,11 @@ void MainWindow::on_actionSimulationStart_triggered() {
 void MainWindow::on_actionSimulationStep_triggered() {
     AnimationTransition::setRunning(true);
     AnimationTransition::setPause(false);
+
+    if (myScene()->existDiagram()) {
+        ui->actionDiagrams->setChecked(false);
+        myScene()->hideDiagrams();
+    }
 
     bool res = true;
 
@@ -3218,6 +3266,7 @@ void MainWindow::on_actionModelNew_triggered() {
     }
     m = simulator->getModels()->newModel();
     _initUiForNewModel(m);
+
 }
 
 void MainWindow::on_actionModelOpen_triggered()
@@ -3267,7 +3316,6 @@ void MainWindow::on_actionModelOpen_triggered()
     if (model != nullptr) {
         _loaded = true;
         _initUiForNewModel(model);
-
         QMessageBox::information(this, "Open Model", "Model successfully oppened");
     } else {
         QMessageBox::warning(this, "Open Model", "Error while opening model");
@@ -3335,10 +3383,36 @@ void MainWindow::on_actionModelClose_triggered()
     }
     _insertCommandInConsole("close");
 
+    // seta o snap to grid pra falso
+    myScene()->setSnapToGrid(false);
+
+    // reseta a escala de zoom
+    ui->graphicsView->resetTransform();
+    ui->graphicsView->resetMatrix();
+    _zoomValue = ui->horizontalSlider_ZoomGraphical->maximum() / 2;
+    ui->horizontalSlider_ZoomGraphical->setValue(_zoomValue);
+
+    // reseta animation speed
+    int speedValueReset = ui->horizontalSliderAnimationSpeed->maximum() / 2;
+    ui->horizontalSliderAnimationSpeed->setValue(speedValueReset);
+
     // quando a cena é fechada, limpo o grid associado a ela
     ui->graphicsView->getScene()->grid()->clear();
     // volto o botao de grid para "não clicado"
     ui->actionShowGrid->setChecked(false);
+
+    // se os diagramas existem, esconde eles antes de limpar
+    if (myScene()->existDiagram()) {
+        myScene()->hideDiagrams();
+    }
+    
+    // mantém o botão de diagramas em não clicado
+    ui->actionDiagrams->setChecked(false);
+
+    // remove listas de diagramas
+    ui->graphicsView->getScene()->getAllGraphicalDiagramsConnections()->clear();
+    ui->graphicsView->getScene()->getGraphicalDiagramsConnections()->clear();
+    ui->graphicsView->getScene()->getAllDataDefinitions()->clear();
 
     // limpando tudo a que se refere à cena
     ui->graphicsView->getScene()->getUndoStack()->clear();
@@ -3389,8 +3463,6 @@ bool MainWindow::_check(bool success)
     // reinsere os data definitions no modelo de componentes restauradosapenas se não for um modelo previamente carregado que ja tem seus data definitions
     myScene()->insertRestoredDataDefinitions(_loaded);
 
-    _loaded = false;
-
     // Ativa visualização de animação
     ui->actionActivateGraphicalSimulation->setChecked(true);
 
@@ -3411,21 +3483,23 @@ bool MainWindow::_check(bool success)
         ModelGraphicsScene* scene = (ModelGraphicsScene*) (ui->graphicsView->scene());
         // Mensagem de sucesso
         if (success)
-            if (!scene->existDiagram()){
-                scene->createDiagrams();
-            } else {
-                scene->destroyDiagram();
-                scene->createDiagrams();
-            }
             QMessageBox::information(this, "Model Check", "Model successfully checked.");
+
+        if (!scene->existDiagram()){
+            scene->createDiagrams();
+        } else {
+            scene->destroyDiagram();
+            scene->createDiagrams();
+        }
 
         // Salva os data definitions dos componentes atuais
         myScene()->saveDataDefinitions();
 
         // Seta os em uma lista os contadores e variáveis criadas
-        myScene()->setCounters();
-        myScene()->setVariables();
+        myScene()->setCounters(_loaded);
+        myScene()->setVariables(_loaded);
 
+        _loaded = false;
         _modelCheked = true;
     } else {
         // Mensagem de erro
@@ -3640,14 +3714,41 @@ void MainWindow::on_actionActivateGraphicalSimulation_triggered()
             component->visivibleImageQueue(visivible);
         }
     }
+
+    QMap<Event *, QList<AnimationTransition *> *>* animationPaused = myScene()->getAnimationPaused();
+
+    if (animationPaused) {
+        if (!animationPaused->empty()) {
+            // Iterando sobre o QMap
+            for (auto it = animationPaused->begin(); it != animationPaused->end(); ++it) {
+                // Obtendo a QList de AnimationTransition*
+                QList<AnimationTransition*>* animationTransitions = it.value();
+
+                // Iterando sobre a QList
+                for (int i = 0; i < animationTransitions->size(); ++i) {
+                    // Obtendo um AnimationTransition
+                    AnimationTransition* transition = animationTransitions->at(i);
+
+                    // Verificando se transition não é nulo
+                    if (transition) {
+                        // Modificando a propriedade visible
+                        transition->getImageAnimation()->setVisible(visivible);
+                    }
+                }
+            }
+        }
+    }
 }
 
 
 void MainWindow::on_horizontalSliderAnimationSpeed_valueChanged(int value)
 {
-    double newValue = ((double) value) / 2;
+    double maximum = (double) ui->horizontalSliderAnimationSpeed->maximum() + 0.5;
+    double valueCurrent = (double) value;
+    double updateValue = maximum - valueCurrent;
+    double finalValue = updateValue / 2;
 
-    AnimationTransition::setTimeExecution(newValue);
+    AnimationTransition::setTimeExecution(finalValue);
 }
 
 

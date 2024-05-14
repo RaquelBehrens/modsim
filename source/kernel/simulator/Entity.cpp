@@ -80,7 +80,11 @@ std::string Entity::show() {
 	return message;
 }
 
-double Entity::getAttributeValue(std::string attributeName, std::string index) {
+double Entity::getAttributeValue(std::string attributeName) {
+	return getAttributeValue("", attributeName);
+}
+
+double Entity::getAttributeValue(std::string index, std::string attributeName) {
 	int rank = _parentModel->getDataManager()->getRankOf(Util::TypeOf<Attribute>(), attributeName);
 	if (rank >= 0) {
 		std::map<std::string, double>* map = this->_attributeValues->getAtRank(rank);
@@ -99,16 +103,25 @@ double Entity::getAttributeValue(std::string attributeName, std::string index) {
 	return 0.0;
 }
 
-double Entity::getAttributeValue(Util::identification attributeID, std::string index) {
+double Entity::getAttributeValue(Util::identification attributeID) {
+	return getAttributeValue("", attributeID);
+}
+
+double Entity::getAttributeValue(std::string index, Util::identification attributeID) {
 	//assert(this->_parentModel != nullptr);
 	ModelDataDefinition* modeldatum = _parentModel->getDataManager()->getDataDefinition(Util::TypeOf<Attribute>(), attributeID);
 	if (modeldatum != nullptr) {
-		return getAttributeValue(modeldatum->getName(), index);
+
+		return getAttributeValue(index, modeldatum->getName());
 	}
 	return 0.0; // attribute not found
 }
 
-void Entity::setAttributeValue(std::string attributeName, double value, std::string index, bool createIfNotFound) {
+void Entity::setAttributeValue(std::string attributeName, double value, bool createIfNotFound) {
+	setAttributeValue("", attributeName, value, createIfNotFound);
+}
+
+void Entity::setAttributeValue(std::string index, std::string attributeName, double value, bool createIfNotFound) {
 	int rank = _parentModel->getDataManager()->getRankOf(Util::TypeOf<Attribute>(), attributeName);
 	if (rank < 0) {
 		if (createIfNotFound) {
@@ -135,9 +148,13 @@ void Entity::setAttributeValue(std::string attributeName, double value, std::str
 	}
 }
 
-void Entity::setAttributeValue(Util::identification attributeID, double value, std::string index) {
+void Entity::setAttributeValue(Util::identification attributeID, double value) {
+	setAttributeValue("", attributeID, value);
+}
+
+void Entity::setAttributeValue(std::string index, Util::identification attributeID, double value) {
 	std::string attrname = _parentModel->getDataManager()->getDataDefinition(Util::TypeOf<Attribute>(), attributeID)->getName();
-	setAttributeValue(attrname, value, index);
+	setAttributeValue(index, attrname, value);
 }
 
 Util::identification Entity::entityNumber() const {

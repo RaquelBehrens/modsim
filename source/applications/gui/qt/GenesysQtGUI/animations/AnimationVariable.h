@@ -23,6 +23,7 @@ public:
     void setValue(double value);
     void setVariable(Variable *variable);
     void setIdVariable(int id);
+    void setNameVariable(std::string name);
 
     // Outros
     void startDrawing(QGraphicsSceneMouseEvent *event); // Inicia o desenho da tela
@@ -31,6 +32,7 @@ public:
     void adjustSizeAndPosition(QGraphicsSceneMouseEvent *event); // Ajusta posição e dimensão do retângulo no final
     bool isDrawingInicialized(); // Diz se a variável começou a ser desenhada
     bool isDrawingFinalized(); // Diz se a variável terminou de ser desenhada
+    void setWhenLoaded(QList<Variable *> *variables); // seta o contador quando o modelo é carregado
 
 private:
     double _value = 0.0;
@@ -39,7 +41,8 @@ private:
     bool _isDrawingInicialized = false;
     bool _isDrawingFinalized = false;
     Variable *_variable = nullptr;
-    int _idVariable = -1;
+    int _idVariable = 0;
+    std::string _variableName = "None";
 };
 
 #endif // ANIMATIONVARIABLE_H

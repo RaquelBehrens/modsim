@@ -184,11 +184,11 @@ public:
     void drawingVariable();
     void drawingTimer();
     void clearAnimationsValues();
-    void setCounters();
-    void setVariables();
+    void setCounters(bool loaded = false);
+    void setVariables(bool loaded = false);
     // TODO: Funções abaixo são usadas para reaver os dataDefinitions do componente nos dataDefinitions do modelo dos componentes deletados, "checados" e reinseridos (Control Z de um delete, por exemplo).
     // O kernel não trata este caso, ale acusa erro, pois não encontra os dataDefinitions do componente nos dataDefinitions do modelo, pois ele os remove como "órfãos" e não os reinsere quando voltados ao modelo.
-    void insertRestoredDataDefinitions(bool loaded);
+    void insertRestoredDataDefinitions(bool loaded = false);
     void saveDataDefinitions();
     // --------------------------------- //
 

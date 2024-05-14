@@ -196,8 +196,12 @@ void GraphicalComponentPort::addGraphicalConnection(GraphicalConnection* connect
 
 void GraphicalComponentPort::removeGraphicalConnection(GraphicalConnection* connection) {
     if (connection && _connections) {
-        if (!_connections->empty()) {
-            _connections->removeOne(connection);
+        QList<GraphicalConnection*>* graphicalConnections = dynamic_cast<QList<GraphicalConnection*>*>(_connections);
+
+        if (graphicalConnections) {
+            if (!_connections->empty()) {
+                _connections->removeOne(connection);
+            }
         }
     }
 }

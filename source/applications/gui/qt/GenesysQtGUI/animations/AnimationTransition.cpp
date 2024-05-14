@@ -52,6 +52,17 @@ AnimationTransition::AnimationTransition(ModelGraphicsScene* myScene, ModelCompo
         // Pega os pontos na tela em que a animação deve ocorrer
         QList<QPointF> pointsConnection = connection->getPoints();
 
+        if (pointsConnection.empty()) {
+            _graphicalEndComponent = nullptr;
+            return;
+        }
+
+        // deve haver no mínimo 4 pontos
+        if (pointsConnection.size() < 4) {
+            _graphicalEndComponent = nullptr;
+            return;
+        }
+
         // Tamanho para imagem
         const int imageWidth = 50;
         const int imageHeight = 50;

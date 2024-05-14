@@ -98,19 +98,18 @@ public: //static
     static ModelDataDefinition* LoadInstance(Model* model, PersistenceRecord *fields);
     static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
 public:
-	double getValue(std::string index="");
-	void setValue(double value, std::string index="");
-	double getInitialValue(std::string index = "");
-	void setInitialValue(double value, std::string index="");
-	void setInitialValues(const std::vector<std::pair<std::string,double>> values);
-	void insertDimentionSize(unsigned int size);
-	std::list<unsigned int>* getDimensionSizes() const;
-	std::map<std::string, double> *getValues() const;
-	//double getValue();
-	//void setValue(double value);
-	//void setValue(std::string index, double value);
+    double getValue();
+    void setValue(double value);
+    double getValue(std::string index);
+    void setValue(std::string index, double value);
 	//double getInitialValue();
 	//void setInitialValue(double value);
+	double getInitialValue(std::string index = "");
+	void setInitialValue(double value, std::string index="");
+	void insertDimentionSize(unsigned int size);
+	std::list<unsigned int>* getDimensionSizes() const;
+
+    std::map<std::string, double> *getValues() const;
 
 protected:
     virtual bool _loadInstance(PersistenceRecord *fields);

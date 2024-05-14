@@ -188,9 +188,9 @@ public:
 	  \see QCustomPlot::savePng, QCustomPlot::saveJpg, QCustomPlot::saveBmp, QCustomPlot::saveRastered
 	 */
 	enum ResolutionUnit {
-		ruDotsPerMeter //!< Resolution is given in dots per meter (dpm)
-		, ruDotsPerCentimeter //!< Resolution is given in dots per centimeter (dpcm)
-		, ruDotsPerInch //!< Resolution is given in dots per inch (DPI/PPI)
+		ruDotsPerMeter ///< Resolution is given in dots per meter (dpm)
+		, ruDotsPerCentimeter ///< Resolution is given in dots per centimeter (dpcm)
+		, ruDotsPerInch ///< Resolution is given in dots per inch (DPI/PPI)
 	};
 
 	/*!
@@ -199,8 +199,8 @@ public:
 	  \see QCustomPlot::savePdf
 	 */
 	enum ExportPen {
-		epNoCosmetic //!< Cosmetic pens are converted to pens with pixel width 1 when exporting
-		, epAllowCosmetic //!< Cosmetic pens are exported normally (e.g. in PDF exports, cosmetic pens always appear as 1 pixel on screen, independent of viewer zoom level)
+		epNoCosmetic ///< Cosmetic pens are converted to pens with pixel width 1 when exporting
+		, epAllowCosmetic ///< Cosmetic pens are exported normally (e.g. in PDF exports, cosmetic pens always appear as 1 pixel on screen, independent of viewer zoom level)
 	};
 
 	/*!
@@ -211,9 +211,9 @@ public:
 	  domains can be visible at a time.
 	 */
 	enum SignDomain {
-		sdNegative //!< The negative sign domain, i.e. numbers smaller than zero
-		, sdBoth //!< Both sign domains, including zero, i.e. all numbers
-		, sdPositive //!< The positive sign domain, i.e. numbers greater than zero
+		sdNegative ///< The negative sign domain, i.e. numbers smaller than zero
+		, sdBoth ///< Both sign domains, including zero, i.e. all numbers
+		, sdPositive ///< The positive sign domain, i.e. numbers greater than zero
 	};
 
 	/*!
@@ -222,12 +222,12 @@ public:
 	  \see QCPLayoutElement::setAutoMargins, QCPAxisRect::setAutoMargins
 	 */
 	enum MarginSide {
-		msLeft = 0x01 //!< <tt>0x01</tt> left margin
-		, msRight = 0x02 //!< <tt>0x02</tt> right margin
-		, msTop = 0x04 //!< <tt>0x04</tt> top margin
-		, msBottom = 0x08 //!< <tt>0x08</tt> bottom margin
-		, msAll = 0xFF //!< <tt>0xFF</tt> all margins
-		, msNone = 0x00 //!< <tt>0x00</tt> no margin
+		msLeft = 0x01 ///< <tt>0x01</tt> left margin
+		, msRight = 0x02 ///< <tt>0x02</tt> right margin
+		, msTop = 0x04 ///< <tt>0x04</tt> top margin
+		, msBottom = 0x08 ///< <tt>0x08</tt> bottom margin
+		, msAll = 0xFF ///< <tt>0xFF</tt> all margins
+		, msNone = 0x00 ///< <tt>0x00</tt> no margin
 	};
 
 	Q_DECLARE_FLAGS(MarginSides, MarginSide)
@@ -242,19 +242,19 @@ public:
 	  \see QCustomPlot::setAntialiasedElements, QCustomPlot::setNotAntialiasedElements
 	 */
 	enum AntialiasedElement {
-		aeAxes = 0x0001 //!< <tt>0x0001</tt> Axis base line and tick marks
-		, aeGrid = 0x0002 //!< <tt>0x0002</tt> Grid lines
-		, aeSubGrid = 0x0004 //!< <tt>0x0004</tt> Sub grid lines
-		, aeLegend = 0x0008 //!< <tt>0x0008</tt> Legend box
-		, aeLegendItems = 0x0010 //!< <tt>0x0010</tt> Legend items
-		, aePlottables = 0x0020 //!< <tt>0x0020</tt> Main lines of plottables
-		, aeItems = 0x0040 //!< <tt>0x0040</tt> Main lines of items
-		, aeScatters = 0x0080 //!< <tt>0x0080</tt> Scatter symbols of plottables (excluding scatter symbols of type ssPixmap)
-		, aeFills = 0x0100 //!< <tt>0x0100</tt> Borders of fills (e.g. under or between graphs)
-		, aeZeroLine = 0x0200 //!< <tt>0x0200</tt> Zero-lines, see \ref QCPGrid::setZeroLinePen
-		, aeOther = 0x8000 //!< <tt>0x8000</tt> Other elements that don't fit into any of the existing categories
-		, aeAll = 0xFFFF //!< <tt>0xFFFF</tt> All elements
-		, aeNone = 0x0000 //!< <tt>0x0000</tt> No elements
+		aeAxes = 0x0001 ///< <tt>0x0001</tt> Axis base line and tick marks
+		, aeGrid = 0x0002 ///< <tt>0x0002</tt> Grid lines
+		, aeSubGrid = 0x0004 ///< <tt>0x0004</tt> Sub grid lines
+		, aeLegend = 0x0008 ///< <tt>0x0008</tt> Legend box
+		, aeLegendItems = 0x0010 ///< <tt>0x0010</tt> Legend items
+		, aePlottables = 0x0020 ///< <tt>0x0020</tt> Main lines of plottables
+		, aeItems = 0x0040 ///< <tt>0x0040</tt> Main lines of items
+		, aeScatters = 0x0080 ///< <tt>0x0080</tt> Scatter symbols of plottables (excluding scatter symbols of type ssPixmap)
+		, aeFills = 0x0100 ///< <tt>0x0100</tt> Borders of fills (e.g. under or between graphs)
+		, aeZeroLine = 0x0200 ///< <tt>0x0200</tt> Zero-lines, see \ref QCPGrid::setZeroLinePen
+		, aeOther = 0x8000 ///< <tt>0x8000</tt> Other elements that don't fit into any of the existing categories
+		, aeAll = 0xFFFF ///< <tt>0xFFFF</tt> All elements
+		, aeNone = 0x0000 ///< <tt>0x0000</tt> No elements
 	};
 
 	Q_DECLARE_FLAGS(AntialiasedElements, AntialiasedElement)
@@ -265,12 +265,12 @@ public:
 	  \see QCustomPlot::setPlottingHints
 	 */
 	enum PlottingHint {
-		phNone = 0x000 //!< <tt>0x000</tt> No hints are set
-		, phFastPolylines = 0x001 //!< <tt>0x001</tt> Graph/Curve lines are drawn with a faster method. This reduces the quality especially of the line segment
-		//!<                joins, thus is most effective for pen sizes larger than 1. It is only used for solid line pens.
-		, phImmediateRefresh = 0x002 //!< <tt>0x002</tt> causes an immediate repaint() instead of a soft update() when QCustomPlot::replot() is called with parameter \ref QCustomPlot::rpRefreshHint.
-		//!<                This is set by default to prevent the plot from freezing on fast consecutive replots (e.g. user drags ranges with mouse).
-		, phCacheLabels = 0x004 //!< <tt>0x004</tt> axis (tick) labels will be cached as pixmaps, increasing replot performance.
+		phNone = 0x000 ///< <tt>0x000</tt> No hints are set
+		, phFastPolylines = 0x001 ///< <tt>0x001</tt> Graph/Curve lines are drawn with a faster method. This reduces the quality especially of the line segment
+		///<                joins, thus is most effective for pen sizes larger than 1. It is only used for solid line pens.
+		, phImmediateRefresh = 0x002 ///< <tt>0x002</tt> causes an immediate repaint() instead of a soft update() when QCustomPlot::replot() is called with parameter \ref QCustomPlot::rpRefreshHint.
+		///<                This is set by default to prevent the plot from freezing on fast consecutive replots (e.g. user drags ranges with mouse).
+		, phCacheLabels = 0x004 ///< <tt>0x004</tt> axis (tick) labels will be cached as pixmaps, increasing replot performance.
 	};
 
 	Q_DECLARE_FLAGS(PlottingHints, PlottingHint)
@@ -283,16 +283,16 @@ public:
 	  \see QCustomPlot::setInteractions
 	 */
 	enum Interaction {
-		iNone = 0x000 //!< <tt>0x000</tt> None of the interactions are possible
-		, iRangeDrag = 0x001 //!< <tt>0x001</tt> Axis ranges are draggable (see \ref QCPAxisRect::setRangeDrag, \ref QCPAxisRect::setRangeDragAxes)
-		, iRangeZoom = 0x002 //!< <tt>0x002</tt> Axis ranges are zoomable with the mouse wheel (see \ref QCPAxisRect::setRangeZoom, \ref QCPAxisRect::setRangeZoomAxes)
-		, iMultiSelect = 0x004 //!< <tt>0x004</tt> The user can select multiple objects by holding the modifier set by \ref QCustomPlot::setMultiSelectModifier while clicking
-		, iSelectPlottables = 0x008 //!< <tt>0x008</tt> Plottables are selectable (e.g. graphs, curves, bars,... see QCPAbstractPlottable)
-		, iSelectAxes = 0x010 //!< <tt>0x010</tt> Axes are selectable (or parts of them, see QCPAxis::setSelectableParts)
-		, iSelectLegend = 0x020 //!< <tt>0x020</tt> Legends are selectable (or their child items, see QCPLegend::setSelectableParts)
-		, iSelectItems = 0x040 //!< <tt>0x040</tt> Items are selectable (Rectangles, Arrows, Textitems, etc. see \ref QCPAbstractItem)
-		, iSelectOther = 0x080 //!< <tt>0x080</tt> All other objects are selectable (e.g. your own derived layerables, other layout elements,...)
-		, iSelectPlottablesBeyondAxisRect = 0x100 //!< <tt>0x100</tt> When performing plottable selection/hit tests, this flag extends the sensitive area beyond the axis rect
+		iNone = 0x000 ///< <tt>0x000</tt> None of the interactions are possible
+		, iRangeDrag = 0x001 ///< <tt>0x001</tt> Axis ranges are draggable (see \ref QCPAxisRect::setRangeDrag, \ref QCPAxisRect::setRangeDragAxes)
+		, iRangeZoom = 0x002 ///< <tt>0x002</tt> Axis ranges are zoomable with the mouse wheel (see \ref QCPAxisRect::setRangeZoom, \ref QCPAxisRect::setRangeZoomAxes)
+		, iMultiSelect = 0x004 ///< <tt>0x004</tt> The user can select multiple objects by holding the modifier set by \ref QCustomPlot::setMultiSelectModifier while clicking
+		, iSelectPlottables = 0x008 ///< <tt>0x008</tt> Plottables are selectable (e.g. graphs, curves, bars,... see QCPAbstractPlottable)
+		, iSelectAxes = 0x010 ///< <tt>0x010</tt> Axes are selectable (or parts of them, see QCPAxis::setSelectableParts)
+		, iSelectLegend = 0x020 ///< <tt>0x020</tt> Legends are selectable (or their child items, see QCPLegend::setSelectableParts)
+		, iSelectItems = 0x040 ///< <tt>0x040</tt> Items are selectable (Rectangles, Arrows, Textitems, etc. see \ref QCPAbstractItem)
+		, iSelectOther = 0x080 ///< <tt>0x080</tt> All other objects are selectable (e.g. your own derived layerables, other layout elements,...)
+		, iSelectPlottablesBeyondAxisRect = 0x100 ///< <tt>0x100</tt> When performing plottable selection/hit tests, this flag extends the sensitive area beyond the axis rect
 	};
 
 	Q_DECLARE_FLAGS(Interactions, Interaction)
@@ -303,10 +303,10 @@ public:
 	  \see QCustomPlot::setSelectionRectMode, QCustomPlot::selectionRect, QCPSelectionRect
 	 */
 	enum SelectionRectMode {
-		srmNone //!< The selection rect is disabled, and all mouse events are forwarded to the underlying objects, e.g. for axis range dragging
-		, srmZoom //!< When dragging the mouse, a selection rect becomes active. Upon releasing, the axes that are currently set as range zoom axes (\ref QCPAxisRect::setRangeZoomAxes) will have their ranges zoomed accordingly.
-		, srmSelect //!< When dragging the mouse, a selection rect becomes active. Upon releasing, plottable data points that were within the selection rect are selected, if the plottable's selectability setting permits. (See  \ref dataselection "data selection mechanism" for details.)
-		, srmCustom //!< When dragging the mouse, a selection rect becomes active. It is the programmer's responsibility to connect according slots to the selection rect's signals (e.g. \ref QCPSelectionRect::accepted) in order to process the user interaction.
+		srmNone ///< The selection rect is disabled, and all mouse events are forwarded to the underlying objects, e.g. for axis range dragging
+		, srmZoom ///< When dragging the mouse, a selection rect becomes active. Upon releasing, the axes that are currently set as range zoom axes (\ref QCPAxisRect::setRangeZoomAxes) will have their ranges zoomed accordingly.
+		, srmSelect ///< When dragging the mouse, a selection rect becomes active. Upon releasing, plottable data points that were within the selection rect are selected, if the plottable's selectability setting permits. (See  \ref dataselection "data selection mechanism" for details.)
+		, srmCustom ///< When dragging the mouse, a selection rect becomes active. It is the programmer's responsibility to connect according slots to the selection rect's signals (e.g. \ref QCPSelectionRect::accepted) in order to process the user interaction.
 	};
 
 	/*!
@@ -328,11 +328,11 @@ public:
 	  \see QCPAbstractPlottable::setSelectable, QCPDataSelection::enforceType
 	 */
 	enum SelectionType {
-		stNone //!< The plottable is not selectable
-		, stWhole //!< Selection behaves like \ref stMultipleDataRanges, but if there are any data points selected, the entire plottable is drawn as selected.
-		, stSingleData //!< One individual data point can be selected at a time
-		, stDataRange //!< Multiple contiguous data points (a data range) can be selected
-		, stMultipleDataRanges //!< Any combination of data points/ranges can be selected
+		stNone ///< The plottable is not selectable
+		, stWhole ///< Selection behaves like \ref stMultipleDataRanges, but if there are any data points selected, the entire plottable is drawn as selected.
+		, stSingleData ///< One individual data point can be selected at a time
+		, stDataRange ///< Multiple contiguous data points (a data range) can be selected
+		, stMultipleDataRanges ///< Any combination of data points/ranges can be selected
 	};
 
 	/*! \internal
@@ -560,10 +560,10 @@ public:
 	  depending on whether they are wanted on the respective output device.
 	 */
 	enum PainterMode {
-		pmDefault = 0x00 //!< <tt>0x00</tt> Default mode for painting on screen devices
-		, pmVectorized = 0x01 //!< <tt>0x01</tt> Mode for vectorized painting (e.g. PDF export). For example, this prevents some antialiasing fixes.
-		, pmNoCaching = 0x02 //!< <tt>0x02</tt> Mode for all sorts of exports (e.g. PNG, PDF,...). For example, this prevents using cached pixmap labels
-		, pmNonCosmetic = 0x04 //!< <tt>0x04</tt> Turns pen widths 0 to 1, i.e. disables cosmetic pens. (A cosmetic pen is always drawn with width 1 pixel in the vector image/pdf viewer, independent of zoom.)
+		pmDefault = 0x00 ///< <tt>0x00</tt> Default mode for painting on screen devices
+		, pmVectorized = 0x01 ///< <tt>0x01</tt> Mode for vectorized painting (e.g. PDF export). For example, this prevents some antialiasing fixes.
+		, pmNoCaching = 0x02 ///< <tt>0x02</tt> Mode for all sorts of exports (e.g. PNG, PDF,...). For example, this prevents using cached pixmap labels
+		, pmNonCosmetic = 0x04 ///< <tt>0x04</tt> Turns pen widths 0 to 1, i.e. disables cosmetic pens. (A cosmetic pen is always drawn with width 1 pixel in the vector image/pdf viewer, independent of zoom.)
 	};
 	Q_ENUMS(PainterMode)
 	Q_FLAGS(PainterModes)
@@ -759,8 +759,8 @@ public:
 	  \see setMode
 	 */
 	enum LayerMode {
-		lmLogical //!< Layer is used only for rendering order, and shares paint buffer with all other adjacent logical layers.
-		, lmBuffered //!< Layer has its own paint buffer and may be replotted individually (see \ref replot).
+		lmLogical ///< Layer is used only for rendering order, and shares paint buffer with all other adjacent logical layers.
+		, lmBuffered ///< Layer has its own paint buffer and may be replotted individually (see \ref replot).
 	};
 	Q_ENUMS(LayerMode)
 
@@ -1423,9 +1423,9 @@ public:
 	  \ref update is called with the according UpdatePhase value.
 	 */
 	enum UpdatePhase {
-		upPreparation //!< Phase used for any type of preparation that needs to be done before margin calculation and layout
-		, upMargins //!< Phase in which the margins are calculated and set
-		, upLayout //!< Final phase in which the layout system places the rects of the elements
+		upPreparation ///< Phase used for any type of preparation that needs to be done before margin calculation and layout
+		, upMargins ///< Phase in which the margins are calculated and set
+		, upLayout ///< Final phase in which the layout system places the rects of the elements
 	};
 
 	Q_ENUMS(UpdatePhase)
@@ -1439,8 +1439,8 @@ public:
 	  \see setSizeConstraintRect
 	 */
 	enum SizeConstraintRect {
-		scrInnerRect //!< Minimum/Maximum size constraints apply to inner rect
-		, scrOuterRect //!< Minimum/Maximum size constraints apply to outer rect, thus include layout element margins
+		scrInnerRect ///< Minimum/Maximum size constraints apply to inner rect
+		, scrOuterRect ///< Minimum/Maximum size constraints apply to outer rect, thus include layout element margins
 	};
 	Q_ENUMS(SizeConstraintRect)
 
@@ -1611,8 +1611,8 @@ public:
 	  \see setFillOrder
 	 */
 	enum FillOrder {
-		foRowsFirst //!< Rows are filled first, and a new element is wrapped to the next column if the row count would exceed \ref setWrap.
-		, foColumnsFirst //!< Columns are filled first, and a new element is wrapped to the next row if the column count would exceed \ref setWrap.
+		foRowsFirst ///< Rows are filled first, and a new element is wrapped to the next column if the row count would exceed \ref setWrap.
+		, foColumnsFirst ///< Columns are filled first, and a new element is wrapped to the next row if the column count would exceed \ref setWrap.
 	};
 	Q_ENUMS(FillOrder)
 
@@ -1716,8 +1716,8 @@ public:
 	  Defines how the placement and sizing is handled for a certain element in a QCPLayoutInset.
 	 */
 	enum InsetPlacement {
-		ipFree //!< The element may be positioned/sized arbitrarily, see \ref setInsetRect
-		, ipBorderAligned //!< The element is aligned to one of the layout sides, see \ref setInsetAlignment
+		ipFree ///< The element may be positioned/sized arbitrarily, see \ref setInsetRect
+		, ipBorderAligned ///< The element is aligned to one of the layout sides, see \ref setInsetAlignment
 	};
 	Q_ENUMS(InsetPlacement)
 
@@ -1784,16 +1784,16 @@ public:
 	  \see QCPItemLine::setHead, QCPItemLine::setTail, QCPItemCurve::setHead, QCPItemCurve::setTail, QCPAxis::setLowerEnding, QCPAxis::setUpperEnding
 	 */
 	enum EndingStyle {
-		esNone //!< No ending decoration
-		, esFlatArrow //!< A filled arrow head with a straight/flat back (a triangle)
-		, esSpikeArrow //!< A filled arrow head with an indented back
-		, esLineArrow //!< A non-filled arrow head with open back
-		, esDisc //!< A filled circle
-		, esSquare //!< A filled square
-		, esDiamond //!< A filled diamond (45 degrees rotated square)
-		, esBar //!< A bar perpendicular to the line
-		, esHalfBar //!< A bar perpendicular to the line, pointing out to only one side (to which side can be changed with \ref setInverted)
-		, esSkewedBar //!< A bar that is skewed (skew controllable via \ref setLength)
+		esNone ///< No ending decoration
+		, esFlatArrow ///< A filled arrow head with a straight/flat back (a triangle)
+		, esSpikeArrow ///< A filled arrow head with an indented back
+		, esLineArrow ///< A non-filled arrow head with open back
+		, esDisc ///< A filled circle
+		, esSquare ///< A filled square
+		, esDiamond ///< A filled diamond (45 degrees rotated square)
+		, esBar ///< A bar perpendicular to the line
+		, esHalfBar ///< A bar perpendicular to the line, pointing out to only one side (to which side can be changed with \ref setInverted)
+		, esSkewedBar ///< A bar that is skewed (skew controllable via \ref setLength)
 	};
 	Q_ENUMS(EndingStyle)
 
@@ -1854,9 +1854,9 @@ public:
 	  TODO
 	 */
 	enum AnchorMode {
-		amRectangular //!< 
-		, amSkewedUpright //!<
-		, amSkewedRotated //!<
+		amRectangular ///< 
+		, amSkewedUpright ///<
+		, amSkewedRotated ///<
 	};
 
 	Q_ENUMS(AnchorMode)
@@ -1865,8 +1865,8 @@ public:
 	  TODO
 	 */
 	enum AnchorReferenceType {
-		artNormal //!< 
-		, artTangent //!<
+		artNormal ///< 
+		, artTangent ///<
 	};
 
 	Q_ENUMS(AnchorReferenceType)
@@ -1875,10 +1875,10 @@ public:
 	  TODO
 	 */
 	enum AnchorSide {
-		asLeft //!< 
-		, asRight //!< 
-		, asTop //!< 
-		, asBottom //!< 
+		asLeft ///< 
+		, asRight ///< 
+		, asTop ///< 
+		, asBottom ///< 
 		, asTopLeft
 		, asTopRight
 		, asBottomRight
@@ -2035,8 +2035,8 @@ public:
 	  \see setTickStepStrategy
 	 */
 	enum TickStepStrategy {
-		tssReadability //!< A nicely readable tick step is prioritized over matching the requested number of ticks (see \ref setTickCount)
-		, tssMeetTickCount //!< Less readable tick steps are allowed which in turn facilitates getting closer to the requested tick count
+		tssReadability ///< A nicely readable tick step is prioritized over matching the requested number of ticks (see \ref setTickCount)
+		, tssMeetTickCount ///< Less readable tick steps are allowed which in turn facilitates getting closer to the requested tick count
 	};
 	Q_ENUMS(TickStepStrategy)
 
@@ -2170,11 +2170,11 @@ public:
 	  \see setFieldWidth, setTimeFormat
 	 */
 	enum TimeUnit {
-		tuMilliseconds //!< Milliseconds, one thousandth of a second (%%z in \ref setTimeFormat)
-		, tuSeconds //!< Seconds (%%s in \ref setTimeFormat)
-		, tuMinutes //!< Minutes (%%m in \ref setTimeFormat)
-		, tuHours //!< Hours (%%h in \ref setTimeFormat)
-		, tuDays //!< Days (%%d in \ref setTimeFormat)
+		tuMilliseconds ///< Milliseconds, one thousandth of a second (%%z in \ref setTimeFormat)
+		, tuSeconds ///< Seconds (%%s in \ref setTimeFormat)
+		, tuMinutes ///< Minutes (%%m in \ref setTimeFormat)
+		, tuHours ///< Hours (%%h in \ref setTimeFormat)
+		, tuDays ///< Days (%%d in \ref setTimeFormat)
 	};
 	Q_ENUMS(TimeUnit)
 
@@ -2231,9 +2231,9 @@ public:
 	  \see setScaleStrategy
 	 */
 	enum ScaleStrategy {
-		ssNone //!< Modifications are not allowed, the specified tick step is absolutely fixed. This might cause a high tick density and overlapping labels if the axis range is zoomed out.
-		, ssMultiples //!< An integer multiple of the specified tick step is allowed. The used factor follows the base class properties of \ref setTickStepStrategy and \ref setTickCount.
-		, ssPowers //!< An integer power of the specified tick step is allowed.
+		ssNone ///< Modifications are not allowed, the specified tick step is absolutely fixed. This might cause a high tick density and overlapping labels if the axis range is zoomed out.
+		, ssMultiples ///< An integer multiple of the specified tick step is allowed. The used factor follows the base class properties of \ref setTickStepStrategy and \ref setTickCount.
+		, ssPowers ///< An integer power of the specified tick step is allowed.
 	};
 	Q_ENUMS(ScaleStrategy)
 
@@ -2324,9 +2324,9 @@ public:
 	  \see setFractionStyle
 	 */
 	enum FractionStyle {
-		fsFloatingPoint //!< Fractions are displayed as regular decimal floating point numbers, e.g. "0.25" or "0.125".
-		, fsAsciiFractions //!< Fractions are written as rationals using ASCII characters only, e.g. "1/4" or "1/8"
-		, fsUnicodeFractions //!< Fractions are written using sub- and superscript UTF-8 digits and the fraction symbol.
+		fsFloatingPoint ///< Fractions are displayed as regular decimal floating point numbers, e.g. "0.25" or "0.125".
+		, fsAsciiFractions ///< Fractions are written as rationals using ASCII characters only, e.g. "1/4" or "1/8"
+		, fsUnicodeFractions ///< Fractions are written using sub- and superscript UTF-8 digits and the fraction symbol.
 	};
 	Q_ENUMS(FractionStyle)
 
@@ -2546,10 +2546,10 @@ public:
 	  marks are drawn, on which side the labels are placed etc.
 	 */
 	enum AxisType {
-		atLeft = 0x01 //!< <tt>0x01</tt> Axis is vertical and on the left side of the axis rect
-		, atRight = 0x02 //!< <tt>0x02</tt> Axis is vertical and on the right side of the axis rect
-		, atTop = 0x04 //!< <tt>0x04</tt> Axis is horizontal and on the top side of the axis rect
-		, atBottom = 0x08 //!< <tt>0x08</tt> Axis is horizontal and on the bottom side of the axis rect
+		atLeft = 0x01 ///< <tt>0x01</tt> Axis is vertical and on the left side of the axis rect
+		, atRight = 0x02 ///< <tt>0x02</tt> Axis is vertical and on the right side of the axis rect
+		, atTop = 0x04 ///< <tt>0x04</tt> Axis is horizontal and on the top side of the axis rect
+		, atBottom = 0x08 ///< <tt>0x08</tt> Axis is horizontal and on the bottom side of the axis rect
 	};
 
 	Q_ENUMS(AxisType)
@@ -2561,8 +2561,8 @@ public:
 	  \see setTickLabelSide
 	 */
 	enum LabelSide {
-		lsInside //!< Tick labels will be displayed inside the axis rect and clipped to the inner axis rect
-		, lsOutside //!< Tick labels will be displayed outside the axis rect
+		lsInside ///< Tick labels will be displayed inside the axis rect and clipped to the inner axis rect
+		, lsOutside ///< Tick labels will be displayed outside the axis rect
 	};
 
 	Q_ENUMS(LabelSide)
@@ -2571,8 +2571,8 @@ public:
 	  \see setScaleType
 	 */
 	enum ScaleType {
-		stLinear //!< Linear scaling
-		, stLogarithmic //!< Logarithmic scaling with correspondingly transformed axis coordinates (possibly also \ref setTicker to a \ref QCPAxisTickerLog instance).
+		stLinear ///< Linear scaling
+		, stLogarithmic ///< Logarithmic scaling with correspondingly transformed axis coordinates (possibly also \ref setTicker to a \ref QCPAxisTickerLog instance).
 	};
 
 	Q_ENUMS(ScaleType)
@@ -2581,10 +2581,10 @@ public:
 	  \see setSelectableParts, setSelectedParts
 	 */
 	enum SelectablePart {
-		spNone = 0 //!< None of the selectable parts
-		, spAxis = 0x001 //!< The axis backbone and tick marks
-		, spTickLabels = 0x002 //!< Tick labels (numbers) of this axis (as a whole, not individually)
-		, spAxisLabel = 0x004 //!< The axis label
+		spNone = 0 ///< None of the selectable parts
+		, spAxis = 0x001 ///< The axis backbone and tick marks
+		, spTickLabels = 0x002 ///< Tick labels (numbers) of this axis (as a whole, not individually)
+		, spAxisLabel = 0x004 ///< The axis label
 	};
 	Q_ENUMS(SelectablePart)
 	Q_FLAGS(SelectableParts)
@@ -3000,12 +3000,12 @@ public:
 	  setFromOther.
 	 */
 	enum ScatterProperty {
-		spNone = 0x00 //!< <tt>0x00</tt> None
-		, spPen = 0x01 //!< <tt>0x01</tt> The pen property, see \ref setPen
-		, spBrush = 0x02 //!< <tt>0x02</tt> The brush property, see \ref setBrush
-		, spSize = 0x04 //!< <tt>0x04</tt> The size property, see \ref setSize
-		, spShape = 0x08 //!< <tt>0x08</tt> The shape property, see \ref setShape
-		, spAll = 0xFF //!< <tt>0xFF</tt> All properties
+		spNone = 0x00 ///< <tt>0x00</tt> None
+		, spPen = 0x01 ///< <tt>0x01</tt> The pen property, see \ref setPen
+		, spBrush = 0x02 ///< <tt>0x02</tt> The brush property, see \ref setBrush
+		, spSize = 0x04 ///< <tt>0x04</tt> The size property, see \ref setSize
+		, spShape = 0x08 ///< <tt>0x08</tt> The shape property, see \ref setShape
+		, spAll = 0xFF ///< <tt>0xFF</tt> All properties
 	};
 
 	Q_ENUMS(ScatterProperty)
@@ -3020,24 +3020,24 @@ public:
 	  drawn with the pen and brush specified with \ref setPen and \ref setBrush.
 	 */
 	enum ScatterShape {
-		ssNone //!< no scatter symbols are drawn (e.g. in QCPGraph, data only represented with lines)
-		, ssDot //!< \enumimage{ssDot.png} a single pixel (use \ref ssDisc or \ref ssCircle if you want a round shape with a certain radius)
-		, ssCross //!< \enumimage{ssCross.png} a cross
-		, ssPlus //!< \enumimage{ssPlus.png} a plus
-		, ssCircle //!< \enumimage{ssCircle.png} a circle
-		, ssDisc //!< \enumimage{ssDisc.png} a circle which is filled with the pen's color (not the brush as with ssCircle)
-		, ssSquare //!< \enumimage{ssSquare.png} a square
-		, ssDiamond //!< \enumimage{ssDiamond.png} a diamond
-		, ssStar //!< \enumimage{ssStar.png} a star with eight arms, i.e. a combination of cross and plus
-		, ssTriangle //!< \enumimage{ssTriangle.png} an equilateral triangle, standing on baseline
-		, ssTriangleInverted //!< \enumimage{ssTriangleInverted.png} an equilateral triangle, standing on corner
-		, ssCrossSquare //!< \enumimage{ssCrossSquare.png} a square with a cross inside
-		, ssPlusSquare //!< \enumimage{ssPlusSquare.png} a square with a plus inside
-		, ssCrossCircle //!< \enumimage{ssCrossCircle.png} a circle with a cross inside
-		, ssPlusCircle //!< \enumimage{ssPlusCircle.png} a circle with a plus inside
-		, ssPeace //!< \enumimage{ssPeace.png} a circle, with one vertical and two downward diagonal lines
-		, ssPixmap //!< a custom pixmap specified by \ref setPixmap, centered on the data point coordinates
-		, ssCustom //!< custom painter operations are performed per scatter (As QPainterPath, see \ref setCustomPath)
+		ssNone ///< no scatter symbols are drawn (e.g. in QCPGraph, data only represented with lines)
+		, ssDot ///< \enumimage{ssDot.png} a single pixel (use \ref ssDisc or \ref ssCircle if you want a round shape with a certain radius)
+		, ssCross ///< \enumimage{ssCross.png} a cross
+		, ssPlus ///< \enumimage{ssPlus.png} a plus
+		, ssCircle ///< \enumimage{ssCircle.png} a circle
+		, ssDisc ///< \enumimage{ssDisc.png} a circle which is filled with the pen's color (not the brush as with ssCircle)
+		, ssSquare ///< \enumimage{ssSquare.png} a square
+		, ssDiamond ///< \enumimage{ssDiamond.png} a diamond
+		, ssStar ///< \enumimage{ssStar.png} a star with eight arms, i.e. a combination of cross and plus
+		, ssTriangle ///< \enumimage{ssTriangle.png} an equilateral triangle, standing on baseline
+		, ssTriangleInverted ///< \enumimage{ssTriangleInverted.png} an equilateral triangle, standing on corner
+		, ssCrossSquare ///< \enumimage{ssCrossSquare.png} a square with a cross inside
+		, ssPlusSquare ///< \enumimage{ssPlusSquare.png} a square with a plus inside
+		, ssCrossCircle ///< \enumimage{ssCrossCircle.png} a circle with a cross inside
+		, ssPlusCircle ///< \enumimage{ssPlusCircle.png} a circle with a plus inside
+		, ssPeace ///< \enumimage{ssPeace.png} a circle, with one vertical and two downward diagonal lines
+		, ssPixmap ///< a custom pixmap specified by \ref setPixmap, centered on the data point coordinates
+		, ssCustom ///< custom painter operations are performed per scatter (As QPainterPath, see \ref setCustomPath)
 	};
 	Q_ENUMS(ScatterShape)
 
@@ -4198,14 +4198,14 @@ public:
 	  \see setType
 	 */
 	enum PositionType {
-		ptAbsolute //!< Static positioning in pixels, starting from the top left corner of the viewport/widget.
-		, ptViewportRatio //!< Static positioning given by a fraction of the viewport size. For example, if you call setCoords(0, 0), the position will be at the top
-		//!< left corner of the viewport/widget. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
-		//!< vertically at the top of the viewport/widget, etc.
-		, ptAxisRectRatio //!< Static positioning given by a fraction of the axis rect size (see \ref setAxisRect). For example, if you call setCoords(0, 0), the position will be at the top
-		//!< left corner of the axis rect. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
-		//!< vertically at the top of the axis rect, etc. You can also go beyond the axis rect by providing negative coordinates or coordinates larger than 1.
-		, ptPlotCoords //!< Dynamic positioning at a plot coordinate defined by two axes (see \ref setAxes).
+		ptAbsolute ///< Static positioning in pixels, starting from the top left corner of the viewport/widget.
+		, ptViewportRatio ///< Static positioning given by a fraction of the viewport size. For example, if you call setCoords(0, 0), the position will be at the top
+		///< left corner of the viewport/widget. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
+		///< vertically at the top of the viewport/widget, etc.
+		, ptAxisRectRatio ///< Static positioning given by a fraction of the axis rect size (see \ref setAxisRect). For example, if you call setCoords(0, 0), the position will be at the top
+		///< left corner of the axis rect. setCoords(1, 1) will be at the bottom right corner, setCoords(0.5, 0) will be horizontally centered and
+		///< vertically at the top of the axis rect, etc. You can also go beyond the axis rect by providing negative coordinates or coordinates larger than 1.
+		, ptPlotCoords ///< Dynamic positioning at a plot coordinate defined by two axes (see \ref setAxes).
 	};
 	Q_ENUMS(PositionType)
 
@@ -4409,8 +4409,8 @@ public:
 	  \see addLayer, moveLayer
 	 */
 	enum LayerInsertMode {
-		limBelow //!< Layer is inserted below other layer
-		, limAbove //!< Layer is inserted above other layer
+		limBelow ///< Layer is inserted below other layer
+		, limAbove ///< Layer is inserted above other layer
 	};
 
 	Q_ENUMS(LayerInsertMode)
@@ -4421,10 +4421,10 @@ public:
 	  \see replot
 	 */
 	enum RefreshPriority {
-		rpImmediateRefresh //!< Replots immediately and repaints the widget immediately by calling QWidget::repaint() after the replot
-		, rpQueuedRefresh //!< Replots immediately, but queues the widget repaint, by calling QWidget::update() after the replot. This way multiple redundant widget repaints can be avoided.
-		, rpRefreshHint //!< Whether to use immediate or queued refresh depends on whether the plotting hint \ref QCP::phImmediateRefresh is set, see \ref setPlottingHints.
-		, rpQueuedReplot //!< Queues the entire replot for the next event loop iteration. This way multiple redundant replots can be avoided. The actual replot is then done with \ref rpRefreshHint priority.
+		rpImmediateRefresh ///< Replots immediately and repaints the widget immediately by calling QWidget::repaint() after the replot
+		, rpQueuedRefresh ///< Replots immediately, but queues the widget repaint, by calling QWidget::update() after the replot. This way multiple redundant widget repaints can be avoided.
+		, rpRefreshHint ///< Whether to use immediate or queued refresh depends on whether the plotting hint \ref QCP::phImmediateRefresh is set, see \ref setPlottingHints.
+		, rpQueuedReplot ///< Queues the entire replot for the next event loop iteration. This way multiple redundant replots can be avoided. The actual replot is then done with \ref rpRefreshHint priority.
 	};
 	Q_ENUMS(RefreshPriority)
 
@@ -5376,8 +5376,8 @@ public:
 	  \see setColorInterpolation
 	 */
 	enum ColorInterpolation {
-		ciRGB //!< Color channels red, green and blue are linearly interpolated
-		, ciHSV //!< Color channels hue, saturation and value are linearly interpolated (The hue is interpolated over the shortest angle distance)
+		ciRGB ///< Color channels red, green and blue are linearly interpolated
+		, ciHSV ///< Color channels hue, saturation and value are linearly interpolated (The hue is interpolated over the shortest angle distance)
 	};
 
 	Q_ENUMS(ColorInterpolation)
@@ -5388,11 +5388,11 @@ public:
 	  \see setNanHandling, setNanColor
 	 */
 	enum NanHandling {
-		nhNone //!< NaN data points are not explicitly handled and shouldn't occur in the data (this gives slight performance improvement)
-		, nhLowestColor //!< NaN data points appear as the lowest color defined in this QCPColorGradient
-		, nhHighestColor //!< NaN data points appear as the highest color defined in this QCPColorGradient
-		, nhTransparent //!< NaN data points appear transparent
-		, nhNanColor //!< NaN data points appear as the color defined with \ref setNanColor
+		nhNone ///< NaN data points are not explicitly handled and shouldn't occur in the data (this gives slight performance improvement)
+		, nhLowestColor ///< NaN data points appear as the lowest color defined in this QCPColorGradient
+		, nhHighestColor ///< NaN data points appear as the highest color defined in this QCPColorGradient
+		, nhTransparent ///< NaN data points appear transparent
+		, nhNanColor ///< NaN data points appear as the color defined with \ref setNanColor
 	};
 
 	Q_ENUMS(NanHandling)
@@ -5402,18 +5402,18 @@ public:
 	  there for an image of the presets.
 	 */
 	enum GradientPreset {
-		gpGrayscale //!< Continuous lightness from black to white (suited for non-biased data representation)
-		, gpHot //!< Continuous lightness from black over firey colors to white (suited for non-biased data representation)
-		, gpCold //!< Continuous lightness from black over icey colors to white (suited for non-biased data representation)
-		, gpNight //!< Continuous lightness from black over weak blueish colors to white (suited for non-biased data representation)
-		, gpCandy //!< Blue over pink to white
-		, gpGeography //!< Colors suitable to represent different elevations on geographical maps
-		, gpIon //!< Half hue spectrum from black over purple to blue and finally green (creates banding illusion but allows more precise magnitude estimates)
-		, gpThermal //!< Colors suitable for thermal imaging, ranging from dark blue over purple to orange, yellow and white
-		, gpPolar //!< Colors suitable to emphasize polarity around the center, with blue for negative, black in the middle and red for positive values
-		, gpSpectrum //!< An approximation of the visible light spectrum (creates banding illusion but allows more precise magnitude estimates)
-		, gpJet //!< Hue variation similar to a spectrum, often used in numerical visualization (creates banding illusion but allows more precise magnitude estimates)
-		, gpHues //!< Full hue cycle, with highest and lowest color red (suitable for periodic data, such as angles and phases, see \ref setPeriodic)
+		gpGrayscale ///< Continuous lightness from black to white (suited for non-biased data representation)
+		, gpHot ///< Continuous lightness from black over firey colors to white (suited for non-biased data representation)
+		, gpCold ///< Continuous lightness from black over icey colors to white (suited for non-biased data representation)
+		, gpNight ///< Continuous lightness from black over weak blueish colors to white (suited for non-biased data representation)
+		, gpCandy ///< Blue over pink to white
+		, gpGeography ///< Colors suitable to represent different elevations on geographical maps
+		, gpIon ///< Half hue spectrum from black over purple to blue and finally green (creates banding illusion but allows more precise magnitude estimates)
+		, gpThermal ///< Colors suitable for thermal imaging, ranging from dark blue over purple to orange, yellow and white
+		, gpPolar ///< Colors suitable to emphasize polarity around the center, with blue for negative, black in the middle and red for positive values
+		, gpSpectrum ///< An approximation of the visible light spectrum (creates banding illusion but allows more precise magnitude estimates)
+		, gpJet ///< Hue variation similar to a spectrum, often used in numerical visualization (creates banding illusion but allows more precise magnitude estimates)
+		, gpHues ///< Full hue cycle, with highest and lowest color red (suitable for periodic data, such as angles and phases, see \ref setPeriodic)
 	};
 	Q_ENUMS(GradientPreset)
 
@@ -5508,11 +5508,11 @@ public:
 	  setBracketHeight and \ref setBracketWidth.
 	 */
 	enum BracketStyle {
-		bsSquareBracket //!< A square bracket is drawn.
-		, bsHalfEllipse //!< A half ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
-		, bsEllipse //!< An ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
-		, bsPlus //!< A plus is drawn.
-		, bsUserStyle //!< Start custom bracket styles at this index when subclassing and reimplementing \ref drawBracket.
+		bsSquareBracket ///< A square bracket is drawn.
+		, bsHalfEllipse ///< A half ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
+		, bsEllipse ///< An ellipse is drawn. The size of the ellipse is given by the bracket width/height properties.
+		, bsPlus ///< A plus is drawn.
+		, bsUserStyle ///< Start custom bracket styles at this index when subclassing and reimplementing \ref drawBracket.
 	};
 	Q_ENUMS(BracketStyle)
 
@@ -5905,9 +5905,9 @@ public:
 	  \see setSelectedParts, setSelectableParts
 	 */
 	enum SelectablePart {
-		spNone = 0x000 //!< <tt>0x000</tt> None
-		, spLegendBox = 0x001 //!< <tt>0x001</tt> The legend box (frame)
-		, spItems = 0x002 //!< <tt>0x002</tt> Legend items individually (see \ref selectedItems)
+		spNone = 0x000 ///< <tt>0x000</tt> None
+		, spLegendBox = 0x001 ///< <tt>0x001</tt> The legend box (frame)
+		, spItems = 0x002 ///< <tt>0x002</tt> Legend items individually (see \ref selectedItems)
 	};
 	Q_ENUMS(SelectablePart)
 	Q_FLAGS(SelectableParts)
@@ -6347,13 +6347,13 @@ public:
 	  \see setLineStyle
 	 */
 	enum LineStyle {
-		lsNone //!< data points are not connected with any lines (e.g. data only represented
-		//!< with symbols according to the scatter style, see \ref setScatterStyle)
-		, lsLine //!< data points are connected by a straight line
-		, lsStepLeft //!< line is drawn as steps where the step height is the value of the left data point
-		, lsStepRight //!< line is drawn as steps where the step height is the value of the right data point
-		, lsStepCenter //!< line is drawn as steps where the step is in between two data points
-		, lsImpulse //!< each data point is represented by a line parallel to the value axis, which reaches from the data point to the zero-value-line
+		lsNone ///< data points are not connected with any lines (e.g. data only represented
+		///< with symbols according to the scatter style, see \ref setScatterStyle)
+		, lsLine ///< data points are connected by a straight line
+		, lsStepLeft ///< line is drawn as steps where the step height is the value of the left data point
+		, lsStepRight ///< line is drawn as steps where the step height is the value of the right data point
+		, lsStepCenter ///< line is drawn as steps where the step is in between two data points
+		, lsImpulse ///< each data point is represented by a line parallel to the value axis, which reaches from the data point to the zero-value-line
 	};
 	Q_ENUMS(LineStyle)
 
@@ -6519,8 +6519,8 @@ public:
 	  \see setLineStyle
 	 */
 	enum LineStyle {
-		lsNone //!< No line is drawn between data points (e.g. only scatters)
-		, lsLine //!< Data points are connected with a straight line
+		lsNone ///< No line is drawn between data points (e.g. only scatters)
+		, lsLine ///< Data points are connected with a straight line
 	};
 	Q_ENUMS(LineStyle)
 
@@ -6616,9 +6616,9 @@ public:
 	  \see setSpacingType, setSpacing
 	 */
 	enum SpacingType {
-		stAbsolute //!< Bar spacing is in absolute pixels
-		, stAxisRectRatio //!< Bar spacing is given by a fraction of the axis rect size
-		, stPlotCoords //!< Bar spacing is in key coordinates and thus scales with the key axis range
+		stAbsolute ///< Bar spacing is in absolute pixels
+		, stAxisRectRatio ///< Bar spacing is given by a fraction of the axis rect size
+		, stPlotCoords ///< Bar spacing is in key coordinates and thus scales with the key axis range
 	};
 	Q_ENUMS(SpacingType)
 
@@ -6751,9 +6751,9 @@ public:
 	  \see setWidthType, setWidth
 	 */
 	enum WidthType {
-		wtAbsolute //!< Bar width is in absolute pixels
-		, wtAxisRectRatio //!< Bar width is given by a fraction of the axis rect size
-		, wtPlotCoords //!< Bar width is in key coordinates and thus scales with the key axis range
+		wtAbsolute ///< Bar width is in absolute pixels
+		, wtAxisRectRatio ///< Bar width is given by a fraction of the axis rect size
+		, wtPlotCoords ///< Bar width is in key coordinates and thus scales with the key axis range
 	};
 	Q_ENUMS(WidthType)
 
@@ -7240,9 +7240,9 @@ public:
 	  \see setWidthType, setWidth
 	 */
 	enum WidthType {
-		wtAbsolute //!< width is in absolute pixels
-		, wtAxisRectRatio //!< width is given by a fraction of the axis rect size
-		, wtPlotCoords //!< width is in key coordinates and thus scales with the key axis range
+		wtAbsolute ///< width is in absolute pixels
+		, wtAxisRectRatio ///< width is given by a fraction of the axis rect size
+		, wtPlotCoords ///< width is in key coordinates and thus scales with the key axis range
 	};
 
 	Q_ENUMS(WidthType)
@@ -7253,8 +7253,8 @@ public:
 	  \see setChartStyle
 	 */
 	enum ChartStyle {
-		csOhlc //!< Open-High-Low-Close bar representation
-		, csCandlestick //!< Candlestick representation
+		csOhlc ///< Open-High-Low-Close bar representation
+		, csCandlestick ///< Candlestick representation
 	};
 	Q_ENUMS(ChartStyle)
 
@@ -7405,8 +7405,8 @@ public:
 	  \see setErrorType
 	 */
 	enum ErrorType {
-		etKeyError //!< The errors are for the key dimension (bars appear parallel to the key axis)
-		, etValueError //!< The errors are for the value dimension (bars appear parallel to the value axis)
+		etKeyError ///< The errors are for the key dimension (bars appear parallel to the key axis)
+		, etValueError ///< The errors are for the value dimension (bars appear parallel to the value axis)
 	};
 	Q_ENUMS(ErrorType)
 
@@ -8077,11 +8077,11 @@ public:
 	  \see setStyle
 	 */
 	enum TracerStyle {
-		tsNone //!< The tracer is not visible
-		, tsPlus //!< A plus shaped crosshair with limited size
-		, tsCrosshair //!< A plus shaped crosshair which spans the complete axis rect
-		, tsCircle //!< A circle
-		, tsSquare //!< A square
+		tsNone ///< The tracer is not visible
+		, tsPlus ///< A plus shaped crosshair with limited size
+		, tsCrosshair ///< A plus shaped crosshair which spans the complete axis rect
+		, tsCircle ///< A circle
+		, tsSquare ///< A square
 	};
 	Q_ENUMS(TracerStyle)
 
@@ -8188,10 +8188,10 @@ public:
 	  \see setStyle
 	 */
 	enum BracketStyle {
-		bsSquare //!< A brace with angled edges
-		, bsRound //!< A brace with round edges
-		, bsCurly //!< A curly brace
-		, bsCalligraphic //!< A curly brace with varying stroke width giving a calligraphic impression
+		bsSquare ///< A brace with angled edges
+		, bsRound ///< A brace with round edges
+		, bsCurly ///< A curly brace
+		, bsCalligraphic ///< A curly brace with varying stroke width giving a calligraphic impression
 	};
 	Q_ENUMS(BracketStyle)
 
@@ -8267,8 +8267,8 @@ public:
 	  Defines the reference of the angle at which a radial axis is tilted (\ref setAngle).
 	 */
 	enum AngleReference {
-		arAbsolute //!< The axis tilt is given in absolute degrees. The zero is to the right and positive angles are measured counter-clockwise.
-		, arAngularAxis //!< The axis tilt is measured in the angular coordinate system given by the parent angular axis.
+		arAbsolute ///< The axis tilt is given in absolute degrees. The zero is to the right and positive angles are measured counter-clockwise.
+		, arAngularAxis ///< The axis tilt is measured in the angular coordinate system given by the parent angular axis.
 	};
 
 	Q_ENUMS(AngleReference)
@@ -8277,8 +8277,8 @@ public:
 	  \see setScaleType
 	 */
 	enum ScaleType {
-		stLinear //!< Linear scaling
-		, stLogarithmic //!< Logarithmic scaling with correspondingly transformed axis coordinates (possibly also \ref setTicker to a \ref QCPAxisTickerLog instance).
+		stLinear ///< Linear scaling
+		, stLogarithmic ///< Logarithmic scaling with correspondingly transformed axis coordinates (possibly also \ref setTicker to a \ref QCPAxisTickerLog instance).
 	};
 
 	Q_ENUMS(ScaleType)
@@ -8287,10 +8287,10 @@ public:
 	  \see setSelectableParts, setSelectedParts
 	 */
 	enum SelectablePart {
-		spNone = 0 //!< None of the selectable parts
-		, spAxis = 0x001 //!< The axis backbone and tick marks
-		, spTickLabels = 0x002 //!< Tick labels (numbers) of this axis (as a whole, not individually)
-		, spAxisLabel = 0x004 //!< The axis label
+		spNone = 0 ///< None of the selectable parts
+		, spAxis = 0x001 ///< The axis backbone and tick marks
+		, spTickLabels = 0x002 ///< Tick labels (numbers) of this axis (as a whole, not individually)
+		, spAxisLabel = 0x004 ///< The axis label
 	};
 
 	Q_ENUMS(SelectablePart)
@@ -8298,8 +8298,8 @@ public:
 	Q_DECLARE_FLAGS(SelectableParts, SelectablePart)
 
 	enum LabelMode {
-		lmUpright //!< 
-		, lmRotated //!< 
+		lmUpright ///< 
+		, lmRotated ///< 
 	};
 	Q_ENUMS(LabelMode)
 
@@ -8634,10 +8634,10 @@ public:
 	  \see setSelectableParts, setSelectedParts
 	 */
 	enum SelectablePart {
-		spNone = 0 //!< None of the selectable parts
-		, spAxis = 0x001 //!< The axis backbone and tick marks
-		, spTickLabels = 0x002 //!< Tick labels (numbers) of this axis (as a whole, not individually)
-		, spAxisLabel = 0x004 //!< The axis label
+		spNone = 0 ///< None of the selectable parts
+		, spAxis = 0x001 ///< The axis backbone and tick marks
+		, spTickLabels = 0x002 ///< Tick labels (numbers) of this axis (as a whole, not individually)
+		, spAxisLabel = 0x004 ///< The axis label
 	};
 
 	Q_ENUMS(SelectablePart)
@@ -8648,8 +8648,8 @@ public:
 	  TODO
 	 */
 	enum LabelMode {
-		lmUpright //!< 
-		, lmRotated //!< 
+		lmUpright ///< 
+		, lmRotated ///< 
 	};
 	Q_ENUMS(LabelMode)
 
@@ -9083,10 +9083,10 @@ public:
 	  TODO
 	 */
 	enum GridType {
-		gtAngular = 0x01 //!< 
-		, gtRadial = 0x02 //!< 
-		, gtAll = 0xFF //!< 
-		, gtNone = 0x00 //!< 
+		gtAngular = 0x01 ///< 
+		, gtRadial = 0x02 ///< 
+		, gtAll = 0xFF ///< 
+		, gtNone = 0x00 ///< 
 	};
 	Q_ENUMS(GridType)
 	Q_FLAGS(GridTypes)
@@ -9222,9 +9222,9 @@ public:
 	  \see setLineStyle
 	 */
 	enum LineStyle {
-		lsNone //!< data points are not connected with any lines (e.g. data only represented
-		//!< with symbols according to the scatter style, see \ref setScatterStyle)
-		, lsLine //!< data points are connected by a straight line
+		lsNone ///< data points are not connected with any lines (e.g. data only represented
+		///< with symbols according to the scatter style, see \ref setScatterStyle)
+		, lsLine ///< data points are connected by a straight line
 	};
 	Q_ENUMS(LineStyle)
 

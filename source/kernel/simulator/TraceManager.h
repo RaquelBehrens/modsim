@@ -64,94 +64,38 @@ public:
 	virtual ~TraceManager() = default;
 public: // add trace handlers
 	// for handlers that are simple functions
-	/*!
-	 * \brief addTraceHandler
-	 * \param traceListener
-	 */
-	void addTraceHandler(traceListener traceListener);  //!< Add a function to by notified/invoked then a trace is called
-	/*!
-	 * \brief addTraceReportHandler
-	 * \param traceReportListener
-	 */
-	void addTraceReportHandler(traceListener traceReportListener);  //!< Add a function to by notified/invoked then a traceReport is called
-	/*!
-	 * \brief addTraceSimulationHandler
-	 * \param traceSimulationListener
-	 */
-	void addTraceSimulationHandler(traceSimulationListener traceSimulationListener);  //!< Add a function to by notified/invoked then a traceSimulation is called
-	/*!
-	 * \brief addTraceErrorHandler
-	 * \param traceErrorListener
-	 */
-	void addTraceErrorHandler(traceErrorListener traceErrorListener);  //!< Add a function to by notified/invoked then a traceError is called
+	void addTraceHandler(traceListener traceListener);
+	void addTraceReportHandler(traceListener traceReportListener);
+	void addTraceSimulationHandler(traceSimulationListener traceSimulationListener);
+	void addTraceErrorHandler(traceErrorListener traceErrorListener);
 	// for handlers that are class members (methods)
-	/*!
-	 * \brief addTraceHandler
-	 * \param object
-	 */
-	template<typename Class> void addTraceHandler(Class * object, void (Class::*function)(TraceEvent)); //!< Add a method to by notified/invoked then a trace is called
-	/*!
-	 * \brief addTraceErrorHandler
-	 * \param object
-	 */
-	template<typename Class> void addTraceErrorHandler(Class * object, void (Class::*function)(TraceErrorEvent));   //!< Add a method to by notified/invoked then a traceError is called
-	/*!
-	 * \brief addTraceReportHandler
-	 * \param object
-	 */
-	template<typename Class> void addTraceReportHandler(Class * object, void (Class::*function)(TraceEvent));  //!< Add a method to by notified/invoked then a traceReport is called
-	/*!
-	 * \brief addTraceSimulationHandler
-	 * \param object
-	 */
-	template<typename Class> void addTraceSimulationHandler(Class * object, void (Class::*function)(TraceSimulationEvent));  //!< Add a method to by notified/invoked then a traceSimulation is called
-
+	template<typename Class> void addTraceHandler(Class * object, void (Class::*function)(TraceEvent));
+	template<typename Class> void addTraceErrorHandler(Class * object, void (Class::*function)(TraceErrorEvent));
+	template<typename Class> void addTraceReportHandler(Class * object, void (Class::*function)(TraceEvent));
+	template<typename Class> void addTraceSimulationHandler(Class * object, void (Class::*function)(TraceSimulationEvent));
 public: // add ModelDataDefinition (or subclasses) allowed (or restrcted) to traceSimulation
 	void addTraceSimulationExceptionRuleModelData(void* thisobject);
 public: // traces (invoke trace handlers)
-	void trace(TraceManager::Level level, std::string text); //<! Deprected
-	void traceSimulation(void* thisobject, TraceManager::Level level, double time, Entity* entity, ModelComponent* component, std::string text); //<! Deprected
-	void traceSimulation(void* thisobject, TraceManager::Level level, std::string text); //<! Deprected
-public: // traces
-	void trace(std::string text, TraceManager::Level level = TraceManager::Level::L8_detailed); //!< Trace to a general output, used when not simulating (eg: adding plugins, checking the model, etc
-	void traceError(std::string text, std::exception e); //!< Trace to the error output, used in every situation an error happens (simulating, report, general)
-	void traceError(std::string text, TraceManager::Level level = TraceManager::Level::L1_errorFatal); //!< Trace to the error output, used in every situation an error happens (simulating, report, general)
-	void traceReport(std::string text, TraceManager::Level level = TraceManager::Level::L2_results); //!< Trace to the report output, used only when generating the simulation report
-	void traceSimulation(void* thisobject, double time, Entity* entity, ModelComponent* component, std::string text, TraceManager::Level level = TraceManager::Level::L8_detailed); //!< Trace to the simulation output, used only when simulation is running (eg: compponents or dataElements inform something)
-	void traceSimulation(void* thisobject, std::string text, TraceManager::Level level = TraceManager::Level::L8_detailed); //!< Trace to the simulation output, used only when simulation is running (eg: compponents or dataElements inform something)
-
+	void trace(TraceManager::Level level, std::string text);
+	//void traceError(std::exception e, std::string text);
+	//void traceError(TraceManager::Level level, std::string text);
+	//void traceReport(TraceManager::Level level, std::string text);
+	void traceSimulation(void* thisobject, TraceManager::Level level, double time, Entity* entity, ModelComponent* component, std::string text);
+	void traceSimulation(void* thisobject, TraceManager::Level level, std::string text);
+public: // traces (invoke trace handlers) SINCE 20191025 NEW TRACES JUST INVERTED THE PARAMETERS, MAKING TRACELEVEL OPTIONAL
+	void trace(std::string text, TraceManager::Level level = TraceManager::Level::L8_detailed);
+	void traceError(std::string text, std::exception e);
+	void traceError(std::string text, TraceManager::Level level = TraceManager::Level::L1_errorFatal);
+	void traceReport(std::string text, TraceManager::Level level = TraceManager::Level::L2_results);
+	void traceSimulation(void* thisobject, double time, Entity* entity, ModelComponent* component, std::string text, TraceManager::Level level = TraceManager::Level::L8_detailed);
+	void traceSimulation(void* thisobject, std::string text, TraceManager::Level level = TraceManager::Level::L8_detailed);
 public:
-	/*!
-	 * \brief errorMessages
-	 * \return
-	 */
 	List<std::string>* errorMessages() const;
-	/*!
-	 * \brief setTraceLevel
-	 * \param _traceLevel
-	 */
 	void setTraceLevel(TraceManager::Level _traceLevel);
-	/*!
-	 * \brief getTraceLevel
-	 * \return
-	 */
 	TraceManager::Level getTraceLevel() const;
-	/*!
-	 * \brief getParentSimulator
-	 * \return
-	 */
 	Simulator* getParentSimulator() const;
-	/*!
-	 * \brief setTraceSimulationRuleAllAllowed
-	 * \param _traceSimulationRuleAllAllowed
-	 */
 	void setTraceSimulationRuleAllAllowed(bool _traceSimulationRuleAllAllowed);
-	/*!
-	 * \brief isTraceSimulationRuleAllAllowed
-	 * \return
-	 */
 	bool isTraceSimulationRuleAllAllowed() const;
-
 private:
 	//void _addHandler(List<traceListener>* list, )
 	bool _traceConditionPassed(TraceManager::Level level);

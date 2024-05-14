@@ -19,21 +19,9 @@
 
 class SimulationReporter_if {
 public:
-	/*!
-	 * \brief showReplicationStatistics
-	 */
 	virtual void showReplicationStatistics() = 0;
-	/*!
-	 * \brief showSimulationStatistics
-	 */
 	virtual void showSimulationStatistics() = 0;
-	/*!
-	 * \brief showSimulationResponses
-	 */
 	virtual void showSimulationResponses() = 0;
-	/*!
-	 * \brief showSimulationControls
-	 */
 	virtual void showSimulationControls() = 0;
 	//virtual void setFormat(std::string format)=0;
 };

@@ -54,10 +54,10 @@ Model::Model(Simulator* simulator, unsigned int level) {
 	_modelPersistence = new TraitsKernel<ModelPersistence_if>::Implementation(this);
 	_automaticallyCreatesModelDataDefinitions = TraitsKernel<Model>::automaticallyCreatesModelData;
 	// 1:n associations
-	_futureEvents = new List<Event*>(); // The future events list must be chronologicaly sorted
+	_futureEvents = new List<Event*>(); /// The future events list must be chronologicaly sorted
 	//_events->setSortFunc(&EventCompare); // It works too
 	_futureEvents->setSortFunc([](const Event* a, const Event*b){
-		return a->getTime()<b->getTime(); // Events are sorted chronologically
+		return a->getTime()<b->getTime(); /// Events are sorted chronologically
 	});
 
 	//@TODO: Add properties

@@ -1,5 +1,6 @@
 #include "PropertyEditor.h"
 #include "../../../../kernel/simulator/ModelDataDefinition.h"
+#include "../../../../kernel/simulator/PropertyGenesys.h"
 #include <QLineEdit>
 
 PropertyEditor::PropertyEditor(QWidget *parent)
@@ -33,7 +34,7 @@ void PropertyEditor::setModelBlock(ModelDataDefinition* modelblock) {
 		//propBool = dynamic_cast<PropertyT<bool>*>(prop);
 		//propStr = dynamic_cast<PropertyT<std::string>*>(prop);
 		//propTUnit = dynamic_cast<PropertyT<Util::TimeUnit>*>(prop);
-		category = QString::fromStdString(prop->getName()); ///!@TODO Era para ser getClassName());
+		category = QString::fromStdString(prop->getName()); ////@TODO Era para ser getClassName());
 		QList<QTreeWidgetItem*> founds = findItems(category, Qt::MatchContains);
 		if (founds.size() == 0) {
 			treeRootItem = new QTreeWidgetItem(this);

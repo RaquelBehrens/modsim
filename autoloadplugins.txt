@@ -1,8 +1,7 @@
-﻿access.so
+access.so
 assign.so
 batch.so
 buffer.so
-cellularautomata.so
 clone.so
 cppforg.so
 cppcompiler.so
@@ -27,7 +26,6 @@ leave.so
 lsode.so
 markovchain.so
 match.so
-octave.so
 pickup.so
 pickstation.so
 process.so
