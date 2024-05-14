@@ -54,10 +54,10 @@ public:
 	 */
 	ModelDataDefinition* loadNew(Model* model, PersistenceRecord *fields); //!< creates a new ModelDataDefinition from fields loaded from a file
 	/*!
-	/*! * \brief loadAndInsertNew
-	/*! * \param model
-	/*! * \param fields
-	/*! * \return
+     * \brief loadAndInsertNew
+     * \param model
+     * \param fields
+     * \return
 	*/
 	bool loadAndInsertNew(Model* model, PersistenceRecord *fields);
 	/*!

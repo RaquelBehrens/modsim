@@ -35,9 +35,9 @@ public:
 	 */
 	bool insert(ModelComponent* comp);
 	/*!
-	/*! * \brief remove
-	/*! * \param comp
-	/*! */
+     * \brief remove
+     * \param comp
+     */
 	void remove(ModelComponent* comp);
 	/*!
 	 * \brief find
@@ -52,8 +52,8 @@ public:
 	 */
 	ModelComponent* find(Util::identification id);
 	/*!
-	/*! * \brief clear
-	*/
+     * \brief clear
+     */
 	void clear();
 public:
 	/*!
@@ -82,9 +82,9 @@ public:
 	 */
 	ModelComponent* next();
 	/*!
-	/*! * \brief hasChanged
-	/*! * \return
-	*/
+     * \brief hasChanged
+     * \return
+     */
 	bool hasChanged() const;
 	/*!
 	 * \brief setHasChanged

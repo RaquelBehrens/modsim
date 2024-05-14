@@ -144,9 +144,9 @@ public: // model control
 	void checkReferencesToDataDefinitions(std::string expression, std::map<std::string, std::list<std::string>*>* referencedDataDefinitions);
 public: // only gets
 	/*!
-	/*! * \brief getId
-	/*! * \return
-	*/
+     * \brief getId
+     * \return
+     */
 	Util::identification getId() const;
 	/*!
 	 * \brief hasChanged
