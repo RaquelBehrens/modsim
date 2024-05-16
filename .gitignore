@@ -34,3 +34,24 @@
 /dist/
 /projects/GenesysTerminalApplication/build/
 /projects/GenesysTerminalApplication/dist/
+source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/
+
+# Pasta com build
+/source/applications/gui/qt/build-GenesysQtGUI-Desktop_Qt_5_15_15_GCC_64bit-Debug/*
+
+# Arquivos extras do GenesysQtGui
+/source/applications/gui/qt/GenesysQtGUI/GenesysQtGUI.pro
+/source/applications/gui/qt/GenesysQtGUI/GenesysQtGUI.pro.user
+/source/applications/gui/qt/GenesysQtGUI/GenesysQtGUI.pro.user.*
+
+# TraitsApp
+source/applications/TraitsApp.h
+
+# Modelos
+/models/
+
+# Main
+/source/applications/gui/qt/GenesysQtGUI/main.cpp
+
+# Pasta do vscode
+.vscode
