@@ -87,6 +87,11 @@ public:
 	};
 	static std::string StrAllocation(Util::AllocationType allocation);
 
+    enum class TimeFormat : unsigned int {
+        twelve = 12,
+        twentyFour = 24,
+    };
+
 private:
 	static unsigned int _S_indentation;
 	static Util::identification _S_lastId;
