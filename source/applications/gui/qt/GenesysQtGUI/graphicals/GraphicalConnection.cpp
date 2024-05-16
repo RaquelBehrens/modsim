@@ -22,15 +22,6 @@ GraphicalConnection::GraphicalConnection(GraphicalComponentPort* sourceGraphical
 	setAcceptTouchEvents(true);
 	setActive(true);
 	setSelected(false);
-	std::string tooltip = sourceGraphicalPort->graphicalComponent()->getComponent()->getName();
-	if (sourceGraphicalPort->graphicalComponent()->getComponent()->getConnections()->size()>1) {
-		tooltip += "["+std::to_string(sourceGraphicalPort->portNum())+ "]";
-	}
-	tooltip+= " to "+destinationGraphicalPort->graphicalComponent()->getComponent()->getName();
-	if (destinationGraphicalPort->graphicalComponent()->getComponent()->getConnections()->getCurrentInputConnectionsSize()>1) {
-		tooltip+=+"["+std::to_string(destinationGraphicalPort->portNum())+ "]";
-	}
-	setToolTip(QString::fromStdString(tooltip));
 	updateDimensionsAndPosition();
 	//update source and dest PORTS
 	sourceGraphicalPort->addGraphicalConnection(this); // to update connection on port position change
@@ -129,8 +120,8 @@ void GraphicalConnection::paint(QPainter *painter, const QStyleOptionGraphicsIte
             _points.append(mapToScene(endpos));
 			break;
 		case ConnectionType::VERTICAL:
-			path.lineTo(x1, (y1 + y2) / 2);
-			path.lineTo(x2, (y1 + y2) / 2);
+            path.lineTo(x1, (y1 + y2) / 2);
+            path.lineTo(x2, (y1 + y2) / 2);
 			break;
 		case ConnectionType::DIRECT:
 			break;

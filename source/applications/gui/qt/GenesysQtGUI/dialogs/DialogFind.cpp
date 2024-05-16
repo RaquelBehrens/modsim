@@ -83,7 +83,7 @@ void DialogFind::findClicked()
                 nextButton->setFocus();
             }
 
-        // Não encontrou
+            // Não encontrou
         } else {
             lineEdit->setStyleSheet("color: red");
         }

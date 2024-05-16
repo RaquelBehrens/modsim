@@ -15,6 +15,7 @@ UngroupUndoCommand::UngroupUndoCommand(QGraphicsItemGroup *group, ModelGraphicsS
 UngroupUndoCommand::~UngroupUndoCommand() {}
 
 void UngroupUndoCommand::undo() {
+    // agrupa
     if (_myComponentsGroup)
         _myGraphicsScene->groupModelComponents(_myComponentsGroup, _group);
 
@@ -22,6 +23,7 @@ void UngroupUndoCommand::undo() {
 }
 
 void UngroupUndoCommand::redo() {
+    // desagrupa
     _myGraphicsScene->ungroupModelComponents(_group);
 
     _myGraphicsScene->update();

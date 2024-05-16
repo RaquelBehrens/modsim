@@ -23,7 +23,13 @@ public:
 public:
 	QRectF boundingRect() const override;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-	ModelDataDefinition* getDataDefinition() const;
+    ModelDataDefinition* getDataDefinition() const;
+    QPointF getOldPosition() const;
+    void setOldPosition(qreal x, qreal y);
+    QColor getColor() const;
+    void setColor(QColor newColor);
+    qreal getHeight() const;
+
 protected:
 	QColor myrgba(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
 protected: // virtual
@@ -47,6 +53,7 @@ protected:
 	unsigned int _selWidth = TraitsGUI<GModelDataDefinition>::selectionWidth;//8;
 	ModelDataDefinition* _element;
 	QColor _color;
+    QPointF _oldPosition;
 	qreal _stretchPosTop = TraitsGUI<GModelDataDefinition>::stretchPos;//0.5;
 	qreal _stretchPosBottom = TraitsGUI<GModelDataDefinition>::stretchPos;//0.5;
 	qreal _stretchPosLeft = TraitsGUI<GModelDataDefinition>::stretchPos;//0.5;

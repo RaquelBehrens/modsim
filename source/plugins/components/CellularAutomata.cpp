@@ -17,23 +17,23 @@
 #ifdef PLUGINCONNECT_DYNAMIC
 
 extern "C" StaticGetPluginInformation GetPluginInformation() {
-	return &CellularAutomataComp::GetPluginInformation;
+	return &CellularAutomata::GetPluginInformation;
 }
 #endif
 
-ModelDataDefinition* CellularAutomataComp::NewInstance(Model* model, std::string name) {
-	return new CellularAutomataComp(model, name);
+ModelDataDefinition* CellularAutomata::NewInstance(Model* model, std::string name) {
+	return new CellularAutomata(model, name);
 }
 
-CellularAutomataComp::CellularAutomataComp(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<CellularAutomataComp>(), name) {
+CellularAutomata::CellularAutomata(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<CellularAutomata>(), name) {
 }
 
-std::string CellularAutomataComp::show() {
+std::string CellularAutomata::show() {
 	return ModelComponent::show() + "";
 }
 
-ModelComponent* CellularAutomataComp::LoadInstance(Model* model, PersistenceRecord *fields) {
-	CellularAutomataComp* newComponent = new CellularAutomataComp(model);
+ModelComponent* CellularAutomata::LoadInstance(Model* model, PersistenceRecord *fields) {
+	CellularAutomata* newComponent = new CellularAutomata(model);
 	try {
 		newComponent->_loadInstance(fields);
 	} catch (const std::exception& e) {
@@ -42,12 +42,12 @@ ModelComponent* CellularAutomataComp::LoadInstance(Model* model, PersistenceReco
 	return newComponent;
 }
 
-void CellularAutomataComp::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
+void CellularAutomata::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 	traceSimulation(this, "I'm just a dummy model and I'll just send the entity forward");
 	this->_parentModel->sendEntityToComponent(entity, this->getConnections()->getFrontConnection());
 }
 
-bool CellularAutomataComp::_loadInstance(PersistenceRecord *fields) {
+bool CellularAutomata::_loadInstance(PersistenceRecord *fields) {
 	bool res = ModelComponent::_loadInstance(fields);
 	if (res) {
 		// @TODO: not implemented yet
@@ -55,20 +55,20 @@ bool CellularAutomataComp::_loadInstance(PersistenceRecord *fields) {
 	return res;
 }
 
-void CellularAutomataComp::_saveInstance(PersistenceRecord *fields, bool saveDefaultValues) {
+void CellularAutomata::_saveInstance(PersistenceRecord *fields, bool saveDefaultValues) {
 	ModelComponent::_saveInstance(fields, saveDefaultValues);
 	// @TODO: not implemented yet
 }
 
-bool CellularAutomataComp::_check(std::string* errorMessage) {
+bool CellularAutomata::_check(std::string* errorMessage) {
 	bool resultAll = true;
 	*errorMessage += "";
 	// @TODO: not implemented yet
 	return resultAll;
 }
 
-PluginInformation* CellularAutomataComp::GetPluginInformation() {
-	PluginInformation* info = new PluginInformation(Util::TypeOf<CellularAutomataComp>(), &CellularAutomataComp::LoadInstance, &CellularAutomataComp::NewInstance);
+PluginInformation* CellularAutomata::GetPluginInformation() {
+	PluginInformation* info = new PluginInformation(Util::TypeOf<CellularAutomata>(), &CellularAutomata::LoadInstance, &CellularAutomata::NewInstance);
 	info->setCategory("Logic");
 	info->setDescriptionHelp("//@TODO");
 	return info;
