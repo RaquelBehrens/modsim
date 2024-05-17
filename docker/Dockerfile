@@ -21,7 +21,7 @@ RUN apt-get update && \
     apt-get -y install openssl libssl-dev libssl1.0 libgl1-mesa-dev libqt5x11extras5 '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev && \
     apt-get -y install xauth xorg x11-apps
     
-RUN apt-get -y install qt5-assistant qt5-qmake qtcreator libqt5designer5 qttools5-* qtbase5-dev git
+RUN apt-get -y install qt5-assistant qt5-qmake qtcreator libqt5designer5 qttools5-* qtbase5-dev git qtchooser
 
 # Install vscode
 RUN apt-get install -y software-properties-common apt-transport-https wget && \
