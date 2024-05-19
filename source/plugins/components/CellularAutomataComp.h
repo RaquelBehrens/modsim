@@ -14,7 +14,6 @@
 #pragma once
 
 #include "../../kernel/simulator/ModelComponent.h"
-#include "../../kernel/simulator/ModelComponent.h"
 #include "CellularAutomata/CellularAutomataBase.h"
 #include "CellularAutomata/Lattice.h"
 #include "CellularAutomata/Neighborhood.h"
