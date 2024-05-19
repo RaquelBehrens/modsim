@@ -17,12 +17,12 @@
 #ifdef PLUGINCONNECT_DYNAMIC
 
 extern "C" StaticGetPluginInformation GetPluginInformation() {
-	return &CellularAutomataComp::GetPluginInformation;
+    return &CellularAutomataComp::GetPluginInformation;
 }
 #endif
 
 ModelDataDefinition* CellularAutomataComp::NewInstance(Model* model, std::string name) {
-	return new CellularAutomataComp(model, name);
+    return new CellularAutomataComp(model, name);
 }
 
 CellularAutomataComp::CellularAutomataComp(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<CellularAutomataComp>(), name) {
@@ -33,7 +33,7 @@ std::string CellularAutomataComp::show() {
 }
 
 ModelComponent* CellularAutomataComp::LoadInstance(Model* model, PersistenceRecord *fields) {
-	CellularAutomataComp* newComponent = new CellularAutomataComp(model);
+    CellularAutomataComp* newComponent = new CellularAutomataComp(model);
 	try {
 		newComponent->_loadInstance(fields);
 	} catch (const std::exception& e) {
@@ -68,7 +68,7 @@ bool CellularAutomataComp::_check(std::string* errorMessage) {
 }
 
 PluginInformation* CellularAutomataComp::GetPluginInformation() {
-	PluginInformation* info = new PluginInformation(Util::TypeOf<CellularAutomataComp>(), &CellularAutomataComp::LoadInstance, &CellularAutomataComp::NewInstance);
+    PluginInformation* info = new PluginInformation(Util::TypeOf<CellularAutomataComp>(), &CellularAutomataComp::LoadInstance, &CellularAutomataComp::NewInstance);
 	info->setCategory("Logic");
 	info->setDescriptionHelp("//@TODO");
 	return info;
