@@ -1,0 +1,20 @@
+# Genesys Simulation Model 
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=220131 
+0   ModelInfo  "Model 1" analystName="" description="" projectTitle="" version="1.0" 
+0   ModelSimulation "" replicationLength=10.000000 traceLevel=8 
+
+# Model Data Definitions
+2129 EntityType "Client" 
+2131 Set        "Set_1" member[0]="Resource_1" member[1]="Resource_2" member[2]="Resource_3" member[3]="Resource_4" member[4]="Resource_5" members=5 type="Resource" 
+2132 Resource   "Resource_1" 
+2133 Resource   "Resource_2" 
+2134 Resource   "Resource_3" 
+2135 Resource   "Resource_4" 
+2136 Resource   "Resource_5" 
+2141 Queue      "myqueue" 
+
+# Model Components
+2128 Create     "Create_1" entityType="Client" timeBetweenCreations="1" nextId=2137 
+2130 Dispose    "Dispose_1" nexts=0 
+2137 Process    "Process_1" delayExpression="unif(0.6,1.4)" queueable="myqueue" requestSeizableType[0]=2 requestSeizable[0]="Set_1" nextId=2130 

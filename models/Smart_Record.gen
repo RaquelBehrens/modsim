@@ -1,0 +1,7 @@
+# Genesys Simulation Model
+# Simulator, Model and Simulation infos
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=230914 0   ModelInfo  "Model 1" version="1.0" projectTitle="" description="" analystName="" 0   ModelSimulation "" traceLevel=9 warmUpTimeTimeUnit=6 warmUpTime=0.050000 replicationLength=10.000000 numberOfReplications=300 replicationLengthTimeUnit=6 
+# Model Data Definitions
+66  EntityType "Person" 69  Attribute  "timeIn" 
+# Model Components
+67  Create     "Create_1" entityType="Person" timeBetweenCreationsTimeUnit=6 nextId=68 caption="Enter Store" timeBetweenCreations="EXPO(5)" 68  Assign     "Assign_1" assignExpr[0]="tnow" nextId=70 caption="Mark Entry Time" assignDest[0]="timeIn" 70  Delay      "Delay_1" delayExpressionTimeUnit=6 delayExpression="tria(3, 7, 11)" nextId=71 caption="Browse" 71  Record     "Record_1" nextId=72 caption="Time in Store" expressionName="Time in Store" expression="timeIn" 72  Dispose    "Dispose_1" nexts=0 caption="Leave Store" 
