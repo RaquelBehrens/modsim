@@ -1,0 +1,20 @@
+#Expression="NR(unitTest)", ExpressionName="Distributions for unit test"
+#ReplicationNumber=1
+1 1
+2 2
+3 1
+4 3
+5 4
+6 5
+7 1
+8 2
+9 1
+10 3
+11 4
+12 5
+13 1
+14 2
+15 1
+16 3
+17 4
+18 5
