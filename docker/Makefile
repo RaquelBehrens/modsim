@@ -1,3 +1,5 @@
+selector:
+	bash ./scripts/selector.sh
 
 build_image:
 	bash ./scripts/build.sh
