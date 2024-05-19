@@ -46,12 +46,14 @@ public: //! enums
 		ENUMERATED = 1, INTEGERBASED = 2, BITBASED = 3, DOUBLEBASED = 4, USERDEFINED = 5
 	};
 
-
 	enum class LocalRuleType : int {
 		ELEMENTAR_CA = 1, GAME_OF_LIFE = 2, BIASED_COMPETITION = 3, HPP = 4, USERDEFINED = 5
 	};
 
-
+	enum class AutomataType : int {
+		Temporary = 0, Permanent = 1
+	};
+	
 public: //! constructors
 	CellularAutomataComp(Model* model, std::string name = "");
 	virtual ~CellularAutomataComp() = default;
@@ -76,7 +78,7 @@ public: //! new public user methods for this component
 	Lattice *getlattice() const;
 	Neighborhood *getNeighboorhood() const;
 	//BoundaryCondition *getBoundary() const;
-	StateSet *getStateSet() const;
+	StateSet *getStateSet() const;	
 
 public: //! virtual public methods
 	virtual std::string show();
@@ -138,9 +140,7 @@ private: //! Attributes that do not need to be loaded or saved with this compone
 	LocalRule* _localRule = nullptr;
 
 private: //! internal DataElements (Composition)
-	// ...
 
 private: //! attached DataElements (Agrregation)
 	// ...
 };
-

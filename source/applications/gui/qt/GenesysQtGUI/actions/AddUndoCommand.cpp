@@ -35,18 +35,19 @@ AddUndoCommand::AddUndoCommand(QGraphicsItem *item, ModelGraphicsScene *scene, Q
         _myDrawingItem = item;
     }
 
-
     setText(QObject::tr("Add"));
 }
 
 AddUndoCommand::~AddUndoCommand() {}
 
 void AddUndoCommand::undo() {
-    // remove as conexoes individuais
+    // remove o que é gráfico
+
+    // remove as conexões individuais
     if (_myConnectionItem != nullptr)
         _myGraphicsScene->removeItem(_myConnectionItem);
 
-    // remove o que e grafico
+    // remove os componentes
     if (_myComponentItem.graphicalComponent != nullptr) {
         for (int j = 0; j < _myComponentItem.inputConnections.size(); ++j) {
             GraphicalConnection *connection = _myComponentItem.inputConnections.at(j);
@@ -61,41 +62,50 @@ void AddUndoCommand::undo() {
         _myGraphicsScene->removeItem(_myComponentItem.graphicalComponent);
     }
 
-    // remove os itens simples da tela
+    // remove os outros itens do tipo QGraphicsItem da tela
     if (_myDrawingItem != nullptr)
-        _myGraphicsScene->removeDrawing(_myDrawingItem);
-
+        _myGraphicsScene->removeItem(_myDrawingItem);
 
     // agora remove o que deve ser removido do modelo
+
+    // remove os componentes
     if (_myComponentItem.graphicalComponent != nullptr)
         _myGraphicsScene->removeComponent(_myComponentItem.graphicalComponent, true);
 
-    // varre todos os GraphicalConnection
+    // remove as conexões
     if (_myConnectionItem != nullptr) {
         GraphicalModelComponent *source = _myGraphicsScene->findGraphicalModelComponent(_myConnectionItem->getSource()->component->getId());
         GraphicalModelComponent *destination = _myGraphicsScene->findGraphicalModelComponent(_myConnectionItem->getDestination()->component->getId());
 
-        // verifica se a conexao ainda existe, pois ela pode ja ter sido removida caso fizesse parte de um componente que foi removido
+        // verifica se a conexão ainda existe, pois ela pode já ter sido removida caso fizesse parte de um componente que foi removido
         if (_myGraphicsScene->getGraphicalConnections()->contains(_myConnectionItem)) {
             // se ela existe, a remove
             _myGraphicsScene->removeGraphicalConnection(_myConnectionItem, source, destination, true);
         } else {
-            // se nao existe, quer dizer que a conexao faz parte de um componente que foi removido, e portando ela ja foi removida
-            // entao a limpa sua referencia
+            // se não existe, quer dizer que a conexão faz parte de um componente que foi removido, e portando ela já foi removida
+            // entao limpa sua referência
             _myConnectionItem = nullptr;
         }
     }
+
+    // remove os outros itens do tipo QGraphicsItem
+    if (_myDrawingItem != nullptr)
+        _myGraphicsScene->removeDrawing(_myDrawingItem, true);
 
     // atualiza a cena
     _myGraphicsScene->update();
 }
 
 void AddUndoCommand::redo() {
-    // adiciona tudo que e grafico
-    // comeca adicionando o componente e suas conexoes
+    // adiciona tudo que é gráfico
+
+    // adiciona o componente
     if (_myComponentItem.graphicalComponent != nullptr) {
         _myGraphicsScene->addItem(_myComponentItem.graphicalComponent);
+    }
 
+    // adiciona as conex dos componentes
+    if (_myComponentItem.graphicalComponent != nullptr) {
         for (int j = 0; j < _myComponentItem.inputConnections.size(); ++j) {
             GraphicalConnection *connection = _myComponentItem.inputConnections.at(j);
             _myGraphicsScene->addItem(connection);
@@ -107,40 +117,32 @@ void AddUndoCommand::redo() {
         }
     }
 
-    // add as conexoes individuais
+    // adiciona as conexões individuais
     if (_myConnectionItem != nullptr) {
         _myGraphicsScene->addItem(_myConnectionItem);
     }
 
-    // remove os itens simples da tela
+    // adiciona os outros itens do tipo QGraphicsItem na tela
     if (_myDrawingItem != nullptr) {
         _myGraphicsScene->addItem(_myDrawingItem);
     }
 
-    // agora comeca a adicionar o que se deve no modelo
+    // agora adiciona o que se deve no modelo
+
+    // adiciona componente
     if (_myComponentItem.graphicalComponent != nullptr) {
-        //add graphically
-        _myGraphicsScene->getGraphicalModelComponents()->append(_myComponentItem.graphicalComponent);
-
         if (!_firstExecution) {
-            //add in model (apenas para delete)
-            _myGraphicsScene->getSimulator()->getModels()->current()->insert(_myComponentItem.graphicalComponent->getComponent());
-
-            //refaz as conexões
-            _myGraphicsScene->redoConnections(_myComponentItem.graphicalComponent, &_myComponentItem.inputConnections, &_myComponentItem.outputConnections);
-
-            _myGraphicsScene->notifyGraphicalModelChange(GraphicalModelEvent::EventType::CREATE, GraphicalModelEvent::EventObjectType::COMPONENT, _myComponentItem.graphicalComponent);
-
+            _myGraphicsScene->insertComponent(_myComponentItem.graphicalComponent, &_myComponentItem.inputConnections, &_myComponentItem.outputConnections, true, false, true);
         } else {
             _firstExecution = false;
         }
     }
 
-    // realiza a conexao do objeto GraphicalConnection
+    // realiza as conexõo entre os componentes da conexão
     if (_myConnectionItem != nullptr) {
-        // verifico se a conexao ainda nao existe (ela pode ser uma conexao que foi refeita no connectComponents)
-        // por exemplo, pode ter uma conexao selecionada que foi eliminada anteriormente pois ela fazia parte de um componente
-        // entao ao refazer as conexoes do componente, ela ja foi religada
+        // verifico se a conexão ainda não existe (ela pode ser uma conexão que foi refeita no connectComponents)
+        // por exemplo, pode ter uma conexão selecionada que foi eliminada anteriormente pois ela fazia parte de um componente
+        // então ao refazer as conexões do componente, ela já foi religada
         if (!_myGraphicsScene->getGraphicalConnections()->contains(_myConnectionItem)) {
             GraphicalModelComponent* sourceComp = _myGraphicsScene->findGraphicalModelComponent(_myConnectionItem->getSource()->component->getId());
             GraphicalModelComponent* destComp = _myGraphicsScene->findGraphicalModelComponent(_myConnectionItem->getDestination()->component->getId());
@@ -150,6 +152,10 @@ void AddUndoCommand::redo() {
             _myGraphicsScene->connectComponents(_myConnectionItem, sourceComp, destComp, true);
         }
     }
+
+    // adiciona os outros itens do tipo QGraphicsItem
+    if (_myDrawingItem != nullptr)
+        _myGraphicsScene->addDrawing(_myDrawingItem, true);
 
     // atualiza a cena
     _myGraphicsScene->update();

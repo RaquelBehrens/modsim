@@ -8,7 +8,6 @@
 #include <QUndoView>
 
 #include "../../../../kernel/simulator/Simulator.h"
-#include "../../../../kernel/simulator/PropertyGenesys.h"
 #include "../../../../kernel/simulator/TraceManager.h"
 #include "ModelGraphicsScene.h"
 
@@ -98,7 +97,7 @@ private slots:
 	void on_actionToolsOptimizator_triggered();
 	void on_actionToolsDataAnalyzer_triggered();
 
-	void on_actionSimulatorPluginManager_triggered();
+    void on_actionSimulatorsPluginManager_triggered();
 	void on_actionSimulatorExit_triggered();
 	void on_actionSimulatorPreferences_triggered();
 
@@ -154,6 +153,12 @@ private slots:
     void on_actionShowSnap_triggered();
     void on_actionGModelShowConnect_triggered();
 
+    void on_actionActivateGraphicalSimulation_triggered();
+    void on_horizontalSliderAnimationSpeed_valueChanged(int value);
+    void on_actionSelectAll_triggered();
+
+    void on_actionDiagrams_triggered();
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 
@@ -175,6 +180,7 @@ private: // simulator event handlers
 	void _onEntityCreateHandler(SimulationEvent* re);
 	void _onEntityRemoveHandler(SimulationEvent* re);
     void _onMoveEntityEvent(SimulationEvent * re);
+    void _onAfterProcessEvent(SimulationEvent * re);
 private: // model Graphics View handlers
     void _onSceneMouseEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void _onSceneWheelInEvent();
@@ -217,7 +223,7 @@ private: // view
 	void _clearModelEditors();
 	void _gentle_zoom(double factor);
 	void _showMessageNotImplemented();
-	void _recursivalyGenerateGraphicalModelFromModel(ModelComponent* component, List<ModelComponent*>* visited, std::map<ModelComponent*,GraphicalModelComponent*>* map, int *x, int *y, int *ymax, int sequenceInline);
+    void _recursivalyGenerateGraphicalModelFromModel(ModelComponent* component, List<ModelComponent*>* visited, std::map<ModelComponent*,GraphicalModelComponent*>* map, int *x, int *y, int *ymax, int sequenceInline);
 	void _generateGraphicalModelFromModel();
     void saveItemForCopy(QList<GraphicalModelComponent*> * gmcList, QList<GraphicalConnection*> * connList);
 	//bool _checkStartSimulation();
@@ -232,18 +238,25 @@ private:
 private: // interface and model main elements to join
 	Ui::MainWindow *ui;
 	Simulator* simulator;
-	PropertyEditorGenesys* propertyGenesys;
-private: // attributes to be saved and loaded withing the graphical model
-	int _zoomValue; // todo should be set for each open graphical model, such as view rect, etc
-//!@TODO CHeck if used
 private: // misc useful
+    bool _check(bool success = true);
 	bool _textModelHasChanged = false;
 	bool _graphicalModelHasChanged = false;
+    QString _autoLoadPluginsFilename = "autoloadplugins.txt";
 	bool _modelWasOpened = false;
-	QString _autoLoadPluginsFilename = "autoloadplugins.txt";
+    bool _checkItemsScene();
 	QString _modelfilename;
 	std::map<std::string /*category*/,QColor>* _pluginCategoryColor = new std::map<std::string,QColor>();
-
+    int _zoomValue; // todo should be set for each open graphical model, such as view rect, etc
+    // TODO 1: Faz parte do mecanismo de restaurar dataDefinitions deletados do modelo e que são restaurados com um Control Z
+    // Caso: Ao adicionar um Create no modelo e dar um check() o EntityType será criado,
+    // mas ao deletar o Create, dar outro check() e em sequida dar um Control Z (voltando o Create no modelo) e checar novamente, o EntityType não é restaurado
+    // na lista de dataDefinitions do modelo, apesar de ainda existir no Create.
+    // Neste caso, ocorre um erro acusando que o EntityType do Create não está no modelo.
+    // Isso se dá ao fato de que no Kernel ele verifica se _entityType = nullptr para criar um novo e reinserir no modelo, mas não trata o caso dele não ser nullptr
+    // e não estar nos dataDefinitions do modelo, que é o que ocorre na situação que foi descrita.
+    // Esta função foi feita para tratar esse caso, assim como é feito com insertRestoredDataDefinitions e saveDataDefinitions em ModelGraphicScene
+    void setStatisticsCollector();
 
     bool _cut;
     QList<GraphicalModelComponent*> * _gmc_copies  = new QList<GraphicalModelComponent*>();
@@ -284,6 +297,8 @@ private:
 
     QUndoView *undoView = nullptr;
     bool _graphicalSimulation = false;
+    bool _modelCheked = false;
+    bool _loaded = false;
 	//CodeEditor* textCodeEdit_Model;
 };
 #endif // MAINWINDOW_H

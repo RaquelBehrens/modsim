@@ -7,12 +7,12 @@
 #include <QVariantAnimation>
 #include <QElapsedTimer>
 
+#include "graphicals/GraphicalImageAnimation.h"
 #include "graphicals/GraphicalModelComponent.h"
 #include "graphicals/GraphicalConnection.h"
-#include "graphicals/GraphicalImageAnimation.h"
 
 // Em segundos
-#define TEMPO_EXECUCAO_ANIMACAO 1
+#define TEMPO_EXECUCAO_ANIMACAO 2.5
 
 class ModelGraphicsScene;
 
@@ -20,7 +20,7 @@ class AnimationTransition : public QVariantAnimation
 {
 public:
     // Construtor
-    AnimationTransition(ModelGraphicsScene* myScene, ModelComponent* graphicalStartComponent, ModelComponent* graphicalEndComponent, const QString imageName = "default.png");
+    AnimationTransition(ModelGraphicsScene* myScene, ModelComponent* graphicalStartComponent, ModelComponent* graphicalEndComponent, bool viewSimulation);
     // Destrutor
     ~AnimationTransition();
 
@@ -28,14 +28,16 @@ public:
     GraphicalModelComponent* getGraphicalStartComponent() const;
     GraphicalModelComponent* getGraphicalEndComponent() const;
     GraphicalConnection* getGraphicalConnection() const;
-    static int getTimeExecution();
+    static double getTimeExecution();
     QList<QPointF> getPointsForAnimation() const;
     GraphicalImageAnimation* getImageAnimation() const;
     unsigned int getPortNumber() const;
 
     // Setters
     void setImageAnimation(GraphicalImageAnimation* imageAnimation);
-    static void setTimeExecution(int timeExecution);
+    static void setTimeExecution(double timeExecution);
+    static void setPause(bool pause);
+    static void setRunning(bool running);
 
     // Inicia a animação
     void startAnimation();
@@ -51,7 +53,6 @@ public:
     void connectValueChangedSignal();
     // Conecta o sinal finished da animação ao slot onAnimationFinished
     void connectFinishedSignal();
-    // Função a ser chamada ao término da execução da animação
 
 public slots:
     // Slot para ser conectado ao sinal valueChanged
@@ -64,12 +65,15 @@ private:
     GraphicalModelComponent* _graphicalStartComponent;
     GraphicalModelComponent* _graphicalEndComponent;
     GraphicalConnection* _graphicalConnection;
-    static int *_timeExecution;
-    static int _oldTimeExecution;
+    static double _timeExecution;
+    static double _oldTimeExecution;
+    static bool _pause;
+    static bool _running;
     QList<QPointF> _pointsForAnimation;
     GraphicalImageAnimation* _imageAnimation;
     unsigned int _portNumber;
     qreal _currentProgress;
+    bool _viewSimulation;
 };
 
 #endif // ANIMATIONTRANSITION_H
