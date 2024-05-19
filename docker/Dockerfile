@@ -30,7 +30,7 @@ RUN apt-get install -y software-properties-common apt-transport-https wget && \
     apt-get install -y code
 
 # Clone the repository
-RUN git clone https://github.com/rlcancian2/Genesys-Simulator /home/Genesys-Simulator
+RUN git clone https://github.com/RaquelBehrens/modsim /home/Genesys-Simulator
 
 COPY ./container-scripts/clone-repo.sh /home/scripts/clone-repo.sh
 COPY ./container-scripts/run-genesys.sh /home/scripts/run-genesys.sh
