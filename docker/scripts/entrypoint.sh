@@ -8,7 +8,7 @@ if [ $1 == "gui" ]; then
     $GENESYS_CLONE_PATH$GENESYS_GUI_SUBPATH
 elif [ $1 == "nogui" ]; then
     $GENESYS_CLONE_PATH$GENESYS_NOGUI_SUBPATH
-else
+elif [ $1 == "qt" ]; then
     /usr/bin/qtcreator $GENESYS_CLONE_PATH$GENESYS_PROJECT_SUBPATH
 fi
 

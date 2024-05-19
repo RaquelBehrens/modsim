@@ -1,55 +1,70 @@
-FROM ubuntu:latest
+FROM ubuntu:23.04
 
-# Set the DEBIAN_FRONTEND variable to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
+# Versão do Dockerfile
+ARG VERSION=0.1.0
 
-# Create a user 
-RUN useradd -ms /bin/bash genesys
+# URL do repositório
+ARG GENESYS_REPO=https://github.com/RaquelBehrens/modsim
 
-# Set the user's password 
-RUN echo 'genesys:genesys' | chpasswd
+# A branch que o container usa
+ENV GENESYS_MAIN_BRANCH=main
 
-# Grant the user sudo privileges
-RUN usermod -aG sudo genesys
+# Caminho onde o GenESyS vai ser clonado
+ENV GENESYS_CLONE_PATH=/home/genesys
 
-# Expose the X11 socket for GUI applications 
-ENV DISPLAY=$DISPLAY
+# Sub-caminho onde está localizado o arquivo do projeto
+ENV GENESYS_PROJECT_SUBPATH=/source/applications/gui/qt/GenesysQtGUI/GenesysQtGUI.pro
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get -y install build-essential && \
-    apt-get -y install openssl libssl-dev libssl1.0 libgl1-mesa-dev libqt5x11extras5 '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev && \
-    apt-get -y install xauth xorg x11-apps
-    
-RUN apt-get -y install qt5-assistant qt5-qmake qtcreator libqt5designer5 qttools5-* qtbase5-dev git
+# Sub-caminho onde está o binário do Genesys com GUI
+ENV GENESYS_GUI_SUBPATH=/GenesysQtGUI
 
-# Install vscode
-RUN apt-get install -y software-properties-common apt-transport-https wget && \
-    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add - && \
-    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" -y && \
-    apt-get install -y code
+# Sub-caminho onde está o binário do Genesys sem GUI
+ENV GENESYS_NOGUI_SUBPATH=/GenesysShell
 
-# Clone the repository
-RUN git clone https://github.com/RaquelBehrens/modsim /home/Genesys-Simulator
+LABEL maintainer=$GENESYS_USER \
+      url=$GENESYS_REPO \
+      name="docker-genesys" \
+      version=$VERSION
 
-COPY ./container-scripts/clone-repo.sh /home/scripts/clone-repo.sh
-COPY ./container-scripts/run-genesys.sh /home/scripts/run-genesys.sh
+# Copia o script de inicialização para dentro do container
+COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh 
+RUN chmod +x /usr/local/bin/entrypoint.sh 
 
-RUN echo '#!/bin/bash\ncode --no-sandbox --user-data-dir="/home/genesys/.vscode-root"' > /usr/bin/vscode && \
-    chmod +x /usr/bin/vscode
+# Instala todas as bibliotecas necessárias
+RUN echo "Instalando pre-requisitos" && \
+    apt-get update && \
+    apt-get upgrade --assume-yes && \
+    DEBIAN_FRONTEND=noninteractive apt-get --assume-yes dist-upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install \
+        build-essential \
+        curl \
+        git \
+        libclang1 \
+        libgl1-mesa-dri \
+        libgl1-mesa-glx \
+        xdg-utils \
+        qtcreator \
+        qtbase5-dev \
+        qttools5-*
 
-RUN echo '#!/bin/bash\n/home/Genesys-Simulator/GenesysQtGUI 2> /dev/null' > /usr/bin/run-default-gui && \
-    chmod +x /usr/bin/run-default-gui && \
-    echo '#!/bin/bash\nqtcreator 2> /dev/null' > /usr/bin/run-qtcreator && \
-    chmod +x /usr/bin/run-qtcreator
+# Instala o comando gh que é o CLI oficial do GitHub
+RUN echo "Preparando GitHub CLI" && \
+    type -p curl >/dev/null || (apt-get update && apt-get install curl -y) && \
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
+    apt-get update && \
+    apt-get install gh -y
 
-COPY ./container-scripts/recompile-gui /usr/bin/recompile-gui
-COPY ./container-scripts/recompile-shell /usr/bin/recompile-shell
-COPY ./container-scripts/generate-ssh-key /usr/bin/generate-ssh-key
+# Clona o GenESyS
+RUN echo "Clonando GeNESyS" && \
+    git clone $GENESYS_REPO $GENESYS_CLONE_PATH
 
-RUN chmod +x /usr/bin/recompile-gui && chmod +x /usr/bin/recompile-shell && chmod +x /usr/bin/generate-ssh-key
+# Diminui o tamanho da imagem
+RUN echo "Limpando" && \
+    apt-get autoremove --assume-yes && \
+    apt-get clean && \
+    rm --force --recursive /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /home/scripts
-
-# Start bash when the container starts
-# ENTRYPOINT . /home/genesys/.bashrc
+# Executa o script de inicialização
+ENTRYPOINT ["bash", "/usr/local/bin/entrypoint.sh"]
