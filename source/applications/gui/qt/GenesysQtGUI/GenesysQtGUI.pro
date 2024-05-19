@@ -140,7 +140,6 @@ SOURCES += \
 	../../../BaseGenesysTerminalApplication.cpp \
 	../../../terminal/GenesysShell/GenesysShell.cpp \
 	../../../terminal/examples/smarts/Smart_CellularAutomata.cpp \
-	AnimationTransition.cpp \
 	CodeEditor.cpp \
 	DataComponentProperty.cpp \
 	ModelGraphicsScene.cpp \
@@ -365,7 +364,6 @@ HEADERS += \
 	../../../terminal/GenesysShell/GenesysShell_if.h \
 	../../../terminal/TraitsTerminalApp.h \
 	../../../terminal/examples/smarts/Smart_CellularAutomata.h \
-    AnimationTransition.h \
 	CodeEditor.h \
 	LineNumberArea.h \
 	ModelGraphicsScene.h \
