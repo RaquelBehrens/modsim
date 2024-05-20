@@ -77,6 +77,9 @@
 #include "../../plugins/data/Storage.h"
 #include "../../plugins/data/Variable.h"
 #include "../../plugins/data/EFSM.h"
+#include "../../plugins/data/SPICECircuit.h"
+#include "../../plugins/data/SPICENode.h"
+#include "../../plugins/data/SPICERunner.h"
 
 //#include "../../plugins/data/State.h"
 //#include "../../plugins/data/Transition.h"
@@ -127,6 +130,12 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &FiniteStateMachine::GetPluginInformation;
 	else if (fn == "efsm.so")
 		GetInfo = &ExtendedFSM::GetPluginInformation;
+	else if (fn == "spice_circuite.so")
+		GetInfo = &SPICECircuit::GetPluginInformation;
+	else if (fn == "spice_node.so")
+		GetInfo = &SPICENode::GetPluginInformation;
+	else if (fn == "spice_runner.so")
+		GetInfo = &SPICERunner::GetPluginInformation;
 	else if (fn == "entitygroup.so")
 		GetInfo = &EntityGroup::GetPluginInformation;
 	else if (fn == "failure.so")

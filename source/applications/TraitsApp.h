@@ -21,6 +21,7 @@
 
 #include "terminal/examples/smarts/Smart_EFSM1.h"
 #include "terminal/examples/smarts/Smart_EFSM2.h"
+#include "terminal/examples/smarts/Smart_Half_Adder.h"
 
 template <typename T>
 struct TraitsApp {
@@ -34,7 +35,8 @@ template <> struct TraitsApp<GenesysApplication_if> {
     static const bool runTests = false;
     static const bool runGraphicalUserInterface = true; ///< If false, a terminal application will be compiled and executed (See TraitsTerminalApp.h). If true, a GUI for a general simulator will be executed.
 
-    typedef Smart_EFSM1 Application;
+    //typedef Smart_EFSM1 Application;
+    typedef Smart_Half_Adder Application;
 };
 
 #endif /* TRAITSAPP_H */

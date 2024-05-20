@@ -56,3 +56,6 @@ stop.so
 unstore.so
 variable.so
 write.so
+spice_circuite.so
+spice_node.so
+spice_runner.so
