@@ -27,6 +27,37 @@ ModelDataDefinition* LSODE::NewInstance(Model* model, std::string name) {
 }
 
 LSODE::LSODE(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<LSODE>(), name) {
+	SimulationControlGenericClass<Variable*, Model*, Variable>* propTimeVariable = new SimulationControlGenericClass<Variable*, Model*, Variable>(
+									_parentModel,
+									std::bind(&LSODE::getTimeVariable, this), std::bind(&LSODE::setTimeVariable, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "TimeVariable", "");
+	SimulationControlGeneric<double>* propStep = new SimulationControlGeneric<double>(
+									std::bind(&LSODE::getStep, this), std::bind(&LSODE::setStep, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "Step", "");
+	SimulationControlGenericClass<Variable*, Model*, Variable>* propVariable = new SimulationControlGenericClass<Variable*, Model*, Variable>(
+									_parentModel,
+									std::bind(&LSODE::getVariable, this), std::bind(&LSODE::setVariable, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "Variable", "");
+	SimulationControlGeneric<std::string>* propFileName = new SimulationControlGeneric<std::string>(
+									std::bind(&LSODE::getFileName, this), std::bind(&LSODE::setFilename, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "FileName", "");
+	SimulationControlGenericList<std::string, Model*, std::string>* propDiffEquations = new SimulationControlGenericList<std::string, Model*, std::string> (
+									_parentModel,
+                                    std::bind(&LSODE::getDiffEquations, this), std::bind(&LSODE::addDiffEquation, this, std::placeholders::_1), std::bind(&LSODE::removeDiffEquation, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "DiffEquations", "");								
+
+	_parentModel->getControls()->insert(propTimeVariable);
+	_parentModel->getControls()->insert(propStep);
+	_parentModel->getControls()->insert(propVariable);
+	_parentModel->getControls()->insert(propFileName);
+	_parentModel->getControls()->insert(propDiffEquations);
+
+	// setting properties
+	_addProperty(propTimeVariable);
+	_addProperty(propStep);
+	_addProperty(propVariable);
+	_addProperty(propFileName);
+	_addProperty(propDiffEquations);
 }
 
 std::string LSODE::show() {
@@ -71,6 +102,14 @@ List<std::string>* LSODE::getDiffEquations() const {
 	return _diffEquations;
 }
 
+void LSODE::addDiffEquation(std::string newDiffEquation) {
+	_diffEquations->insert(newDiffEquation);
+}
+
+void LSODE::removeDiffEquation(std::string diffEquation) {
+	_diffEquations->remove(diffEquation);
+}
+
 void LSODE::setFilename(std::string filename) {
 	this->_filename = filename;
 }
@@ -101,7 +140,7 @@ bool LSODE::_doStep() {
 		time += halfStep;
 		_timeVariable->setValue(time);
 		for (i = 0; i < numEqs; i++) {
-			_variable->setValue(valVar[i] + k1[i] * halfStep, std::to_string(i));
+			_variable->setValue(std::to_string(i), valVar[i] + k1[i] * halfStep);
 		}
 		for (i = 0; i < numEqs; i++) {
 			expression = _diffEquations->getAtRank(i);
@@ -109,7 +148,7 @@ bool LSODE::_doStep() {
 			k2[i] = eqResult;
 		}
 		for (i = 0; i < numEqs; i++) {
-			_variable->setValue(valVar[i] + k2[i] * halfStep, std::to_string(i));
+			_variable->setValue(std::to_string(i), valVar[i] + k2[i] * halfStep);
 		}
 		for (i = 0; i < numEqs; i++) {
 			expression = _diffEquations->getAtRank(i);
@@ -117,7 +156,7 @@ bool LSODE::_doStep() {
 			k3[i] = eqResult;
 		}
 		for (i = 0; i < numEqs; i++) {
-			_variable->setValue(valVar[i] + k3[i] * halfStep, std::to_string(i));
+			_variable->setValue(std::to_string(i), valVar[i] + k3[i] * halfStep);
 		}
 		for (i = 0; i < numEqs; i++) {
 			expression = _diffEquations->getAtRank(i);
@@ -127,7 +166,7 @@ bool LSODE::_doStep() {
 		for (i = 0; i < numEqs; i++) {
 
 			eqResult = _variable->getValue(std::to_string(i)) +(_step / 6) * (k1[i] + 2 * (k2[i] + k3[i]) + k4[i]);
-			_variable->setValue(eqResult, std::to_string(i));
+			_variable->setValue(std::to_string(i), eqResult);
 		}
 		time = initTime + _step;
 		_timeVariable->setValue(time);

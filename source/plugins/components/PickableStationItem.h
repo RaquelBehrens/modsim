@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/class.h to edit this template
  */
 
-/* 
+/*
  * File:   PickableStationItem.h
  * Author: rlcancian
  *
@@ -20,28 +20,38 @@
 
 class PickableStationItem {
 public:
-	PickableStationItem(Model* model, std::string stationName, std::string queueName = "", std::string resourceName = "");
-	PickableStationItem(Model* model, std::string stationName, std::string expression);
-	PickableStationItem(Station* station, Queue* queue);
-	PickableStationItem(Station* station, Resource* resource);
-	PickableStationItem(Station* station, std::string expression);
-	PickableStationItem(Station* station);
-	virtual ~PickableStationItem() = default;
+    PickableStationItem(Model* model, std::string stationName, std::string queueName = "", std::string resourceName = "");
+    PickableStationItem(Model* model, std::string stationName, std::string expression);
+    PickableStationItem(Station* station, Queue* queue);
+    PickableStationItem(Station* station, Resource* resource);
+    PickableStationItem(Station* station, std::string expression);
+    PickableStationItem(Station* station);
+    virtual ~PickableStationItem() = default;
 public:
-	std::string getExpression() const;
-	Queue* getQueue() const;
-	Resource* getResource() const;
-	Station* getStation() const;
+    std::string getExpression() const;
+    Queue* getQueue() const;
+    Resource* getResource() const;
+    Station* getStation() const;
     void setExpression(std::string _expression);
     void setQueue(Queue* _queue);
     void setResource(Resource* _resource);
     void setStation(Station* _station);
+
+    std::string getName();
+    void _addProperty(PropertyBase* property);
+    List<PropertyBase*>* getProperties() const;
+
+    std::string getTypeDC() {return _typeDC;};
 private:
 private:
-	Station* _station = nullptr;
-	Resource* _resource = nullptr;
-	Queue* _queue = nullptr;
-	std::string _expression = "";
+    Station* _station = nullptr;
+    Resource* _resource = nullptr;
+    Queue* _queue = nullptr;
+    std::string _expression = "";
+    std::string _stationName = "";
+
+    std::string _typeDC = Util::TypeOf<Station>();
+    List<PropertyBase*>* _properties = new List<PropertyBase*>();
 };
 
 #endif /* PICKABLESTATIONITEM_H */

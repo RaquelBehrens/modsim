@@ -146,6 +146,8 @@ public: // get & set
 	void setQueue(Queue* queue); //!< Deprected
 	//Queue* getQueue() const;
 	List<SeizableItem*>* getSeizeRequests() const;
+    void addRequest(SeizableItem* newRequest);
+    void removeRequest(SeizableItem* request);
 	void setQueueableItem(QueueableItem* _queueableItem);
 	QueueableItem* getQueueableItem() const;
 	void setPriorityExpression(std::string _priorityExpression);

@@ -49,8 +49,10 @@ class Match : public ModelComponent {
 public:
 
 	enum class Rule : int {
-		Any = 0, ByAttribute = 1
+		Any = 0, ByAttribute = 1, num_elements = 2
 	};
+public:
+	static std::string convertEnumToStr(Rule rule);
 public: // constructors
 	Match(Model* model, std::string name = "");
 	virtual ~Match() = default;

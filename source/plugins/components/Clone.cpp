@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/*
+/* 
  * File:   Clone.cpp
  * Author: rafael.luiz.cancian
  *
@@ -55,7 +55,7 @@ std::string Clone::getNumClonesExpression() const {
 	return _numClonesExpression;
 }
 
-// public static
+// public static 
 
 ModelComponent* Clone::LoadInstance(Model* model, PersistenceRecord *fields) {
 	Clone* newComponent = new Clone(model);
@@ -113,7 +113,7 @@ void Clone::_saveInstance(PersistenceRecord *fields, bool saveDefaultValues) {
 }
 
 
-// protected virtual -- could be overriden
+// protected virtual -- could be overriden 
 
 //ParserChangesInformation* DummyElement::_getParserChangesInformation() {}
 

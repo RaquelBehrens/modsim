@@ -97,6 +97,14 @@ std::string Search::getSearchInName() const {
 		return "";
 }
 
+std::string Search::convertEnumToStr(SearchInType type) {
+	switch (static_cast<int> (type)) {
+		case 0: return "QUEUE";
+		case 1: return "ENTITYGROUP";
+	}
+	return "Unknown";
+}
+
 Search::Search(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Search>(), name) {
 	SimulationControlGeneric<std::string>* propStart = new SimulationControlGeneric<std::string>(
 									std::bind(&Search::getStartRank, this), std::bind(&Search::setStartRank, this, std::placeholders::_1),
@@ -116,18 +124,18 @@ Search::Search(Model* model, std::string name) : ModelComponent(model, Util::Typ
 	// SimulationControlGeneric<ModelDataDefinition*>* propSearchIn = new SimulationControlGeneric<ModelDataDefinition*>(
 	// 								std::bind(&Search::getSearchIn, this), std::bind(&Search::setSearchIn, this, std::placeholders::_1),
 	// 								Util::TypeOf<Search>(), getName(), "SearchIn", "");
-	SimulationControlGenericEnum<Search::SearchInType>* propSearchInType = new SimulationControlGenericEnum<Search::SearchInType>(
-									std::bind(&Search::getSearchInType, this), std::bind(&Search::setSearchInType, this, std::placeholders::_1),
-									Util::TypeOf<Search>(), getName(), "SearchInType", "");
+    SimulationControlGenericEnum<Search::SearchInType, Search>* propSearchInType = new SimulationControlGenericEnum<Search::SearchInType, Search>(
+                                    std::bind(&Search::getSearchInType, this), std::bind(&Search::setSearchInType, this, std::placeholders::_1),
+                                    Util::TypeOf<Search>(), getName(), "SearchInType", "");
 
 
-	_parentModel->getControls()->insert(propStart);
+	_parentModel->getControls()->insert(propStart);								
 	_parentModel->getControls()->insert(propEnd);
 	_parentModel->getControls()->insert(propCondition);
 	_parentModel->getControls()->insert(propSaveAttribute);
 	_parentModel->getControls()->insert(propSearchInName);
 	// _parentModel->getControls()->insert(propSearchIn);
-	_parentModel->getControls()->insert(propSearchInType);
+    _parentModel->getControls()->insert(propSearchInType);
 
 	// setting properties
 	_addProperty(propStart);
@@ -136,7 +144,7 @@ Search::Search(Model* model, std::string name) : ModelComponent(model, Util::Typ
 	_addProperty(propSaveAttribute);
 	_addProperty(propSearchInName);
 	// _addProperty(propSearchIn);
-	_addProperty(propSearchInType);
+    _addProperty(propSearchInType);
 }
 
 std::string Search::show() {

@@ -42,23 +42,23 @@ Delay::Delay(Model* model, std::string name) : ModelComponent(model, Util::TypeO
 	SimulationControlGeneric<double>* propDelay = new SimulationControlGeneric<double>(
 									std::bind(&Delay::delay, this), std::bind(&Delay::setDelay, this, std::placeholders::_1),
 									Util::TypeOf<Delay>(), getName(), "Delay", "");
-	SimulationControlGenericEnum<Util::TimeUnit>* propUnitTime = new SimulationControlGenericEnum<Util::TimeUnit>(
+    SimulationControlGenericEnum<Util::TimeUnit, Util>* propUnitTime = new SimulationControlGenericEnum<Util::TimeUnit, Util>(
 									std::bind(&Delay::delayTimeUnit, this),	std::bind(&Delay::setDelayTimeUnit, this, std::placeholders::_1),
 									Util::TypeOf<Delay>(), getName(), "DelayTimeUnit", "");
-	SimulationControlGenericEnum<Util::AllocationType>* propAlloc = new SimulationControlGenericEnum<Util::AllocationType>(
-									std::bind(&Delay::getAllocation, this), std::bind(&Delay::setAllocation,  this, std::placeholders::_1),
-									Util::TypeOf<Delay>(), getName(), "AllocationType", "");
+    SimulationControlGenericEnum<Util::AllocationType, Util>* propAlloc = new SimulationControlGenericEnum<Util::AllocationType, Util>(
+                                    std::bind(&Delay::getAllocation, this), std::bind(&Delay::setAllocation,  this, std::placeholders::_1),
+                                    Util::TypeOf<Delay>(), getName(), "AllocationType", "");
 
 	_parentModel->getControls()->insert(propExpression);
 	_parentModel->getControls()->insert(propDelay);
 	_parentModel->getControls()->insert(propUnitTime);
-	_parentModel->getControls()->insert(propAlloc);
+    _parentModel->getControls()->insert(propAlloc);
 
 	// setting properties
 	_addProperty(propExpression);
 	_addProperty(propDelay);
 	_addProperty(propUnitTime);
-	_addProperty(propAlloc);
+    _addProperty(propAlloc);
 }
 
 void Delay::setDelay(double delay) {
@@ -112,8 +112,8 @@ void Delay::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 		if (entity->getEntityType()->isReportStatistics())
 			entity->getEntityType()->addGetStatisticsCollector(entity->getEntityTypeName() + "." + allocationCategory+ "Time")->getStatistics()->getCollector()->addValue(waitTime);
 		double totalWaitTime = entity->getAttributeValue("Entity.Total" + allocationCategory + "Time");
-		std::string index="";
-		entity->setAttributeValue("Entity.Total" + allocationCategory + "Time", totalWaitTime + waitTime, index, true);
+		std::string attribIndex="";
+		entity->setAttributeValue("Entity.Total" + allocationCategory + "Time", totalWaitTime + waitTime, attribIndex, true);
 	}
 	double delayEndTime = _parentModel->getSimulation()->getSimulatedTime() + waitTime;
 	Event* newEvent = new Event(delayEndTime, entity, this->getConnections()->getFrontConnection());

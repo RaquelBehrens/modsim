@@ -55,9 +55,10 @@ containing an attribute name(s) for searching queues or batches.
 class Search : public ModelComponent {
 public:
 	enum class SearchInType : int {
-		QUEUE = 1, ENTITYGROUP = 2
+		QUEUE = 0, ENTITYGROUP = 1, num_elements = 2
 	};
-
+public:
+	static std::string convertEnumToStr(SearchInType type);
 public: // constructors
 	Search(Model* model, std::string name = "");
 	virtual ~Search() = default;

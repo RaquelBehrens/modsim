@@ -70,6 +70,8 @@ public:
 	static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
 public:
 	List<Assignment*>* getAssignments() const;
+	void addAssignment(Assignment* newAssignment);
+	void removeAssignment(Assignment* assignment);
 protected: // must be overriden 
 	virtual bool _loadInstance(PersistenceRecord *fields);
 	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);

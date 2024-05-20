@@ -76,6 +76,8 @@ public: // get & set
 	unsigned short priority() const;
 public: // gets
 	List<SeizableItem*>* getReleaseRequests() const;
+	void addReleaseRequests(SeizableItem* newRequest);
+	void removeReleaseRequests(SeizableItem* request);
 
 protected:
 	virtual void _onDispatchEvent(Entity* entity, unsigned int inputPortNumber);

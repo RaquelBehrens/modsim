@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   ODE.h
  * Author: rlcancian
  *
@@ -20,43 +20,45 @@
 
 class ODEfunction {
 public:
-	ODEfunction(std::string expression, double initialPoint, double initialValue) {
-		this->expression = expression;
-		this->initialPoint = initialPoint;
-		this->initialValue = initialValue;
-	}
-	std::string expression;
-	double initialPoint;
-	double initialValue;
+    ODEfunction(std::string expression, double initialPoint, double initialValue) {
+        this->expression = expression;
+        this->initialPoint = initialPoint;
+        this->initialValue = initialValue;
+    }
+    std::string expression;
+    double initialPoint;
+    double initialValue;
 };
 
 class OLD_ODEelement : public ModelDataDefinition {
 public:
-	OLD_ODEelement(Model* model, std::string name = "");
-	virtual ~OLD_ODEelement() = default;
+    OLD_ODEelement(Model* model, std::string name = "");
+    virtual ~OLD_ODEelement() = default;
 public:
-	virtual std::string show();
+    virtual std::string show();
 public:
-	static PluginInformation* GetPluginInformation();
-	static ModelDataDefinition* LoadInstance(Model* model, PersistenceRecord *fields);
-	static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
+    static PluginInformation* GetPluginInformation();
+    static ModelDataDefinition* LoadInstance(Model* model, PersistenceRecord *fields);
+    static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
 public:
-	double solve();
-	void setStepH(double _h);
-	double getStepH() const;
-	void setEndTime(double _endTime);
-	double getEndTime() const;
-	List<ODEfunction*>* getODEfunctions() const;
-protected: // must be overriden 
-	virtual bool _loadInstance(PersistenceRecord *fields);
-	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
-	virtual bool _check(std::string* errorMessage);
+    double solve();
+    void setStepH(double _h);
+    double getStepH() const;
+    void setEndTime(double _endTime);
+    double getEndTime() const;
+    List<ODEfunction*>* getODEfunctions() const;
+    void addODEfunction(ODEfunction* newFunction);
+    void removeODEfunction(ODEfunction* function);
+protected: // must be overriden
+    virtual bool _loadInstance(PersistenceRecord *fields);
+    virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
+    virtual bool _check(std::string* errorMessage);
 private:
 
 private:
-	List<ODEfunction*>* _ODEfunctions = new List<ODEfunction*>();
-	double _stepH = 0.1;
-	double _endTime;
+    List<ODEfunction*>* _ODEfunctions = new List<ODEfunction*>();
+    double _stepH = 0.1;
+    double _endTime;
 };
 
 #endif /* OLD_ODEELEMENT_H */

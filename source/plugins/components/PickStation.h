@@ -69,13 +69,14 @@ class PickStation : public ModelComponent {
 public:
 
 	enum class TestCondition : int {
-		MINIMUM = 1, MAXIMUM = 2
+		MINIMUM = 0, MAXIMUM = 1, num_elements = 2
 	};
 
 	//enum class PickCondition : int {
 	//	NUMBER_BUSY_RESOURCE = 1, NUMBER_IN_QUEUE = 2, EXPRESSION = 3
 	//};
-
+public:
+	static std::string convertEnumToStr(TestCondition condition);
 public: // constructors
 	PickStation(Model* model, std::string name = "");
 	virtual ~PickStation() = default;
@@ -89,6 +90,8 @@ public:
 	void setSaveAttribute(std::string _saveAttribute);
 	std::string getSaveAttribute() const;
 	List<PickableStationItem*>* getPickableStationItens() const;
+	void addPickableStationItem(PickableStationItem* newItem);
+	void removePickableStationItem(PickableStationItem* item);
 	void setPickConditionExpression(bool _pickConditionExpression);
 	bool isPickConditionExpression() const;
 	void setPickConditionNumberInQueue(bool _pickConditionNumberInQueue);
