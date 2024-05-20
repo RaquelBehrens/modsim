@@ -13,28 +13,9 @@ public: // get
 		return _elements;
 	}
 public:
-	void changeProperty(std::string id, std::string attribute, std::string value) {
-		SimulationControl* property = findProperty(id, attribute);
-
-		if (property) {
-			property->setValue(value);
-		}
-	}
-	SimulationControl* findProperty(std::string id, std::string attribute){
-		for (auto element : _elements) {
-			if (std::to_string(element->getId()) == id) {
-				for (auto prop : *element->getProperties()->list()) {
-					if (prop->getName() == attribute) {
-						return prop;
-					}
-				}
-			}
-		}
-		return nullptr;
-	}
-	void addElement(ModelComponent* component){
-		_elements.push_back(component);
-	}
+	void changeProperty(std::string id, std::string attribute, std::string value);
+	SimulationControl* findProperty(std::string id, std::string attribute);
+	void addElement(ModelComponent* component);
 private: // attributes
 	std::list<ModelComponent*> _elements;
 };
