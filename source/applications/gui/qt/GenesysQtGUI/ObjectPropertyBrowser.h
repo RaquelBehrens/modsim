@@ -9,26 +9,36 @@
 #include "QPropertyBrowser/qttreepropertybrowser.h"
 #include "QPropertyBrowser/qtvariantproperty.h"
 
+#include "DataComponentProperty.h"
+#include "DataComponentEditor.h"
+#include "ComboBoxEnum.h"
+
 #include "../../../../kernel/simulator/ModelDataDefinition.h"
+#include "../../../../kernel/simulator/PropertyGenesys.h"
 
 class ObjectPropertyBrowser : public QtTreePropertyBrowser
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
     ObjectPropertyBrowser(QWidget* parent);
-    void setActiveObject(QObject *obj, ModelDataDefinition* mdd = nullptr);
-    void clearCurrentlyConnectedObject();
+    void setActiveObject(QObject *obj, ModelDataDefinition* mdd = nullptr, PropertyEditorGenesys* peg = nullptr, std::map<SimulationControl*, DataComponentProperty*>* pl = nullptr, std::map<SimulationControl*, DataComponentEditor*>* peUI = nullptr, std::map<SimulationControl*, ComboBoxEnum*>* pb = nullptr);
+
 private:
-	QtVariantPropertyManager *variantManager;
-	QObject *currentlyConnectedObject = nullptr;
-	QMap<QtProperty *, const char*> propertyMap;
+    QtVariantPropertyManager *variantManager;
+    QObject *currentlyConnectedObject = nullptr;
+    QMap<QtProperty *, const char*> propertyMap;
+
+    PropertyEditorGenesys* propertyEditor;
+    std::map<SimulationControl*, DataComponentProperty*>* propertyList;
+    std::map<SimulationControl*, DataComponentEditor*>* propertyEditorUI;
+    std::map<SimulationControl*, ComboBoxEnum*>* propertyBox;
 
 private slots:
-	void valueChanged(QtProperty *property, const QVariant &value);
+    void valueChanged(QtProperty *property, const QVariant &value);
 
 public slots:
-	void objectUpdated();
+    void objectUpdated();
 };
 
 #endif // OBJECTPROPERTYBROWSER_H

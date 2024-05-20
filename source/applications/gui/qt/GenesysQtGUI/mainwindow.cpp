@@ -41,7 +41,7 @@
 #include <actions/DeleteUndoCommand.h>
 #include "animations/AnimationVariable.h"
 #include <cstdlib>
-// @TODO: Should NOT be hardcoded!!!
+// @TODO: Should NOT be hardcoded!!! (Used to visualize variables)
 #include "../../../../plugins/data/Variable.h"
 
 
@@ -64,6 +64,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         //@TODO: now it's the opportunity to adjust template
         _insertPluginUI(simulator->getPlugins()->getAtRank(i));
     }
+
+	propertyGenesys = new PropertyEditorGenesys();
+    propertyList = new std::map<SimulationControl*, DataComponentProperty*>();
+    propertyEditorUI = new std::map<SimulationControl*, DataComponentEditor*>();
+    propertyBox = new std::map<SimulationControl*, ComboBoxEnum*>();
 
     //_insertFakePlugins(); // todo hate this
 
@@ -126,6 +131,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // ModelGraphic
     ui->graphicsView->setParentWidget(ui->centralwidget);
     ui->graphicsView->setSimulator(simulator);
+	ui->graphicsView->setPropertyEditor(propertyGenesys);
+    ui->graphicsView->setPropertyList(propertyList);
+    ui->graphicsView->setPropertyEditorUI(propertyEditorUI);
+    ui->graphicsView->setComboBox(propertyBox);
     _zoomValue = ui->horizontalSlider_ZoomGraphical->maximum() / 2;
     //
     // set current tabs
@@ -1247,7 +1256,7 @@ void MainWindow::_recursiveCreateModelGraphicPicture(ModelDataDefinition* compon
         //std::string nodeComponentOtherLevel = "shape=record, fontsize=12, fontcolor=black, style=filled, fillcolor=goldenrod3";
         std::string edgeComponent = "style=solid, arrowhead=\"normal\" color=black, fontcolor=black, fontsize=7";
         std::string nodeDataDefInternal = "shape=record, fontsize=8, color=gray50, fontcolor=gray50, style=filled, fillcolor=#d9ebbd";
-        std::string nodeDataDefAttached = "shape=record, fontsize=10, color=gray50, fontcolor=gray50, style=filled, fillcolor=#a2cd5a";
+		std::string nodeDataDefAttached = "shape=record, fontsize=10, color=gray50, fontcolor=gray50, style=filled, fillcolor=#a2cd5a";
         std::string edgeDataDefInternal = "style=dashed, arrowhead=\"diamond\", color=gray55, fontcolor=gray55, fontsize=7";
         std::string edgeDataDefAttached = "style=dashed, arrowhead=\"ediamond\", color=gray50, fontcolor=gray50, fontsize=7";
         unsigned int rankSource = 0;
@@ -1373,7 +1382,7 @@ void MainWindow::_actualizeModelCppCode() {
         text += _addCppCodeLine(" */");
         code->insert({"1begin", text});
 
-        text = _addCppCodeLine("#include \"kernel/simulator/Simulator.h\"");
+        text = _addCppCodeLine("#include \"kernel/simulator/PropertyGenesys.h\"");
         List<std::string>* included = new List<std::string>();
         for (ModelComponent* comp : *m->getComponents()->getAllComponents()) {
             name = comp->getClassname();
@@ -1398,20 +1407,27 @@ void MainWindow::_actualizeModelCppCode() {
 
         text = _addCppCodeLine("\nint main(int argc, char** argv) {");
         tabs++;
-        text += _addCppCodeLine("// Create simulator, a model and get acess to plugins", tabs);
+        text += _addCppCodeLine("// Create simulator, a property editor, a model and get acess to plugins", tabs);
         text += _addCppCodeLine("Simulator* genesys = new Simulator();", tabs);
+		text += _addCppCodeLine("PropertyEditorGenesys* propertyEditor = new PropertyEditorGenesys();", tabs);
         text += _addCppCodeLine("Model* model = genesys->getModels()->newModel();", tabs);
         text += _addCppCodeLine("PluginManager* plugins = genesys->getPlugins();", tabs);
         text += _addCppCodeLine("model->getTracer()->setTraceLevel(TraceManager::TraceLevel::L9_mostDetailed);", tabs);
         code->insert({"3main", text});
 
-        text = _addCppCodeLine("// Create model data definitions", tabs);
+        text = _addCppCodeLine("// Create model components and setting properties", tabs);
         for (std::string ddClassname : *m->getDataManager()->getDataDefinitionClassnames()) {
             for (ModelDataDefinition* modeldata : *m->getDataManager()->getDataDefinitionList(ddClassname)->list()) {
                 name = modeldata->getName();
                 if (name.find(".") == std::string::npos) {
                     text += _addCppCodeLine(ddClassname + "* " + name + " = plugins->newInstance<" + ddClassname + ">(model, \"" + name + "\");", tabs);
                 }
+				for (auto prop : *comp->getProperties()->list()) {
+					// Fazer um loop até encontrar propriedade não alterável?
+					text += _addCppCodeLine("SimulationControl* property = propertyEditor->findProperty(" + std::to_string(comp->getId()) + ", " + prop->getName() + ");", tabs);
+					text += _addCppCodeLine("propertyEditor->changeProperty(property, " + prop->getValue() + ", false);", tabs);
+				};
+				text += _addCppCodeLine("", tabs);
             }
         }
         code->insert({"4datadef", text});
@@ -1832,7 +1848,7 @@ void MainWindow::sceneSelectionChanged() {
             item = ui->graphicsView->selectedItems().at(0);
             gmc = dynamic_cast<GraphicalModelComponent*> (item);
             if (gmc != nullptr) {
-                ui->treeViewPropertyEditor->setActiveObject(gmc, gmc->getComponent());
+                ui->treeViewPropertyEditor->setActiveObject(gmc, gmc->getComponent(), propertyGenesys, propertyList, propertyEditorUI, propertyBox);
                 return;
             }
         }

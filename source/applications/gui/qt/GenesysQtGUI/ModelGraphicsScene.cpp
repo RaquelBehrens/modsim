@@ -88,6 +88,21 @@ void ModelGraphicsScene::notifyGraphicalModelChange(GraphicalModelEvent::EventTy
 }
 
 GraphicalModelComponent* ModelGraphicsScene::addGraphicalModelComponent(Plugin* plugin, ModelComponent* component, QPointF position, QColor color, bool notify) {
+    _propertyEditor->addElement(component);
+    for (auto prop : *component->getProperties()->list()) {
+        if (prop->getIsList()) {
+            (*(_propertyList))[prop] = new DataComponentProperty(_propertyEditor, prop, false);
+        }
+
+        if (prop->getIsClass()) {
+            (*(_propertyEditorUI))[prop] = new DataComponentEditor(_propertyEditor, prop);
+        }
+
+        if (prop->getIsEnum()) {
+            (*(_propertyBox))[prop] = new ComboBoxEnum(_propertyEditor, prop);
+        }
+    }
+    
     // cria o componente gráfico
     GraphicalModelComponent* graphComp = new GraphicalModelComponent(plugin, component, position, color);
 
@@ -2358,6 +2373,22 @@ void ModelGraphicsScene::setObjectBeingDragged(QTreeWidgetItem* objectBeingDragg
 
 void ModelGraphicsScene::setSimulator(Simulator *simulator) {
     _simulator = simulator;
+}
+
+void ModelGraphicsScene::setPropertyEditor(PropertyEditorGenesys *propEditor) {
+	_propertyEditor = propEditor;
+}
+
+void ModelGraphicsScene::setPropertyList(std::map<SimulationControl*, DataComponentProperty*>* propList) {
+    _propertyList = propList;
+}
+
+void ModelGraphicsScene::setPropertyEditorUI(std::map<SimulationControl*, DataComponentEditor*>* propEditorUI) {
+    _propertyEditorUI = propEditorUI;
+}
+
+void ModelGraphicsScene::setComboBox(std::map<SimulationControl*, ComboBoxEnum*>* propCombo) {
+    _propertyBox = propCombo;
 }
 
 unsigned short ModelGraphicsScene::connectingStep() const {

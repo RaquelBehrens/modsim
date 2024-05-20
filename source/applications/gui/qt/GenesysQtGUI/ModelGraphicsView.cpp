@@ -68,6 +68,9 @@ ModelGraphicsScene* ModelGraphicsView::getScene() {
 	return (ModelGraphicsScene*) scene();
 }
 
+void ModelGraphicsView::showGrid() {
+	((ModelGraphicsScene*) scene())->showGrid();
+}
 
 void ModelGraphicsView::clear() {
 	scene()->clear();
@@ -80,9 +83,9 @@ void ModelGraphicsView::beginConnection() {
 void ModelGraphicsView::selectModelComponent(ModelComponent* component) {
 	QList<QGraphicsItem*>* list = ((ModelGraphicsScene*) scene())->getGraphicalModelComponents();
 	for (QGraphicsItem* item : *list) {
-        GraphicalModelComponent* gmc = (GraphicalModelComponent*) item;
+		GraphicalModelComponent* gmc = (GraphicalModelComponent*) item;
 		if (gmc->getComponent() == component) {
-            gmc->setSelected(true);
+			gmc->setSelected(true);
 		} else {
 			gmc->setSelected(false);
 		}
@@ -92,6 +95,26 @@ void ModelGraphicsView::selectModelComponent(ModelComponent* component) {
 void ModelGraphicsView::setSimulator(Simulator* simulator) {
 	_simulator = simulator;
 	((ModelGraphicsScene*) scene())->setSimulator(simulator);
+}
+
+void ModelGraphicsView::setPropertyEditor(PropertyEditorGenesys* propEditor) {
+	_propertyEditor = propEditor;
+	((ModelGraphicsScene*) scene())->setPropertyEditor(propEditor);
+}
+
+void ModelGraphicsView::setPropertyList(std::map<SimulationControl*, DataComponentProperty*>* propList) {
+    _propertyList = propList;
+    ((ModelGraphicsScene*) scene())->setPropertyList(propList);
+}
+
+void ModelGraphicsView::setPropertyEditorUI(std::map<SimulationControl*, DataComponentEditor*>* propEditorUI) {
+    _propertyEditorUI = propEditorUI;
+    ((ModelGraphicsScene*) scene())->setPropertyEditorUI(propEditorUI);
+}
+
+void ModelGraphicsView::setComboBox(std::map<SimulationControl*, ComboBoxEnum*>* propBox) {
+    _propertyBox = propBox;
+    ((ModelGraphicsScene*) scene())->setComboBox(propBox);
 }
 
 QColor ModelGraphicsView::myrgba(uint64_t color) {

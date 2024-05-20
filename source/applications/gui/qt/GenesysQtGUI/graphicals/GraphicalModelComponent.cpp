@@ -74,7 +74,7 @@ GraphicalModelComponent::GraphicalModelComponent(Plugin* plugin, ModelComponent*
 	setAcceptTouchEvents(true);
 	setActive(true);
 	setSelected(false);
-	setToolTip(QString::fromStdString(component->getName()));
+	setToolTip(QString::fromStdString(component->show()));
 	// create input output ports
 	GraphicalComponentPort* port;
 	qreal px, py = 0;

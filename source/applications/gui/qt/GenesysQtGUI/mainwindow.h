@@ -7,7 +7,12 @@
 #include <QGraphicsItem>
 #include <QUndoView>
 
+#include "DataComponentProperty.h"
+#include "DataComponentEditor.h"
+#include "ComboBoxEnum.h"
+
 #include "../../../../kernel/simulator/Simulator.h"
+#include "../../../../kernel/simulator/PropertyGenesys.h"
 #include "../../../../kernel/simulator/TraceManager.h"
 #include "ModelGraphicsScene.h"
 
@@ -231,47 +236,28 @@ private: // graphical model persistence
     bool _saveGraphicalModel(QString filename);
     bool _saveTextModel(QFile *saveFile, QString data);
 	Model* _loadGraphicalModel(std::string filename);
-private:
-	QColor myrgba(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
-	static std::string dotColor(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
-    void _helpCopy();
+private: //???
 private: // interface and model main elements to join
 	Ui::MainWindow *ui;
 	Simulator* simulator;
+	PropertyEditorGenesys* propertyGenesys;
+    std::map<SimulationControl*, DataComponentProperty*>* propertyList;
+    std::map<SimulationControl*, DataComponentEditor*>* propertyEditorUI;
+    std::map<SimulationControl*, ComboBoxEnum*>* propertyBox;
+private: // attributes to be saved and loaded withing the graphical model
+	int _zoomValue; // todo should be set for each open graphical model, such as view rect, etc
 private: // misc useful
     bool _check(bool success = true);
 	bool _textModelHasChanged = false;
 	bool _graphicalModelHasChanged = false;
+	bool _modelWasOpened = false;
     QString _autoLoadPluginsFilename = "autoloadplugins.txt";
 	bool _modelWasOpened = false;
     bool _checkItemsScene();
 	QString _modelfilename;
 	std::map<std::string /*category*/,QColor>* _pluginCategoryColor = new std::map<std::string,QColor>();
-    int _zoomValue; // todo should be set for each open graphical model, such as view rect, etc
-    // TODO 1: Faz parte do mecanismo de restaurar dataDefinitions deletados do modelo e que são restaurados com um Control Z
-    // Caso: Ao adicionar um Create no modelo e dar um check() o EntityType será criado,
-    // mas ao deletar o Create, dar outro check() e em sequida dar um Control Z (voltando o Create no modelo) e checar novamente, o EntityType não é restaurado
-    // na lista de dataDefinitions do modelo, apesar de ainda existir no Create.
-    // Neste caso, ocorre um erro acusando que o EntityType do Create não está no modelo.
-    // Isso se dá ao fato de que no Kernel ele verifica se _entityType = nullptr para criar um novo e reinserir no modelo, mas não trata o caso dele não ser nullptr
-    // e não estar nos dataDefinitions do modelo, que é o que ocorre na situação que foi descrita.
-    // Esta função foi feita para tratar esse caso, assim como é feito com insertRestoredDataDefinitions e saveDataDefinitions em ModelGraphicScene
-    void setStatisticsCollector();
-
-    bool _cut;
-    QList<GraphicalModelComponent*> * _gmc_copies  = new QList<GraphicalModelComponent*>();
-    QList<GraphicalConnection*> * _ports_copies = new QList<GraphicalConnection*>();
-    QList<QGraphicsItem *>  *_draw_copy = new QList<QGraphicsItem *>();
-    QList<QGraphicsItemGroup *>  *_group_copy = new QList<QGraphicsItemGroup *>();
-
-    struct COPY {
-        GraphicalModelComponent * old;
-        GraphicalModelComponent * copy;
-    };
-
-    bool _firstClickShowConnection = true;
-
-private:
+	QColor myrgba(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
+    static std::string dotColor(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
 
 	const struct TABINDEXES_STRUC {
 		const int TabCentralModelIndex = 0;
