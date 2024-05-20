@@ -97,9 +97,10 @@ public:
 	}
 
 	enum class ResourceState : int {
-		IDLE = 1, BUSY = 2, FAILED = 3, INACTIVE = 4, OTHER = 5
+		IDLE = 0, BUSY = 1, FAILED = 2, INACTIVE = 3, OTHER = 4, num_elements = 5
 	};
-
+public:	
+	static std::string convertEnumToStr(ResourceState state);
 public:
 	//Resource(Model* model);
 	Resource(Model* model, std::string name = "");

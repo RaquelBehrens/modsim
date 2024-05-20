@@ -69,13 +69,15 @@ class Failure : public ModelDataDefinition {
 public:
 
 	enum class FailureType : int {
-		COUNT = 1, TIME = 2
+		COUNT = 0, TIME = 1, num_elements = 2
 	};
 
 	enum class FailureRule : int {
-		IGNORE = 1, PREEMPT = 2, WAIT = 3
+		IGNORE = 0, PREEMPT = 1, WAIT = 2, num_elements = 3
 	};
-
+public:
+	static std::string convertEnumToStr(FailureType type);
+	static std::string convertEnumToStr(FailureRule rule);
 public:
 	Failure(Model* model, std::string name = "");
 	virtual ~Failure() = default;
@@ -103,6 +105,8 @@ public: // gets & sets
 	FailureRule getFailureRule() const;
 
 	List<Resource*>*falingResources() const;
+	void addResource(Resource* newResource);
+	void removeResource(Resource* resource);
 
 protected: // must be overriden
 	virtual bool _loadInstance(PersistenceRecord *fields);
