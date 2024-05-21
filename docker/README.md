@@ -2,6 +2,11 @@
 
 ## Guia Rápido
 
+Para abrir menu interativo:
+```bash
+make selector
+```
+
 Para buildar a imagem docker:
 ```bash
 make build_image
