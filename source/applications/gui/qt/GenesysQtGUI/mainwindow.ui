@@ -580,6 +580,9 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayoutZoomReplication">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <widget class="QLabel" name="labelMousePos">
         <property name="font">
@@ -687,6 +690,42 @@
         </property>
         <property name="invertedAppearance">
          <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelAnimationSpeed">
+        <property name="text">
+         <string>Animation speed</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="horizontalSliderAnimationSpeed">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+        <property name="sliderPosition">
+         <number>5</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>
@@ -799,6 +838,7 @@
      <addaction name="actionShowRule"/>
      <addaction name="actionShowSnap"/>
      <addaction name="actionShowGuides"/>
+     <addaction name="actionDiagrams"/>
      <addaction name="separator"/>
      <addaction name="actionShowInternalElements"/>
      <addaction name="actionShowAttachedElements"/>
@@ -1107,6 +1147,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <addaction name="actionShowRule"/>
    <addaction name="actionShowSnap"/>
    <addaction name="actionShowGuides"/>
+   <addaction name="actionSelectAll"/>
    <addaction name="separator"/>
    <addaction name="actionZoom_In"/>
    <addaction name="actionZoom_Out"/>
@@ -1114,6 +1155,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <addaction name="separator"/>
    <addaction name="actionViewGroup"/>
    <addaction name="actionViewUngroup"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QToolBar" name="toolBarSimulation">
    <property name="windowTitle">
@@ -1658,6 +1700,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
   </action>
   <action name="actionAnimateSimulatedTime">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="GenesysQtGUI_resources.qrc">
      <normaloff>:/icons3/resources/icons/pack3/ico/alarm clock.ico</normaloff>:/icons3/resources/icons/pack3/ico/alarm clock.ico</iconset>
@@ -1670,6 +1715,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
   </action>
   <action name="actionAnimateVariable">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="GenesysQtGUI_resources.qrc">
      <normaloff>:/resources/ToolBar/_animvalor.bmp</normaloff>:/resources/ToolBar/_animvalor.bmp</iconset>
@@ -1889,6 +1937,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
   </action>
   <action name="actionAnimateCounter">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="GenesysQtGUI_resources.qrc">
      <normaloff>:/icons3/resources/icons/pack3/ico/coin.ico</normaloff>:/icons3/resources/icons/pack3/ico/coin.ico</iconset>
@@ -2032,6 +2083,17 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>Plot</string>
    </property>
   </action>
+  <action name="actionDiagrams">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="window-new"/>
+   </property>
+   <property name="text">
+    <string>Diagrams</string>
+   </property>
+  </action>
   <action name="actionActivateGraphicalSimulation">
    <property name="checkable">
     <bool>true</bool>
@@ -2045,6 +2107,24 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
    <property name="toolTip">
     <string>Activate graphical simulation</string>
+   </property>
+  </action>
+  <action name="actionSelectAll">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="GenesysQtGUI_resources.qrc">
+     <normaloff>:/mxgraph/resources/icons/pack4/iconsMxGraph/select.gif</normaloff>:/mxgraph/resources/icons/pack4/iconsMxGraph/select.gif</iconset>
+   </property>
+   <property name="text">
+    <string>actionSelectAll</string>
+   </property>
+   <property name="toolTip">
+    <string>select all elements in scene</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>

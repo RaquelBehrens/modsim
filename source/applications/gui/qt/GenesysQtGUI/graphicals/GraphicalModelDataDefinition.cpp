@@ -17,8 +17,8 @@ GraphicalModelDataDefinition::GraphicalModelDataDefinition(Plugin* plugin, Model
 	_color = color;
 	_color.setAlpha(TraitsGUI<GModelDataDefinition>::opacity);
 	// define shape
-	/*
-	if (plugin->getPluginInfo()->isSource()) {
+
+    /*if (plugin->getPluginInfo()->isSource()) {
 		_stretchRigth = 0.3;
 		_stretchPosTop = 0.75;
 		_stretchPosBottom = 0.75;
@@ -43,8 +43,8 @@ GraphicalModelDataDefinition::GraphicalModelDataDefinition(Plugin* plugin, Model
 		//_stretchLeft=0.2;
 		//_stretchTopMidle=0.05;
 		//_stretchBottomMidle=0.05;
-	}
-	*/
+    } */
+
 	// position and flags
 	setPos(position.x()/*-_width/2*/, position.y() - _height / 2);
 	setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsFocusable);
@@ -231,6 +231,30 @@ void GraphicalModelDataDefinition::paint(QPainter *painter, const QStyleOptionGr
 
 ModelDataDefinition* GraphicalModelDataDefinition::getDataDefinition() const {
 	return _element;
+}
+
+QPointF GraphicalModelDataDefinition::getOldPosition() const {
+    return _oldPosition;
+}
+
+void GraphicalModelDataDefinition::setOldPosition(qreal x, qreal y) {
+    QPointF newPosition;
+    newPosition.setX(x);
+    newPosition.setY(y);
+    _oldPosition = newPosition;
+}
+
+QColor GraphicalModelDataDefinition::getColor() const {
+    return _color;
+}
+
+void GraphicalModelDataDefinition::setColor(QColor newColor) {
+    _color = newColor;
+    _color.setAlpha(TraitsGUI<GModelDataDefinition>::opacity);
+}
+
+qreal GraphicalModelDataDefinition::getHeight() const {
+    return _height;
 }
 
 bool GraphicalModelDataDefinition::sceneEvent(QEvent *event) {
