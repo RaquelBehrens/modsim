@@ -4,6 +4,9 @@ selector:
 build_image:
 	bash ./scripts/build.sh
 
+run_debug:
+	bash ./scripts/debug.sh
+
 run_qt:
 	bash ./scripts/qt.sh
 

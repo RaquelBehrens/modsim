@@ -1,14 +1,12 @@
 #!/bin/bash
 
-# Garante que a versão do repositório do GenESyS é a última possível
-git -C $GENESYS_CLONE_PATH fetch --all
-git -C $GENESYS_CLONE_PATH reset --hard origin/$GENESYS_MAIN_BRANCH
-
 if [ $1 == "gui" ]; then
-    $GENESYS_CLONE_PATH$GENESYS_GUI_SUBPATH
+    $GENESYS_ROOT/$GENESYS_GUI_SUBPATH
 elif [ $1 == "nogui" ]; then
-    $GENESYS_CLONE_PATH$GENESYS_NOGUI_SUBPATH
+    $GENESYS_ROOT/$GENESYS_NOGUI_SUBPATH
 elif [ $1 == "qt" ]; then
-    /usr/bin/qtcreator $GENESYS_CLONE_PATH$GENESYS_PROJECT_SUBPATH
+    /usr/bin/qtcreator $GENESYS_ROOT/$GENESYS_PROJECT_SUBPATH
+elif [ $1 == "debug" ]; then
+    /bin/bash
 fi
 
