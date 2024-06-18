@@ -16,7 +16,7 @@ ENV GENESYS_ROOT=/home/genesys
 ENV GENESYS_PROJECT_SUBPATH=source/applications/gui/qt/GenesysQtGUI/GenesysQtGUI.pro
 
 # Sub-caminho onde está o binário do Genesys com GUI
-ENV GENESYS_GUI_SUBPATH=source/applications/gui/qt/GenesysQtGUI/GenesysQtGUI
+ENV GENESYS_GUI_SUBPATH=GenesysQtGUI
 
 # Sub-caminho onde está o binário do Genesys sem GUI
 ENV GENESYS_NOGUI_SUBPATH=GenesysShell
