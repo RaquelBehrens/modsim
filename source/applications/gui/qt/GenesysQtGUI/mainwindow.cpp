@@ -1382,6 +1382,7 @@ void MainWindow::_actualizeModelCppCode() {
         text += _addCppCodeLine(" */");
         code->insert({"1begin", text});
 
+        text = _addCppCodeLine("#include \"kernel/simulator/Simulator.h\"");
         text = _addCppCodeLine("#include \"kernel/simulator/PropertyGenesys.h\"");
         List<std::string>* included = new List<std::string>();
         for (ModelComponent* comp : *m->getComponents()->getAllComponents()) {
@@ -1422,9 +1423,9 @@ void MainWindow::_actualizeModelCppCode() {
                 if (name.find(".") == std::string::npos) {
                     text += _addCppCodeLine(ddClassname + "* " + name + " = plugins->newInstance<" + ddClassname + ">(model, \"" + name + "\");", tabs);
                 }
-				for (auto prop : *comp->getProperties()->list()) {
+				for (auto prop : *modeldata->getProperties()->list()) {
 					// Fazer um loop até encontrar propriedade não alterável?
-					text += _addCppCodeLine("SimulationControl* property = propertyEditor->findProperty(" + std::to_string(comp->getId()) + ", " + prop->getName() + ");", tabs);
+					text += _addCppCodeLine("SimulationControl* property = propertyEditor->findProperty(" + std::to_string(modeldata->getId()) + ", " + prop->getName() + ");", tabs);
 					text += _addCppCodeLine("propertyEditor->changeProperty(property, " + prop->getValue() + ", false);", tabs);
 				};
 				text += _addCppCodeLine("", tabs);
@@ -2579,33 +2580,6 @@ void MainWindow::on_actionEditCopy_triggered() {
 
 }
 
-void MainWindow::on_actionEditPaste_triggered() {
-
-    // se tiver componente copiados
-    if (_gmc_copies->size() > 0 || _draw_copy->size() > 0 || _group_copy->size() > 0) {
-
-        // pega a cena
-        ModelGraphicsScene *scene = (ModelGraphicsScene *)(ui->graphicsView->getScene());
-
-        // se não for ação de recorte chama o auxiliar do copy
-        if (!_cut) {
-            _helpCopy();
-        }
-
-        // cola na cena o que foi copiado
-        QUndoCommand *pasteUndoCommand = new PasteUndoCommand(_gmc_copies, _ports_copies, _group_copy, _draw_copy, scene);
-        scene->getUndoStack()->push(pasteUndoCommand);
-
-        // limpa todas as listas
-        _gmc_copies->clear();
-        _ports_copies->clear();
-        _draw_copy->clear();
-        _group_copy->clear();
-        _cut = false;
-    }
-}
-
-
 void MainWindow::_helpCopy() {
     // Pega a cena
     ModelGraphicsScene *scene = (ModelGraphicsScene *)(ui->graphicsView->getScene());
@@ -2871,6 +2845,33 @@ void MainWindow::_helpCopy() {
     _draw_copy = drawing_aux;
     _group_copy = group_aux;
 }
+
+void MainWindow::on_actionEditPaste_triggered() {
+
+    // se tiver componente copiados
+    if (_gmc_copies->size() > 0 || _draw_copy->size() > 0 || _group_copy->size() > 0) {
+
+        // pega a cena
+        ModelGraphicsScene *scene = (ModelGraphicsScene *)(ui->graphicsView->getScene());
+
+        // se não for ação de recorte chama o auxiliar do copy
+        if (!_cut) {
+            _helpCopy();
+        }
+
+        // cola na cena o que foi copiado
+        QUndoCommand *pasteUndoCommand = new PasteUndoCommand(_gmc_copies, _ports_copies, _group_copy, _draw_copy, scene);
+        scene->getUndoStack()->push(pasteUndoCommand);
+
+        // limpa todas as listas
+        _gmc_copies->clear();
+        _ports_copies->clear();
+        _draw_copy->clear();
+        _group_copy->clear();
+        _cut = false;
+    }
+}
+
 
 void MainWindow::on_actionShowGrid_triggered() {
     ui->graphicsView->getScene()->showGrid();

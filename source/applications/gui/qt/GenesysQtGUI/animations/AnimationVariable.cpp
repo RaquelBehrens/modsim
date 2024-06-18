@@ -66,6 +66,10 @@ void AnimationVariable::setIdVariable(int id) {
     _idVariable = id;
 }
 
+void AnimationVariable::setNameVariable(std::string name) {
+    _variableName = name;
+}
+
 void AnimationVariable::setVariable(Variable *variable){
     _variable = variable;
 }
@@ -158,3 +162,20 @@ bool AnimationVariable::isDrawingFinalized() {
     return _isDrawingFinalized;
 }
 
+void AnimationVariable::setWhenLoaded(QList<Variable *> *variables) {
+    if (variables) {
+        if (!variables->empty()) {
+            for (Variable *variable : *variables) {
+                std::string variableName = variable->getName();
+
+                if (variableName == _variableName) {
+                    this->_variable = variable;
+                    this->_idVariable = variable->getId();
+                    this->_variableName = variableName;
+
+                    break;
+                }
+            }
+        }
+    }
+}

@@ -66,7 +66,7 @@ void DataComponentProperty::addElement(PropertyEditorGenesys* editor, Simulation
         newItem->setText(0,newValue);
 
         // change property
-        editor->changeProperty(property, newValue.toStdString(), false);
+        editor->changeProperty(property, newValue.toStdString());
     }
 };
 
@@ -80,7 +80,7 @@ void DataComponentProperty::removeElement(PropertyEditorGenesys* editor, Simulat
     delete selectedItem;
 
     // change property
-    editor->changeProperty(property, itemValue.toStdString(), true);
+    editor->changeProperty(property, itemValue.toStdString());
 };
 
 void DataComponentProperty::editProperty(PropertyEditorGenesys* editor, SimulationControl* property) {

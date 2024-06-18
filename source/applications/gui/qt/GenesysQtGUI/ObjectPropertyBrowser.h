@@ -23,7 +23,8 @@ class ObjectPropertyBrowser : public QtTreePropertyBrowser
 public:
     ObjectPropertyBrowser(QWidget* parent);
     void setActiveObject(QObject *obj, ModelDataDefinition* mdd = nullptr, PropertyEditorGenesys* peg = nullptr, std::map<SimulationControl*, DataComponentProperty*>* pl = nullptr, std::map<SimulationControl*, DataComponentEditor*>* peUI = nullptr, std::map<SimulationControl*, ComboBoxEnum*>* pb = nullptr);
-
+    void clearCurrentlyConnectedObject();
+    
 private:
     QtVariantPropertyManager *variantManager;
     QObject *currentlyConnectedObject = nullptr;

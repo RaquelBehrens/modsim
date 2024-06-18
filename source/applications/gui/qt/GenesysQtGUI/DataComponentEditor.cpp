@@ -96,7 +96,7 @@ void DataComponentEditor::editProperty(PropertyEditorGenesys* editor, Simulation
                         QString valueToChange = _newValue->getText(_newValue, "Item", "Enter the value:");
                         currentItem->setText(1,valueToChange);
 
-                        editor->changeProperty(prop, valueToChange.toStdString(), false);
+                        editor->changeProperty(prop, valueToChange.toStdString());
                         }
         }
         index++;
@@ -125,7 +125,7 @@ void DataComponentEditor::editProperty(PropertyEditorGenesys* editor, List<Simul
                     QString valueToChange = _newValue->getText(_newValue, "Item", "Enter the value:");
                     currentItem->setText(1,valueToChange);
 
-                    editor->changeProperty(prop, valueToChange.toStdString(), false);
+                    editor->changeProperty(prop, valueToChange.toStdString());
                     }
         }
         index++;
