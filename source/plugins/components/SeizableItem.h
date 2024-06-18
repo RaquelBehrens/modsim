@@ -24,12 +24,15 @@ class SeizableItem {
 public:
 
 	enum class SelectionRule : int {
-		CYCLICAL = 1, RANDOM = 2, SPECIFICMEMBER = 3, LARGESTREMAININGCAPACITY = 4, SMALLESTNUMBERBUSY = 5, PREFEREDORDER = 6
+		CYCLICAL = 0, RANDOM = 1, SPECIFICMEMBER = 2, LARGESTREMAININGCAPACITY = 3, SMALLESTNUMBERBUSY = 4, PREFEREDORDER = 5, num_elements = 6
 	};
 
 	enum class SeizableType : int {
-		RESOURCE = 1, SET = 2
+		RESOURCE = 0, SET = 1, num_elements = 2
 	};
+
+	static std::string convertEnumToStr(SelectionRule rule);
+	static std::string convertEnumToStr(SeizableType type);
 
 public:
 	SeizableItem(ModelDataDefinition* resourceOrSet, std::string quantityExpression = "1", SeizableItem::SelectionRule selectionRule = SeizableItem::SelectionRule::LARGESTREMAININGCAPACITY, std::string saveAttribute = "", std::string index = "0");
@@ -51,6 +54,7 @@ public:
 	void setQuantityExpression(std::string quantityExpression);
 	std::string getQuantityExpression() const;
 	std::string getResourceName() const;
+    std::string getName() const;
 	void setResource(Resource* resource);
 	Resource* getResource() const;
 	void setSet(Set* set);
@@ -64,7 +68,10 @@ public:
 	void setLastPreferedOrder(unsigned int lastPreferedOrder);
 	unsigned int getLastPreferedOrder() const;
 	//void setComponentManager(ComponentManager* _componentManager);
+    List<PropertyBase*>* getProperties() const;
+    void _addProperty(PropertyBase* property);
 
+	std::string getTypeDC() {return _typeDC;};
 private:
 
 	const struct DEFAULT_VALUES {
@@ -84,8 +91,10 @@ private:
 	std::string _quantityExpression;
 	unsigned int _lastMemberSeized = 0;
 	unsigned int _lastPreferedOrder = 0;
+	std::string _typeDC = Util::TypeOf<Resource>();
 private:
 	ModelDataManager* _modeldataManager;
+    List<PropertyBase*>* _properties = new List<PropertyBase*>();
 };
 
 #endif /* SEIZABLEITEM_H */

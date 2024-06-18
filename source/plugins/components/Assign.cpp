@@ -31,6 +31,14 @@ ModelDataDefinition* Assign::NewInstance(Model* model, std::string name) {
 }
 
 Assign::Assign(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Assign>(), name) {
+	SimulationControlGenericListPointer<Assignment*, Model*, Assignment>* propAssignments = new SimulationControlGenericListPointer<Assignment*, Model*, Assignment> (
+									_parentModel,
+                                    std::bind(&Assign::getAssignments, this), std::bind(&Assign::addAssignment, this, std::placeholders::_1), std::bind(&Assign::removeAssignment, this, std::placeholders::_1),
+									Util::TypeOf<Assign>(), getName(), "Assignments", "");
+
+	_parentModel->getControls()->insert(propAssignments);
+
+	_addProperty(propAssignments);
 }
 
 std::string Assign::show() {
@@ -44,6 +52,14 @@ std::string Assign::show() {
 
 List<Assignment*>* Assign::getAssignments() const {
 	return _assignments;
+}
+
+void Assign::addAssignment(Assignment* newAssignment) {
+	_assignments->insert(newAssignment);
+}
+
+void Assign::removeAssignment(Assignment* assignment) {
+	_assignments->remove(assignment);
 }
 
 PluginInformation* Assign::GetPluginInformation() {

@@ -15,6 +15,8 @@
 
 #include "../../kernel/simulator/Model.h"
 #include "../data/Variable.h"
+//#include "ProbDistribDefaultImpl1.h"
+#include "../../kernel/simulator/Simulator.h"
 #include "../../kernel/TraitsKernel.h"
 
 #ifdef PLUGINCONNECT_DYNAMIC
@@ -45,7 +47,7 @@ MarkovChain::MarkovChain(Model* model, std::string name) : ModelComponent(model,
 									Util::TypeOf<MarkovChain>(), getName(), "InitialDistribution", "");
 	SimulationControlGeneric<bool>* propInitilized = new SimulationControlGeneric<bool>(
 									std::bind(&MarkovChain::isInitilized, this), std::bind(&MarkovChain::setInitilized, this, std::placeholders::_1),
-									Util::TypeOf<MarkovChain>(), getName(), "Initilized", "");
+									Util::TypeOf<MarkovChain>(), getName(), "Initilized", "");																											
 
 	_parentModel->getControls()->insert(propTransitionMatrix);
 	_parentModel->getControls()->insert(propCurrentState);
@@ -162,7 +164,6 @@ void MarkovChain::_saveInstance(PersistenceRecord *fields, bool saveDefaultValue
 bool MarkovChain::_check(std::string* errorMessage) {
 	bool resultAll = true;
 	// @TODO: not implemented yet
-	//std::list<unsigned int> dimensions = _transitionProbMatrix->getDimensionSizes();
 	*errorMessage += "";
 	return resultAll;
 }

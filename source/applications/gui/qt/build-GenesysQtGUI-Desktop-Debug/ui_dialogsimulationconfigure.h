@@ -126,6 +126,15 @@ public:
         horizontalLayout->addWidget(spinBox_3);
 
         comboBox = new QComboBox(DialogSimulationConfigure);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         horizontalLayout->addWidget(comboBox);
@@ -142,6 +151,15 @@ public:
         horizontalLayout_2->addWidget(spinBox_2);
 
         comboBox_2 = new QComboBox(DialogSimulationConfigure);
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
         comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
 
         horizontalLayout_2->addWidget(comboBox_2);
@@ -155,6 +173,14 @@ public:
         formLayout->setWidget(6, QFormLayout::LabelRole, label_6);
 
         comboBox_3 = new QComboBox(DialogSimulationConfigure);
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
         comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
 
         formLayout->setWidget(6, QFormLayout::FieldRole, comboBox_3);
@@ -238,7 +264,36 @@ public:
         label_3->setText(QCoreApplication::translate("DialogSimulationConfigure", "Replication Length", nullptr));
         label_4->setText(QCoreApplication::translate("DialogSimulationConfigure", "Warmup Period:", nullptr));
         label_5->setText(QCoreApplication::translate("DialogSimulationConfigure", "Terminating Condition:", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("DialogSimulationConfigure", "picosecond", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("DialogSimulationConfigure", "nanosecond", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("DialogSimulationConfigure", "microsecond", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("DialogSimulationConfigure", "milisecond", nullptr));
+        comboBox->setItemText(4, QCoreApplication::translate("DialogSimulationConfigure", "second", nullptr));
+        comboBox->setItemText(5, QCoreApplication::translate("DialogSimulationConfigure", "minute", nullptr));
+        comboBox->setItemText(6, QCoreApplication::translate("DialogSimulationConfigure", "hour", nullptr));
+        comboBox->setItemText(7, QCoreApplication::translate("DialogSimulationConfigure", "day", nullptr));
+        comboBox->setItemText(8, QCoreApplication::translate("DialogSimulationConfigure", "week", nullptr));
+
+        comboBox_2->setItemText(0, QCoreApplication::translate("DialogSimulationConfigure", "picosecond", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("DialogSimulationConfigure", "nanosecond", nullptr));
+        comboBox_2->setItemText(2, QCoreApplication::translate("DialogSimulationConfigure", "microsecond", nullptr));
+        comboBox_2->setItemText(3, QCoreApplication::translate("DialogSimulationConfigure", "milisecond", nullptr));
+        comboBox_2->setItemText(4, QCoreApplication::translate("DialogSimulationConfigure", "second", nullptr));
+        comboBox_2->setItemText(5, QCoreApplication::translate("DialogSimulationConfigure", "minute", nullptr));
+        comboBox_2->setItemText(6, QCoreApplication::translate("DialogSimulationConfigure", "hour", nullptr));
+        comboBox_2->setItemText(7, QCoreApplication::translate("DialogSimulationConfigure", "day", nullptr));
+        comboBox_2->setItemText(8, QCoreApplication::translate("DialogSimulationConfigure", "week", nullptr));
+
         label_6->setText(QCoreApplication::translate("DialogSimulationConfigure", "Trace Level:", nullptr));
+        comboBox_3->setItemText(0, QCoreApplication::translate("DialogSimulationConfigure", "L0", nullptr));
+        comboBox_3->setItemText(1, QCoreApplication::translate("DialogSimulationConfigure", "L1", nullptr));
+        comboBox_3->setItemText(2, QCoreApplication::translate("DialogSimulationConfigure", "L2", nullptr));
+        comboBox_3->setItemText(3, QCoreApplication::translate("DialogSimulationConfigure", "L3", nullptr));
+        comboBox_3->setItemText(4, QCoreApplication::translate("DialogSimulationConfigure", "L4", nullptr));
+        comboBox_3->setItemText(5, QCoreApplication::translate("DialogSimulationConfigure", "L5", nullptr));
+        comboBox_3->setItemText(6, QCoreApplication::translate("DialogSimulationConfigure", "L6", nullptr));
+        comboBox_3->setItemText(7, QCoreApplication::translate("DialogSimulationConfigure", "L7", nullptr));
+
         checkBox->setText(QCoreApplication::translate("DialogSimulationConfigure", "Initialize system", nullptr));
         checkBox_4->setText(QCoreApplication::translate("DialogSimulationConfigure", "Initialize statistics between replications", nullptr));
         checkBox_3->setText(QCoreApplication::translate("DialogSimulationConfigure", "Show reports after replication", nullptr));

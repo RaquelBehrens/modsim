@@ -75,6 +75,10 @@ void AnimationCounter::setIdCounter(int id) {
     _idCounter = id;
 }
 
+void AnimationCounter::setNameCounter(std::string name) {
+    _counterName = name;
+}
+
 void AnimationCounter::startDrawing(QGraphicsSceneMouseEvent *event) {
     _isResizing = true;
     _startPoint = event->scenePos();
@@ -161,5 +165,23 @@ bool AnimationCounter::isDrawingInicialized() {
 
 bool AnimationCounter::isDrawingFinalized() {
     return _isDrawingFinalized;
+}
+
+void AnimationCounter::setWhenLoaded(QList<Counter *> *counters) {
+    if (counters) {
+        if (!counters->empty()) {
+            for (Counter *counter : *counters) {
+                std::string counterName = counter->getName();
+
+                if (counterName == _counterName) {
+                    this->_counter = counter;
+                    this->_idCounter = counter->getId();
+                    this->_counterName = counterName;
+
+                    break;
+                }
+            }
+        }
+    }
 }
 

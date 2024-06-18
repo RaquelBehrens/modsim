@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = GenesysQtGUI1.0.0
-DISTDIR = /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/.tmp/GenesysQtGUI1.0.0
+DISTDIR = /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/.tmp/GenesysQtGUI1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so /usr/lib/x86_64-linux-gnu/libQt5Designer.so /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Xml.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -116,6 +116,7 @@ SOURCES       = ../../../../kernel/simulator/Attribute.cpp \
 		../../../../plugins/components/CellularAutomata/StateSet.cpp \
 		../../../../plugins/components/CellularAutomata/StateSet_Enumerable.cpp \
 		../../../../plugins/components/CellularAutomataComp.cpp \
+		../../../../plugins/components/CellularAutomata.cpp \
 		../../../../plugins/components/Clone.cpp \
 		../../../../plugins/components/CppForG.cpp \
 		../../../../plugins/components/Create.cpp \
@@ -180,20 +181,29 @@ SOURCES       = ../../../../kernel/simulator/Attribute.cpp \
 		../../../BaseGenesysTerminalApplication.cpp \
 		../../../terminal/GenesysShell/GenesysShell.cpp \
 		../../../terminal/examples/smarts/Smart_CellularAutomata.cpp \
-		../GenesysQtGUI/AnimationTransition.cpp \
 		../GenesysQtGUI/CodeEditor.cpp \
 		../GenesysQtGUI/DataComponentProperty.cpp \
 		../GenesysQtGUI/ModelGraphicsScene.cpp \
 		../GenesysQtGUI/ModelGraphicsView.cpp \
 		../GenesysQtGUI/ObjectPropertyBrowser.cpp \
 		../GenesysQtGUI/PropertyEditor.cpp \
+		../GenesysQtGUI/DataComponentEditor.cpp \
+		../GenesysQtGUI/ComboBoxEnum.cpp \
 		../GenesysQtGUI/actions/AddUndoCommand.cpp \
 		../GenesysQtGUI/actions/DeleteUndoCommand.cpp \
 		../GenesysQtGUI/actions/GroupUndoCommand.cpp \
 		../GenesysQtGUI/actions/MoveUndoCommand.cpp \
 		../GenesysQtGUI/actions/PasteUndoCommand.cpp \
 		../GenesysQtGUI/actions/UngroupUndoCommand.cpp \
+		../GenesysQtGUI/animations/AnimationCounter.cpp \
+		../GenesysQtGUI/animations/AnimationQueue.cpp \
+		../GenesysQtGUI/animations/AnimationTimer.cpp \
+		../GenesysQtGUI/animations/AnimationTransition.cpp \
+		../GenesysQtGUI/animations/AnimationVariable.cpp \
 		../GenesysQtGUI/dialogs/DialogFind.cpp \
+		../GenesysQtGUI/dialogs/DialogSelectCounter.cpp \
+		../GenesysQtGUI/dialogs/DialogSelectVariable.cpp \
+		../GenesysQtGUI/dialogs/DialogTimerConfigure.cpp \
 		../GenesysQtGUI/dialogs/Dialogmodelinformation.cpp \
 		../GenesysQtGUI/dialogs/dialogBreakpoint.cpp \
 		../GenesysQtGUI/dialogs/dialogpluginmanager.cpp \
@@ -211,6 +221,7 @@ SOURCES       = ../../../../kernel/simulator/Attribute.cpp \
 		../GenesysQtGUI/graphicals/GraphicalAssociation.cpp \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.cpp \
 		../GenesysQtGUI/graphicals/GraphicalConnection.cpp \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.cpp \
 		../GenesysQtGUI/graphicals/GraphicalImageAnimation.cpp \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.cpp \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.cpp \
@@ -223,6 +234,9 @@ SOURCES       = ../../../../kernel/simulator/Attribute.cpp \
 		moc_ObjectPropertyBrowser.cpp \
 		moc_qtpropertybrowserutils_p.cpp \
 		moc_DialogFind.cpp \
+		moc_DialogSelectCounter.cpp \
+		moc_DialogSelectVariable.cpp \
+		moc_DialogTimerConfigure.cpp \
 		moc_Dialogmodelinformation.cpp \
 		moc_dialogBreakpoint.cpp \
 		moc_dialogpluginmanager.cpp \
@@ -294,6 +308,7 @@ OBJECTS       = Attribute.o \
 		StateSet.o \
 		StateSet_Enumerable.o \
 		CellularAutomataComp.o \
+		CellularAutomata.o \
 		Clone.o \
 		CppForG.o \
 		Create.o \
@@ -358,20 +373,29 @@ OBJECTS       = Attribute.o \
 		BaseGenesysTerminalApplication.o \
 		GenesysShell.o \
 		Smart_CellularAutomata.o \
-		AnimationTransition.o \
 		CodeEditor.o \
 		DataComponentProperty.o \
 		ModelGraphicsScene.o \
 		ModelGraphicsView.o \
 		ObjectPropertyBrowser.o \
 		PropertyEditor.o \
+		DataComponentEditor.o \
+		ComboBoxEnum.o \
 		AddUndoCommand.o \
 		DeleteUndoCommand.o \
 		GroupUndoCommand.o \
 		MoveUndoCommand.o \
 		PasteUndoCommand.o \
 		UngroupUndoCommand.o \
+		AnimationCounter.o \
+		AnimationQueue.o \
+		AnimationTimer.o \
+		AnimationTransition.o \
+		AnimationVariable.o \
 		DialogFind.o \
+		DialogSelectCounter.o \
+		DialogSelectVariable.o \
+		DialogTimerConfigure.o \
 		Dialogmodelinformation.o \
 		dialogBreakpoint.o \
 		dialogpluginmanager.o \
@@ -389,6 +413,7 @@ OBJECTS       = Attribute.o \
 		GraphicalAssociation.o \
 		GraphicalComponentPort.o \
 		GraphicalConnection.o \
+		GraphicalDiagramConnection.o \
 		GraphicalImageAnimation.o \
 		GraphicalModelComponent.o \
 		GraphicalModelDataDefinition.o \
@@ -402,6 +427,9 @@ OBJECTS       = Attribute.o \
 		moc_ObjectPropertyBrowser.o \
 		moc_qtpropertybrowserutils_p.o \
 		moc_DialogFind.o \
+		moc_DialogSelectCounter.o \
+		moc_DialogSelectVariable.o \
+		moc_DialogTimerConfigure.o \
 		moc_Dialogmodelinformation.o \
 		moc_dialogBreakpoint.o \
 		moc_dialogpluginmanager.o \
@@ -409,7 +437,7 @@ OBJECTS       = Attribute.o \
 		moc_dialogsystempreferences.o \
 		moc_mainwindow.o \
 		moc_qcustomplot.o
-DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.txt \
+DIST          = /home/raquel/Documents/modsim/modsim/autoloadplugins.txt \
 		../GenesysQtGUI/QPropertyBrowser/CMakeLists.txt \
 		../GenesysQtGUI/QPropertyBrowser/images/cursor-arrow.png \
 		../GenesysQtGUI/QPropertyBrowser/images/cursor-busy.png \
@@ -495,7 +523,6 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		../GenesysQtGUI/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -621,6 +648,7 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../../../../plugins/components/CellularAutomata/StateSet_Enumerable.h \
 		../../../../plugins/components/CellularAutomata/State_Numerical.h \
 		../../../../plugins/components/CellularAutomataComp.h \
+		../../../../plugins/components/CellularAutomata.h \
 		../../../../plugins/components/Clone.h \
 		../../../../plugins/components/CppForG.h \
 		../../../../plugins/components/Create.h \
@@ -694,7 +722,6 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../../../terminal/GenesysShell/GenesysShell_if.h \
 		../../../terminal/TraitsTerminalApp.h \
 		../../../terminal/examples/smarts/Smart_CellularAutomata.h \
-		../GenesysQtGUI/AnimationTransition.h \
 		../GenesysQtGUI/CodeEditor.h \
 		../GenesysQtGUI/LineNumberArea.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
@@ -702,6 +729,8 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../GenesysQtGUI/ObjectPropertyBrowser.h \
 		../GenesysQtGUI/PropertyEditor.h \
 		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qteditorfactory.h \
 		../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.h \
@@ -718,7 +747,15 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../GenesysQtGUI/actions/MoveUndoCommand.h \
 		../GenesysQtGUI/actions/PasteUndoCommand.h \
 		../GenesysQtGUI/actions/UngroupUndoCommand.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../GenesysQtGUI/animations/AnimationQueue.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
 		../GenesysQtGUI/dialogs/DialogFind.h \
+		../GenesysQtGUI/dialogs/DialogSelectCounter.h \
+		../GenesysQtGUI/dialogs/DialogSelectVariable.h \
+		../GenesysQtGUI/dialogs/DialogTimerConfigure.h \
 		../GenesysQtGUI/dialogs/Dialogmodelinformation.h \
 		../GenesysQtGUI/dialogs/dialogBreakpoint.h \
 		../GenesysQtGUI/dialogs/dialogpluginmanager.h \
@@ -728,6 +765,7 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../GenesysQtGUI/graphicals/GraphicalAssociation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
 		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
@@ -796,6 +834,7 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../../../../plugins/components/CellularAutomata/StateSet.cpp \
 		../../../../plugins/components/CellularAutomata/StateSet_Enumerable.cpp \
 		../../../../plugins/components/CellularAutomataComp.cpp \
+		../../../../plugins/components/CellularAutomata.cpp \
 		../../../../plugins/components/Clone.cpp \
 		../../../../plugins/components/CppForG.cpp \
 		../../../../plugins/components/Create.cpp \
@@ -860,20 +899,29 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../../../BaseGenesysTerminalApplication.cpp \
 		../../../terminal/GenesysShell/GenesysShell.cpp \
 		../../../terminal/examples/smarts/Smart_CellularAutomata.cpp \
-		../GenesysQtGUI/AnimationTransition.cpp \
 		../GenesysQtGUI/CodeEditor.cpp \
 		../GenesysQtGUI/DataComponentProperty.cpp \
 		../GenesysQtGUI/ModelGraphicsScene.cpp \
 		../GenesysQtGUI/ModelGraphicsView.cpp \
 		../GenesysQtGUI/ObjectPropertyBrowser.cpp \
 		../GenesysQtGUI/PropertyEditor.cpp \
+		../GenesysQtGUI/DataComponentEditor.cpp \
+		../GenesysQtGUI/ComboBoxEnum.cpp \
 		../GenesysQtGUI/actions/AddUndoCommand.cpp \
 		../GenesysQtGUI/actions/DeleteUndoCommand.cpp \
 		../GenesysQtGUI/actions/GroupUndoCommand.cpp \
 		../GenesysQtGUI/actions/MoveUndoCommand.cpp \
 		../GenesysQtGUI/actions/PasteUndoCommand.cpp \
 		../GenesysQtGUI/actions/UngroupUndoCommand.cpp \
+		../GenesysQtGUI/animations/AnimationCounter.cpp \
+		../GenesysQtGUI/animations/AnimationQueue.cpp \
+		../GenesysQtGUI/animations/AnimationTimer.cpp \
+		../GenesysQtGUI/animations/AnimationTransition.cpp \
+		../GenesysQtGUI/animations/AnimationVariable.cpp \
 		../GenesysQtGUI/dialogs/DialogFind.cpp \
+		../GenesysQtGUI/dialogs/DialogSelectCounter.cpp \
+		../GenesysQtGUI/dialogs/DialogSelectVariable.cpp \
+		../GenesysQtGUI/dialogs/DialogTimerConfigure.cpp \
 		../GenesysQtGUI/dialogs/Dialogmodelinformation.cpp \
 		../GenesysQtGUI/dialogs/dialogBreakpoint.cpp \
 		../GenesysQtGUI/dialogs/dialogpluginmanager.cpp \
@@ -891,6 +939,7 @@ DIST          = /home/raquel/Documents/modsim/Genesys-Simulator/autoloadplugins.
 		../GenesysQtGUI/graphicals/GraphicalAssociation.cpp \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.cpp \
 		../GenesysQtGUI/graphicals/GraphicalConnection.cpp \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.cpp \
 		../GenesysQtGUI/graphicals/GraphicalImageAnimation.cpp \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.cpp \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.cpp \
@@ -905,7 +954,7 @@ TARGET        = GenesysQtGUI
 first: all
 ####### Build rules
 
-GenesysQtGUI: ui_Dialogmodelinformation.h ui_dialogBreakpoint.h ui_dialogpluginmanager.h ui_dialogsimulationconfigure.h ui_dialogsystempreferences.h ui_mainwindow.h $(OBJECTS)  
+GenesysQtGUI: ui_DialogTimerConfigure.h ui_Dialogmodelinformation.h ui_dialogBreakpoint.h ui_dialogpluginmanager.h ui_dialogsimulationconfigure.h ui_dialogsystempreferences.h ui_mainwindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../GenesysQtGUI/GenesysQtGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -973,7 +1022,6 @@ Makefile: ../GenesysQtGUI/GenesysQtGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -1066,7 +1114,6 @@ Makefile: ../GenesysQtGUI/GenesysQtGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -1110,9 +1157,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../GenesysQtGUI/GenesysQtGUI_en_US.ts $(DISTDIR)/
 	$(COPY_FILE) --parents ../GenesysQtGUI/GenesysQtGUI_resources.qrc ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.qrc qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../../../kernel/TraitsKernel.h ../../../../kernel/simulator/Attribute.h ../../../../kernel/simulator/ComponentManager.h ../../../../kernel/simulator/ConnectionManager.h ../../../../kernel/simulator/Counter.h ../../../../kernel/simulator/CppSerializer.h ../../../../kernel/simulator/DefineGetterSetter.h ../../../../kernel/simulator/Entity.h ../../../../kernel/simulator/EntityType.h ../../../../kernel/simulator/Event.h ../../../../kernel/simulator/ExperimentManager.h ../../../../kernel/simulator/ExperimentManagerDefaultImpl1.h ../../../../kernel/simulator/ExperimetManager_if.h ../../../../kernel/simulator/GenSerializer.h ../../../../kernel/simulator/JsonSerializer.h ../../../../kernel/simulator/LicenceManager.h ../../../../kernel/simulator/Model.h ../../../../kernel/simulator/ModelCheckerDefaultImpl1.h ../../../../kernel/simulator/ModelChecker_if.h ../../../../kernel/simulator/ModelComponent.h ../../../../kernel/simulator/ModelDataDefinition.h ../../../../kernel/simulator/ModelDataManager.h ../../../../kernel/simulator/ModelInfo.h ../../../../kernel/simulator/ModelManager.h ../../../../kernel/simulator/ModelPersistenceDefaultImpl2.h ../../../../kernel/simulator/ModelSerializer.h ../../../../kernel/simulator/ModelSimulation.h ../../../../kernel/simulator/OnEventManager.h ../../../../kernel/simulator/ParserChangesInformation.h ../../../../kernel/simulator/ParserDefaultImpl1.h ../../../../kernel/simulator/ParserDefaultImpl2.h ../../../../kernel/simulator/ParserManager.h ../../../../kernel/simulator/Parser_if.h ../../../../kernel/simulator/Persistence.h ../../../../kernel/simulator/Plugin.h ../../../../kernel/simulator/PluginConnectorDummyImpl1.h ../../../../kernel/simulator/PluginConnector_if.h ../../../../kernel/simulator/PluginInformation.h ../../../../kernel/simulator/PluginManager.h ../../../../kernel/simulator/PropertyGenesys.h ../../../../kernel/simulator/ScenarioExperiment_if.h ../../../../kernel/simulator/SimulationControlAndResponse.h ../../../../kernel/simulator/SimulationExperiment.h ../../../../kernel/simulator/SimulationReporterDefaultImpl1.h ../../../../kernel/simulator/SimulationReporter_if.h ../../../../kernel/simulator/SimulationScenario.h ../../../../kernel/simulator/Simulator.h ../../../../kernel/simulator/SinkModelComponent.h ../../../../kernel/simulator/SourceModelComponent.h ../../../../kernel/simulator/StatisticsCollector.h ../../../../kernel/simulator/TraceManager.h ../../../../kernel/simulator/XmlSerializer.h ../../../../kernel/statistics/CollectorDatafileDefaultImpl1.h ../../../../kernel/statistics/CollectorDatafile_if.h ../../../../kernel/statistics/CollectorDefaultImpl1.h ../../../../kernel/statistics/Collector_if.h ../../../../kernel/statistics/SamplerBoostImpl.h ../../../../kernel/statistics/SamplerDefaultImpl1.h ../../../../kernel/statistics/Sampler_if.h ../../../../kernel/statistics/SorttFile.h ../../../../kernel/statistics/StatisticsDataFileDefaultImpl.h ../../../../kernel/statistics/StatisticsDataFile_if.h ../../../../kernel/statistics/StatisticsDefaultImpl1.h ../../../../kernel/statistics/Statistics_if.h ../../../../kernel/util/Exact.h ../../../../kernel/util/List.h ../../../../kernel/util/ListObservable.h ../../../../kernel/util/Util.h ../../../../parser/Genesys++-driver.h ../../../../parser/GenesysParser.h ../../../../parser/location.hh ../../../../parser/obj_t.h ../../../../parser/parserBisonFlex/bisonparser.yy ../../../../parser/parserBisonFlex/lexerparser.ll ../../../../parser/position.hh ../../../../parser/stack.hh ../../../../plugins/components/Access.h ../../../../plugins/components/Assign.h ../../../../plugins/components/Batch.h ../../../../plugins/components/Buffer.h ../../../../plugins/components/CellularAutomata/BoundaryCondition.h ../../../../plugins/components/CellularAutomata/Boundary_Closed.h ../../../../plugins/components/CellularAutomata/Boundary_Fixed.h ../../../../plugins/components/CellularAutomata/Cell.h ../../../../plugins/components/CellularAutomata/CellularAutomataBase.h ../../../../plugins/components/CellularAutomata/CellularAutomata_1DTimed.h ../../../../plugins/components/CellularAutomata/CellularAutomata_Classic.h ../../../../plugins/components/CellularAutomata/Lattice.h ../../../../plugins/components/CellularAutomata/LocalRule.h ../../../../plugins/components/CellularAutomata/LocalRule_Elementary.h ../../../../plugins/components/CellularAutomata/LocalRule_FlorestalFire.h ../../../../plugins/components/CellularAutomata/LocalRule_GameOfLife.h ../../../../plugins/components/CellularAutomata/LocalRule_Growty.h ../../../../plugins/components/CellularAutomata/LocalRule_ShowNeighbordhood.h ../../../../plugins/components/CellularAutomata/Neighborhood.h ../../../../plugins/components/CellularAutomata/Neighborhood_Center.h ../../../../plugins/components/CellularAutomata/Neighborhood_Moore.h ../../../../plugins/components/CellularAutomata/Neighborhood_VonNeumann.h ../../../../plugins/components/CellularAutomata/State.h ../../../../plugins/components/CellularAutomata/StateSet.h ../../../../plugins/components/CellularAutomata/StateSet_Enumerable.h ../../../../plugins/components/CellularAutomata/State_Numerical.h ../../../../plugins/components/CellularAutomataComp.h ../../../../plugins/components/Clone.h ../../../../plugins/components/CppForG.h ../../../../plugins/components/Create.h ../../../../plugins/components/Decide.h ../../../../plugins/components/Delay.h ../../../../plugins/components/DiffEquations.h ../../../../plugins/components/Dispose.h ../../../../plugins/components/DropOff.h ../../../../plugins/components/DummyComponent.h ../../../../plugins/components/Enter.h ../../../../plugins/components/Exit.h ../../../../plugins/components/FiniteStateMachine.h ../../../../plugins/components/PickableStationItem.h ../../../../plugins/components/Wait.h ../../../../plugins/components/LSODE.h ../../../../plugins/components/Leave.h ../../../../plugins/components/MarkovChain.h ../../../../plugins/components/Match.h ../../../../plugins/components/OLD_ODEelement.h ../../../../plugins/components/PickStation.h ../../../../plugins/components/PickUp.h ../../../../plugins/components/Process.h ../../../../plugins/components/QueueableItem.h ../../../../plugins/components/Record.h ../../../../plugins/components/Release.h ../../../../plugins/components/Remove.h ../../../../plugins/components/Route.h ../../../../plugins/components/Search.h ../../../../plugins/components/SeizableItem.h ../../../../plugins/components/Seize.h ../../../../plugins/components/Separate.h ../../../../plugins/components/Signal.h ../../../../plugins/components/Start.h ../../../../plugins/components/Stop.h ../../../../plugins/components/Store.h ../../../../plugins/components/Submodel.h ../../../../plugins/components/Unstore.h ../../../../plugins/components/Write.h ../../../../plugins/data/AssignmentItem.h ../../../../plugins/data/CppCompiler.h ../../../../plugins/data/DummyElement.h ../../../../plugins/data/EFSM.h ../../../../plugins/data/EntityGroup.h ../../../../plugins/data/Failure.h ../../../../plugins/data/File.h ../../../../plugins/data/Formula.h ../../../../plugins/data/Label.h ../../../../plugins/data/Queue.h ../../../../plugins/data/Resource.h ../../../../plugins/data/Schedule.h ../../../../plugins/data/Sequence.h ../../../../plugins/data/Set.h ../../../../plugins/data/SignalData.h ../../../../plugins/data/Station.h ../../../../plugins/data/Storage.h ../../../../plugins/data/Variable.h ../../../../tools/DataAnalyser_if.h ../../../../tools/FitterDummyImpl.h ../../../../tools/Fitter_if.h ../../../../tools/HypothesisTesterDefaultImpl1.h ../../../../tools/HypothesisTester_if.h ../../../../tools/ProbabilityDistribution.h ../../../../tools/ProbabilityDistributionBase.h ../../../../tools/SolverDefaultImpl1.h ../../../../tools/Solver_if.h ../../../../tools/TraitsTools.h ../../../BaseGenesysTerminalApplication.h ../../../GenesysApplication_if.h ../../../TraitsApp.h ../../../terminal/GenesysShell/GenesysShell.h ../../../terminal/GenesysShell/GenesysShell_if.h ../../../terminal/TraitsTerminalApp.h ../../../terminal/examples/smarts/Smart_CellularAutomata.h ../GenesysQtGUI/AnimationTransition.h ../GenesysQtGUI/CodeEditor.h ../GenesysQtGUI/LineNumberArea.h ../GenesysQtGUI/ModelGraphicsScene.h ../GenesysQtGUI/ModelGraphicsView.h ../GenesysQtGUI/ObjectPropertyBrowser.h ../GenesysQtGUI/PropertyEditor.h ../GenesysQtGUI/DataComponentProperty.h ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.h ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils_p.h ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h ../GenesysQtGUI/TraitsGUI.h ../GenesysQtGUI/UtilGUI.h ../GenesysQtGUI/actions/AddUndoCommand.h ../GenesysQtGUI/actions/DeleteUndoCommand.h ../GenesysQtGUI/actions/GroupUndoCommand.h ../GenesysQtGUI/actions/MoveUndoCommand.h ../GenesysQtGUI/actions/PasteUndoCommand.h ../GenesysQtGUI/actions/UngroupUndoCommand.h ../GenesysQtGUI/dialogs/DialogFind.h ../GenesysQtGUI/dialogs/Dialogmodelinformation.h ../GenesysQtGUI/dialogs/dialogBreakpoint.h ../GenesysQtGUI/dialogs/dialogpluginmanager.h ../GenesysQtGUI/dialogs/dialogsimulationconfigure.h ../GenesysQtGUI/dialogs/dialogsystempreferences.h ../GenesysQtGUI/graphicals/GraphicalAnimateExpression.h ../GenesysQtGUI/graphicals/GraphicalAssociation.h ../GenesysQtGUI/graphicals/GraphicalComponentPort.h ../GenesysQtGUI/graphicals/GraphicalConnection.h ../GenesysQtGUI/graphicals/GraphicalImageAnimation.h ../GenesysQtGUI/graphicals/GraphicalModelComponent.h ../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h ../GenesysQtGUI/mainwindow.h ../GenesysQtGUI/qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../../../kernel/simulator/Attribute.cpp ../../../../kernel/simulator/ComponentManager.cpp ../../../../kernel/simulator/ConnectionManager.cpp ../../../../kernel/simulator/Counter.cpp ../../../../kernel/simulator/CppSerializer.cpp ../../../../kernel/simulator/Entity.cpp ../../../../kernel/simulator/EntityType.cpp ../../../../kernel/simulator/Event.cpp ../../../../kernel/simulator/ExperimentManager.cpp ../../../../kernel/simulator/ExperimentManagerDefaultImpl1.cpp ../../../../kernel/simulator/GenSerializer.cpp ../../../../kernel/simulator/JsonSerializer.cpp ../../../../kernel/simulator/LicenceManager.cpp ../../../../kernel/simulator/Model.cpp ../../../../kernel/simulator/ModelCheckerDefaultImpl1.cpp ../../../../kernel/simulator/ModelComponent.cpp ../../../../kernel/simulator/ModelDataDefinition.cpp ../../../../kernel/simulator/ModelDataManager.cpp ../../../../kernel/simulator/ModelInfo.cpp ../../../../kernel/simulator/ModelManager.cpp ../../../../kernel/simulator/ModelPersistenceDefaultImpl2.cpp ../../../../kernel/simulator/ModelSerializer.cpp ../../../../kernel/simulator/ModelSimulation.cpp ../../../../kernel/simulator/OnEventManager.cpp ../../../../kernel/simulator/ParserChangesInformation.cpp ../../../../kernel/simulator/ParserDefaultImpl1.cpp ../../../../kernel/simulator/ParserDefaultImpl2.cpp ../../../../kernel/simulator/ParserManager.cpp ../../../../kernel/simulator/Persistence.cpp ../../../../kernel/simulator/Plugin.cpp ../../../../kernel/simulator/PluginConnectorDummyImpl1.cpp ../../../../kernel/simulator/PluginInformation.cpp ../../../../kernel/simulator/PluginManager.cpp ../../../../kernel/simulator/SimulationExperiment.cpp ../../../../kernel/simulator/SimulationReporterDefaultImpl1.cpp ../../../../kernel/simulator/SimulationScenario.cpp ../../../../kernel/simulator/Simulator.cpp ../../../../kernel/simulator/SinkModelComponent.cpp ../../../../kernel/simulator/SourceModelComponent.cpp ../../../../kernel/simulator/StatisticsCollector.cpp ../../../../kernel/simulator/TraceManager.cpp ../../../../kernel/simulator/XmlSerializer.cpp ../../../../kernel/statistics/CollectorDatafileDefaultImpl1.cpp ../../../../kernel/statistics/CollectorDefaultImpl1.cpp ../../../../kernel/statistics/SamplerBoostImpl.cpp ../../../../kernel/statistics/SamplerDefaultImpl1.cpp ../../../../kernel/statistics/SorttFile.cpp ../../../../kernel/statistics/StatisticsDataFileDefaultImpl.cpp ../../../../kernel/statistics/StatisticsDefaultImpl1.cpp ../../../../kernel/util/Util.cpp ../../../../parser/Genesys++-driver.cpp ../../../../parser/Genesys++-scanner.cpp ../../../../parser/GenesysParser.cpp ../../../../parser/obj_t.cpp ../../../../plugins/components/Access.cpp ../../../../plugins/components/Assign.cpp ../../../../plugins/components/Batch.cpp ../../../../plugins/components/Buffer.cpp ../../../../plugins/components/CellularAutomata/Cell.cpp ../../../../plugins/components/CellularAutomata/CellularAutomataBase.cpp ../../../../plugins/components/CellularAutomata/Lattice.cpp ../../../../plugins/components/CellularAutomata/StateSet.cpp ../../../../plugins/components/CellularAutomata/StateSet_Enumerable.cpp ../../../../plugins/components/CellularAutomataComp.cpp ../../../../plugins/components/Clone.cpp ../../../../plugins/components/CppForG.cpp ../../../../plugins/components/Create.cpp ../../../../plugins/components/Decide.cpp ../../../../plugins/components/Delay.cpp ../../../../plugins/components/DiffEquations.cpp ../../../../plugins/components/Dispose.cpp ../../../../plugins/components/DropOff.cpp ../../../../plugins/components/DummyComponent.cpp ../../../../plugins/components/Enter.cpp ../../../../plugins/components/Exit.cpp ../../../../plugins/components/FiniteStateMachine.cpp ../../../../plugins/components/PickableStationItem.cpp ../../../../plugins/components/Wait.cpp ../../../../plugins/components/LSODE.cpp ../../../../plugins/components/Leave.cpp ../../../../plugins/components/MarkovChain.cpp ../../../../plugins/components/Match.cpp ../../../../plugins/components/OLD_ODEelement.cpp ../../../../plugins/components/PickStation.cpp ../../../../plugins/components/PickUp.cpp ../../../../plugins/components/Process.cpp ../../../../plugins/components/QueueableItem.cpp ../../../../plugins/components/Record.cpp ../../../../plugins/components/Release.cpp ../../../../plugins/components/Remove.cpp ../../../../plugins/components/Route.cpp ../../../../plugins/components/Search.cpp ../../../../plugins/components/SeizableItem.cpp ../../../../plugins/components/Seize.cpp ../../../../plugins/components/Separate.cpp ../../../../plugins/components/Signal.cpp ../../../../plugins/components/Start.cpp ../../../../plugins/components/Stop.cpp ../../../../plugins/components/Store.cpp ../../../../plugins/components/Submodel.cpp ../../../../plugins/components/Unstore.cpp ../../../../plugins/components/Write.cpp ../../../../plugins/data/AssignmentItem.cpp ../../../../plugins/data/CppCompiler.cpp ../../../../plugins/data/DummyElement.cpp ../../../../plugins/data/EFSM.cpp ../../../../plugins/data/EntityGroup.cpp ../../../../plugins/data/Failure.cpp ../../../../plugins/data/File.cpp ../../../../plugins/data/Formula.cpp ../../../../plugins/data/Label.cpp ../../../../plugins/data/Queue.cpp ../../../../plugins/data/Resource.cpp ../../../../plugins/data/Schedule.cpp ../../../../plugins/data/Sequence.cpp ../../../../plugins/data/Set.cpp ../../../../plugins/data/SignalData.cpp ../../../../plugins/data/Station.cpp ../../../../plugins/data/Storage.cpp ../../../../plugins/data/Variable.cpp ../../../../tools/FitterDummyImpl.cpp ../../../../tools/HypothesisTesterDefaultImpl1.cpp ../../../../tools/ProbabilityDistribution.cpp ../../../../tools/ProbabilityDistributionBase.cpp ../../../../tools/SolverDefaultImpl1.cpp ../../../BaseGenesysTerminalApplication.cpp ../../../terminal/GenesysShell/GenesysShell.cpp ../../../terminal/examples/smarts/Smart_CellularAutomata.cpp ../GenesysQtGUI/AnimationTransition.cpp ../GenesysQtGUI/CodeEditor.cpp ../GenesysQtGUI/DataComponentProperty.cpp ../GenesysQtGUI/ModelGraphicsScene.cpp ../GenesysQtGUI/ModelGraphicsView.cpp ../GenesysQtGUI/ObjectPropertyBrowser.cpp ../GenesysQtGUI/PropertyEditor.cpp ../GenesysQtGUI/actions/AddUndoCommand.cpp ../GenesysQtGUI/actions/DeleteUndoCommand.cpp ../GenesysQtGUI/actions/GroupUndoCommand.cpp ../GenesysQtGUI/actions/MoveUndoCommand.cpp ../GenesysQtGUI/actions/PasteUndoCommand.cpp ../GenesysQtGUI/actions/UngroupUndoCommand.cpp ../GenesysQtGUI/dialogs/DialogFind.cpp ../GenesysQtGUI/dialogs/Dialogmodelinformation.cpp ../GenesysQtGUI/dialogs/dialogBreakpoint.cpp ../GenesysQtGUI/dialogs/dialogpluginmanager.cpp ../GenesysQtGUI/dialogs/dialogsimulationconfigure.cpp ../GenesysQtGUI/dialogs/dialogsystempreferences.cpp ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.cpp ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils.cpp ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.cpp ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.cpp ../GenesysQtGUI/graphicals/GraphicalAnimateExpression.cpp ../GenesysQtGUI/graphicals/GraphicalAssociation.cpp ../GenesysQtGUI/graphicals/GraphicalComponentPort.cpp ../GenesysQtGUI/graphicals/GraphicalConnection.cpp ../GenesysQtGUI/graphicals/GraphicalImageAnimation.cpp ../GenesysQtGUI/graphicals/GraphicalModelComponent.cpp ../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.cpp ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/qcustomplot.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../GenesysQtGUI/dialogs/Dialogmodelinformation.ui ../GenesysQtGUI/dialogs/dialogBreakpoint.ui ../GenesysQtGUI/dialogs/dialogpluginmanager.ui ../GenesysQtGUI/dialogs/dialogsimulationconfigure.ui ../GenesysQtGUI/dialogs/dialogsystempreferences.ui ../GenesysQtGUI/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../../kernel/TraitsKernel.h ../../../../kernel/simulator/Attribute.h ../../../../kernel/simulator/ComponentManager.h ../../../../kernel/simulator/ConnectionManager.h ../../../../kernel/simulator/Counter.h ../../../../kernel/simulator/CppSerializer.h ../../../../kernel/simulator/DefineGetterSetter.h ../../../../kernel/simulator/Entity.h ../../../../kernel/simulator/EntityType.h ../../../../kernel/simulator/Event.h ../../../../kernel/simulator/ExperimentManager.h ../../../../kernel/simulator/ExperimentManagerDefaultImpl1.h ../../../../kernel/simulator/ExperimetManager_if.h ../../../../kernel/simulator/GenSerializer.h ../../../../kernel/simulator/JsonSerializer.h ../../../../kernel/simulator/LicenceManager.h ../../../../kernel/simulator/Model.h ../../../../kernel/simulator/ModelCheckerDefaultImpl1.h ../../../../kernel/simulator/ModelChecker_if.h ../../../../kernel/simulator/ModelComponent.h ../../../../kernel/simulator/ModelDataDefinition.h ../../../../kernel/simulator/ModelDataManager.h ../../../../kernel/simulator/ModelInfo.h ../../../../kernel/simulator/ModelManager.h ../../../../kernel/simulator/ModelPersistenceDefaultImpl2.h ../../../../kernel/simulator/ModelSerializer.h ../../../../kernel/simulator/ModelSimulation.h ../../../../kernel/simulator/OnEventManager.h ../../../../kernel/simulator/ParserChangesInformation.h ../../../../kernel/simulator/ParserDefaultImpl1.h ../../../../kernel/simulator/ParserDefaultImpl2.h ../../../../kernel/simulator/ParserManager.h ../../../../kernel/simulator/Parser_if.h ../../../../kernel/simulator/Persistence.h ../../../../kernel/simulator/Plugin.h ../../../../kernel/simulator/PluginConnectorDummyImpl1.h ../../../../kernel/simulator/PluginConnector_if.h ../../../../kernel/simulator/PluginInformation.h ../../../../kernel/simulator/PluginManager.h ../../../../kernel/simulator/PropertyGenesys.h ../../../../kernel/simulator/ScenarioExperiment_if.h ../../../../kernel/simulator/SimulationControlAndResponse.h ../../../../kernel/simulator/SimulationExperiment.h ../../../../kernel/simulator/SimulationReporterDefaultImpl1.h ../../../../kernel/simulator/SimulationReporter_if.h ../../../../kernel/simulator/SimulationScenario.h ../../../../kernel/simulator/Simulator.h ../../../../kernel/simulator/SinkModelComponent.h ../../../../kernel/simulator/SourceModelComponent.h ../../../../kernel/simulator/StatisticsCollector.h ../../../../kernel/simulator/TraceManager.h ../../../../kernel/simulator/XmlSerializer.h ../../../../kernel/statistics/CollectorDatafileDefaultImpl1.h ../../../../kernel/statistics/CollectorDatafile_if.h ../../../../kernel/statistics/CollectorDefaultImpl1.h ../../../../kernel/statistics/Collector_if.h ../../../../kernel/statistics/SamplerBoostImpl.h ../../../../kernel/statistics/SamplerDefaultImpl1.h ../../../../kernel/statistics/Sampler_if.h ../../../../kernel/statistics/SorttFile.h ../../../../kernel/statistics/StatisticsDataFileDefaultImpl.h ../../../../kernel/statistics/StatisticsDataFile_if.h ../../../../kernel/statistics/StatisticsDefaultImpl1.h ../../../../kernel/statistics/Statistics_if.h ../../../../kernel/util/Exact.h ../../../../kernel/util/List.h ../../../../kernel/util/ListObservable.h ../../../../kernel/util/Util.h ../../../../parser/Genesys++-driver.h ../../../../parser/GenesysParser.h ../../../../parser/location.hh ../../../../parser/obj_t.h ../../../../parser/parserBisonFlex/bisonparser.yy ../../../../parser/parserBisonFlex/lexerparser.ll ../../../../parser/position.hh ../../../../parser/stack.hh ../../../../plugins/components/Access.h ../../../../plugins/components/Assign.h ../../../../plugins/components/Batch.h ../../../../plugins/components/Buffer.h ../../../../plugins/components/CellularAutomata/BoundaryCondition.h ../../../../plugins/components/CellularAutomata/Boundary_Closed.h ../../../../plugins/components/CellularAutomata/Boundary_Fixed.h ../../../../plugins/components/CellularAutomata/Cell.h ../../../../plugins/components/CellularAutomata/CellularAutomataBase.h ../../../../plugins/components/CellularAutomata/CellularAutomata_1DTimed.h ../../../../plugins/components/CellularAutomata/CellularAutomata_Classic.h ../../../../plugins/components/CellularAutomata/Lattice.h ../../../../plugins/components/CellularAutomata/LocalRule.h ../../../../plugins/components/CellularAutomata/LocalRule_Elementary.h ../../../../plugins/components/CellularAutomata/LocalRule_FlorestalFire.h ../../../../plugins/components/CellularAutomata/LocalRule_GameOfLife.h ../../../../plugins/components/CellularAutomata/LocalRule_Growty.h ../../../../plugins/components/CellularAutomata/LocalRule_ShowNeighbordhood.h ../../../../plugins/components/CellularAutomata/Neighborhood.h ../../../../plugins/components/CellularAutomata/Neighborhood_Center.h ../../../../plugins/components/CellularAutomata/Neighborhood_Moore.h ../../../../plugins/components/CellularAutomata/Neighborhood_VonNeumann.h ../../../../plugins/components/CellularAutomata/State.h ../../../../plugins/components/CellularAutomata/StateSet.h ../../../../plugins/components/CellularAutomata/StateSet_Enumerable.h ../../../../plugins/components/CellularAutomata/State_Numerical.h ../../../../plugins/components/CellularAutomataComp.h ../../../../plugins/components/CellularAutomata.h ../../../../plugins/components/Clone.h ../../../../plugins/components/CppForG.h ../../../../plugins/components/Create.h ../../../../plugins/components/Decide.h ../../../../plugins/components/Delay.h ../../../../plugins/components/DiffEquations.h ../../../../plugins/components/Dispose.h ../../../../plugins/components/DropOff.h ../../../../plugins/components/DummyComponent.h ../../../../plugins/components/Enter.h ../../../../plugins/components/Exit.h ../../../../plugins/components/FiniteStateMachine.h ../../../../plugins/components/PickableStationItem.h ../../../../plugins/components/Wait.h ../../../../plugins/components/LSODE.h ../../../../plugins/components/Leave.h ../../../../plugins/components/MarkovChain.h ../../../../plugins/components/Match.h ../../../../plugins/components/OLD_ODEelement.h ../../../../plugins/components/PickStation.h ../../../../plugins/components/PickUp.h ../../../../plugins/components/Process.h ../../../../plugins/components/QueueableItem.h ../../../../plugins/components/Record.h ../../../../plugins/components/Release.h ../../../../plugins/components/Remove.h ../../../../plugins/components/Route.h ../../../../plugins/components/Search.h ../../../../plugins/components/SeizableItem.h ../../../../plugins/components/Seize.h ../../../../plugins/components/Separate.h ../../../../plugins/components/Signal.h ../../../../plugins/components/Start.h ../../../../plugins/components/Stop.h ../../../../plugins/components/Store.h ../../../../plugins/components/Submodel.h ../../../../plugins/components/Unstore.h ../../../../plugins/components/Write.h ../../../../plugins/data/AssignmentItem.h ../../../../plugins/data/CppCompiler.h ../../../../plugins/data/DummyElement.h ../../../../plugins/data/EFSM.h ../../../../plugins/data/EntityGroup.h ../../../../plugins/data/Failure.h ../../../../plugins/data/File.h ../../../../plugins/data/Formula.h ../../../../plugins/data/Label.h ../../../../plugins/data/Queue.h ../../../../plugins/data/Resource.h ../../../../plugins/data/Schedule.h ../../../../plugins/data/Sequence.h ../../../../plugins/data/Set.h ../../../../plugins/data/SignalData.h ../../../../plugins/data/Station.h ../../../../plugins/data/Storage.h ../../../../plugins/data/Variable.h ../../../../tools/DataAnalyser_if.h ../../../../tools/FitterDummyImpl.h ../../../../tools/Fitter_if.h ../../../../tools/HypothesisTesterDefaultImpl1.h ../../../../tools/HypothesisTester_if.h ../../../../tools/ProbabilityDistribution.h ../../../../tools/ProbabilityDistributionBase.h ../../../../tools/SolverDefaultImpl1.h ../../../../tools/Solver_if.h ../../../../tools/TraitsTools.h ../../../BaseGenesysTerminalApplication.h ../../../GenesysApplication_if.h ../../../TraitsApp.h ../../../terminal/GenesysShell/GenesysShell.h ../../../terminal/GenesysShell/GenesysShell_if.h ../../../terminal/TraitsTerminalApp.h ../../../terminal/examples/smarts/Smart_CellularAutomata.h ../GenesysQtGUI/CodeEditor.h ../GenesysQtGUI/LineNumberArea.h ../GenesysQtGUI/ModelGraphicsScene.h ../GenesysQtGUI/ModelGraphicsView.h ../GenesysQtGUI/ObjectPropertyBrowser.h ../GenesysQtGUI/PropertyEditor.h ../GenesysQtGUI/DataComponentProperty.h ../GenesysQtGUI/DataComponentEditor.h ../GenesysQtGUI/ComboBoxEnum.h ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.h ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils_p.h ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h ../GenesysQtGUI/TraitsGUI.h ../GenesysQtGUI/UtilGUI.h ../GenesysQtGUI/actions/AddUndoCommand.h ../GenesysQtGUI/actions/DeleteUndoCommand.h ../GenesysQtGUI/actions/GroupUndoCommand.h ../GenesysQtGUI/actions/MoveUndoCommand.h ../GenesysQtGUI/actions/PasteUndoCommand.h ../GenesysQtGUI/actions/UngroupUndoCommand.h ../GenesysQtGUI/animations/AnimationCounter.h ../GenesysQtGUI/animations/AnimationQueue.h ../GenesysQtGUI/animations/AnimationTimer.h ../GenesysQtGUI/animations/AnimationTransition.h ../GenesysQtGUI/animations/AnimationVariable.h ../GenesysQtGUI/dialogs/DialogFind.h ../GenesysQtGUI/dialogs/DialogSelectCounter.h ../GenesysQtGUI/dialogs/DialogSelectVariable.h ../GenesysQtGUI/dialogs/DialogTimerConfigure.h ../GenesysQtGUI/dialogs/Dialogmodelinformation.h ../GenesysQtGUI/dialogs/dialogBreakpoint.h ../GenesysQtGUI/dialogs/dialogpluginmanager.h ../GenesysQtGUI/dialogs/dialogsimulationconfigure.h ../GenesysQtGUI/dialogs/dialogsystempreferences.h ../GenesysQtGUI/graphicals/GraphicalAnimateExpression.h ../GenesysQtGUI/graphicals/GraphicalAssociation.h ../GenesysQtGUI/graphicals/GraphicalComponentPort.h ../GenesysQtGUI/graphicals/GraphicalConnection.h ../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h ../GenesysQtGUI/graphicals/GraphicalImageAnimation.h ../GenesysQtGUI/graphicals/GraphicalModelComponent.h ../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h ../GenesysQtGUI/mainwindow.h ../GenesysQtGUI/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../../kernel/simulator/Attribute.cpp ../../../../kernel/simulator/ComponentManager.cpp ../../../../kernel/simulator/ConnectionManager.cpp ../../../../kernel/simulator/Counter.cpp ../../../../kernel/simulator/CppSerializer.cpp ../../../../kernel/simulator/Entity.cpp ../../../../kernel/simulator/EntityType.cpp ../../../../kernel/simulator/Event.cpp ../../../../kernel/simulator/ExperimentManager.cpp ../../../../kernel/simulator/ExperimentManagerDefaultImpl1.cpp ../../../../kernel/simulator/GenSerializer.cpp ../../../../kernel/simulator/JsonSerializer.cpp ../../../../kernel/simulator/LicenceManager.cpp ../../../../kernel/simulator/Model.cpp ../../../../kernel/simulator/ModelCheckerDefaultImpl1.cpp ../../../../kernel/simulator/ModelComponent.cpp ../../../../kernel/simulator/ModelDataDefinition.cpp ../../../../kernel/simulator/ModelDataManager.cpp ../../../../kernel/simulator/ModelInfo.cpp ../../../../kernel/simulator/ModelManager.cpp ../../../../kernel/simulator/ModelPersistenceDefaultImpl2.cpp ../../../../kernel/simulator/ModelSerializer.cpp ../../../../kernel/simulator/ModelSimulation.cpp ../../../../kernel/simulator/OnEventManager.cpp ../../../../kernel/simulator/ParserChangesInformation.cpp ../../../../kernel/simulator/ParserDefaultImpl1.cpp ../../../../kernel/simulator/ParserDefaultImpl2.cpp ../../../../kernel/simulator/ParserManager.cpp ../../../../kernel/simulator/Persistence.cpp ../../../../kernel/simulator/Plugin.cpp ../../../../kernel/simulator/PluginConnectorDummyImpl1.cpp ../../../../kernel/simulator/PluginInformation.cpp ../../../../kernel/simulator/PluginManager.cpp ../../../../kernel/simulator/SimulationExperiment.cpp ../../../../kernel/simulator/SimulationReporterDefaultImpl1.cpp ../../../../kernel/simulator/SimulationScenario.cpp ../../../../kernel/simulator/Simulator.cpp ../../../../kernel/simulator/SinkModelComponent.cpp ../../../../kernel/simulator/SourceModelComponent.cpp ../../../../kernel/simulator/StatisticsCollector.cpp ../../../../kernel/simulator/TraceManager.cpp ../../../../kernel/simulator/XmlSerializer.cpp ../../../../kernel/statistics/CollectorDatafileDefaultImpl1.cpp ../../../../kernel/statistics/CollectorDefaultImpl1.cpp ../../../../kernel/statistics/SamplerBoostImpl.cpp ../../../../kernel/statistics/SamplerDefaultImpl1.cpp ../../../../kernel/statistics/SorttFile.cpp ../../../../kernel/statistics/StatisticsDataFileDefaultImpl.cpp ../../../../kernel/statistics/StatisticsDefaultImpl1.cpp ../../../../kernel/util/Util.cpp ../../../../parser/Genesys++-driver.cpp ../../../../parser/Genesys++-scanner.cpp ../../../../parser/GenesysParser.cpp ../../../../parser/obj_t.cpp ../../../../plugins/components/Access.cpp ../../../../plugins/components/Assign.cpp ../../../../plugins/components/Batch.cpp ../../../../plugins/components/Buffer.cpp ../../../../plugins/components/CellularAutomata/Cell.cpp ../../../../plugins/components/CellularAutomata/CellularAutomataBase.cpp ../../../../plugins/components/CellularAutomata/Lattice.cpp ../../../../plugins/components/CellularAutomata/StateSet.cpp ../../../../plugins/components/CellularAutomata/StateSet_Enumerable.cpp ../../../../plugins/components/CellularAutomataComp.cpp ../../../../plugins/components/CellularAutomata.cpp ../../../../plugins/components/Clone.cpp ../../../../plugins/components/CppForG.cpp ../../../../plugins/components/Create.cpp ../../../../plugins/components/Decide.cpp ../../../../plugins/components/Delay.cpp ../../../../plugins/components/DiffEquations.cpp ../../../../plugins/components/Dispose.cpp ../../../../plugins/components/DropOff.cpp ../../../../plugins/components/DummyComponent.cpp ../../../../plugins/components/Enter.cpp ../../../../plugins/components/Exit.cpp ../../../../plugins/components/FiniteStateMachine.cpp ../../../../plugins/components/PickableStationItem.cpp ../../../../plugins/components/Wait.cpp ../../../../plugins/components/LSODE.cpp ../../../../plugins/components/Leave.cpp ../../../../plugins/components/MarkovChain.cpp ../../../../plugins/components/Match.cpp ../../../../plugins/components/OLD_ODEelement.cpp ../../../../plugins/components/PickStation.cpp ../../../../plugins/components/PickUp.cpp ../../../../plugins/components/Process.cpp ../../../../plugins/components/QueueableItem.cpp ../../../../plugins/components/Record.cpp ../../../../plugins/components/Release.cpp ../../../../plugins/components/Remove.cpp ../../../../plugins/components/Route.cpp ../../../../plugins/components/Search.cpp ../../../../plugins/components/SeizableItem.cpp ../../../../plugins/components/Seize.cpp ../../../../plugins/components/Separate.cpp ../../../../plugins/components/Signal.cpp ../../../../plugins/components/Start.cpp ../../../../plugins/components/Stop.cpp ../../../../plugins/components/Store.cpp ../../../../plugins/components/Submodel.cpp ../../../../plugins/components/Unstore.cpp ../../../../plugins/components/Write.cpp ../../../../plugins/data/AssignmentItem.cpp ../../../../plugins/data/CppCompiler.cpp ../../../../plugins/data/DummyElement.cpp ../../../../plugins/data/EFSM.cpp ../../../../plugins/data/EntityGroup.cpp ../../../../plugins/data/Failure.cpp ../../../../plugins/data/File.cpp ../../../../plugins/data/Formula.cpp ../../../../plugins/data/Label.cpp ../../../../plugins/data/Queue.cpp ../../../../plugins/data/Resource.cpp ../../../../plugins/data/Schedule.cpp ../../../../plugins/data/Sequence.cpp ../../../../plugins/data/Set.cpp ../../../../plugins/data/SignalData.cpp ../../../../plugins/data/Station.cpp ../../../../plugins/data/Storage.cpp ../../../../plugins/data/Variable.cpp ../../../../tools/FitterDummyImpl.cpp ../../../../tools/HypothesisTesterDefaultImpl1.cpp ../../../../tools/ProbabilityDistribution.cpp ../../../../tools/ProbabilityDistributionBase.cpp ../../../../tools/SolverDefaultImpl1.cpp ../../../BaseGenesysTerminalApplication.cpp ../../../terminal/GenesysShell/GenesysShell.cpp ../../../terminal/examples/smarts/Smart_CellularAutomata.cpp ../GenesysQtGUI/CodeEditor.cpp ../GenesysQtGUI/DataComponentProperty.cpp ../GenesysQtGUI/ModelGraphicsScene.cpp ../GenesysQtGUI/ModelGraphicsView.cpp ../GenesysQtGUI/ObjectPropertyBrowser.cpp ../GenesysQtGUI/PropertyEditor.cpp ../GenesysQtGUI/DataComponentEditor.cpp ../GenesysQtGUI/ComboBoxEnum.cpp ../GenesysQtGUI/actions/AddUndoCommand.cpp ../GenesysQtGUI/actions/DeleteUndoCommand.cpp ../GenesysQtGUI/actions/GroupUndoCommand.cpp ../GenesysQtGUI/actions/MoveUndoCommand.cpp ../GenesysQtGUI/actions/PasteUndoCommand.cpp ../GenesysQtGUI/actions/UngroupUndoCommand.cpp ../GenesysQtGUI/animations/AnimationCounter.cpp ../GenesysQtGUI/animations/AnimationQueue.cpp ../GenesysQtGUI/animations/AnimationTimer.cpp ../GenesysQtGUI/animations/AnimationTransition.cpp ../GenesysQtGUI/animations/AnimationVariable.cpp ../GenesysQtGUI/dialogs/DialogFind.cpp ../GenesysQtGUI/dialogs/DialogSelectCounter.cpp ../GenesysQtGUI/dialogs/DialogSelectVariable.cpp ../GenesysQtGUI/dialogs/DialogTimerConfigure.cpp ../GenesysQtGUI/dialogs/Dialogmodelinformation.cpp ../GenesysQtGUI/dialogs/dialogBreakpoint.cpp ../GenesysQtGUI/dialogs/dialogpluginmanager.cpp ../GenesysQtGUI/dialogs/dialogsimulationconfigure.cpp ../GenesysQtGUI/dialogs/dialogsystempreferences.cpp ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.cpp ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils.cpp ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.cpp ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.cpp ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.cpp ../GenesysQtGUI/graphicals/GraphicalAnimateExpression.cpp ../GenesysQtGUI/graphicals/GraphicalAssociation.cpp ../GenesysQtGUI/graphicals/GraphicalComponentPort.cpp ../GenesysQtGUI/graphicals/GraphicalConnection.cpp ../GenesysQtGUI/graphicals/GraphicalDiagramConnection.cpp ../GenesysQtGUI/graphicals/GraphicalImageAnimation.cpp ../GenesysQtGUI/graphicals/GraphicalModelComponent.cpp ../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.cpp ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../GenesysQtGUI/dialogs/DialogTimerConfigure.ui ../GenesysQtGUI/dialogs/Dialogmodelinformation.ui ../GenesysQtGUI/dialogs/dialogBreakpoint.ui ../GenesysQtGUI/dialogs/dialogpluginmanager.ui ../GenesysQtGUI/dialogs/dialogsimulationconfigure.ui ../GenesysQtGUI/dialogs/dialogsystempreferences.ui ../GenesysQtGUI/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../GenesysQtGUI/GenesysQtGUI_en_US.ts $(DISTDIR)/
 
 
@@ -1909,88 +1956,90 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -pedantic -Wno-unused -Wmissing-field-initializers -g -std=gnu++1y -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_CodeEditor.cpp moc_ObjectPropertyBrowser.cpp moc_qtbuttonpropertybrowser.cpp moc_qteditorfactory.cpp moc_qtgroupboxpropertybrowser.cpp moc_qtpropertybrowser.cpp moc_qtpropertybrowserutils_p.cpp moc_qtpropertymanager.cpp moc_qttreepropertybrowser.cpp moc_qtvariantproperty.cpp moc_DialogFind.cpp moc_Dialogmodelinformation.cpp moc_dialogBreakpoint.cpp moc_dialogpluginmanager.cpp moc_dialogsimulationconfigure.cpp moc_dialogsystempreferences.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+compiler_moc_header_make_all: moc_CodeEditor.cpp moc_ObjectPropertyBrowser.cpp moc_qtbuttonpropertybrowser.cpp moc_qteditorfactory.cpp moc_qtgroupboxpropertybrowser.cpp moc_qtpropertybrowser.cpp moc_qtpropertybrowserutils_p.cpp moc_qtpropertymanager.cpp moc_qttreepropertybrowser.cpp moc_qtvariantproperty.cpp moc_DialogFind.cpp moc_DialogSelectCounter.cpp moc_DialogSelectVariable.cpp moc_DialogTimerConfigure.cpp moc_Dialogmodelinformation.cpp moc_dialogBreakpoint.cpp moc_dialogpluginmanager.cpp moc_dialogsimulationconfigure.cpp moc_dialogsystempreferences.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_CodeEditor.cpp moc_ObjectPropertyBrowser.cpp moc_qtbuttonpropertybrowser.cpp moc_qteditorfactory.cpp moc_qtgroupboxpropertybrowser.cpp moc_qtpropertybrowser.cpp moc_qtpropertybrowserutils_p.cpp moc_qtpropertymanager.cpp moc_qttreepropertybrowser.cpp moc_qtvariantproperty.cpp moc_DialogFind.cpp moc_Dialogmodelinformation.cpp moc_dialogBreakpoint.cpp moc_dialogpluginmanager.cpp moc_dialogsimulationconfigure.cpp moc_dialogsystempreferences.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+	-$(DEL_FILE) moc_CodeEditor.cpp moc_ObjectPropertyBrowser.cpp moc_qtbuttonpropertybrowser.cpp moc_qteditorfactory.cpp moc_qtgroupboxpropertybrowser.cpp moc_qtpropertybrowser.cpp moc_qtpropertybrowserutils_p.cpp moc_qtpropertymanager.cpp moc_qttreepropertybrowser.cpp moc_qtvariantproperty.cpp moc_DialogFind.cpp moc_DialogSelectCounter.cpp moc_DialogSelectVariable.cpp moc_DialogTimerConfigure.cpp moc_Dialogmodelinformation.cpp moc_dialogBreakpoint.cpp moc_dialogpluginmanager.cpp moc_dialogsimulationconfigure.cpp moc_dialogsystempreferences.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
 moc_CodeEditor.cpp: ../GenesysQtGUI/CodeEditor.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/CodeEditor.h -o moc_CodeEditor.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/CodeEditor.h -o moc_CodeEditor.cpp
 
 moc_ObjectPropertyBrowser.cpp: ../GenesysQtGUI/ObjectPropertyBrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h \
 		../GenesysQtGUI/DataComponentProperty.h \
-		../../../../kernel/simulator/ModelDataDefinition.h \
-		../../../../kernel/util/List.h \
-		../../../../kernel/util/Util.h \
-		../../../../kernel/simulator/ParserChangesInformation.h \
-		../../../../kernel/simulator/Persistence.h \
-		../../../../kernel/simulator/ModelPersistence_if.h \
-		../../../../kernel/simulator/SimulationControlAndResponse.h \
-		../../../../kernel/simulator/TraceManager.h \
+		../GenesysQtGUI/DataComponentEditor.h \
 		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
 		../../../../kernel/simulator/PluginInformation.h \
 		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/TraceManager.h \
 		../../../../kernel/simulator/EntityType.h \
 		../../../../kernel/simulator/StatisticsCollector.h \
 		../../../../kernel/statistics/Statistics_if.h \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/ObjectPropertyBrowser.h -o moc_ObjectPropertyBrowser.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/ObjectPropertyBrowser.h -o moc_ObjectPropertyBrowser.cpp
 
 moc_qtbuttonpropertybrowser.cpp: ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.h -o moc_qtbuttonpropertybrowser.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtbuttonpropertybrowser.h -o moc_qtbuttonpropertybrowser.cpp
 
 moc_qteditorfactory.cpp: ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.h -o moc_qteditorfactory.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.h -o moc_qteditorfactory.cpp
 
 moc_qtgroupboxpropertybrowser.cpp: ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.h -o moc_qtgroupboxpropertybrowser.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtgroupboxpropertybrowser.h -o moc_qtgroupboxpropertybrowser.cpp
 
 moc_qtpropertybrowser.cpp: ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h -o moc_qtpropertybrowser.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h -o moc_qtpropertybrowser.cpp
 
 moc_qtpropertybrowserutils_p.cpp: ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils_p.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils_p.h -o moc_qtpropertybrowserutils_p.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertybrowserutils_p.h -o moc_qtpropertybrowserutils_p.cpp
 
 moc_qtpropertymanager.cpp: ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h -o moc_qtpropertymanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h -o moc_qtpropertymanager.cpp
 
 moc_qttreepropertybrowser.cpp: ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h -o moc_qttreepropertybrowser.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h -o moc_qttreepropertybrowser.cpp
 
 moc_qtvariantproperty.cpp: ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h -o moc_qtvariantproperty.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h -o moc_qtvariantproperty.cpp
 
 moc_DialogFind.cpp: ../GenesysQtGUI/dialogs/DialogFind.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
@@ -2012,10 +2061,18 @@ moc_DialogFind.cpp: ../GenesysQtGUI/dialogs/DialogFind.h \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -2028,7 +2085,6 @@ moc_DialogFind.cpp: ../GenesysQtGUI/dialogs/DialogFind.h \
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -2036,17 +2092,62 @@ moc_DialogFind.cpp: ../GenesysQtGUI/dialogs/DialogFind.h \
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/DialogFind.h -o moc_DialogFind.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/DialogFind.h -o moc_DialogFind.cpp
+
+moc_DialogSelectCounter.cpp: ../GenesysQtGUI/dialogs/DialogSelectCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/DialogSelectCounter.h -o moc_DialogSelectCounter.cpp
+
+moc_DialogSelectVariable.cpp: ../GenesysQtGUI/dialogs/DialogSelectVariable.h \
+		../../../../plugins/data/Variable.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/DialogSelectVariable.h -o moc_DialogSelectVariable.cpp
+
+moc_DialogTimerConfigure.cpp: ../GenesysQtGUI/dialogs/DialogTimerConfigure.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
+		../../../../kernel/util/Util.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/DialogTimerConfigure.h -o moc_DialogTimerConfigure.cpp
 
 moc_Dialogmodelinformation.cpp: ../GenesysQtGUI/dialogs/Dialogmodelinformation.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/Dialogmodelinformation.h -o moc_Dialogmodelinformation.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/Dialogmodelinformation.h -o moc_Dialogmodelinformation.cpp
 
 moc_dialogBreakpoint.cpp: ../GenesysQtGUI/dialogs/dialogBreakpoint.h \
 		ui_dialogBreakpoint.h \
@@ -2090,24 +2191,14 @@ moc_dialogBreakpoint.cpp: ../GenesysQtGUI/dialogs/dialogBreakpoint.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogBreakpoint.h -o moc_dialogBreakpoint.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogBreakpoint.h -o moc_dialogBreakpoint.cpp
 
 moc_dialogpluginmanager.cpp: ../GenesysQtGUI/dialogs/dialogpluginmanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogpluginmanager.h -o moc_dialogpluginmanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogpluginmanager.h -o moc_dialogpluginmanager.cpp
 
 moc_dialogsimulationconfigure.cpp: ../GenesysQtGUI/dialogs/dialogsimulationconfigure.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogsimulationconfigure.h -o moc_dialogsimulationconfigure.cpp
-
-moc_dialogsystempreferences.cpp: ../GenesysQtGUI/dialogs/dialogsystempreferences.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogsystempreferences.h -o moc_dialogsystempreferences.cpp
-
-moc_mainwindow.cpp: ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/util/List.h \
@@ -2146,22 +2237,81 @@ moc_mainwindow.cpp: ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogsimulationconfigure.h -o moc_dialogsimulationconfigure.cpp
+
+moc_dialogsystempreferences.cpp: ../GenesysQtGUI/dialogs/dialogsystempreferences.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/dialogs/dialogsystempreferences.h -o moc_dialogsystempreferences.cpp
+
+moc_mainwindow.cpp: ../GenesysQtGUI/mainwindow.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
+		../../../../kernel/simulator/Event.h \
+		../../../../kernel/simulator/ModelChecker_if.h \
+		../../../../kernel/simulator/Parser_if.h \
+		../../../../kernel/statistics/Sampler_if.h \
+		../../../../kernel/simulator/ComponentManager.h \
+		../../../../kernel/simulator/SourceModelComponent.h \
+		../../../../kernel/simulator/OnEventManager.h \
+		../../../../kernel/simulator/ModelInfo.h \
+		../../../../kernel/simulator/ModelSimulation.h \
+		../../../../kernel/simulator/SimulationReporter_if.h \
+		../../../../kernel/simulator/LicenceManager.h \
+		../../../../kernel/simulator/PluginManager.h \
+		../../../../kernel/simulator/PluginConnector_if.h \
+		../../../../kernel/simulator/ModelManager.h \
+		../../../../kernel/simulator/ParserManager.h \
+		../../../../kernel/simulator/ExperimentManager.h \
+		../../../../kernel/simulator/SimulationExperiment.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/mainwindow.h -o moc_mainwindow.cpp
 
 moc_qcustomplot.cpp: ../GenesysQtGUI/qcustomplot.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/qcustomplot.h -o moc_qcustomplot.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/qcustomplot.h -o moc_qcustomplot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -2176,7 +2326,7 @@ qteditorfactory.moc: ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.cpp \
 		moc_qteditorfactory.cpp \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.cpp -o qteditorfactory.moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qteditorfactory.cpp -o qteditorfactory.moc
 
 qtpropertymanager.moc: ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.cpp \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.h \
@@ -2185,7 +2335,7 @@ qtpropertymanager.moc: ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.cpp \
 		moc_qtpropertymanager.cpp \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.cpp -o qtpropertymanager.moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qtpropertymanager.cpp -o qtpropertymanager.moc
 
 qttreepropertybrowser.moc: ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.cpp \
 		../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h \
@@ -2193,11 +2343,15 @@ qttreepropertybrowser.moc: ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowse
 		moc_qttreepropertybrowser.cpp \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/Genesys-Simulator/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.cpp -o qttreepropertybrowser.moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/raquel/Documents/modsim/modsim/source/applications/gui/qt/build-GenesysQtGUI-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/raquel/Documents/modsim/modsim/source/applications/gui/qt/GenesysQtGUI -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtDesigner -I/usr/include/x86_64-linux-gnu/qt5/QtUiPlugin -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.cpp -o qttreepropertybrowser.moc
 
-compiler_uic_make_all: ui_Dialogmodelinformation.h ui_dialogBreakpoint.h ui_dialogpluginmanager.h ui_dialogsimulationconfigure.h ui_dialogsystempreferences.h ui_mainwindow.h
+compiler_uic_make_all: ui_DialogTimerConfigure.h ui_Dialogmodelinformation.h ui_dialogBreakpoint.h ui_dialogpluginmanager.h ui_dialogsimulationconfigure.h ui_dialogsystempreferences.h ui_mainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_Dialogmodelinformation.h ui_dialogBreakpoint.h ui_dialogpluginmanager.h ui_dialogsimulationconfigure.h ui_dialogsystempreferences.h ui_mainwindow.h
+	-$(DEL_FILE) ui_DialogTimerConfigure.h ui_Dialogmodelinformation.h ui_dialogBreakpoint.h ui_dialogpluginmanager.h ui_dialogsimulationconfigure.h ui_dialogsystempreferences.h ui_mainwindow.h
+ui_DialogTimerConfigure.h: ../GenesysQtGUI/dialogs/DialogTimerConfigure.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../GenesysQtGUI/dialogs/DialogTimerConfigure.ui -o ui_DialogTimerConfigure.h
+
 ui_Dialogmodelinformation.h: ../GenesysQtGUI/dialogs/Dialogmodelinformation.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../GenesysQtGUI/dialogs/Dialogmodelinformation.ui -o ui_Dialogmodelinformation.h
@@ -2243,9 +2397,17 @@ ui_mainwindow.h: ../GenesysQtGUI/mainwindow.ui \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -2258,7 +2420,6 @@ ui_mainwindow.h: ../GenesysQtGUI/mainwindow.ui \
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -2266,32 +2427,38 @@ ui_mainwindow.h: ../GenesysQtGUI/mainwindow.ui \
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
 		../GenesysQtGUI/QPropertyBrowser/qttreepropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h \
 		../GenesysQtGUI/DataComponentProperty.h \
-		../../../../kernel/simulator/ModelDataDefinition.h \
-		../../../../kernel/util/List.h \
-		../../../../kernel/util/Util.h \
-		../../../../kernel/simulator/ParserChangesInformation.h \
-		../../../../kernel/simulator/Persistence.h \
-		../../../../kernel/simulator/ModelPersistence_if.h \
-		../../../../kernel/simulator/SimulationControlAndResponse.h \
-		../../../../kernel/simulator/TraceManager.h \
+		../GenesysQtGUI/DataComponentEditor.h \
 		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
 		../../../../kernel/simulator/PluginInformation.h \
 		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/TraceManager.h \
 		../../../../kernel/simulator/EntityType.h \
 		../../../../kernel/simulator/StatisticsCollector.h \
 		../../../../kernel/statistics/Statistics_if.h \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
-		../../../../kernel/simulator/ConnectionManager.h
+		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/ComboBoxEnum.h
 	/usr/lib/qt5/bin/uic ../GenesysQtGUI/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -4270,6 +4437,39 @@ CellularAutomataComp.o: ../../../../plugins/components/CellularAutomataComp.cpp 
 		../../../../plugins/components/CellularAutomata/Neighborhood_VonNeumann.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CellularAutomataComp.o ../../../../plugins/components/CellularAutomataComp.cpp
 
+CellularAutomata.o: ../../../../plugins/components/CellularAutomata.cpp ../../../../plugins/components/CellularAutomata.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../kernel/simulator/Model.h \
+		../../../../kernel/simulator/Event.h \
+		../../../../kernel/simulator/ModelChecker_if.h \
+		../../../../kernel/simulator/Parser_if.h \
+		../../../../kernel/statistics/Sampler_if.h \
+		../../../../kernel/simulator/ComponentManager.h \
+		../../../../kernel/simulator/SourceModelComponent.h \
+		../../../../kernel/simulator/OnEventManager.h \
+		../../../../kernel/simulator/ModelInfo.h \
+		../../../../kernel/simulator/ModelSimulation.h \
+		../../../../kernel/simulator/SimulationReporter_if.h \
+		../../../../kernel/simulator/PropertyGenesys.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CellularAutomata.o ../../../../plugins/components/CellularAutomata.cpp
+
 Clone.o: ../../../../plugins/components/Clone.cpp ../../../../plugins/components/Clone.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
@@ -4913,13 +5113,19 @@ MarkovChain.o: ../../../../plugins/components/MarkovChain.cpp ../../../../plugin
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
 		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/LicenceManager.h \
+		../../../../kernel/simulator/PluginManager.h \
+		../../../../kernel/simulator/PluginConnector_if.h \
+		../../../../kernel/simulator/ModelManager.h \
+		../../../../kernel/simulator/ParserManager.h \
+		../../../../kernel/simulator/ExperimentManager.h \
+		../../../../kernel/simulator/SimulationExperiment.h \
 		../../../../kernel/TraitsKernel.h \
 		../../../../kernel/simulator/ModelPersistenceDefaultImpl2.h \
 		../../../../kernel/simulator/SimulationReporterDefaultImpl1.h \
 		../../../../kernel/simulator/Counter.h \
 		../../../../kernel/simulator/ModelCheckerDefaultImpl1.h \
-		../../../../kernel/simulator/PluginManager.h \
-		../../../../kernel/simulator/PluginConnector_if.h \
 		../../../../kernel/simulator/PluginConnectorDummyImpl1.h \
 		../../../../kernel/simulator/ParserDefaultImpl2.h \
 		../../../../parser/Genesys++-driver.h \
@@ -6588,19 +6794,24 @@ Smart_CellularAutomata.o: ../../../terminal/examples/smarts/Smart_CellularAutoma
 		../../../TraitsApp.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Smart_CellularAutomata.o ../../../terminal/examples/smarts/Smart_CellularAutomata.cpp
 
-AnimationTransition.o: ../GenesysQtGUI/AnimationTransition.cpp ../GenesysQtGUI/AnimationTransition.h \
-		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+CodeEditor.o: ../GenesysQtGUI/CodeEditor.cpp ../GenesysQtGUI/CodeEditor.h \
+		../GenesysQtGUI/LineNumberArea.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CodeEditor.o ../GenesysQtGUI/CodeEditor.cpp
+
+DataComponentProperty.o: ../GenesysQtGUI/DataComponentProperty.cpp ../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
-		../../../../kernel/util/Util.h \
 		../../../../kernel/simulator/Persistence.h \
 		../../../../kernel/simulator/ModelPersistence_if.h \
 		../../../../kernel/simulator/PluginInformation.h \
-		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/Entity.h \
 		../../../../kernel/simulator/ModelDataDefinition.h \
 		../../../../kernel/simulator/ParserChangesInformation.h \
-		../../../../kernel/simulator/SimulationControlAndResponse.h \
 		../../../../kernel/simulator/TraceManager.h \
 		../../../../kernel/simulator/EntityType.h \
 		../../../../kernel/simulator/StatisticsCollector.h \
@@ -6608,39 +6819,7 @@ AnimationTransition.o: ../GenesysQtGUI/AnimationTransition.cpp ../GenesysQtGUI/A
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
-		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
-		../GenesysQtGUI/TraitsGUI.h \
-		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
-		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
-		../GenesysQtGUI/ModelGraphicsScene.h \
-		../../../../kernel/simulator/Simulator.h \
-		../../../../kernel/simulator/Model.h \
-		../../../../kernel/simulator/Event.h \
-		../../../../kernel/simulator/ModelChecker_if.h \
-		../../../../kernel/simulator/Parser_if.h \
-		../../../../kernel/statistics/Sampler_if.h \
-		../../../../kernel/simulator/ComponentManager.h \
-		../../../../kernel/simulator/SourceModelComponent.h \
-		../../../../kernel/simulator/OnEventManager.h \
-		../../../../kernel/simulator/ModelInfo.h \
-		../../../../kernel/simulator/ModelSimulation.h \
-		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
-		../../../../kernel/simulator/LicenceManager.h \
-		../../../../kernel/simulator/PluginManager.h \
-		../../../../kernel/simulator/PluginConnector_if.h \
-		../../../../kernel/simulator/ModelManager.h \
-		../../../../kernel/simulator/ParserManager.h \
-		../../../../kernel/simulator/ExperimentManager.h \
-		../../../../kernel/simulator/SimulationExperiment.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnimationTransition.o ../GenesysQtGUI/AnimationTransition.cpp
-
-CodeEditor.o: ../GenesysQtGUI/CodeEditor.cpp ../GenesysQtGUI/CodeEditor.h \
-		../GenesysQtGUI/LineNumberArea.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CodeEditor.o ../GenesysQtGUI/CodeEditor.cpp
-
-DataComponentProperty.o: ../GenesysQtGUI/DataComponentProperty.cpp ../GenesysQtGUI/DataComponentProperty.h
+		../GenesysQtGUI/ComboBoxEnum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DataComponentProperty.o ../GenesysQtGUI/DataComponentProperty.cpp
 
 ModelGraphicsScene.o: ../GenesysQtGUI/ModelGraphicsScene.cpp ../GenesysQtGUI/ModelGraphicsScene.h \
@@ -6663,9 +6842,17 @@ ModelGraphicsScene.o: ../GenesysQtGUI/ModelGraphicsScene.cpp ../GenesysQtGUI/Mod
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -6678,7 +6865,6 @@ ModelGraphicsScene.o: ../GenesysQtGUI/ModelGraphicsScene.cpp ../GenesysQtGUI/Mod
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -6686,15 +6872,23 @@ ModelGraphicsScene.o: ../GenesysQtGUI/ModelGraphicsScene.cpp ../GenesysQtGUI/Mod
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
 		../GenesysQtGUI/ModelGraphicsView.h \
 		../GenesysQtGUI/actions/AddUndoCommand.h \
 		../GenesysQtGUI/actions/DeleteUndoCommand.h \
 		../GenesysQtGUI/actions/MoveUndoCommand.h \
 		../GenesysQtGUI/actions/GroupUndoCommand.h \
-		../GenesysQtGUI/actions/UngroupUndoCommand.h
+		../GenesysQtGUI/actions/UngroupUndoCommand.h \
+		../GenesysQtGUI/dialogs/DialogSelectCounter.h \
+		../GenesysQtGUI/dialogs/DialogSelectVariable.h \
+		../GenesysQtGUI/dialogs/DialogTimerConfigure.h \
+		../GenesysQtGUI/animations/AnimationQueue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ModelGraphicsScene.o ../GenesysQtGUI/ModelGraphicsScene.cpp
 
 ModelGraphicsView.o: ../GenesysQtGUI/ModelGraphicsView.cpp ../GenesysQtGUI/ModelGraphicsView.h \
@@ -6718,9 +6912,17 @@ ModelGraphicsView.o: ../GenesysQtGUI/ModelGraphicsView.cpp ../GenesysQtGUI/Model
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -6733,7 +6935,6 @@ ModelGraphicsView.o: ../GenesysQtGUI/ModelGraphicsView.cpp ../GenesysQtGUI/Model
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -6741,9 +6942,13 @@ ModelGraphicsView.o: ../GenesysQtGUI/ModelGraphicsView.cpp ../GenesysQtGUI/Model
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ModelGraphicsView.o ../GenesysQtGUI/ModelGraphicsView.cpp
 
 ObjectPropertyBrowser.o: ../GenesysQtGUI/ObjectPropertyBrowser.cpp ../GenesysQtGUI/ObjectPropertyBrowser.h \
@@ -6751,25 +6956,27 @@ ObjectPropertyBrowser.o: ../GenesysQtGUI/ObjectPropertyBrowser.cpp ../GenesysQtG
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		../GenesysQtGUI/QPropertyBrowser/qtvariantproperty.h \
 		../GenesysQtGUI/DataComponentProperty.h \
-		../../../../kernel/simulator/ModelDataDefinition.h \
-		../../../../kernel/util/List.h \
-		../../../../kernel/util/Util.h \
-		../../../../kernel/simulator/ParserChangesInformation.h \
-		../../../../kernel/simulator/Persistence.h \
-		../../../../kernel/simulator/ModelPersistence_if.h \
-		../../../../kernel/simulator/SimulationControlAndResponse.h \
-		../../../../kernel/simulator/TraceManager.h \
+		../GenesysQtGUI/DataComponentEditor.h \
 		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
 		../../../../kernel/simulator/PluginInformation.h \
 		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/TraceManager.h \
 		../../../../kernel/simulator/EntityType.h \
 		../../../../kernel/simulator/StatisticsCollector.h \
 		../../../../kernel/statistics/Statistics_if.h \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
-		../../../../kernel/simulator/ConnectionManager.h
+		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/ComboBoxEnum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ObjectPropertyBrowser.o ../GenesysQtGUI/ObjectPropertyBrowser.cpp
 
 PropertyEditor.o: ../GenesysQtGUI/PropertyEditor.cpp ../GenesysQtGUI/PropertyEditor.h \
@@ -6782,6 +6989,52 @@ PropertyEditor.o: ../GenesysQtGUI/PropertyEditor.cpp ../GenesysQtGUI/PropertyEdi
 		../../../../kernel/simulator/SimulationControlAndResponse.h \
 		../../../../kernel/simulator/TraceManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PropertyEditor.o ../GenesysQtGUI/PropertyEditor.cpp
+
+DataComponentEditor.o: ../GenesysQtGUI/DataComponentEditor.cpp ../GenesysQtGUI/DataComponentEditor.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DataComponentEditor.o ../GenesysQtGUI/DataComponentEditor.cpp
+
+ComboBoxEnum.o: ../GenesysQtGUI/ComboBoxEnum.cpp ../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ComboBoxEnum.o ../GenesysQtGUI/ComboBoxEnum.cpp
 
 AddUndoCommand.o: ../GenesysQtGUI/actions/AddUndoCommand.cpp ../GenesysQtGUI/actions/AddUndoCommand.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
@@ -6804,9 +7057,17 @@ AddUndoCommand.o: ../GenesysQtGUI/actions/AddUndoCommand.cpp ../GenesysQtGUI/act
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -6819,7 +7080,6 @@ AddUndoCommand.o: ../GenesysQtGUI/actions/AddUndoCommand.cpp ../GenesysQtGUI/act
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -6827,9 +7087,13 @@ AddUndoCommand.o: ../GenesysQtGUI/actions/AddUndoCommand.cpp ../GenesysQtGUI/act
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AddUndoCommand.o ../GenesysQtGUI/actions/AddUndoCommand.cpp
 
 DeleteUndoCommand.o: ../GenesysQtGUI/actions/DeleteUndoCommand.cpp ../GenesysQtGUI/actions/DeleteUndoCommand.h \
@@ -6854,9 +7118,17 @@ DeleteUndoCommand.o: ../GenesysQtGUI/actions/DeleteUndoCommand.cpp ../GenesysQtG
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -6869,7 +7141,6 @@ DeleteUndoCommand.o: ../GenesysQtGUI/actions/DeleteUndoCommand.cpp ../GenesysQtG
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -6877,9 +7148,13 @@ DeleteUndoCommand.o: ../GenesysQtGUI/actions/DeleteUndoCommand.cpp ../GenesysQtG
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DeleteUndoCommand.o ../GenesysQtGUI/actions/DeleteUndoCommand.cpp
 
 GroupUndoCommand.o: ../GenesysQtGUI/actions/GroupUndoCommand.cpp ../GenesysQtGUI/actions/GroupUndoCommand.h \
@@ -6903,9 +7178,17 @@ GroupUndoCommand.o: ../GenesysQtGUI/actions/GroupUndoCommand.cpp ../GenesysQtGUI
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -6918,7 +7201,6 @@ GroupUndoCommand.o: ../GenesysQtGUI/actions/GroupUndoCommand.cpp ../GenesysQtGUI
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -6926,9 +7208,13 @@ GroupUndoCommand.o: ../GenesysQtGUI/actions/GroupUndoCommand.cpp ../GenesysQtGUI
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GroupUndoCommand.o ../GenesysQtGUI/actions/GroupUndoCommand.cpp
 
 MoveUndoCommand.o: ../GenesysQtGUI/actions/MoveUndoCommand.cpp ../GenesysQtGUI/actions/MoveUndoCommand.h \
@@ -6952,9 +7238,17 @@ MoveUndoCommand.o: ../GenesysQtGUI/actions/MoveUndoCommand.cpp ../GenesysQtGUI/a
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -6967,7 +7261,6 @@ MoveUndoCommand.o: ../GenesysQtGUI/actions/MoveUndoCommand.cpp ../GenesysQtGUI/a
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -6975,9 +7268,13 @@ MoveUndoCommand.o: ../GenesysQtGUI/actions/MoveUndoCommand.cpp ../GenesysQtGUI/a
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MoveUndoCommand.o ../GenesysQtGUI/actions/MoveUndoCommand.cpp
 
 PasteUndoCommand.o: ../GenesysQtGUI/actions/PasteUndoCommand.cpp ../GenesysQtGUI/actions/PasteUndoCommand.h \
@@ -7002,9 +7299,17 @@ PasteUndoCommand.o: ../GenesysQtGUI/actions/PasteUndoCommand.cpp ../GenesysQtGUI
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -7017,7 +7322,6 @@ PasteUndoCommand.o: ../GenesysQtGUI/actions/PasteUndoCommand.cpp ../GenesysQtGUI
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -7025,9 +7329,13 @@ PasteUndoCommand.o: ../GenesysQtGUI/actions/PasteUndoCommand.cpp ../GenesysQtGUI
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PasteUndoCommand.o ../GenesysQtGUI/actions/PasteUndoCommand.cpp
 
 UngroupUndoCommand.o: ../GenesysQtGUI/actions/UngroupUndoCommand.cpp ../GenesysQtGUI/actions/UngroupUndoCommand.h \
@@ -7051,9 +7359,17 @@ UngroupUndoCommand.o: ../GenesysQtGUI/actions/UngroupUndoCommand.cpp ../GenesysQ
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -7066,7 +7382,6 @@ UngroupUndoCommand.o: ../GenesysQtGUI/actions/UngroupUndoCommand.cpp ../GenesysQ
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -7074,10 +7389,222 @@ UngroupUndoCommand.o: ../GenesysQtGUI/actions/UngroupUndoCommand.cpp ../GenesysQ
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UngroupUndoCommand.o ../GenesysQtGUI/actions/UngroupUndoCommand.cpp
+
+AnimationCounter.o: ../GenesysQtGUI/animations/AnimationCounter.cpp ../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/PluginInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnimationCounter.o ../GenesysQtGUI/animations/AnimationCounter.cpp
+
+AnimationQueue.o: ../GenesysQtGUI/animations/AnimationQueue.cpp ../GenesysQtGUI/animations/AnimationQueue.h \
+		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
+		../GenesysQtGUI/TraitsGUI.h \
+		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/ModelGraphicsScene.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
+		../../../../kernel/simulator/Event.h \
+		../../../../kernel/simulator/ModelChecker_if.h \
+		../../../../kernel/simulator/Parser_if.h \
+		../../../../kernel/statistics/Sampler_if.h \
+		../../../../kernel/simulator/ComponentManager.h \
+		../../../../kernel/simulator/SourceModelComponent.h \
+		../../../../kernel/simulator/OnEventManager.h \
+		../../../../kernel/simulator/ModelInfo.h \
+		../../../../kernel/simulator/ModelSimulation.h \
+		../../../../kernel/simulator/SimulationReporter_if.h \
+		../../../../kernel/simulator/LicenceManager.h \
+		../../../../kernel/simulator/PluginManager.h \
+		../../../../kernel/simulator/PluginConnector_if.h \
+		../../../../kernel/simulator/ModelManager.h \
+		../../../../kernel/simulator/ParserManager.h \
+		../../../../kernel/simulator/ExperimentManager.h \
+		../../../../kernel/simulator/SimulationExperiment.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
+		../GenesysQtGUI/graphicals/GraphicalConnection.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnimationQueue.o ../GenesysQtGUI/animations/AnimationQueue.cpp
+
+AnimationTimer.o: ../GenesysQtGUI/animations/AnimationTimer.cpp ../GenesysQtGUI/animations/AnimationTimer.h \
+		../../../../kernel/util/Util.h \
+		../GenesysQtGUI/ModelGraphicsScene.h \
+		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
+		../GenesysQtGUI/TraitsGUI.h \
+		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
+		../../../../kernel/simulator/Event.h \
+		../../../../kernel/simulator/ModelChecker_if.h \
+		../../../../kernel/simulator/Parser_if.h \
+		../../../../kernel/statistics/Sampler_if.h \
+		../../../../kernel/simulator/ComponentManager.h \
+		../../../../kernel/simulator/SourceModelComponent.h \
+		../../../../kernel/simulator/OnEventManager.h \
+		../../../../kernel/simulator/ModelInfo.h \
+		../../../../kernel/simulator/ModelSimulation.h \
+		../../../../kernel/simulator/SimulationReporter_if.h \
+		../../../../kernel/simulator/LicenceManager.h \
+		../../../../kernel/simulator/PluginManager.h \
+		../../../../kernel/simulator/PluginConnector_if.h \
+		../../../../kernel/simulator/ModelManager.h \
+		../../../../kernel/simulator/ParserManager.h \
+		../../../../kernel/simulator/ExperimentManager.h \
+		../../../../kernel/simulator/SimulationExperiment.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
+		../GenesysQtGUI/graphicals/GraphicalConnection.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnimationTimer.o ../GenesysQtGUI/animations/AnimationTimer.cpp
+
+AnimationTransition.o: ../GenesysQtGUI/animations/AnimationTransition.cpp ../GenesysQtGUI/animations/AnimationTransition.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
+		../GenesysQtGUI/TraitsGUI.h \
+		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/graphicals/GraphicalConnection.h \
+		../GenesysQtGUI/ModelGraphicsScene.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
+		../../../../kernel/simulator/Event.h \
+		../../../../kernel/simulator/ModelChecker_if.h \
+		../../../../kernel/simulator/Parser_if.h \
+		../../../../kernel/statistics/Sampler_if.h \
+		../../../../kernel/simulator/ComponentManager.h \
+		../../../../kernel/simulator/SourceModelComponent.h \
+		../../../../kernel/simulator/OnEventManager.h \
+		../../../../kernel/simulator/ModelInfo.h \
+		../../../../kernel/simulator/ModelSimulation.h \
+		../../../../kernel/simulator/SimulationReporter_if.h \
+		../../../../kernel/simulator/LicenceManager.h \
+		../../../../kernel/simulator/PluginManager.h \
+		../../../../kernel/simulator/PluginConnector_if.h \
+		../../../../kernel/simulator/ModelManager.h \
+		../../../../kernel/simulator/ParserManager.h \
+		../../../../kernel/simulator/ExperimentManager.h \
+		../../../../kernel/simulator/SimulationExperiment.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnimationTransition.o ../GenesysQtGUI/animations/AnimationTransition.cpp
+
+AnimationVariable.o: ../GenesysQtGUI/animations/AnimationVariable.cpp ../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/PluginInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AnimationVariable.o ../GenesysQtGUI/animations/AnimationVariable.cpp
 
 DialogFind.o: ../GenesysQtGUI/dialogs/DialogFind.cpp ../GenesysQtGUI/dialogs/DialogFind.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
@@ -7099,10 +7626,18 @@ DialogFind.o: ../GenesysQtGUI/dialogs/DialogFind.cpp ../GenesysQtGUI/dialogs/Dia
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
 		../../../../kernel/simulator/Simulator.h \
 		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
@@ -7115,7 +7650,6 @@ DialogFind.o: ../GenesysQtGUI/dialogs/DialogFind.cpp ../GenesysQtGUI/dialogs/Dia
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -7123,10 +7657,50 @@ DialogFind.o: ../GenesysQtGUI/dialogs/DialogFind.cpp ../GenesysQtGUI/dialogs/Dia
 		../../../../kernel/simulator/ParserManager.h \
 		../../../../kernel/simulator/ExperimentManager.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DialogFind.o ../GenesysQtGUI/dialogs/DialogFind.cpp
+
+DialogSelectCounter.o: ../GenesysQtGUI/dialogs/DialogSelectCounter.cpp ../GenesysQtGUI/dialogs/DialogSelectCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/PluginInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DialogSelectCounter.o ../GenesysQtGUI/dialogs/DialogSelectCounter.cpp
+
+DialogSelectVariable.o: ../GenesysQtGUI/dialogs/DialogSelectVariable.cpp ../GenesysQtGUI/dialogs/DialogSelectVariable.h \
+		../../../../plugins/data/Variable.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/PluginInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DialogSelectVariable.o ../GenesysQtGUI/dialogs/DialogSelectVariable.cpp
+
+DialogTimerConfigure.o: ../GenesysQtGUI/dialogs/DialogTimerConfigure.cpp ../GenesysQtGUI/dialogs/DialogTimerConfigure.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
+		../../../../kernel/util/Util.h \
+		ui_DialogTimerConfigure.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DialogTimerConfigure.o ../GenesysQtGUI/dialogs/DialogTimerConfigure.cpp
 
 Dialogmodelinformation.o: ../GenesysQtGUI/dialogs/Dialogmodelinformation.cpp ../GenesysQtGUI/dialogs/Dialogmodelinformation.h \
 		ui_Dialogmodelinformation.h
@@ -7180,6 +7754,44 @@ dialogpluginmanager.o: ../GenesysQtGUI/dialogs/dialogpluginmanager.cpp ../Genesy
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogpluginmanager.o ../GenesysQtGUI/dialogs/dialogpluginmanager.cpp
 
 dialogsimulationconfigure.o: ../GenesysQtGUI/dialogs/dialogsimulationconfigure.cpp ../GenesysQtGUI/dialogs/dialogsimulationconfigure.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../kernel/simulator/Event.h \
+		../../../../kernel/simulator/ModelChecker_if.h \
+		../../../../kernel/simulator/Parser_if.h \
+		../../../../kernel/statistics/Sampler_if.h \
+		../../../../kernel/simulator/ComponentManager.h \
+		../../../../kernel/simulator/SourceModelComponent.h \
+		../../../../kernel/simulator/OnEventManager.h \
+		../../../../kernel/simulator/ModelInfo.h \
+		../../../../kernel/simulator/ModelSimulation.h \
+		../../../../kernel/simulator/SimulationReporter_if.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/LicenceManager.h \
+		../../../../kernel/simulator/PluginManager.h \
+		../../../../kernel/simulator/PluginConnector_if.h \
+		../../../../kernel/simulator/ModelManager.h \
+		../../../../kernel/simulator/ParserManager.h \
+		../../../../kernel/simulator/ExperimentManager.h \
+		../../../../kernel/simulator/SimulationExperiment.h \
 		ui_dialogsimulationconfigure.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogsimulationconfigure.o ../GenesysQtGUI/dialogs/dialogsimulationconfigure.cpp
 
@@ -7260,6 +7872,8 @@ GraphicalComponentPort.o: ../GenesysQtGUI/graphicals/GraphicalComponentPort.cpp 
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
 		../GenesysQtGUI/UtilGUI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GraphicalComponentPort.o ../GenesysQtGUI/graphicals/GraphicalComponentPort.cpp
@@ -7286,8 +7900,38 @@ GraphicalConnection.o: ../GenesysQtGUI/graphicals/GraphicalConnection.cpp ../Gen
 		../../../../kernel/simulator/ConnectionManager.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GraphicalConnection.o ../GenesysQtGUI/graphicals/GraphicalConnection.cpp
+
+GraphicalDiagramConnection.o: ../GenesysQtGUI/graphicals/GraphicalDiagramConnection.cpp ../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../../../../kernel/simulator/ModelComponent.h \
+		../../../../kernel/simulator/Plugin.h \
+		../../../../kernel/util/Util.h \
+		../../../../kernel/simulator/Persistence.h \
+		../../../../kernel/simulator/ModelPersistence_if.h \
+		../../../../kernel/simulator/PluginInformation.h \
+		../../../../kernel/util/List.h \
+		../../../../kernel/simulator/Entity.h \
+		../../../../kernel/simulator/ModelDataDefinition.h \
+		../../../../kernel/simulator/ParserChangesInformation.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
+		../../../../kernel/simulator/TraceManager.h \
+		../../../../kernel/simulator/EntityType.h \
+		../../../../kernel/simulator/StatisticsCollector.h \
+		../../../../kernel/statistics/Statistics_if.h \
+		../../../../kernel/statistics/Collector_if.h \
+		../../../../kernel/simulator/ModelDataManager.h \
+		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
+		../GenesysQtGUI/TraitsGUI.h \
+		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
+		../GenesysQtGUI/UtilGUI.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GraphicalDiagramConnection.o ../GenesysQtGUI/graphicals/GraphicalDiagramConnection.cpp
 
 GraphicalImageAnimation.o: ../GenesysQtGUI/graphicals/GraphicalImageAnimation.cpp ../GenesysQtGUI/graphicals/GraphicalImageAnimation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GraphicalImageAnimation.o ../GenesysQtGUI/graphicals/GraphicalImageAnimation.cpp
@@ -7311,6 +7955,8 @@ GraphicalModelComponent.o: ../GenesysQtGUI/graphicals/GraphicalModelComponent.cp
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
@@ -7332,10 +7978,12 @@ GraphicalModelDataDefinition.o: ../GenesysQtGUI/graphicals/GraphicalModelDataDef
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GraphicalModelDataDefinition.o ../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.cpp
 
 main.o: ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.h \
-		../../../../kernel/simulator/Simulator.h \
-		../../../../kernel/simulator/Model.h \
-		../../../../kernel/util/List.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
 		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
 		../../../../kernel/simulator/Persistence.h \
@@ -7344,7 +7992,6 @@ main.o: ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/Entity.h \
 		../../../../kernel/simulator/ModelDataDefinition.h \
 		../../../../kernel/simulator/ParserChangesInformation.h \
-		../../../../kernel/simulator/SimulationControlAndResponse.h \
 		../../../../kernel/simulator/TraceManager.h \
 		../../../../kernel/simulator/EntityType.h \
 		../../../../kernel/simulator/StatisticsCollector.h \
@@ -7352,6 +7999,9 @@ main.o: ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
 		../../../../kernel/simulator/ModelChecker_if.h \
 		../../../../kernel/simulator/Parser_if.h \
@@ -7362,7 +8012,6 @@ main.o: ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -7372,12 +8021,20 @@ main.o: ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
 		../../../GenesysApplication_if.h \
 		../../../TraitsApp.h \
 		../../../terminal/TraitsTerminalApp.h \
@@ -7387,10 +8044,12 @@ main.o: ../GenesysQtGUI/main.cpp ../GenesysQtGUI/mainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../GenesysQtGUI/main.cpp
 
 mainwindow.o: ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/mainwindow.h \
-		../../../../kernel/simulator/Simulator.h \
-		../../../../kernel/simulator/Model.h \
-		../../../../kernel/util/List.h \
+		../GenesysQtGUI/DataComponentProperty.h \
+		../GenesysQtGUI/DataComponentEditor.h \
+		../../../../kernel/simulator/PropertyGenesys.h \
+		../../../../kernel/simulator/SimulationControlAndResponse.h \
 		../../../../kernel/util/Util.h \
+		../../../../kernel/util/List.h \
 		../../../../kernel/simulator/ModelComponent.h \
 		../../../../kernel/simulator/Plugin.h \
 		../../../../kernel/simulator/Persistence.h \
@@ -7399,7 +8058,6 @@ mainwindow.o: ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/Entity.h \
 		../../../../kernel/simulator/ModelDataDefinition.h \
 		../../../../kernel/simulator/ParserChangesInformation.h \
-		../../../../kernel/simulator/SimulationControlAndResponse.h \
 		../../../../kernel/simulator/TraceManager.h \
 		../../../../kernel/simulator/EntityType.h \
 		../../../../kernel/simulator/StatisticsCollector.h \
@@ -7407,6 +8065,9 @@ mainwindow.o: ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/statistics/Collector_if.h \
 		../../../../kernel/simulator/ModelDataManager.h \
 		../../../../kernel/simulator/ConnectionManager.h \
+		../GenesysQtGUI/ComboBoxEnum.h \
+		../../../../kernel/simulator/Simulator.h \
+		../../../../kernel/simulator/Model.h \
 		../../../../kernel/simulator/Event.h \
 		../../../../kernel/simulator/ModelChecker_if.h \
 		../../../../kernel/simulator/Parser_if.h \
@@ -7417,7 +8078,6 @@ mainwindow.o: ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/ModelInfo.h \
 		../../../../kernel/simulator/ModelSimulation.h \
 		../../../../kernel/simulator/SimulationReporter_if.h \
-		../../../../kernel/simulator/PropertyGenesys.h \
 		../../../../kernel/simulator/LicenceManager.h \
 		../../../../kernel/simulator/PluginManager.h \
 		../../../../kernel/simulator/PluginConnector_if.h \
@@ -7427,12 +8087,20 @@ mainwindow.o: ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/mainwindow.h \
 		../../../../kernel/simulator/SimulationExperiment.h \
 		../GenesysQtGUI/ModelGraphicsScene.h \
 		../GenesysQtGUI/graphicals/GraphicalModelComponent.h \
+		../../../../plugins/data/Queue.h \
+		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
 		../GenesysQtGUI/graphicals/GraphicalComponentPort.h \
 		../GenesysQtGUI/TraitsGUI.h \
 		../GenesysQtGUI/graphicals/GraphicalModelDataDefinition.h \
-		../GenesysQtGUI/AnimationTransition.h \
+		../GenesysQtGUI/graphicals/GraphicalDiagramConnection.h \
+		../GenesysQtGUI/UtilGUI.h \
+		../GenesysQtGUI/animations/AnimationTransition.h \
 		../GenesysQtGUI/graphicals/GraphicalConnection.h \
-		../GenesysQtGUI/graphicals/GraphicalImageAnimation.h \
+		../GenesysQtGUI/animations/AnimationVariable.h \
+		../../../../plugins/data/Variable.h \
+		../GenesysQtGUI/animations/AnimationCounter.h \
+		../../../../kernel/simulator/Counter.h \
+		../GenesysQtGUI/animations/AnimationTimer.h \
 		ui_mainwindow.h \
 		../GenesysQtGUI/dialogs/dialogBreakpoint.h \
 		ui_dialogBreakpoint.h \
@@ -7449,8 +8117,7 @@ mainwindow.o: ../GenesysQtGUI/mainwindow.cpp ../GenesysQtGUI/mainwindow.h \
 		../GenesysQtGUI/QPropertyBrowser/qtpropertybrowser.h \
 		../GenesysQtGUI/actions/PasteUndoCommand.h \
 		../GenesysQtGUI/actions/AddUndoCommand.h \
-		../GenesysQtGUI/actions/DeleteUndoCommand.h \
-		../../../../plugins/data/Variable.h
+		../GenesysQtGUI/actions/DeleteUndoCommand.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../GenesysQtGUI/mainwindow.cpp
 
 qcustomplot.o: ../GenesysQtGUI/qcustomplot.cpp ../GenesysQtGUI/qcustomplot.h
@@ -7476,6 +8143,15 @@ moc_qtpropertybrowserutils_p.o: moc_qtpropertybrowserutils_p.cpp
 
 moc_DialogFind.o: moc_DialogFind.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DialogFind.o moc_DialogFind.cpp
+
+moc_DialogSelectCounter.o: moc_DialogSelectCounter.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DialogSelectCounter.o moc_DialogSelectCounter.cpp
+
+moc_DialogSelectVariable.o: moc_DialogSelectVariable.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DialogSelectVariable.o moc_DialogSelectVariable.cpp
+
+moc_DialogTimerConfigure.o: moc_DialogTimerConfigure.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DialogTimerConfigure.o moc_DialogTimerConfigure.cpp
 
 moc_Dialogmodelinformation.o: moc_Dialogmodelinformation.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Dialogmodelinformation.o moc_Dialogmodelinformation.cpp

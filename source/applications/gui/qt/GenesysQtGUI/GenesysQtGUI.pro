@@ -146,6 +146,8 @@ SOURCES += \
 	ModelGraphicsView.cpp \
 	ObjectPropertyBrowser.cpp \
 	PropertyEditor.cpp \
+	DataComponentEditor.cpp \
+	ComboBoxEnum.cpp \
     actions/AddUndoCommand.cpp \
     actions/DeleteUndoCommand.cpp \
     actions/GroupUndoCommand.cpp \
@@ -178,8 +180,8 @@ SOURCES += \
 	graphicals/GraphicalAssociation.cpp \
 	graphicals/GraphicalComponentPort.cpp \
 	graphicals/GraphicalConnection.cpp \
-        graphicals/GraphicalDiagramConnection.cpp \
-        graphicals/GraphicalImageAnimation.cpp \
+	graphicals/GraphicalDiagramConnection.cpp \
+	graphicals/GraphicalImageAnimation.cpp \
 	graphicals/GraphicalModelComponent.cpp \
 	graphicals/GraphicalModelDataDefinition.cpp \
 	main.cpp \
@@ -371,6 +373,8 @@ HEADERS += \
 	ObjectPropertyBrowser.h \
 	PropertyEditor.h \
 	DataComponentProperty.h \
+	DataComponentEditor.h \
+	ComboBoxEnum.h \
     QPropertyBrowser/qtbuttonpropertybrowser.h \
     QPropertyBrowser/qteditorfactory.h \
     QPropertyBrowser/qtgroupboxpropertybrowser.h \
@@ -405,8 +409,8 @@ HEADERS += \
 	graphicals/GraphicalAssociation.h \
 	graphicals/GraphicalComponentPort.h \
 	graphicals/GraphicalConnection.h \
-        graphicals/GraphicalDiagramConnection.h \
-        graphicals/GraphicalImageAnimation.h \
+	graphicals/GraphicalDiagramConnection.h \
+	graphicals/GraphicalImageAnimation.h \
 	graphicals/GraphicalModelComponent.h \
 	graphicals/GraphicalModelDataDefinition.h \
 	mainwindow.h \

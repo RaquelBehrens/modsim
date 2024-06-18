@@ -38,8 +38,10 @@ class Remove : public ModelComponent {
 public:
 
 	enum class RemoveFromType : int {
-		QUEUE = 1, ENTITYGROUP = 2
+		QUEUE = 0, ENTITYGROUP = 1, num_elements = 2
 	};
+public:
+	static std::string convertEnumToStr(RemoveFromType type);
 public: // constructors
 	Remove(Model* model, std::string name = "");
 	virtual ~Remove() = default;
@@ -49,7 +51,8 @@ public:
 	void setRemoveStartRank(std::string _removeFromRank);
 	std::string getRemoveStartRank() const;
     void setRemoveEndRank(std::string _removeEndRank);
-    std::string getRemoveEndRank() const;	void setRemoveFromType(Remove::RemoveFromType _removeFromType);
+    std::string getRemoveEndRank() const;	
+	void setRemoveFromType(Remove::RemoveFromType _removeFromType);
 	Remove::RemoveFromType getRemoveFromType() const;
 	void setRemoveFrom(ModelDataDefinition* _removeFrom);
 	ModelDataDefinition* getRemoveFrom() const;

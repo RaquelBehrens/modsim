@@ -41,11 +41,35 @@ Assignment::Assignment(Model* model, std::string destination, std::string expres
 		if (model->getDataManager()->getDataDefinition(Util::TypeOf<Attribute>(), destination) == nullptr) {
 			model->getDataManager()->insert(Util::TypeOf<Attribute>(), new Attribute(model, destination));
 		}
+		_typeDC = Util::TypeOf<Attribute>();
 	} else {
 		if (model->getDataManager()->getDataDefinition(Util::TypeOf<Variable>(), destination) == nullptr) {
 			model->getDataManager()->insert(Util::TypeOf<Variable>(), new Variable(model, destination));
 		}
+		_typeDC = Util::TypeOf<Variable>();
 	}
+
+	SimulationControlGeneric<std::string>* propDestination = new SimulationControlGeneric<std::string>(
+				std::bind(&Assignment::getDestination, this),
+				std::bind(&Assignment::setDestination, this, std::placeholders::_1),
+				Util::TypeOf<Assignment>(), getName(), "Destination", "");
+	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
+				std::bind(&Assignment::getExpression, this),
+				std::bind(&Assignment::setExpression, this, std::placeholders::_1),
+				Util::TypeOf<Assignment>(), getName(), "Expression", "");
+	SimulationControlGeneric<bool>* propAttributeNotVariable = new SimulationControlGeneric<bool>(
+				std::bind(&Assignment::isAttributeNotVariable, this),
+				std::bind(&Assignment::setAttributeNotVariable, this, std::placeholders::_1),
+				Util::TypeOf<Assignment>(), getName(), "AttributeNotVariable", "");
+
+	model->getControls()->insert(propDestination);
+	model->getControls()->insert(propExpression);
+	model->getControls()->insert(propAttributeNotVariable);
+
+	// setting properties
+    _addProperty(propDestination);
+    _addProperty(propExpression);
+	_addProperty(propAttributeNotVariable);
 }
 
 Assignment::Assignment(std::string destination, std::string expression, bool isAttributeNotVariable) {
@@ -64,6 +88,10 @@ std::string Assignment::getDestination() const {
 	return _destination;
 }
 
+std::string Assignment::getName() const {
+	return _destination;
+}
+
 void Assignment::setExpression(std::string _expression) {
 	this->_expression = _expression;
 }
@@ -74,10 +102,24 @@ std::string Assignment::getExpression() const {
 
 void Assignment::setAttributeNotVariable(bool isAttributeNotVariable) {
 	this->_isAttributeNotVariable = isAttributeNotVariable;
+
+	if (_isAttributeNotVariable) {
+		_typeDC = Util::TypeOf<Attribute>();
+	} else {
+		_typeDC = Util::TypeOf<Variable>();
+	}
 }
 
 bool Assignment::isAttributeNotVariable() const {
 	return _isAttributeNotVariable;
+}
+
+void Assignment::_addProperty(PropertyBase* property) {
+    _properties->insert(property);
+}
+
+List<PropertyBase*>* Assignment::getProperties() const {
+    return _properties;
 }
 
 bool Assignment::loadInstance(PersistenceRecord *fields, unsigned int parentIndex) {

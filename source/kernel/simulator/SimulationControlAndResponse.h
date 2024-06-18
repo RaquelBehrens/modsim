@@ -12,12 +12,14 @@
 
 class PropertyGenesysBase {
 public:
-	PropertyGenesysBase(std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) {
+    PropertyGenesysBase(std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) {
 		_className=className;
 		_elementName=elementName;
 		_propertyName=propertyName;
 		_whatsThis=whatsThis;
-		_isClass=isClass;
+		_isList=isList;
+        _isClass=isClass;
+        _isEnum=isEnum;
 	}
 	virtual ~PropertyGenesysBase() = default;
 public:
@@ -26,7 +28,9 @@ public:
 	std::string getElementName() const { return _elementName; }
 	std::string getName() const { return _propertyName; }
 	std::string propertyType() const { return _propertyType; }
-	bool getIsClass() const { return _isClass; }
+    bool getIsList() const { return _isList; }
+    bool getIsClass() const { return _isClass; }
+    bool getIsEnum() const { return _isEnum; }
 	void setWhatsThis(const std::string text);
 	void setName(std::string name) { _propertyName = name; }
 protected:
@@ -35,7 +39,9 @@ protected:
 	std::string _propertyName;
 	std::string _propertyType;
 	std::string _whatsThis;
-	bool _isClass;
+	bool _isList;
+    bool _isClass;
+    bool _isEnum;
 };
 
 class PropertyGenesys: public PropertyGenesysBase {
@@ -90,8 +96,8 @@ protected:
 
 class SimulationControl: public PropertyGenesysBase {
 public:
-	SimulationControl(std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false)
-		: PropertyGenesysBase(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControl(std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false,  bool isClass=false, bool isEnum=false)
+        : PropertyGenesysBase(className, elementName, propertyName, whatsThis, isList, isClass){
 	}
 	std::string show() const {
 		std::string msg = "classname="+_className+ ", elementName="+_elementName+", name=\""+_propertyName+"\"";
@@ -105,7 +111,9 @@ public:
 	bool isReadOnly() const { return _readonly; }
 public:
 	virtual std::string getValue() const  = 0;
-	virtual void setValue(std::string value) = 0;
+    virtual void setValue(std::string value, bool remove=false) = 0;
+    virtual List<SimulationControl*>* getProperties(int index=0) { return nullptr; };
+    virtual List<std::string>* getStrValues() { return nullptr; };
 protected:
 	bool _readonly;
 };
@@ -119,7 +127,7 @@ public:
 //	SimulationControlString(GetterString getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlString(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlString(GetterString getter, SetterString setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass) {
+    SimulationControlString(GetterString getter, SetterString setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum) {
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -127,7 +135,7 @@ public:
 	}
 public:
 	virtual std::string getValue() const override { return _getter(); }
-	virtual void setValue(std::string value) override { _setter(value); };
+    virtual void setValue(std::string value, bool remove=false) override { _setter(value); };
 private:
 	GetterString _getter;
 	SetterString _setter;
@@ -143,7 +151,7 @@ public:
 //	SimulationControlDouble(GetterDouble getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlDouble(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlDouble(GetterDouble getter, SetterDouble setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlDouble(GetterDouble getter, SetterDouble setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -151,7 +159,7 @@ public:
 	}
 public:
 	virtual std::string getValue() const override { return std::to_string(_getter()); }
-	virtual void setValue(std::string value) override { _setter(std::stod(value)); };
+    virtual void setValue(std::string value, bool remove=false) override { _setter(std::stod(value)); };
 private:
 	GetterDouble _getter;
 	SetterDouble _setter;
@@ -166,7 +174,7 @@ public:
 //	SimulationControlBool(GetterBool getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlBool(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlBool(GetterBool getter, SetterBool setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlBool(GetterBool getter, SetterBool setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -174,7 +182,7 @@ public:
 	}
 public:
 	virtual std::string getValue() const override { return std::to_string(_getter()); }
-	virtual void setValue(std::string value) override { _setter(std::stoi(value)); };
+    virtual void setValue(std::string value, bool remove=false) override { _setter(std::stoi(value)); };
 private:
 	GetterBool _getter;
 	SetterBool _setter;
@@ -190,7 +198,7 @@ public:
 //	SimulationControlUInt(GetterUInt getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlUInt(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlUInt(GetterUInt getter, SetterUInt setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlUInt(GetterUInt getter, SetterUInt setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -198,7 +206,7 @@ public:
 	}
 public:
 	virtual std::string getValue() const override { return std::to_string(_getter()); }
-	virtual void setValue(std::string value) override { _setter(std::stoul(value)); };
+    virtual void setValue(std::string value, bool remove=false) override { _setter(std::stoul(value)); };
 private:
 	GetterUInt _getter;
 	SetterUInt _setter;
@@ -213,7 +221,7 @@ public:
 //	SimulationControlUShort(GetterUShort getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlUShort(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlUShort(GetterUShort getter, SetterUShort setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlUShort(GetterUShort getter, SetterUShort setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -221,7 +229,7 @@ public:
 	}
 public:
 	virtual std::string getValue() const override { return std::to_string(_getter()); }
-	virtual void setValue(std::string value) override { _setter(std::stoul(value)); };
+    virtual void setValue(std::string value, bool remove=false) override { _setter(std::stoul(value)); };
 private:
 	GetterUShort _getter;
 	SetterUShort _setter;
@@ -237,7 +245,7 @@ public:
 //	SimulationControlInt(GetterInt getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlInt(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlInt(GetterInt getter, SetterInt setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlInt(GetterInt getter, SetterInt setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -245,7 +253,7 @@ public:
 	}
 public:
 	virtual std::string getValue() const override { return std::to_string(_getter()); }
-	virtual void setValue(std::string value) override { _setter(std::stoi(value)); };
+    virtual void setValue(std::string value, bool remove=false) override { _setter(std::stoi(value)); };
 private:
 	GetterInt _getter;
 	SetterInt _setter;
@@ -260,7 +268,7 @@ public:
 //	SimulationControlTimeUnit(GetterTimeUnit getter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="") : SimulationControl(className, elementName, propertyName, whatsThis) {
 //		SimulationControlTimeUnit(getter, nullptr, className, propertyName, whatsThis);
 //	}
-	SimulationControlTimeUnit(GetterTimeUnit getter, SetterTimeUnit setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlTimeUnit(GetterTimeUnit getter, SetterTimeUnit setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -271,10 +279,10 @@ public:
 		int intVal = static_cast<int>(_getter());
 		return std::to_string(intVal);
 	}
-	virtual void setValue(std::string value) override {
+    virtual void setValue(std::string value, bool remove=false) override {
 		int intVal = std::stoul(value);
 		_setter(static_cast<Util::TimeUnit>(intVal));
-	};
+    };
 private:
 	GetterTimeUnit _getter;
 	SetterTimeUnit _setter;
@@ -291,11 +299,13 @@ template <typename T>
 using SetterGeneric = std::function<void(T)>;
 template <typename T>
 using AdderGeneric = std::function<void(T)>;
+template <typename T>
+using RemoverGeneric = std::function<void(T)>;
 
 template <typename T>
 class SimulationControlGeneric: public SimulationControl {
 public:
-	SimulationControlGeneric(GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlGeneric(GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
@@ -313,38 +323,67 @@ public:
 		return strVal;
 	}
 
-	virtual void setValue(std::string value) override {
+    virtual void setValue(std::string value, bool remove=false) override {
 		std::istringstream auxStr(value);
 		T tVal;
 		auxStr >> tVal;
 
 		_setter(static_cast<T>(tVal));
-	};
+    };
 
 private:
 	GetterGeneric<T> _getter;
 	SetterGeneric<T> _setter;
 };
 
-template <typename T>
+// TODO: remove typename E
+template <typename T, typename E>
 class SimulationControlGenericEnum: public SimulationControl {
 public:
-	SimulationControlGenericEnum(GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlGenericEnum(GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=false, bool isEnum=true) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_getter= getter;
 		_setter = setter;
 		_readonly = setter == nullptr;
 		_propertyType = Util::TypeOf<T>();
+        _isEnum=true;
 	}
 public:
 	virtual std::string getValue() const override {
 		int intVal = static_cast<int>(_getter());
-		return std::to_string(intVal);
+
+        // get string value of enum
+        // TODO: call the function getStrValues
+        List<std::string>* strOptions = new List<std::string>();
+        int max_i = static_cast<int>(T::num_elements);;
+        for (int i=0; i<max_i; i++) {
+            std::string value = E::convertEnumToStr((T)i);
+            strOptions->insert(value);
+        }
+
+        int current_index = 0;
+        for (auto element : *strOptions->list()){
+            if (current_index == intVal) {
+                return element;
+            }
+            current_index++;
+        }
+        return "";
 	}
 
-	virtual void setValue(std::string value) override {
+    virtual void setValue(std::string value, bool remove=false) override {
 		int intVal = std::stoul(value);
 		_setter(static_cast<T>(intVal));
 	};
+
+    virtual List<std::string>* getStrValues() override {
+        List<std::string>* strOptions = new List<std::string>();
+        int max_i = static_cast<int>(T::num_elements);;
+		for (int i=0; i<max_i; i++) {
+            std::string value = E::convertEnumToStr((T)i);
+            strOptions->insert(value);
+        }
+        return strOptions;
+    }
 
 private:
 	GetterGeneric<T> _getter;
@@ -355,7 +394,7 @@ private:
 template <typename T, typename M, typename C>
 class SimulationControlGenericClass: public SimulationControl {
 public:
-	SimulationControlGenericClass(M model, GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=false) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlGenericClass(M model, GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=true, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_model = model;
 		_getter= getter;
 		_setter = setter;
@@ -365,37 +404,47 @@ public:
 public:
 	virtual std::string getValue() const override {
 		T tVal = static_cast<T>(_getter());
-		std::string strVal;
+        std::string strVal;
 
-		if (tVal != nullptr) {
-			strVal = tVal->getName();
-		} else {
+        if (tVal != nullptr) {
+            strVal = tVal->getName();
+        } else {
 			strVal = "";
-		};
+        };
 
 		return strVal;
 	}
 
-	virtual void setValue(std::string value) override {
+    virtual void setValue(std::string value, bool remove=false) override {
 		bool exists = false;
-		value.pop_back();
+        // value.pop_back();
 		T newVal;
 
-		for (auto modeldata : *_model->getDataManager()->getDataDefinitionList(_propertyType)->list()) {
-			if (modeldata->getName() == value) {
-				exists = true;
-				newVal = static_cast<T>(modeldata);
-				break;
-			};
-		};
+        for (auto modeldata : *_model->getDataManager()->getDataDefinitionList(_propertyType)->list()) {
+            if (modeldata->getName() == value) {
+                exists = true;
+                newVal = static_cast<T>(modeldata);
+                break;
+            };
+        };
 
 		if (!exists) {
 			newVal = new C(_model, value);
-			_model->getDataManager()->insert(newVal);
+		 	_model->getDataManager()->insert(newVal);
 		};
 
 		_setter(newVal);
 	};
+
+    virtual List<SimulationControl*>* getProperties(int index=0) override {
+        T tVal = static_cast<T>(_getter());
+
+        if (tVal) {
+            return tVal->getProperties();
+        } else {
+            return nullptr;
+        }
+    }
 
 private:
 	M _model;
@@ -403,13 +452,66 @@ private:
 	SetterGeneric<T> _setter;
 };
 
+// TODO: remove typename C
+template <typename T, typename M, typename C>
+class SimulationControlGenericClassNotDC: public SimulationControl {
+public:
+    SimulationControlGenericClassNotDC(M model, GetterGeneric<T> getter, SetterGeneric<T> setter, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=false, bool isClass=true, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
+        _model = model;
+        _getter= getter;
+        _setter = setter;
+        _readonly = setter == nullptr;
+        _propertyType = Util::TypeOf<C>();
+    }
+public:
+    virtual std::string getValue() const override {
+        T tVal = static_cast<T>(_getter());
+        std::string strVal;
+
+        if (tVal != nullptr) {
+            strVal = tVal->getName();
+        } else {
+            strVal = "";
+        };
+
+        return strVal;
+    }
+
+    virtual void setValue(std::string value, bool remove=false) override {
+        bool exists = false;
+        // value.pop_back();
+        T newVal;
+
+        // TODO: criar apenas se já não estiver definido?
+        newVal = new C(_model, value);
+
+        _setter(newVal);
+    };
+
+    virtual List<SimulationControl*>* getProperties(int index=0) override {
+        T tVal = static_cast<T>(_getter());
+
+        if (tVal) {
+            return tVal->getProperties();
+        } else {
+            return nullptr;
+        }
+    }
+
+private:
+    M _model;
+    GetterGeneric<T> _getter;
+    SetterGeneric<T> _setter;
+};
+
 template <typename T, typename M, typename C>
 class SimulationControlGenericList: public SimulationControl {
 public:
-	SimulationControlGenericList(M model, GetterGeneric<List<T>*> getter, AdderGeneric<T> adder, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isClass=true) : SimulationControl(className, elementName, propertyName, whatsThis, isClass){
+    SimulationControlGenericList(M model, GetterGeneric<List<T>*> getter, AdderGeneric<T> adder, RemoverGeneric<T> remover, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=true, bool isClass=false, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
 		_model = model;
 		_getter= getter;
 		_adder = adder;
+        _remover = remover;
 		_readonly = adder == nullptr;
 		_propertyType = Util::TypeOf<C>();
 	}
@@ -421,25 +523,133 @@ public:
 		return strVal;
 	}
 
-	virtual void setValue(std::string value) override {
-		value.pop_back();
-		T newVal;
+    virtual void setValue(std::string value, bool remove=false) override {
+        T newVal;
 
-		// if (typeid(C) != typeid(std::string)) {
-			// newVal = new C(_model, value);
-		// } else {
-			std::istringstream auxStr(value);
-			auxStr >> newVal;
-			newVal = static_cast<T>(newVal);
-		// }
+        std::istringstream auxStr(value);
+        auxStr >> newVal;
+        newVal = static_cast<T>(newVal);
 
-		_adder(newVal);
-	};
+        if (remove) {
+            _remover(newVal);
+        } else {
+            bool exists = false;
+            for (auto element : *getStrValues()->list()) {
+                if (value == element) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                _adder(newVal);
+            }
+        }
+    };
+
+    virtual List<std::string>* getStrValues() override {
+        List<T>* tVal = static_cast<List<T>*>(_getter());
+        List<std::string>* strOptions = new List<std::string>();
+
+        for (auto element : *tVal->list()) {
+            std::string strVal;
+            std::ostringstream auxStr;
+            auxStr << element;
+            strVal = auxStr.str();
+
+            strOptions->insert(strVal);
+        }
+        return strOptions;
+    }
 
 private:
 	M _model;
 	GetterGeneric<List<T>*> _getter;
 	AdderGeneric<T> _adder;
+    RemoverGeneric<T> _remover;
+};
+
+template <typename T, typename M, typename C>
+class SimulationControlGenericListPointer: public SimulationControl {
+public:
+    SimulationControlGenericListPointer(M model, GetterGeneric<List<T>*> getter, AdderGeneric<T> adder, RemoverGeneric<T> remover, std::string className, std::string elementName, std::string propertyName, std::string whatsThis="", bool isList=true, bool isClass=true, bool isEnum=false) : SimulationControl(className, elementName, propertyName, whatsThis, isList, isClass, isEnum){
+        _model = model;
+        _getter= getter;
+        _adder = adder;
+        _remover = remover;
+        _readonly = adder == nullptr;
+        _propertyType = Util::TypeOf<C>();
+    }
+public:
+    virtual std::string getValue() const override {
+        List<T>* tVal = static_cast<List<T>*>(_getter());
+        std::string strVal = std::to_string(tVal->size()) + " Items";
+
+        return strVal;
+    }
+
+    virtual void setValue(std::string value, bool remove=false) override {
+        T newVal;
+        newVal = new C(_model, value);
+
+        if (remove) {
+            _remover(newVal);
+        } else {
+            bool exists = false;
+            for (auto element : *getStrValues()->list()) {
+                if (value == element) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (!exists) {
+                _adder(newVal);
+            }
+        }
+    };
+
+    virtual List<SimulationControl*>* getProperties(int index=0) override {
+        List<T>* tVal = static_cast<List<T>*>(_getter());
+        T selectedElement;
+
+        int current_index = 0;
+        for (auto element : *tVal->list()) {
+            if (current_index == index) {
+                selectedElement = element;
+            }
+            current_index++;
+        }
+
+        if (selectedElement) {
+            return selectedElement->getProperties();
+        } else {
+            return nullptr;
+        }
+    }
+
+    virtual List<std::string>* getStrValues() override {
+        List<T>* tVal = static_cast<List<T>*>(_getter());
+        List<std::string>* strOptions = new List<std::string>();
+
+        for (auto element : *tVal->list()) {
+            std::string strVal;
+            if (element != nullptr) {
+                strVal = element->getName();
+            } else {
+                strVal = "";
+            };
+
+            strOptions->insert(strVal);
+        }
+        return strOptions;
+    }
+
+private:
+    M _model;
+    GetterGeneric<List<T>*> _getter;
+    AdderGeneric<T> _adder;
+    RemoverGeneric<T> _remover;
 };
 
 //namespace\\}

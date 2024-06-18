@@ -39,6 +39,8 @@ public: // g&s
 	void setVariable(Variable* _variables);
 	Variable* getVariable() const;
 	List<std::string>* getDiffEquations() const;
+	void addDiffEquation(std::string newDiffEquation);
+    void removeDiffEquation(std::string diffEquation);
 	void setFilename(std::string filename);
 	std::string getFileName() const;
 protected: // virtual

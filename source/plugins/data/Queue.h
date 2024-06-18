@@ -93,9 +93,10 @@ class Queue : public ModelDataDefinition {
 public:
 
 	enum class OrderRule : int {
-		FIFO = 1, LIFO = 2, HIGHESTVALUE = 3, SMALLESTVALUE = 4
+		FIFO = 0, LIFO = 1, HIGHESTVALUE = 2, SMALLESTVALUE = 3, num_elements = 4
 	};
-
+public:
+	static std::string convertEnumToStr(OrderRule rule);
 public:
 	Queue(Model* model, std::string name = "");
 	virtual ~Queue();

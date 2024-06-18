@@ -79,8 +79,10 @@ class Wait : public ModelComponent {
 public:
 
 	enum class WaitType : int {
-		WaitForSignal = 1, InfiniteHold = 2, ScanForCondition = 3
+		WaitForSignal = 0, InfiniteHold = 1, ScanForCondition = 2, num_elements = 3
 	};
+public:
+	static std::string convertEnumToStr(WaitType type);
 public: // constructors
 	Wait(Model* model, std::string name = "");
 	virtual ~Wait() = default;

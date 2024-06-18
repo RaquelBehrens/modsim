@@ -112,7 +112,9 @@ public:
     QAction *actionViewGroup;
     QAction *actionViewUngroup;
     QAction *actionAnimatePlot;
+    QAction *actionDiagrams;
     QAction *actionActivateGraphicalSimulation;
+    QAction *actionSelectAll;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_7;
     QSplitter *splitter;
@@ -185,6 +187,9 @@ public:
     QLabel *label_ReplicationNum;
     QLabel *label;
     QProgressBar *progressBarSimulation;
+    QFrame *line_3;
+    QLabel *labelAnimationSpeed;
+    QSlider *horizontalSliderAnimationSpeed;
     QMenuBar *menubar;
     QMenu *menuModel;
     QMenu *menuSimulation;
@@ -407,11 +412,13 @@ public:
         actionDrawEllipse->setIcon(icon29);
         actionAnimateSimulatedTime = new QAction(MainWindow);
         actionAnimateSimulatedTime->setObjectName(QString::fromUtf8("actionAnimateSimulatedTime"));
+        actionAnimateSimulatedTime->setCheckable(true);
         QIcon icon30;
         icon30.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/alarm clock.ico"), QSize(), QIcon::Normal, QIcon::Off);
         actionAnimateSimulatedTime->setIcon(icon30);
         actionAnimateVariable = new QAction(MainWindow);
         actionAnimateVariable->setObjectName(QString::fromUtf8("actionAnimateVariable"));
+        actionAnimateVariable->setCheckable(true);
         QIcon icon31;
         icon31.addFile(QString::fromUtf8(":/resources/ToolBar/_animvalor.bmp"), QSize(), QIcon::Normal, QIcon::Off);
         actionAnimateVariable->setIcon(icon31);
@@ -520,6 +527,7 @@ public:
         actionDrawPoligon->setIcon(icon47);
         actionAnimateCounter = new QAction(MainWindow);
         actionAnimateCounter->setObjectName(QString::fromUtf8("actionAnimateCounter"));
+        actionAnimateCounter->setCheckable(true);
         QIcon icon48;
         icon48.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/coin.ico"), QSize(), QIcon::Normal, QIcon::Off);
         actionAnimateCounter->setIcon(icon48);
@@ -593,12 +601,23 @@ public:
         QIcon icon61;
         icon61.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/3d bar chart.ico"), QSize(), QIcon::Normal, QIcon::Off);
         actionAnimatePlot->setIcon(icon61);
+        actionDiagrams = new QAction(MainWindow);
+        actionDiagrams->setObjectName(QString::fromUtf8("actionDiagrams"));
+        actionDiagrams->setCheckable(true);
+        QIcon icon62(QIcon::fromTheme(QString::fromUtf8("window-new")));
+        actionDiagrams->setIcon(icon62);
         actionActivateGraphicalSimulation = new QAction(MainWindow);
         actionActivateGraphicalSimulation->setObjectName(QString::fromUtf8("actionActivateGraphicalSimulation"));
         actionActivateGraphicalSimulation->setCheckable(true);
-        QIcon icon62;
-        icon62.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/eye.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        actionActivateGraphicalSimulation->setIcon(icon62);
+        QIcon icon63;
+        icon63.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/eye.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        actionActivateGraphicalSimulation->setIcon(icon63);
+        actionSelectAll = new QAction(MainWindow);
+        actionSelectAll->setObjectName(QString::fromUtf8("actionSelectAll"));
+        actionSelectAll->setCheckable(false);
+        QIcon icon64;
+        icon64.addFile(QString::fromUtf8(":/mxgraph/resources/icons/pack4/iconsMxGraph/select.gif"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSelectAll->setIcon(icon64);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_7 = new QVBoxLayout(centralwidget);
@@ -917,6 +936,7 @@ public:
         verticalLayout_7->addWidget(splitter);
 
         horizontalLayoutZoomReplication = new QHBoxLayout();
+        horizontalLayoutZoomReplication->setSpacing(12);
         horizontalLayoutZoomReplication->setObjectName(QString::fromUtf8("horizontalLayoutZoomReplication"));
         labelMousePos = new QLabel(centralwidget);
         labelMousePos->setObjectName(QString::fromUtf8("labelMousePos"));
@@ -986,6 +1006,29 @@ public:
 
         horizontalLayoutZoomReplication->addWidget(progressBarSimulation);
 
+        line_3 = new QFrame(centralwidget);
+        line_3->setObjectName(QString::fromUtf8("line_3"));
+        line_3->setFrameShape(QFrame::VLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayoutZoomReplication->addWidget(line_3);
+
+        labelAnimationSpeed = new QLabel(centralwidget);
+        labelAnimationSpeed->setObjectName(QString::fromUtf8("labelAnimationSpeed"));
+
+        horizontalLayoutZoomReplication->addWidget(labelAnimationSpeed);
+
+        horizontalSliderAnimationSpeed = new QSlider(centralwidget);
+        horizontalSliderAnimationSpeed->setObjectName(QString::fromUtf8("horizontalSliderAnimationSpeed"));
+        horizontalSliderAnimationSpeed->setMinimum(1);
+        horizontalSliderAnimationSpeed->setMaximum(10);
+        horizontalSliderAnimationSpeed->setPageStep(1);
+        horizontalSliderAnimationSpeed->setValue(5);
+        horizontalSliderAnimationSpeed->setSliderPosition(5);
+        horizontalSliderAnimationSpeed->setOrientation(Qt::Horizontal);
+
+        horizontalLayoutZoomReplication->addWidget(horizontalSliderAnimationSpeed);
+
 
         verticalLayout_7->addLayout(horizontalLayoutZoomReplication);
 
@@ -1033,9 +1076,9 @@ public:
         sizePolicy2.setHeightForWidth(dockWidgetConsole->sizePolicy().hasHeightForWidth());
         dockWidgetConsole->setSizePolicy(sizePolicy2);
         dockWidgetConsole->setMinimumSize(QSize(118, 138));
-        QIcon icon63;
-        icon63.addFile(QString::fromUtf8(":/icons4/resources/icons/pack4/console.png"), QSize(), QIcon::Normal, QIcon::Off);
-        dockWidgetConsole->setWindowIcon(icon63);
+        QIcon icon65;
+        icon65.addFile(QString::fromUtf8(":/icons4/resources/icons/pack4/console.png"), QSize(), QIcon::Normal, QIcon::Off);
+        dockWidgetConsole->setWindowIcon(icon65);
         dockWidgetConsole->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
         dockWidgetConsole->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
         dockWidgetContentsConsole = new QWidget();
@@ -1061,9 +1104,9 @@ public:
         MainWindow->addDockWidget(Qt::BottomDockWidgetArea, dockWidgetConsole);
         dockWidgetPlugins = new QDockWidget(MainWindow);
         dockWidgetPlugins->setObjectName(QString::fromUtf8("dockWidgetPlugins"));
-        QIcon icon64;
-        icon64.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/component.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        dockWidgetPlugins->setWindowIcon(icon64);
+        QIcon icon66;
+        icon66.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/component.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        dockWidgetPlugins->setWindowIcon(icon66);
         dockWidgetPlugins->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
         dockWidgetPlugins->setAllowedAreas(Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
         dockWidgetContentsPlugin = new QWidget();
@@ -1099,9 +1142,9 @@ public:
         MainWindow->addDockWidget(Qt::LeftDockWidgetArea, dockWidgetPlugins);
         dockWidgetPropertyEditor = new QDockWidget(MainWindow);
         dockWidgetPropertyEditor->setObjectName(QString::fromUtf8("dockWidgetPropertyEditor"));
-        QIcon icon65;
-        icon65.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/table.ico"), QSize(), QIcon::Normal, QIcon::Off);
-        dockWidgetPropertyEditor->setWindowIcon(icon65);
+        QIcon icon67;
+        icon67.addFile(QString::fromUtf8(":/icons3/resources/icons/pack3/ico/table.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        dockWidgetPropertyEditor->setWindowIcon(icon67);
         dockWidgetPropertyEditor->setFloating(false);
         dockWidgetPropertyEditor->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
         dockWidgetPropertyEditor->setAllowedAreas(Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
@@ -1216,6 +1259,7 @@ public:
         menuViewShow->addAction(actionShowRule);
         menuViewShow->addAction(actionShowSnap);
         menuViewShow->addAction(actionShowGuides);
+        menuViewShow->addAction(actionDiagrams);
         menuViewShow->addSeparator();
         menuViewShow->addAction(actionShowInternalElements);
         menuViewShow->addAction(actionShowAttachedElements);
@@ -1260,6 +1304,7 @@ public:
         toolBarView->addAction(actionShowRule);
         toolBarView->addAction(actionShowSnap);
         toolBarView->addAction(actionShowGuides);
+        toolBarView->addAction(actionSelectAll);
         toolBarView->addSeparator();
         toolBarView->addAction(actionZoom_In);
         toolBarView->addAction(actionZoom_Out);
@@ -1267,6 +1312,7 @@ public:
         toolBarView->addSeparator();
         toolBarView->addAction(actionViewGroup);
         toolBarView->addAction(actionViewUngroup);
+        toolBarView->addSeparator();
         toolBarSimulation->addAction(actionSimulationConfigure);
         toolBarSimulation->addAction(actionSimulationStart);
         toolBarSimulation->addAction(actionSimulationStep);
@@ -1521,10 +1567,18 @@ public:
         actionViewGroup->setText(QCoreApplication::translate("MainWindow", "Group", nullptr));
         actionViewUngroup->setText(QCoreApplication::translate("MainWindow", "Ungroup", nullptr));
         actionAnimatePlot->setText(QCoreApplication::translate("MainWindow", "Plot", nullptr));
+        actionDiagrams->setText(QCoreApplication::translate("MainWindow", "Diagrams", nullptr));
         actionActivateGraphicalSimulation->setText(QCoreApplication::translate("MainWindow", "ActivateGraphicalSimulation", nullptr));
 #if QT_CONFIG(tooltip)
         actionActivateGraphicalSimulation->setToolTip(QCoreApplication::translate("MainWindow", "Activate graphical simulation", nullptr));
 #endif // QT_CONFIG(tooltip)
+        actionSelectAll->setText(QCoreApplication::translate("MainWindow", "actionSelectAll", nullptr));
+#if QT_CONFIG(tooltip)
+        actionSelectAll->setToolTip(QCoreApplication::translate("MainWindow", "select all elements in scene", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(shortcut)
+        actionSelectAll->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+A", nullptr));
+#endif // QT_CONFIG(shortcut)
         tabWidgetModel->setTabText(tabWidgetModel->indexOf(tabModelSimLanguage), QCoreApplication::translate("MainWindow", "SimulLang", nullptr));
         tabWidgetModel->setTabText(tabWidgetModel->indexOf(tabModelCpp), QCoreApplication::translate("MainWindow", "C++", nullptr));
         label_ModelGraphic->setText(QString());
@@ -1553,6 +1607,7 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Replication ", nullptr));
         label_ReplicationNum->setText(QCoreApplication::translate("MainWindow", "0/-", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", ":", nullptr));
+        labelAnimationSpeed->setText(QCoreApplication::translate("MainWindow", "Animation speed", nullptr));
         menuModel->setTitle(QCoreApplication::translate("MainWindow", "Model", nullptr));
         menuSimulation->setTitle(QCoreApplication::translate("MainWindow", "Simulation", nullptr));
         menuAbout->setTitle(QCoreApplication::translate("MainWindow", "About", nullptr));

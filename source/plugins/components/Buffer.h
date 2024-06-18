@@ -23,11 +23,13 @@
 class Buffer : public ModelComponent {
 public:
 	enum class AdvanceOn : int {
-		NewArrivals = 0, Signal = 1
+		NewArrivals = 0, Signal = 1, num_elements = 2
 	};
 	enum class ArrivalOnFullBufferRule : int {
-		Dispose = 0, SendToBulkPort = 1, ReplaceLastPosition = 2
+		Dispose = 0, SendToBulkPort = 1, ReplaceLastPosition = 2, num_elements = 3
 	};
+	static std::string convertEnumToStr(AdvanceOn advance);
+	static std::string convertEnumToStr(ArrivalOnFullBufferRule arrival);
 public: // constructors
 	Buffer(Model* model, std::string name = "");
 	virtual ~Buffer() = default;

@@ -42,6 +42,9 @@
 #include "graphicals/GraphicalModelComponent.h"
 #include "graphicals/GraphicalComponentPort.h"
 #include "graphicals/GraphicalDiagramConnection.h"
+#include "DataComponentProperty.h"
+#include "DataComponentEditor.h"
+#include "ComboBoxEnum.h"
 #include "../../../../kernel/simulator/ModelComponent.h"
 #include "../../../../kernel/simulator/Simulator.h"
 #include "../../../../kernel/simulator/Plugin.h"
@@ -50,17 +53,18 @@
 #include "animations/AnimationCounter.h"
 #include "animations/AnimationTimer.h"
 #include "../../../../kernel/simulator/Counter.h"
+#include "../../../../kernel/simulator/PropertyGenesys.h"
 #include "../../../../plugins/data/Variable.h"
 
 class GraphicalModelEvent {
 public:
 
     enum class EventType : int {
-        CREATE = 1, REMOVE = 2, EDIT = 3, CLONE = 4, OTHER = 5
+        CREATE = 1, REMOVE = 2, EDIT = 3, CLONE = 4, OTHER = 9
     };
 
     enum class EventObjectType : int {
-        COMPONENT = 1, DATADEFINITION = 2, CONNECTION = 3, DRAWING = 4, ANIMATION = 5, OTHER = 6
+        COMPONENT = 1, DATADEFINITION = 2, CONNECTION = 3, DRAWING = 4, ANIMATION = 5, PLOT = 6, OTHER = 9
     };
 
 public:
@@ -147,6 +151,10 @@ public:
     void setUndoStack(QUndoStack* undo);
     void beginConnection();
     void setSimulator(Simulator *simulator);
+    void setPropertyEditor(PropertyEditorGenesys *propEditor);
+    void setPropertyList(std::map<SimulationControl*, DataComponentProperty*>* propList);
+    void setPropertyEditorUI(std::map<SimulationControl*, DataComponentEditor*>* propEditorUI);
+    void setComboBox(std::map<SimulationControl*, ComboBoxEnum*>* propCombo);
     void setObjectBeingDragged(QTreeWidgetItem* objectBeingDragged);
     void setParentWidget(QWidget *parentWidget);
     unsigned short connectingStep() const;
@@ -235,6 +243,10 @@ protected: // virtual functions
 private:
     GRID _grid;
     Simulator* _simulator = nullptr;
+    PropertyEditorGenesys* _propertyEditor = nullptr;
+    std::map<SimulationControl*, DataComponentProperty*>* _propertyList = nullptr;
+    std::map<SimulationControl*, DataComponentEditor*>* _propertyEditorUI = nullptr;
+    std::map<SimulationControl*, ComboBoxEnum*>* _propertyBox = nullptr;
     QTreeWidgetItem* _objectBeingDragged = nullptr;
     QWidget* _parentWidget;
     QList<GraphicalModelComponent*> _allGraphicalModelComponents;

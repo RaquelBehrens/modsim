@@ -68,13 +68,16 @@ public:
 	std::string getSetOfType() const;
 	List<ModelDataDefinition*>* getElementSet() const;
 
+	void addElementSet(ModelDataDefinition* newElement);
+	void removeElementSet(ModelDataDefinition* element);
+
 protected: // must be overriden 
 	virtual bool _loadInstance(PersistenceRecord *fields);
 	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
 protected: // could be overriden 
 	virtual bool _check(std::string* errorMessage);
 	virtual ParserChangesInformation* _getParserChangesInformation();
-    	virtual void _createInternalAndAttachedData(); 
+    virtual void _createInternalAndAttachedData(); 
 private:
 	//ElementManager* _elems;
 

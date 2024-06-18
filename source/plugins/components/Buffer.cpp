@@ -27,15 +27,32 @@ ModelDataDefinition* Buffer::NewInstance(Model* model, std::string name) {
 	return new Buffer(model, name);
 }
 
+std::string Buffer::convertEnumToStr(AdvanceOn advance) {
+	switch (static_cast<int> (advance)) {
+		case 0: return "NewArrivals";
+		case 1: return "Signal";
+	}
+	return "Unknown";
+}
+
+std::string Buffer::convertEnumToStr(ArrivalOnFullBufferRule arrival) {
+	switch (static_cast<int> (arrival)) {
+		case 0: return "Dispose";
+		case 1: return "SendToBulkPort";
+		case 2: return "ReplaceLastPosition";
+	}
+	return "Unknown";
+}
+
 Buffer::Buffer(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Buffer>(), name) {
-	SimulationControlGenericEnum<Buffer::ArrivalOnFullBufferRule>* propArrivalRule = new SimulationControlGenericEnum<Buffer::ArrivalOnFullBufferRule>(
-				std::bind(&Buffer::getarrivalOnFullBufferRule, this),
-				std::bind(&Buffer::setArrivalOnFullBufferRule, this, std::placeholders::_1),
-				Util::TypeOf<Buffer>(), getName(), "ArrivalOnFullBufferRule", "");
-	SimulationControlGenericEnum<Buffer::AdvanceOn>* propAdvanceOn = new SimulationControlGenericEnum<Buffer::AdvanceOn>(
-				std::bind(&Buffer::getadvanceOn, this),
-				std::bind(&Buffer::setAdvanceOn, this, std::placeholders::_1),
-				Util::TypeOf<Buffer>(), getName(), "AdvanceOn", "");
+    SimulationControlGenericEnum<Buffer::ArrivalOnFullBufferRule, Buffer>* propArrivalRule = new SimulationControlGenericEnum<Buffer::ArrivalOnFullBufferRule, Buffer>(
+                std::bind(&Buffer::getarrivalOnFullBufferRule, this),
+                std::bind(&Buffer::setArrivalOnFullBufferRule, this, std::placeholders::_1),
+                Util::TypeOf<Buffer>(), getName(), "ArrivalOnFullBufferRule", "");
+    SimulationControlGenericEnum<Buffer::AdvanceOn, Buffer>* propAdvanceOn = new SimulationControlGenericEnum<Buffer::AdvanceOn, Buffer>(
+                std::bind(&Buffer::getadvanceOn, this),
+                std::bind(&Buffer::setAdvanceOn, this, std::placeholders::_1),
+                Util::TypeOf<Buffer>(), getName(), "AdvanceOn", "");
 	SimulationControlGeneric<unsigned int>* propCapacity = new SimulationControlGeneric<unsigned int>(
 				std::bind(&Buffer::getcapacity, this),
 				std::bind(&Buffer::setCapacity, this, std::placeholders::_1),
@@ -46,14 +63,14 @@ Buffer::Buffer(Model* model, std::string name) : ModelComponent(model, Util::Typ
 				std::bind(&Buffer::setSignal, this, std::placeholders::_1),
 				Util::TypeOf<Buffer>(), getName(), "Signal", "");
 
-	_parentModel->getControls()->insert(propArrivalRule);
-	_parentModel->getControls()->insert(propAdvanceOn);
+    _parentModel->getControls()->insert(propArrivalRule);
+    _parentModel->getControls()->insert(propAdvanceOn);
 	_parentModel->getControls()->insert(propCapacity);
 	_parentModel->getControls()->insert(propSignal);
 
 	// setting properties
-	_addProperty(propArrivalRule);
-	_addProperty(propAdvanceOn);
+    _addProperty(propArrivalRule);
+    _addProperty(propAdvanceOn);
 	_addProperty(propCapacity);
 	_addProperty(propSignal);
 }
@@ -222,4 +239,3 @@ Entity* Buffer::_advance(Entity* enteringEntity) {
 	_buffer->push_back(enteringEntity);
 	return result;
 }
-

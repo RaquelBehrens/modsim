@@ -54,16 +54,20 @@ class Batch : public ModelComponent {
 public:
 
 	enum class BatchType : int {
-		Temporary = 0, Permanent = 1
+		Temporary = 0, Permanent = 1, num_elements = 2
 	};
 
 	enum class Rule : int {
-		Any = 0, ByAttribute = 1
+		Any = 0, ByAttribute = 1, num_elements = 2
 	};
 
 	enum class GroupedAttribs : int {
-		FirstEntity = 0, LastEntity = 1, SumAttributes = 2
+		FirstEntity = 0, LastEntity = 1, SumAttributes = 2, num_elements = 3
 	};
+public:
+	static std::string convertEnumToStr(BatchType type);
+	static std::string convertEnumToStr(Rule rule);
+	static std::string convertEnumToStr(GroupedAttribs attribs);
 public: // constructors
 	Batch(Model* model, std::string name = "");
 	virtual ~Batch() = default;

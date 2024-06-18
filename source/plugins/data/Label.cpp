@@ -28,6 +28,15 @@ Label::Label(Model* model, std::string name) : ModelDataDefinition(model, Util::
 //	_addProperty(new PropertyT<std::string>(Util::TypeOf<Label>(), "Label",
 //			DefineGetter<Label,std::string>(this, &Label::getLabel),
 //			DefineSetter<Label,std::string>(this, &Label::setLabel)));
+
+	SimulationControlGeneric<std::string>* propLabel = new SimulationControlGeneric<std::string>(
+									std::bind(&Label::getLabel, this), std::bind(&Label::setLabel, this, std::placeholders::_1),
+									Util::TypeOf<Label>(), getName(), "Label", "");
+
+	_parentModel->getControls()->insert(propLabel);
+
+	// setting properties
+	_addProperty(propLabel);													
 }
 
 // static

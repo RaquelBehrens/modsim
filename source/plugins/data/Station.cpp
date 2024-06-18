@@ -28,6 +28,16 @@ ModelDataDefinition* Station::NewInstance(Model* model, std::string name) {
 }
 
 Station::Station(Model* model, std::string name) : ModelDataDefinition(model, Util::TypeOf<Station>(), name) {
+    // SimulationControlGenericClass<ModelComponent*, Model*, ModelComponent>* propEnterIntoStation = new SimulationControlGenericClass<ModelComponent*, Model*, ModelComponent>(
+                // _parentModel,
+                // std::bind(&Station::getEnterIntoStationComponent, this),
+                // std::bind(&Station::setEnterIntoStationComponent, this, std::placeholders::_1),
+                // Util::TypeOf<Station>(), getName(), "EnterIntoStationComponent", "");
+
+    // _parentModel->getControls()->insert(propEnterIntoStation);
+
+	// setting properties
+    // _addProperty(propEnterIntoStation);
 }
 
 Station::~Station() {
