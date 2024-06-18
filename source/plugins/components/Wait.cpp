@@ -31,6 +31,15 @@ ModelDataDefinition* Wait::NewInstance(Model* model, std::string name) {
 	return new Wait(model, name);
 }
 
+std::string Wait::convertEnumToStr(WaitType type) {
+	switch (static_cast<int> (type)) {
+		case 0: return "WaitForSignal";
+		case 1: return "InfiniteHold";
+		case 2: return "ScanForCondition";
+	}
+	return "Unknown";
+}
+
 Wait::Wait(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Wait>(), name) {
 	SimulationControlGeneric<std::string>* propCondition = new SimulationControlGeneric<std::string>(
 									std::bind(&Wait::getCondition, this), std::bind(&Wait::setCondition, this, std::placeholders::_1),
@@ -38,22 +47,22 @@ Wait::Wait(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<
 	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
 									std::bind(&Wait::getlimitExpression, this), std::bind(&Wait::setLimitExpression, this, std::placeholders::_1),
 									Util::TypeOf<Wait>(), getName(), "LimitExpression", "");
-	SimulationControlGenericEnum<Wait::WaitType>* propWaitType = new SimulationControlGenericEnum<Wait::WaitType>(
-									std::bind(&Wait::getWaitType, this), std::bind(&Wait::setWaitType, this, std::placeholders::_1),
-									Util::TypeOf<Wait>(), getName(), "WaitType", "");
+    SimulationControlGenericEnum<Wait::WaitType, Wait>* propWaitType = new SimulationControlGenericEnum<Wait::WaitType, Wait>(
+                                    std::bind(&Wait::getWaitType, this), std::bind(&Wait::setWaitType, this, std::placeholders::_1),
+                                    Util::TypeOf<Wait>(), getName(), "WaitType", "");
 	SimulationControlGenericClass<Queue*, Model*, Queue>* propQueue = new SimulationControlGenericClass<Queue*, Model*, Queue>(
 									_parentModel,
 									std::bind(&Wait::getQueue, this), std::bind(&Wait::setQueue, this, std::placeholders::_1),
-									Util::TypeOf<Wait>(), getName(), "Queue", "");
+									Util::TypeOf<Wait>(), getName(), "Queue", "");																			
 
 	_parentModel->getControls()->insert(propQueue);
-	_parentModel->getControls()->insert(propWaitType);
+    _parentModel->getControls()->insert(propWaitType);
 	_parentModel->getControls()->insert(propCondition);
 	_parentModel->getControls()->insert(propExpression);
 
 	// setting properties
 	_addProperty(propQueue);
-	_addProperty(propWaitType);
+    _addProperty(propWaitType);
 	_addProperty(propCondition);
 	_addProperty(propExpression);
 }

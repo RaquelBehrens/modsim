@@ -52,6 +52,64 @@ ModelDataDefinition* CppCompiler::NewInstance(Model* model, std::string name) {
 }
 
 CppCompiler::CppCompiler(Model* model, std::string name) : ModelDataDefinition(model, Util::TypeOf<CppCompiler>(), name) {
+	SimulationControlGeneric<std::string>* propSourceFilename = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getSourceFilename, this), std::bind(&CppCompiler::setSourceFilename, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "SourceFilename", "");
+	SimulationControlGeneric<bool>* propLibraryLoaded = new SimulationControlGeneric<bool>(
+									std::bind(&CppCompiler::IsLibraryLoaded, this), std::bind(&CppCompiler::setLibraryLoaded, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "LibraryLoaded", "");
+	SimulationControlGeneric<std::string>* propFlagsExecutable = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getFlagsExecutable, this), std::bind(&CppCompiler::setFlagsExecutable, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "FlagsExecutable", "");
+	SimulationControlGeneric<std::string>* propFlagsStaticLibrary = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getFlagsStaticLibrary, this), std::bind(&CppCompiler::setFlagsStaticLibrary, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "FlagsStaticLibrary", "");
+	SimulationControlGeneric<std::string>* propFlagsDynamicLibrary = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getFlagsDynamicLibrary, this), std::bind(&CppCompiler::setFlagsDynamicLibrary, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "FlagsDynamicLibrary", "");
+	SimulationControlGeneric<std::string>* propFlagsGeneral = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getFlagsGeneral, this), std::bind(&CppCompiler::setFlagsGeneral, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "FlagsGeneral", "");
+	SimulationControlGeneric<std::string>* propCompilerCommand = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getCompilerCommand, this), std::bind(&CppCompiler::setCompilerCommand, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "CompilerCommand", "");
+	SimulationControlGeneric<std::string>* propOutputDir = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getOutputDir, this), std::bind(&CppCompiler::setOutputDir, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "OutputDir", "");
+	SimulationControlGeneric<std::string>* propTempDir = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getTempDir, this), std::bind(&CppCompiler::setTempDir, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "TempDir", "");
+	SimulationControlGeneric<std::string>* propOutputFilename = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getOutputFilename, this), std::bind(&CppCompiler::setOutputFilename, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "OutputFilename", "");
+	SimulationControlGeneric<std::string>* propObjectFiles = new SimulationControlGeneric<std::string>(
+									std::bind(&CppCompiler::getObjectFiles, this), std::bind(&CppCompiler::setObjectFiles, this, std::placeholders::_1),
+									Util::TypeOf<CppCompiler>(), getName(), "ObjectFiles", "");																																													
+
+	_parentModel->getControls()->insert(propSourceFilename);
+	_parentModel->getControls()->insert(propLibraryLoaded);
+	_parentModel->getControls()->insert(propFlagsExecutable);
+	_parentModel->getControls()->insert(propFlagsStaticLibrary);
+	_parentModel->getControls()->insert(propFlagsDynamicLibrary);
+	_parentModel->getControls()->insert(propFlagsGeneral);
+	_parentModel->getControls()->insert(propCompilerCommand);
+	_parentModel->getControls()->insert(propOutputDir);
+	_parentModel->getControls()->insert(propTempDir);
+	_parentModel->getControls()->insert(propOutputFilename);
+	_parentModel->getControls()->insert(propObjectFiles);
+
+	// setting properties
+	_addProperty(propSourceFilename);
+	_addProperty(propLibraryLoaded);
+	_addProperty(propFlagsExecutable);
+	_addProperty(propFlagsStaticLibrary);
+	_addProperty(propFlagsDynamicLibrary);
+	_addProperty(propFlagsGeneral);
+	_addProperty(propCompilerCommand);
+	_addProperty(propOutputDir);
+	_addProperty(propTempDir);
+	_addProperty(propOutputFilename);
+	_addProperty(propObjectFiles);
 }
 
 // static

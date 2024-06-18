@@ -39,7 +39,7 @@
  */
 class Assignment {
 public:
-	Assignment(Model* model, std::string destination, std::string expression, bool isAttributeNotVariable = true);
+	Assignment(Model* model, std::string destination, std::string expression="1", bool isAttributeNotVariable = true);
 	Assignment(std::string destination, std::string expression, bool isAttributeNotVariable = true);
 	void setDestination(std::string _destination);
 	std::string getDestination() const;
@@ -47,6 +47,14 @@ public:
 	std::string getExpression() const;
 	void setAttributeNotVariable(bool isAttributeNotVariable);
 	bool isAttributeNotVariable() const;
+
+	// TODO: don't have name
+	std::string getName() const;
+
+	List<PropertyBase*>* getProperties() const;
+    void _addProperty(PropertyBase* property);
+
+	std::string getTypeDC() {return _typeDC;};
 public:
 	bool loadInstance(PersistenceRecord *fields, unsigned int parentIndex);
 	void saveInstance(PersistenceRecord *fields, unsigned int parentIndex, bool saveDefault);
@@ -54,6 +62,9 @@ private:
 	std::string _destination = "";
 	std::string _expression = "";
 	bool _isAttributeNotVariable = true;
+	std::string _typeDC;
+
+	List<PropertyBase*>* _properties = new List<PropertyBase*>();
 };
 
 

@@ -24,9 +24,10 @@
 class Write : public ModelComponent {
 public:
 	enum class WriteToType : int {
-		SCREEN = 1, FILE = 2
+		SCREEN = 0, FILE = 1, num_elements = 2
 	};
-
+public:
+	static std::string convertEnumToStr(WriteToType type);
 public: // constructors
 	Write(Model* model, std::string name = "");
 	virtual ~Write() = default;

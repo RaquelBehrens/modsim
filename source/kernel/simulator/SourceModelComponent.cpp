@@ -36,7 +36,7 @@ SourceModelComponent::SourceModelComponent(Model* model, std::string componentTy
 				std::bind(&SourceModelComponent::getTimeBetweenCreationsExpression, this),
 				std::bind(&SourceModelComponent::setTimeBetweenCreationsExpression, this, std::placeholders::_1, Util::TimeUnit::unknown),
 				className, name, "TimeBetweenArrivals", "Expression that defines the interval between two consecutive arrivals");
-	SimulationControlGenericEnum<Util::TimeUnit>* propTimeUnit = new SimulationControlGenericEnum<Util::TimeUnit>(
+    SimulationControlGenericEnum<Util::TimeUnit, Util>* propTimeUnit = new SimulationControlGenericEnum<Util::TimeUnit, Util>(
 				std::bind(&SourceModelComponent::getTimeUnit, this),
 				std::bind(&SourceModelComponent::setTimeUnit, this, std::placeholders::_1),
 				className, name, "TimeUnit", "The time unit of time between arrivals");

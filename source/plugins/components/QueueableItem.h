@@ -24,9 +24,10 @@ class QueueableItem {
 public:
 
 	enum class QueueableType : int {
-		QUEUE = 1, SET = 2//, HOLD = 3
+		QUEUE = 0, SET = 1, num_elements = 2 //, HOLD = 2, num_elements = 3
 	};
-
+public:
+	static std::string convertEnumToStr(QueueableType type);
 public:
 	QueueableItem(ModelDataDefinition* queueOrSet, QueueableItem::QueueableType queueableType = QueueableItem::QueueableType::QUEUE, std::string index = "0");
 	QueueableItem(Model* model, std::string queueName);
@@ -38,6 +39,7 @@ public:
 	void setIndex(std::string index);
 	std::string getIndex() const;
 	std::string getQueueableName() const;
+    std::string getName() const;
 	void setQueue(Queue* resource);
 	Queue* getQueue() const;
 	void setSet(Set* set);
@@ -48,7 +50,10 @@ public:
 	ModelDataDefinition* getQueueable() const;
 	void setElementManager(ModelDataManager* _modeldataManager);
 	//void setComponentManager(ComponentManager* _componentManager);
+    List<PropertyBase*>* getProperties() const;
+    void _addProperty(PropertyBase* property);
 
+	std::string getTypeDC() {return _typeDC;};
 private:
 
 	const struct DEFAULT_VALUES {
@@ -62,11 +67,12 @@ private:
 	ModelDataDefinition* _queueOrSet = nullptr;
 	std::string _queueableName;
 	std::string _index = DEFAULT.index;
+	std::string _typeDC = Util::TypeOf<Queue>();
 private:
 	//ComponentManager* _componentManager;
 	ModelDataManager* _modeldataManager = nullptr;
+    List<PropertyBase*>* _properties = new List<PropertyBase*>();
 };
 
 
 #endif /* QUEUEABLEITEM_H */
-

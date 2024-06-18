@@ -14,6 +14,7 @@
 #include "Release.h"
 #include "../../kernel/simulator/Model.h"
 #include "../../kernel/simulator/Simulator.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include "../data/Resource.h"
 //#include "../../kernel/simulator/Attribute.h"
 #include <assert.h>
@@ -34,11 +35,17 @@ Release::Release(Model* model, std::string name) : ModelComponent(model, Util::T
 	SimulationControlGeneric<unsigned short>* propPriority = new SimulationControlGeneric<unsigned short>(
 									std::bind(&Release::priority, this), std::bind(&Release::setPriority, this, std::placeholders::_1),
 									Util::TypeOf<Release>(), getName(), "Priority", "");
+	SimulationControlGenericListPointer<SeizableItem*, Model*, SeizableItem>* propReleaseRequests = new SimulationControlGenericListPointer<SeizableItem*, Model*, SeizableItem> (
+									_parentModel,
+                                    std::bind(&Release::getReleaseRequests, this), std::bind(&Release::addReleaseRequests, this, std::placeholders::_1), std::bind(&Release::removeReleaseRequests, this, std::placeholders::_1),
+									Util::TypeOf<Release>(), getName(), "ReleaseRequests", "");	
 
 	_parentModel->getControls()->insert(propPriority);
-
+	_parentModel->getControls()->insert(propReleaseRequests);
+	
 	// setting properties
 	_addProperty(propPriority);
+	_addProperty(propReleaseRequests);
 }
 
 std::string Release::show() {
@@ -63,6 +70,14 @@ unsigned short Release::priority() const {
 
 List<SeizableItem*>* Release::getReleaseRequests() const {
 	return _releaseRequests;
+}
+
+void Release::addReleaseRequests(SeizableItem* newRequest) {
+	_releaseRequests->insert(newRequest);
+}
+
+void Release::removeReleaseRequests(SeizableItem* request) {
+	_releaseRequests->remove(request);
 }
 
 //void Release::setResource(Resource* _resource) {
@@ -192,9 +207,9 @@ void Release::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 			double timeSeized = resource->getLastTimeSeized();
 			double allocationEntityResource = entity->getAttributeValue("Entity.Allocation."+resource->getName()); //@TODO: Seize is not setting this attribute. Fiz it.
 			std::string allocationCategory = Util::StrAllocation(static_cast<Util::AllocationType>((int) allocationEntityResource));
+			std::string attribIndex="";
 			entity->getEntityType()->addGetStatisticsCollector(entity->getEntityTypeName() + "."+allocationCategory+"Time")->getStatistics()->getCollector()->addValue(timeSeized);
-			std::string index="";
-			entity->setAttributeValue("Entity.Total"+allocationCategory+"Time", entity->getAttributeValue("Entity.Total"+allocationCategory+"Time") + timeSeized, index, true);
+			entity->setAttributeValue("Entity.Total"+allocationCategory+"Time", entity->getAttributeValue("Entity.Total"+allocationCategory+"Time") + timeSeized, attribIndex, true);			
 		}
 	}
 	_parentModel->sendEntityToComponent(entity, this->getConnections()->getFrontConnection());

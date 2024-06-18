@@ -27,6 +27,37 @@ ModelDataDefinition* LSODE::NewInstance(Model* model, std::string name) {
 }
 
 LSODE::LSODE(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<LSODE>(), name) {
+	SimulationControlGenericClass<Variable*, Model*, Variable>* propTimeVariable = new SimulationControlGenericClass<Variable*, Model*, Variable>(
+									_parentModel,
+									std::bind(&LSODE::getTimeVariable, this), std::bind(&LSODE::setTimeVariable, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "TimeVariable", "");
+	SimulationControlGeneric<double>* propStep = new SimulationControlGeneric<double>(
+									std::bind(&LSODE::getStep, this), std::bind(&LSODE::setStep, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "Step", "");
+	SimulationControlGenericClass<Variable*, Model*, Variable>* propVariable = new SimulationControlGenericClass<Variable*, Model*, Variable>(
+									_parentModel,
+									std::bind(&LSODE::getVariable, this), std::bind(&LSODE::setVariable, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "Variable", "");
+	SimulationControlGeneric<std::string>* propFileName = new SimulationControlGeneric<std::string>(
+									std::bind(&LSODE::getFileName, this), std::bind(&LSODE::setFilename, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "FileName", "");
+	SimulationControlGenericList<std::string, Model*, std::string>* propDiffEquations = new SimulationControlGenericList<std::string, Model*, std::string> (
+									_parentModel,
+                                    std::bind(&LSODE::getDiffEquations, this), std::bind(&LSODE::addDiffEquation, this, std::placeholders::_1), std::bind(&LSODE::removeDiffEquation, this, std::placeholders::_1),
+									Util::TypeOf<LSODE>(), getName(), "DiffEquations", "");								
+
+	_parentModel->getControls()->insert(propTimeVariable);
+	_parentModel->getControls()->insert(propStep);
+	_parentModel->getControls()->insert(propVariable);
+	_parentModel->getControls()->insert(propFileName);
+	_parentModel->getControls()->insert(propDiffEquations);
+
+	// setting properties
+	_addProperty(propTimeVariable);
+	_addProperty(propStep);
+	_addProperty(propVariable);
+	_addProperty(propFileName);
+	_addProperty(propDiffEquations);
 }
 
 std::string LSODE::show() {
@@ -69,6 +100,14 @@ Variable* LSODE::getVariable() const {
 
 List<std::string>* LSODE::getDiffEquations() const {
 	return _diffEquations;
+}
+
+void LSODE::addDiffEquation(std::string newDiffEquation) {
+	_diffEquations->insert(newDiffEquation);
+}
+
+void LSODE::removeDiffEquation(std::string diffEquation) {
+	_diffEquations->remove(diffEquation);
 }
 
 void LSODE::setFilename(std::string filename) {

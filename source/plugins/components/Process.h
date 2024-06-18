@@ -40,6 +40,8 @@ public:
 	void setAllocationType(Util::AllocationType _allocationType);
 	Util::AllocationType getAllocationType() const;
 	List<SeizableItem*>* getSeizeRequests() const;
+	void addSeizeRequest(SeizableItem* newRequest);
+	void removeSeizeRequest(SeizableItem* request);
 	void setQueueableItem(QueueableItem* _queueableItem);
 	QueueableItem* getQueueableItem() const;
 	void setDelayExpression(std::string _delayExpression);

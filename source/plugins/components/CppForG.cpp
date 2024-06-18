@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/class.cc to edit this template
  */
 
-/*
+/* 
  * File:   CppForG.cpp
  * Author: rlcancian
- *
+ * 
  * Created on 11 de janeiro de 2022, 22:37
  */
 

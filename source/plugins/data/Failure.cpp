@@ -26,7 +26,68 @@ ModelDataDefinition* Failure::NewInstance(Model* model, std::string name) {
 	return new Failure(model, name);
 }
 
+std::string Failure::convertEnumToStr(FailureType type) {
+	switch (static_cast<int> (type)) {
+		case 0: return "COUNT";
+		case 1: return "TIME";
+	}
+	return "Unknown";
+}
+
+std::string Failure::convertEnumToStr(FailureRule rule) {
+	switch (static_cast<int> (rule)) {
+		case 0: return "IGNORE";
+		case 1: return "PREEMPT";
+		case 2: return "WAIT";
+	}
+	return "Unknown";
+}
+
 Failure::Failure(Model* model, std::string name) : ModelDataDefinition(model, Util::TypeOf<Failure>(), name) {
+	SimulationControlGenericEnum<Failure::FailureType, Failure>* propFailureType = new SimulationControlGenericEnum<Failure::FailureType, Failure>(
+                                    std::bind(&Failure::getFailureType, this), std::bind(&Failure::setFailureType, this, std::placeholders::_1),
+                                    Util::TypeOf<Failure>(), getName(), "FailureType", "");
+	SimulationControlGeneric<std::string>* propCountExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Failure::getCountExpression, this), std::bind(&Failure::setCountExpression, this, std::placeholders::_1),
+									Util::TypeOf<Failure>(), getName(), "CountExpression", "");															
+	SimulationControlGenericEnum<Util::TimeUnit, Util>* propDownUnitTime = new SimulationControlGenericEnum<Util::TimeUnit, Util>(
+									std::bind(&Failure::getDownTimeTimeUnit, this),	std::bind(&Failure::setDownTimeTimeUnit, this, std::placeholders::_1),
+									Util::TypeOf<Failure>(), getName(), "DownTimeTimeUnit", "");
+	SimulationControlGeneric<std::string>* propDownTimeExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Failure::getDownTimeExpression, this), std::bind(&Failure::setDownTimeExpression, this, std::placeholders::_1),
+									Util::TypeOf<Failure>(), getName(), "DownTimeExpression", "");
+	SimulationControlGenericEnum<Util::TimeUnit, Util>* propUpUnitTime = new SimulationControlGenericEnum<Util::TimeUnit, Util>(
+									std::bind(&Failure::getUpTimeTimeUnit, this),	std::bind(&Failure::setUpTimeTimeUnit, this, std::placeholders::_1),
+									Util::TypeOf<Failure>(), getName(), "UpTimeTimeUnit", "");
+	SimulationControlGeneric<std::string>* propUpTimeExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Failure::getUpTimeExpression, this), std::bind(&Failure::setUpTimeExpression, this, std::placeholders::_1),
+									Util::TypeOf<Failure>(), getName(), "UpTimeExpression", "");
+	SimulationControlGenericEnum<Failure::FailureRule, Failure>* propFailureRule = new SimulationControlGenericEnum<Failure::FailureRule, Failure>(
+                                    std::bind(&Failure::getFailureRule, this), std::bind(&Failure::setFailureRule, this, std::placeholders::_1),
+                                    Util::TypeOf<Failure>(), getName(), "FailureType", "");
+	SimulationControlGenericListPointer<Resource*, Model*, Resource>* propFalingResources = new SimulationControlGenericListPointer<Resource*, Model*, Resource>(
+									_parentModel,
+									std::bind(&Failure::falingResources, this), std::bind(&Failure::addResource, this, std::placeholders::_1), std::bind(&Failure::removeResource, this, std::placeholders::_1),
+									Util::TypeOf<Failure>(), getName(), "FalingResources", "");
+	
+	_parentModel->getControls()->insert(propFailureType);
+	_parentModel->getControls()->insert(propCountExpression);
+	_parentModel->getControls()->insert(propDownUnitTime);
+	_parentModel->getControls()->insert(propDownTimeExpression);
+	_parentModel->getControls()->insert(propUpUnitTime);
+	_parentModel->getControls()->insert(propUpTimeExpression);
+	_parentModel->getControls()->insert(propFailureRule);
+	_parentModel->getControls()->insert(propFalingResources);
+
+	// setting properties
+	_addProperty(propFailureType);
+	_addProperty(propCountExpression);
+	_addProperty(propDownUnitTime);
+	_addProperty(propDownTimeExpression);
+	_addProperty(propUpUnitTime);
+	_addProperty(propUpTimeExpression);
+	_addProperty(propFailureRule);
+	_addProperty(propFalingResources);
 }
 
 std::string Failure::show() {
@@ -176,6 +237,14 @@ void Failure::_initBetweenReplications() {
 
 List<Resource*>*Failure::falingResources() const{
 	return _falingResources;
+}
+
+void Failure::addResource(Resource* newResource){
+	_falingResources->insert(newResource);
+}
+
+void Failure::removeResource(Resource* resource){
+	_falingResources->remove(resource);
 }
 
 // private (internal!!) simulation event handlers

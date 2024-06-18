@@ -26,16 +26,39 @@ ModelDataDefinition* Queue::NewInstance(Model* model, std::string name) {
 	return new Queue(model, name);
 }
 
+std::string Queue::convertEnumToStr(OrderRule rule) {
+	switch (static_cast<int> (rule)) {
+		case 0: return "FIFO";
+		case 1: return "LIFO";
+		case 2: return "HIGHESTVALUE";
+		case 3: return "SMALLESTVALUE";
+	}
+	return "Unknown";
+}
+
 Queue::Queue(Model* model, std::string name) : ModelDataDefinition(model, Util::TypeOf<Queue>(), name) {
 	//controls
-	_parentModel->getControls()->insert(new SimulationControlInt(
-					 std::bind(&Queue::getOrderRuleInt, this),
-					 std::bind(&Queue::setOrderRuleInt, this, std::placeholders::_1),
-					 Util::TypeOf<Queue>(), getName(), "OrderRule"));
-	_parentModel->getControls()->insert(new SimulationControlString(
-					 std::bind(&Queue::getAttributeName, this),
-					 std::bind(&Queue::setAttributeName, this, std::placeholders::_1),
-					 Util::TypeOf<Queue>(), getName(), "AttributeName"));
+	SimulationControlGeneric<std::string>* propAttributeName = new SimulationControlGeneric<std::string>(
+				std::bind(&Queue::getAttributeName, this),
+				std::bind(&Queue::setAttributeName, this, std::placeholders::_1),
+				Util::TypeOf<Queue>(), getName(), "AttributeName", "");
+	SimulationControlGenericEnum<Queue::OrderRule, Queue>* propOrderRule = new SimulationControlGenericEnum<Queue::OrderRule, Queue>(
+                std::bind(&Queue::getOrderRule, this),
+                std::bind(&Queue::setOrderRule, this, std::placeholders::_1),
+                Util::TypeOf<Queue>(), getName(), "OrderRule", "");
+	SimulationControlGeneric<int>* propOrderRuleInt = new SimulationControlGeneric<int>(
+				std::bind(&Queue::getOrderRuleInt, this),
+				std::bind(&Queue::setOrderRuleInt, this, std::placeholders::_1),
+				Util::TypeOf<Queue>(), getName(), "OrderRuleInt", "");
+
+	_parentModel->getControls()->insert(propAttributeName);
+	_parentModel->getControls()->insert(propOrderRule);
+	_parentModel->getControls()->insert(propOrderRuleInt);
+
+	// setting properties
+    _addProperty(propAttributeName);
+    _addProperty(propOrderRule);
+	_addProperty(propOrderRuleInt);
 }
 
 Queue::~Queue() {

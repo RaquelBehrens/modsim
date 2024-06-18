@@ -26,22 +26,30 @@ ModelDataDefinition* Write::NewInstance(Model* model, std::string name) {
 	return new Write(model, name);
 }
 
+std::string Write::convertEnumToStr(WriteToType type) {
+	switch (static_cast<int> (type)) {
+		case 0: return "SCREEN";
+		case 1: return "FILE";
+	}
+	return "Unknown";
+}
+
 Write::Write(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Write>(), name) {
 	SimulationControlGeneric<std::string>* propFilename = new SimulationControlGeneric<std::string>(
 									std::bind(&Write::filename, this), std::bind(&Write::setFilename, this, std::placeholders::_1),
 									Util::TypeOf<Write>(), getName(), "Filename", "");
-	SimulationControlGenericEnum<Write::WriteToType>* propWriteToType = new SimulationControlGenericEnum<Write::WriteToType>(
-									std::bind(&Write::writeToType, this), std::bind(&Write::setWriteToType, this, std::placeholders::_1),
-									Util::TypeOf<Write>(), getName(), "WriteToType", "");
+    SimulationControlGenericEnum<Write::WriteToType, Write>* propWriteToType = new SimulationControlGenericEnum<Write::WriteToType, Write>(
+                                    std::bind(&Write::writeToType, this), std::bind(&Write::setWriteToType, this, std::placeholders::_1),
+                                    Util::TypeOf<Write>(), getName(), "WriteToType", "");
 
 	// _parentModel->getControls()->insert();
 	_parentModel->getControls()->insert(propFilename);
-	_parentModel->getControls()->insert(propWriteToType);
+    _parentModel->getControls()->insert(propWriteToType);
 
 	// setting properties
 	// _addProperty();
 	_addProperty(propFilename);
-	_addProperty(propWriteToType);
+    _addProperty(propWriteToType);
 }
 
 std::string Write::show() {

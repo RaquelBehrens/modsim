@@ -7,7 +7,12 @@
 #include <QGraphicsItem>
 #include <QUndoView>
 
+#include "DataComponentProperty.h"
+#include "DataComponentEditor.h"
+#include "ComboBoxEnum.h"
+
 #include "../../../../kernel/simulator/Simulator.h"
+#include "../../../../kernel/simulator/PropertyGenesys.h"
 #include "../../../../kernel/simulator/TraceManager.h"
 #include "ModelGraphicsScene.h"
 
@@ -231,23 +236,28 @@ private: // graphical model persistence
     bool _saveGraphicalModel(QString filename);
     bool _saveTextModel(QFile *saveFile, QString data);
 	Model* _loadGraphicalModel(std::string filename);
-private:
-	QColor myrgba(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
-	static std::string dotColor(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
-    void _helpCopy();
+private: //???
+	void _helpCopy();
 private: // interface and model main elements to join
 	Ui::MainWindow *ui;
 	Simulator* simulator;
+	PropertyEditorGenesys* propertyGenesys;
+    std::map<SimulationControl*, DataComponentProperty*>* propertyList;
+    std::map<SimulationControl*, DataComponentEditor*>* propertyEditorUI;
+    std::map<SimulationControl*, ComboBoxEnum*>* propertyBox;
+private: // attributes to be saved and loaded withing the graphical model
+	int _zoomValue; // todo should be set for each open graphical model, such as view rect, etc
 private: // misc useful
     bool _check(bool success = true);
 	bool _textModelHasChanged = false;
 	bool _graphicalModelHasChanged = false;
-    QString _autoLoadPluginsFilename = "autoloadplugins.txt";
 	bool _modelWasOpened = false;
+	QString _autoLoadPluginsFilename = "autoloadplugins.txt";
     bool _checkItemsScene();
 	QString _modelfilename;
 	std::map<std::string /*category*/,QColor>* _pluginCategoryColor = new std::map<std::string,QColor>();
-    int _zoomValue; // todo should be set for each open graphical model, such as view rect, etc
+	QColor myrgba(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
+    static std::string dotColor(uint64_t color); // TODO: Should NOT be here, but in UtilGUI.h, but then it generates multiple definitions error
     // TODO 1: Faz parte do mecanismo de restaurar dataDefinitions deletados do modelo e que são restaurados com um Control Z
     // Caso: Ao adicionar um Create no modelo e dar um check() o EntityType será criado,
     // mas ao deletar o Create, dar outro check() e em sequida dar um Control Z (voltando o Create no modelo) e checar novamente, o EntityType não é restaurado

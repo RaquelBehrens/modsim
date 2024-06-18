@@ -30,6 +30,15 @@ ModelDataDefinition* Route::NewInstance(Model* model, std::string name) {
 	return new Route(model, name);
 }
 
+std::string Route::convertEnumToStr(DestinationType type) {
+	switch (static_cast<int> (type)) {
+		case 0: return "Station";
+		case 1: return "Sequence";
+		case 2: return "Label";
+	}
+	return "Unknown";
+}
+
 Route::Route(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Route>(), name) {
 	SimulationControlGenericClass<Station*, Model*, Station>* propStation = new SimulationControlGenericClass<Station*, Model*, Station>(
 									_parentModel,
@@ -41,12 +50,12 @@ Route::Route(Model* model, std::string name) : ModelComponent(model, Util::TypeO
 	// SimulationControlGeneric<std::string>* propTimeExpression = new SimulationControlGeneric<std::string>(
 	// 								std::bind(&Route::getRouteTimeExpression, this), std::bind(&Route::setRouteTimeExpression, this, std::placeholders::_1),
 	// 								Util::TypeOf<Route>(), getName(), "RouteTimeExpression", "");									
-	SimulationControlGenericEnum<Util::TimeUnit>* propTimeTimeUnit = new SimulationControlGenericEnum<Util::TimeUnit>(
+    SimulationControlGenericEnum<Util::TimeUnit, Util>* propTimeTimeUnit = new SimulationControlGenericEnum<Util::TimeUnit, Util>(
 									std::bind(&Route::getRouteTimeTimeUnit, this), std::bind(&Route::setRouteTimeTimeUnit, this, std::placeholders::_1),
 									Util::TypeOf<Route>(), getName(), "RouteTimeTimeUnit", "");								
-	SimulationControlGenericEnum<Route::DestinationType>* propDestinationType = new SimulationControlGenericEnum<Route::DestinationType>(
-									std::bind(&Route::getRouteDestinationType, this), std::bind(&Route::setRouteDestinationType, this, std::placeholders::_1),
-									Util::TypeOf<Route>(), getName(), "RouteDestinationType", "");	
+    SimulationControlGenericEnum<Route::DestinationType, Route>* propDestinationType = new SimulationControlGenericEnum<Route::DestinationType, Route>(
+                                    std::bind(&Route::getRouteDestinationType, this), std::bind(&Route::setRouteDestinationType, this, std::placeholders::_1),
+                                    Util::TypeOf<Route>(), getName(), "RouteDestinationType", "");
 	SimulationControlGenericClass<Label*, Model*, Label>* propLabel = new SimulationControlGenericClass<Label*, Model*, Label>(
 									_parentModel,
 									std::bind(&Route::getLabel, this), std::bind(&Route::setLabel, this, std::placeholders::_1),
@@ -56,7 +65,7 @@ Route::Route(Model* model, std::string name) : ModelComponent(model, Util::TypeO
 	_parentModel->getControls()->insert(propStationExpression);
 	// _parentModel->getControls()->insert(propTimeExpression);
 	_parentModel->getControls()->insert(propTimeTimeUnit);
-	_parentModel->getControls()->insert(propDestinationType);
+    _parentModel->getControls()->insert(propDestinationType);
 	_parentModel->getControls()->insert(propLabel);
 
 	// setting properties
@@ -64,7 +73,7 @@ Route::Route(Model* model, std::string name) : ModelComponent(model, Util::TypeO
 	_addProperty(propStationExpression);
 	// _addProperty(propTimeExpression);
 	_addProperty(propTimeTimeUnit);
-	_addProperty(propDestinationType);
+    _addProperty(propDestinationType);
 	_addProperty(propLabel);
 }
 
@@ -184,9 +193,9 @@ void Route::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 	// adds the route time to the TransferTime statistics / attribute related to the Entitys
 	double routeTime = _parentModel->parseExpression(_routeTimeExpression) * Util::TimeUnitConvert(_routeTimeTimeUnit, _parentModel->getSimulation()->getReplicationBaseTimeUnit());
 	if (entity->getEntityType()->isReportStatistics()) {
+		std::string attribIndex="";
 		entity->getEntityType()->addGetStatisticsCollector(entity->getEntityTypeName() + ".TransferTime")->getStatistics()->getCollector()->addValue(routeTime);
-		std::string index = "";
-		entity->setAttributeValue("Entity.TotalTransferTime", entity->getAttributeValue("Entity.TotalTransferTime") + routeTime, index, true);
+		entity->setAttributeValue("Entity.TotalTransferTime", entity->getAttributeValue("Entity.TotalTransferTime") + routeTime, attribIndex, true);
 	}
 	if (routeTime > 0.0) {
 		// calculates when this Entity will reach the end of this route and schedule this Event

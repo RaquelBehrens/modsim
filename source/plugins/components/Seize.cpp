@@ -15,6 +15,7 @@
 #include "../data/Resource.h"
 #include "../../kernel/simulator/Attribute.h"
 #include "../../kernel/simulator/Simulator.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include <assert.h>
 #include <cmath>
 
@@ -33,30 +34,36 @@ ModelDataDefinition* Seize::NewInstance(Model* model, std::string name) {
 
 Seize::Seize(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Seize>(), name) {
 	// controls and Responses
-	SimulationControlGenericEnum<Util::AllocationType>* propAlloc = new SimulationControlGenericEnum<Util::AllocationType>(
-									std::bind(&Seize::getAllocationType, this), std::bind(&Seize::setAllocationType,  this, std::placeholders::_1),
-									Util::TypeOf<Seize>(), getName(), "AllocationType", "");
+    SimulationControlGenericEnum<Util::AllocationType, Util>* propAlloc = new SimulationControlGenericEnum<Util::AllocationType, Util>(
+                                    std::bind(&Seize::getAllocationType, this), std::bind(&Seize::setAllocationType,  this, std::placeholders::_1),
+                                    Util::TypeOf<Seize>(), getName(), "AllocationType", "");
 	SimulationControlGeneric<unsigned short>* propPriority = new SimulationControlGeneric<unsigned short>(
 									std::bind(&Seize::getPriority, this), std::bind(&Seize::setPriority, this, std::placeholders::_1),
 									Util::TypeOf<Seize>(), getName(), "Priority", "");
 	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
 									std::bind(&Seize::getPriorityExpression, this), std::bind(&Seize::setPriorityExpression, this, std::placeholders::_1),
 									Util::TypeOf<Seize>(), getName(), "PriorityExpression", "");
-	// SimulationControlGenericClass<QueueableItem*, Model*, QueueableItem>* propQueueableItem = new SimulationControlGenericClass<QueueableItem*, Model*, QueueableItem>(
-	// 								_parentModel,
-	// 								std::bind(&Seize::getQueueableItem, this), std::bind(&Seize::setQueueableItem, this, std::placeholders::_1),
-	// 								Util::TypeOf<Seize>(), getName(), "QueueableItem", "");
+    SimulationControlGenericClassNotDC<QueueableItem*, Model*, QueueableItem>* propQueueableItem = new SimulationControlGenericClassNotDC<QueueableItem*, Model*, QueueableItem>(
+                                    _parentModel,
+                                    std::bind(&Seize::getQueueableItem, this), std::bind(&Seize::setQueueableItem, this, std::placeholders::_1),
+                                    Util::TypeOf<Seize>(), getName(), "QueueableItem", "");
+    SimulationControlGenericListPointer<SeizableItem*, Model*, SeizableItem>* propRequests = new SimulationControlGenericListPointer<SeizableItem*, Model*, SeizableItem> (
+									_parentModel,
+									std::bind(&Seize::getSeizeRequests, this), std::bind(&Seize::addRequest, this, std::placeholders::_1), std::bind(&Seize::removeRequest, this, std::placeholders::_1),
+									Util::TypeOf<Seize>(), getName(), "Requests", "");
 
-	_parentModel->getControls()->insert(propAlloc);
+    _parentModel->getControls()->insert(propAlloc);
 	_parentModel->getControls()->insert(propPriority);
 	_parentModel->getControls()->insert(propExpression);
-	// _parentModel->getControls()->insert(propQueueableItem);
+    _parentModel->getControls()->insert(propQueueableItem);
+    _parentModel->getControls()->insert(propRequests);
 
 	// setting properties
-	_addProperty(propAlloc);
+    _addProperty(propAlloc);
 	_addProperty(propPriority);
 	_addProperty(propExpression);
-	// _addProperty(propQueueableItem);
+    _addProperty(propQueueableItem);
+    _addProperty(propRequests);
 }
 
 // public
@@ -86,7 +93,7 @@ void Seize::setAllocationType(Util::AllocationType _allocationType) {
 }
 
 Util::AllocationType Seize::getAllocationType() const {
-	return _allocationType;
+    return _allocationType;
 }
 
 void Seize::setQueue(Queue* queue) {
@@ -95,6 +102,14 @@ void Seize::setQueue(Queue* queue) {
 
 List<SeizableItem*>* Seize::getSeizeRequests() const {
 	return _seizeRequests;
+}
+
+void Seize::addRequest(SeizableItem* newRequest) {
+    _seizeRequests->insert(newRequest);
+}
+
+void Seize::removeRequest(SeizableItem* request) {
+    _seizeRequests->remove(request);
 }
 
 void Seize::setQueueableItem(QueueableItem* _queueableItem) {

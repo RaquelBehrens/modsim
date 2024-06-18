@@ -35,6 +35,7 @@ Leave::Leave(Model* model, std::string name) : ModelComponent(model, Util::TypeO
 	_parentModel->getControls()->insert(propStation);
 
 	// setting properties
+	_addProperty(propStation);
 }
 
 std::string Leave::show() {

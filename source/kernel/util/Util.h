@@ -66,7 +66,8 @@ public:
 		minute = 6,
 		hour = 7,
 		day = 8,
-		week = 9
+		week = 9,
+		num_elements = 10
 	};
 	/*!
 	 * \brief StrTimeUnitShort
@@ -80,12 +81,14 @@ public:
 	 * \return
 	 */
 	static std::string StrTimeUnitLong(Util::TimeUnit timeUnit);
+	static std::string convertEnumToStr(Util::TimeUnit timeUnit);
 
 	// TODO check: here? Shouldn´t it be on SimulationReport interface?
 	enum class AllocationType : int {
-		ValueAdded = 1, NonValueAdded = 2, Transfer = 3, Wait = 4, Others = 5
+        ValueAdded = 0, NonValueAdded = 1, Transfer = 2, Wait = 3, Others = 4, num_elements = 5
 	};
 	static std::string StrAllocation(Util::AllocationType allocation);
+	static std::string convertEnumToStr(Util::AllocationType allocation);
 
 	enum class TimeFormat : unsigned int {
         twelve = 12,
