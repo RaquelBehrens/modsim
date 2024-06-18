@@ -268,14 +268,14 @@ void ModelSimulation::_showSimulationHeader() {
 	tm->traceReport("Replication Length: "+std::to_string(_replicationLength)+" "+Util::StrTimeUnitLong(_replicationLengthTimeUnit));
 	tm->traceReport("Replication/Report Base TimeUnit: "+Util::StrTimeUnitLong(_replicationBaseTimeUnit));
 	//tm->traceReport(TraceManager::Level::simulation, "");
-	// model controls and responses
-	std::string controls;
-	for (/*PropertyBase**/SimulationControl* control : * _model->getControls()->list()) {
-		//!@TODO IMPORTANT CONTROLS AND RESPONSES MUST WORK NO MATTER THE PROPERTIES //!@TODO PProperties ///
-		controls += control->getName()+"("+control->getClassname()+")="+control->getValue()+", ";
-	}
-	controls = controls.substr(0, controls.length()-2);
-	tm->traceReport("> Simulation controls: "+controls);
+//    // model controls and responses
+//    std::string controls;
+//    for (/*PropertyBase**/SimulationControl* control : * _model->getControls()->list()) {
+//        //!@TODO IMPORTANT CONTROLS AND RESPONSES MUST WORK NO MATTER THE PROPERTIES //!@TODO PProperties ///
+//        controls += control->getName()+"("+control->getClassname()+")="+control->getValue()+", ";
+//    }
+//    controls = controls.substr(0, controls.length()-2);
+//    tm->traceReport("> Simulation controls: "+controls);
 	std::string responses;
 	for (SimulationControl* pg : *_model->getResponses()->list()) {
 		responses += pg->getName()+"("+pg->getClassname()+"), ";

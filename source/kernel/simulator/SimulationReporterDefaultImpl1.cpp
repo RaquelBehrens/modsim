@@ -28,12 +28,12 @@ SimulationReporterDefaultImpl1::SimulationReporterDefaultImpl1(ModelSimulation* 
 void SimulationReporterDefaultImpl1::showSimulationControls() {
 	_model->getTracer()->traceReport("Simulation Controls:");
 	Util::IncIndent();
-	{
-		for (SimulationControl* control : *_model->getControls()->list()) {
-//			_model->getTracer()->traceReport(control->getClassname() + "." +control->getName() + ": " + control->getValue());
-			_model->getTracer()->traceReport("("+control->getClassname() + ") "+ control->getElementName()+"." +control->getName() + ": " + control->getValue());
-		}
-	}
+// 	{
+// 		for (SimulationControl* control : *_model->getControls()->list()) {
+// //			_model->getTracer()->traceReport(control->getClassname() + "." +control->getName() + ": " + control->getValue());
+// 			_model->getTracer()->traceReport("("+control->getClassname() + ") "+ control->getElementName()+"." +control->getName() + ": " + control->getValue());
+// 		}
+// 	}
 	Util::DecIndent();
 }
 
