@@ -1,6 +1,6 @@
 source ./scripts/config.sh
 
-if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
+if docker image inspect $GENESYS_IMAGE >/dev/null 2>&1; then
     xhost local:root
     if [[ $REMOTE == 1 ]]; then 
         docker run --name genesys --rm -ti --net=host --ipc=host \
@@ -9,7 +9,7 @@ if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
             -e QT_X11_NO_MITSHM=1 \
             -e XDG_RUNTIME_DIR=/run/user/1001 \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
-            $IMAGE_NAME debug
+            $GENESYS_IMAGE debug
     else
         docker run --name genesys --rm -ti --net=host --ipc=host \
             -e DISPLAY=$DISPLAY \
@@ -20,7 +20,7 @@ if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
             -e XDG_RUNTIME_DIR=/run/user/1001 \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             -v $GENESYS_PROJECT:$GENESYS_ROOT \
-            $IMAGE_NAME debug
+            $GENESYS_IMAGE debug
     fi
 else
     echo "Build não executado"

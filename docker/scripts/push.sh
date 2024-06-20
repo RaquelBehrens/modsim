@@ -1,3 +1,3 @@
 source ./scripts/config.sh
 
-docker push $IMAGE_NAME
+docker push $GENESYS_IMAGE

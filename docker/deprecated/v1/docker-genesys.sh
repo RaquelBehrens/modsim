@@ -6,7 +6,7 @@ default_git_repo=https://github.com/rlcancian2/Genesys-Simulator  # Default Gene
 default_git_branch=2023  # Default Genesys Git repository branch
 docker_hub_image=modsimgrupo6/genesys:1.0  # Name of the genesys image in the Docker Hub
 container_command=/bin/bash  # Default container command
-image_name=genesys-image
+GENESYS_IMAGE=genesys-image
 
 
 function save_container {
@@ -49,7 +49,7 @@ function run_genesys {
 echo -e "\n========= Bem vindo ao Genesys docker ========= \n\n" 
 
 # Checando se a imagem do genesys já está instalada na máquina
-if docker image inspect $image_name >/dev/null 2>&1; then
+if docker image inspect $GENESYS_IMAGE >/dev/null 2>&1; then
     echo -e "Foi encontrada uma imagem do Genesys localmente!\n"
 else
     dockerfile=./Dockerfile
