@@ -1,7 +1,7 @@
 source ./scripts/config.sh
 
 if [ $DOCKER_CACHE == 0 ]; then
-    docker build -f $DOCKERFILE_NAME -t $IMAGE_NAME --no-cache .
+    docker build -f $GENESYS_DOCKERFILE -t $GENESYS_IMAGE --no-cache .
 else
-    docker build -f $DOCKERFILE_NAME -t $IMAGE_NAME .
+    docker build -f $GENESYS_DOCKERFILE -t $GENESYS_IMAGE .
 fi

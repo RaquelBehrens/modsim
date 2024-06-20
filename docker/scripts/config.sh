@@ -8,19 +8,19 @@ REMOTE=0
 GENESYS_USER="genesys-user"
 
 # Nome da imagem Docker
-IMAGE_NAME="genesys-image"
+GENESYS_IMAGE="genesys-image"
 
 # Utilizar cache no build da imagem (1 - sim, 0 - não)
-DOCKER_CACHE=0
+DOCKER_CACHE=1
 
 # Nome do Dockerfile
-DOCKERFILE_NAME="Dockerfile"
+GENESYS_DOCKERFILE="Dockerfile"
 
 # Driver gráfico
 MESA_LOADER_DRIVER_OVERRIDE=zink
 
 # Variáveis internas da imagem
-PROJECT_ROOT=$(cd .. && pwd)
+GENESYS_PROJECT=$(cd .. && pwd)
 GENESYS_NOGUI_SUBPATH=GenesysShell
 GENESYS_GUI_SUBPATH=GenesysQtGUI
 
