@@ -4,16 +4,17 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Remove.cpp
  * Author: rlcancian
- * 
+ *
  * Created on 03 de Junho de 2019, 15:20
  */
 
 #include "Remove.h"
 #include "../../kernel/simulator/Model.h"
 #include "../../kernel/simulator/Simulator.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include "../../plugins/data/EntityGroup.h"
 #include "../../plugins/data/Queue.h"
 
@@ -61,6 +62,29 @@ ModelDataDefinition* Remove::getRemoveFrom() const {
 }
 
 Remove::Remove(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Remove>(), name) {
+	SimulationControlGeneric<std::string>* propRemoveStart = new SimulationControlGeneric<std::string>(
+									std::bind(&Remove::getRemoveStartRank, this), std::bind(&Remove::setRemoveStartRank,  this, std::placeholders::_1),
+									Util::TypeOf<Remove>(), getName(), "RemoveStartRank", "");
+	SimulationControlGeneric<std::string>* propRemoveEnd = new SimulationControlGeneric<std::string>(
+									std::bind(&Remove::getRemoveEndRank, this), std::bind(&Remove::setRemoveEndRank, this, std::placeholders::_1),
+									Util::TypeOf<Remove>(), getName(), "RemoveEndRank", "");
+	SimulationControlGenericEnum<Remove::RemoveFromType>* propRemoveType = new SimulationControlGenericEnum<Remove::RemoveFromType>(
+									std::bind(&Remove::getRemoveFromType, this), std::bind(&Remove::setRemoveFromType, this, std::placeholders::_1),
+									Util::TypeOf<Remove>(), getName(), "RemoveEndRank", "");
+	// SimulationControlGeneric<ModelDataDefinition*>* propRemoveFrom = new SimulationControlGeneric<ModelDataDefinition*>(
+	// 								std::bind(&Remove::getRemoveFrom, this), std::bind(&Remove::setRemoveFrom, this, std::placeholders::_1),
+	// 								Util::TypeOf<Remove>(), getName(), "RemoveFrom", "");
+
+
+	// _parentModel->getControls()->insert(propRemoveFrom);
+	_parentModel->getControls()->insert(propRemoveType);
+	_parentModel->getControls()->insert(propRemoveStart);
+	_parentModel->getControls()->insert(propRemoveEnd);
+
+	// _addProperty(propRemoveFrom);
+	_addProperty(propRemoveType);
+	_addProperty(propRemoveStart);
+	_addProperty(propRemoveEnd);
 }
 
 std::string Remove::show() {
@@ -103,7 +127,7 @@ void Remove::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 			waiting = queue->getAtRank(startRank); //always startRank, since when one is removed, the next one take its place
 			if (waiting != nullptr) {
 				queue->removeElement(waiting);
-			}			
+			}
 		}
 	}
 	if (_removeFromType == RemoveFromType::ENTITYGROUP) {
@@ -164,5 +188,3 @@ PluginInformation* Remove::GetPluginInformation() {
 	// ...
 	return info;
 }
-
-

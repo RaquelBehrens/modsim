@@ -113,12 +113,12 @@ bool PluginManager::_insert(Plugin * plugin) {
 			Util::DecIndent();
 		}
 		if (!allDependenciesInserted) {
-			_simulator->getTracer()->traceError("Plugin dependencies could not be inserted; therefore, plugin will not be inserted", TraceManager::Level::L3_errorRecover);
+			_simulator->getTracer()->traceError("Plugin dependencies could not be inserted; therefore, the plugin will not be inserted", TraceManager::Level::L3_errorRecover);
 			return false;
 		}
 		if (this->find(plugInfo->getPluginTypename()) != nullptr) { // plugin alread exists
 			Util::IncIndent();
-			_simulator->getTracer()->trace("Plugin alread exists and was not inserted again");
+			_simulator->getTracer()->trace("The plugin already exists and was not inserted again");
 			Util::DecIndent();
 			return false;
 		}

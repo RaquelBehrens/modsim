@@ -31,17 +31,28 @@ public:
 public:
 	virtual std::string show();
 public:
+	/*!
+	 * \brief getParent
+	 * \return
+	 */
+	ModelDataDefinition* getParent() const;
+	/*!
+	 * \brief getStatistics
+	 * \return
+	 */
+	Statistics_if* getStatistics() const;
+
+public:
 	static PluginInformation* GetPluginInformation();
 	static ModelDataDefinition* LoadInstance(Model* model, PersistenceRecord *fields);
 	static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
-public:
-	ModelDataDefinition* getParent() const;
-	Statistics_if* getStatistics() const;
 
 protected:
 	virtual bool _loadInstance(PersistenceRecord *fields);
 	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
+protected:
 	virtual bool _check(std::string* errorMessage);
+
 private:
 	void _initStaticsAndCollector();
 private:

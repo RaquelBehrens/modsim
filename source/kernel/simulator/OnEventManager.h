@@ -223,6 +223,7 @@ public: // event listeners (method handlers)
 	template<typename Class> void addOnSimulationResumeHandler(Class * object, void (Class::*function)(SimulationEvent*));
 	template<typename Class> void addOnSimulationEndHandler(Class * object, void (Class::*function)(SimulationEvent*));
 	template<typename Class> void addOnBreakpointHandler(Class * object, void (Class::*function)(SimulationEvent*));
+
 public:
 	void NotifyModelCheckSuccessHandlers(ModelEvent* se);
 	void NotifyModelLoadHandlers(ModelEvent* se);
@@ -240,6 +241,7 @@ public:
 	void NotifySimulationResumeHandlers(SimulationEvent* se);
 	void NotifySimulationEndHandlers(SimulationEvent* se);
 	void NotifyBreakpointHandlers(SimulationEvent* se);
+
 private:
 	void _NotifyHandlers(List<modelEventHandler>* list, ModelEvent* se);
 	void _NotifyHandlers(List<simulationEventHandler>* list, SimulationEvent* se);

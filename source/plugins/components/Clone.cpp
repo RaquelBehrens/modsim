@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Clone.cpp
  * Author: rafael.luiz.cancian
  *
@@ -16,6 +16,7 @@
 #include "../../kernel/simulator/Attribute.h"
 #include "../../kernel/simulator/Model.h"
 #include "../../kernel/simulator/Simulator.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include "../../kernel/simulator/PluginManager.h"
 
 #ifdef PLUGINCONNECT_DYNAMIC
@@ -30,6 +31,14 @@ ModelDataDefinition* Clone::NewInstance(Model* model, std::string name) {
 }
 
 Clone::Clone(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Clone>(), name) {
+	SimulationControlGeneric<std::string>* propNumClone = new SimulationControlGeneric<std::string>(
+									std::bind(&Clone::getNumClonesExpression, this), std::bind(&Clone::setNumClonesExpression, this, std::placeholders::_1),
+									Util::TypeOf<Clone>(), getName(), "NumClonesExpression", "");
+
+	_parentModel->getControls()->insert(propNumClone);
+
+	// setting properties
+	_addProperty(propNumClone);
 }
 
 std::string Clone::show() {
@@ -46,7 +55,7 @@ std::string Clone::getNumClonesExpression() const {
 	return _numClonesExpression;
 }
 
-// public static 
+// public static
 
 ModelComponent* Clone::LoadInstance(Model* model, PersistenceRecord *fields) {
 	Clone* newComponent = new Clone(model);
@@ -104,7 +113,7 @@ void Clone::_saveInstance(PersistenceRecord *fields, bool saveDefaultValues) {
 }
 
 
-// protected virtual -- could be overriden 
+// protected virtual -- could be overriden
 
 //ParserChangesInformation* DummyElement::_getParserChangesInformation() {}
 

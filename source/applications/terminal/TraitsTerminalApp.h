@@ -14,6 +14,7 @@
 #pragma once
 
 #include "GenesysShell/GenesysShell.h"
+#include "examples/smarts/Smart_EFSM2.h"
 
 template <typename T>
 struct TraitsTerminalApp {
@@ -23,7 +24,7 @@ struct TraitsTerminalApp {
  *  Configure the Genesys Application to be compiled and executed
  */
 template <> struct TraitsTerminalApp<GenesysApplication_if> {
-	typedef GenesysShell Application;
+	//typedef GenesysShell Application;
 
 	//
 	// MODEL SPECIFIC TERMINAL SIMULATORS:
@@ -33,13 +34,17 @@ template <> struct TraitsTerminalApp<GenesysApplication_if> {
 	//typedef Smart_AssignWriteSeizes Application;
 	//typedef Smart_BatchSeparate Application;
 	//typedef Smart_Buffer Application;
+	//typedef Smart_CellularAutomata Application;
 	//typedef Smart_Clone Application;
 	//typedef Smart_CppForG Application;
 	//typedef Smart_Delay Application;
 	//typedef Smart_Dummy Application;
+	//typedef Smart_EFSM1 Application;
+	typedef Smart_EFSM2 Application;
 	//typedef Smart_Failures Application;
 	//typedef Smart_FiniteStateMachine Application;
 	//typedef Smart_HoldSearchRemove Application;
+	//typedef Smart_MarkovChain Application;
 	//typedef Smart_ModelInfoModelSimulation Application;
 	//typedef Smart_ODE Application;
 	//typedef Smart_OnEvent Application;
@@ -105,7 +110,7 @@ template <> struct TraitsTerminalApp<GenesysApplication_if> {
 	//typedef Airport_Extended1 Application;
 	//typedef Assembly_Line Application;
 	//typedef Banking_Transactions Application;
-	//typedef BasicOrderShipping Application;
+	//typedef Example_BasicOrderShipping Application;
 	//typedef Example_PortModel Application;
 	//typedef Example_PublicTransport Application;
 

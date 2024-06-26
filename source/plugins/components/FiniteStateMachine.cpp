@@ -31,7 +31,7 @@ FiniteStateMachine::FiniteStateMachine(Model* model, std::string name) : ModelCo
 }
 
 std::string FiniteStateMachine::show() {
-	return ModelComponent::show() + " asdasdad";
+	return ModelComponent::show() + "";
 }
 
 // public static 
@@ -92,8 +92,7 @@ void FiniteStateMachine::_initBetweenReplications() {
 void FiniteStateMachine::_createInternalAndAttachedData() {
 	if (_internalDataDefinition == nullptr) {
 		PluginManager* pm = _parentModel->getParentSimulator()->getPlugins();
-		_internalDataDefinition = pm->newInstance<ExtendedFSM>(_parentModel, getName() + "." + "efsm");
+		_internalDataDefinition = pm->newInstance<ExtendedFSM>(_parentModel, getName() + "." + "JustaDummy");
 		_internalDataInsert("JustaDummy", _internalDataDefinition);
 	}
 }
-

@@ -69,7 +69,6 @@ int Smart_AssignWriteSeizes::main(int argc, char** argv) {
 	Decide* decide1 = plugins->newInstance<Decide>(model);
 	decide1->getConditions()->insert("NR(Machine_1) < MR(Machine_1)");
 	decide1->getConditions()->insert("NR(Machine_2) < MR(Machine_2)");
-	
 	Queue* queueSeize1 = plugins->newInstance<Queue>(model, "Queue_Seize_1");
 	queueSeize1->setOrderRule(Queue::OrderRule::FIFO);
 	Seize* seize1 = plugins->newInstance<Seize>(model);
@@ -80,7 +79,6 @@ int Smart_AssignWriteSeizes::main(int argc, char** argv) {
 	delay1->setDelayTimeUnit(Util::TimeUnit::second);
 	Release* release1 = plugins->newInstance<Release>(model);
 	release1->getReleaseRequests()->insert(new SeizableItem(machine1));
-	
 	Queue* queueSeize2 = plugins->newInstance<Queue>(model, "Queue_Seize_2");
 	queueSeize2->setOrderRule(Queue::OrderRule::FIFO);
 	Seize* seize2 = plugins->newInstance<Seize>(model);
@@ -90,7 +88,6 @@ int Smart_AssignWriteSeizes::main(int argc, char** argv) {
 	delay2->setDelayExpression("norm(15,1)", Util::TimeUnit::second);
 	Release* release2 = plugins->newInstance<Release>(model);
 	release2->getReleaseRequests()->insert(new SeizableItem(machine2));
-	
 	Queue* queueSeize3 = plugins->newInstance<Queue>(model, "Queue_Seize_3");
 	queueSeize3->setOrderRule(Queue::OrderRule::FIFO);
 	Seize* seize3 = plugins->newInstance<Seize>(model);
@@ -100,25 +97,20 @@ int Smart_AssignWriteSeizes::main(int argc, char** argv) {
 	delay3->setDelayExpression("norm(15,1)", Util::TimeUnit::second);
 	Release* release3 = plugins->newInstance<Release>(model);
 	release3->getReleaseRequests()->insert(new SeizableItem(machine3));
-	
 	Dispose* dispose1 = plugins->newInstance<Dispose>(model);
 	// connect model components to create a "workflow"
 	create1->getConnections()->insert(assign1);
 	assign1->getConnections()->insert(write1);
 	write1->getConnections()->insert(decide1);
-	
 	decide1->getConnections()->insert(seize1);
 	decide1->getConnections()->insert(seize2);
 	decide1->getConnections()->insert(seize3);
-	
 	seize1->getConnections()->insert(delay1);
 	delay1->getConnections()->insert(release1);
 	release1->getConnections()->insert(dispose1);
-
 	seize2->getConnections()->insert(delay2);
 	delay2->getConnections()->insert(release2);
 	release2->getConnections()->insert(dispose1);
-	
 	seize3->getConnections()->insert(delay3);
 	delay3->getConnections()->insert(release3);
 	release3->getConnections()->insert(dispose1);

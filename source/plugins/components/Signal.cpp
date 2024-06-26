@@ -15,6 +15,7 @@
 
 #include "../../kernel/simulator/Model.h"
 #include "../../kernel/simulator/Simulator.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include "../../kernel/simulator/PluginManager.h"
 
 #ifdef PLUGINCONNECT_DYNAMIC
@@ -31,6 +32,14 @@ ModelDataDefinition* Signal::NewInstance(Model* model, std::string name) {
 }
 
 Signal::Signal(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Signal>(), name) {
+	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Signal::limitExpression, this), std::bind(&Signal::setLimitExpression, this, std::placeholders::_1),
+									Util::TypeOf<Signal>(), getName(), "LimitExpression", "");
+
+	_parentModel->getControls()->insert(propExpression);
+
+	// setting properties
+	_addProperty(propExpression);
 }
 
 // public virtual

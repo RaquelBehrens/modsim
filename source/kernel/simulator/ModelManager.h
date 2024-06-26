@@ -19,22 +19,68 @@
 
 //namespace GenesysKernel {
 
+/*!
+ * \brief The ModelManager class
+ */
 class ModelManager {
 public:
 	ModelManager(Simulator* simulator);
 	virtual ~ModelManager() = default;
 public:
 	Model* newModel();
+	/*!
+	 * \brief insert
+	 * \param model
+	 */
 	void insert(Model* model);
+	/*!
+	 * \brief remove
+	 * \param model
+	 */
 	void remove(Model* model);
+	/*!
+	 * \brief setCurrent
+	 * \param model
+	 */
 	void setCurrent(Model* model);
+	/*!
+	 * \brief saveModel
+	 * \param filename
+	 * \return
+	 */
 	bool saveModel(std::string filename);
+	/*!
+	 * \brief loadModel
+	 * \param filename
+	 * \return
+	 */
 	Model* loadModel(std::string filename);
+	/*!
+	 * \brief createFromLanguage
+	 * \param modelSpecification
+	 * \return
+	 */
 	Model* createFromLanguage(std::string modelSpecification);
+	/*!
+	 * \brief size
+	 * \return
+	 */
 	unsigned int size();
 public:
+	/*!
+	 * \brief front
+	 * \return
+	 */
 	Model* front();
+	/*!
+	 * \brief current
+	 * \return
+	 */
 	Model* current();
+	/*!
+	 * \brief next
+	 * \return
+	 */
 	Model* next();
 	//Model* end();
 private:

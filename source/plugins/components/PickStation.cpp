@@ -84,6 +84,34 @@ List<PickableStationItem*>* PickStation::getPickableStationItens() const {
 }
 
 PickStation::PickStation(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<PickStation>(), name) {
+	SimulationControlGenericEnum<PickStation::TestCondition>* propTestCondition = new SimulationControlGenericEnum<PickStation::TestCondition>(
+									std::bind(&PickStation::getTestCondition, this), std::bind(&PickStation::setTestCondition, this, std::placeholders::_1),
+									Util::TypeOf<PickStation>(), getName(), "TestCondition", "");
+	SimulationControlGeneric<std::string>* propSaveAttribute = new SimulationControlGeneric<std::string>(
+									std::bind(&PickStation::getSaveAttribute, this), std::bind(&PickStation::setSaveAttribute, this, std::placeholders::_1),
+									Util::TypeOf<PickStation>(), getName(), "SaveAttribute", "");
+	SimulationControlGeneric<bool>* propPickConditionExpression = new SimulationControlGeneric<bool>(
+									std::bind(&PickStation::isPickConditionExpression, this), std::bind(&PickStation::setPickConditionExpression, this, std::placeholders::_1),
+									Util::TypeOf<PickStation>(), getName(), "PickConditionExpression", "");
+	SimulationControlGeneric<bool>* propPickConditionNumberInQueue = new SimulationControlGeneric<bool>(
+									std::bind(&PickStation::isPickConditionNumberInQueue, this), std::bind(&PickStation::setPickConditionNumberInQueue, this, std::placeholders::_1),
+									Util::TypeOf<PickStation>(), getName(), "PickConditionNumberInQueue", "");
+	SimulationControlGeneric<bool>* propPickConditionNumberBusyResource = new SimulationControlGeneric<bool>(
+									std::bind(&PickStation::isPickConditionNumberBusyResource, this), std::bind(&PickStation::setPickConditionNumberBusyResource, this, std::placeholders::_1),
+									Util::TypeOf<PickStation>(), getName(), "PickConditionNumberBusyResource", "");
+
+	_parentModel->getControls()->insert(propTestCondition);
+	_parentModel->getControls()->insert(propSaveAttribute);
+	_parentModel->getControls()->insert(propPickConditionExpression);
+	_parentModel->getControls()->insert(propPickConditionNumberInQueue);
+	_parentModel->getControls()->insert(propPickConditionNumberBusyResource);
+
+	// setting properties
+	_addProperty(propTestCondition);
+	_addProperty(propSaveAttribute);
+	_addProperty(propPickConditionExpression);
+	_addProperty(propPickConditionNumberInQueue);
+	_addProperty(propPickConditionNumberBusyResource);
 }
 
 std::string PickStation::show() {

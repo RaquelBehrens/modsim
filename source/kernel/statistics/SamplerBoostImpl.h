@@ -40,7 +40,7 @@ public: // probability distributions
 	virtual double sampleUniform(double min, double max);
 	virtual double sampleWeibull(double alpha, double scale);
 public:
-	void reset(); ///< reinitialize seed and other parameters so (pseudo) random number sequence will be generated again.
+	void reset(); //!< reinitialize seed and other parameters so (pseudo) random number sequence will be generated again.
 public:
 	virtual void setRNGparameters(Sampler_if::RNG_Parameters* param);
 	virtual RNG_Parameters* getRNGparameters() const;

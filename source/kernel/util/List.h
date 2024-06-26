@@ -51,7 +51,7 @@ public: // new methods
 	T create(U arg);
 	std::string show();
 	typename std::list<T>::iterator find(T element);
-	//int rankOf(T modeldatum); ///< returns the position (1st position=0) of the modeldatum if found, or negative value if not found
+	//int rankOf(T modeldatum); //!< returns the position (1st position=0) of the modeldatum if found, or negative value if not found
 public: // improved (easier) methods
 	void insert(T element);
 	void remove(T element);

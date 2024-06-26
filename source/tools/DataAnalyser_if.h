@@ -28,7 +28,6 @@ public:
 	virtual Sampler_if* sampler() = 0;
 	virtual ExperimentManager_if* experimenter() = 0;
 	virtual HypothesisTester_if* tester() = 0;
-	virtual StatisticsDatafile_if* statisticsDataFile() const = 0;
 };
 
 

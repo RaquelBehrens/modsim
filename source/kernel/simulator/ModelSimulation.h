@@ -37,10 +37,10 @@ public:
 public:
 	std::string show();
 public: // simulation control
-	void start(); ///< Starts a sequential execution of a simulation, ie, a set of replications of this model.
-	void pause(); ///<
-	void step(); ///< Executes the processing of a single event, the next one in the future events list.
-	void stop(); ///<
+	void start(); //!< Starts a sequential execution of a simulation, ie, a set of replications of this model.
+	void pause(); //!<
+	void step(); //!< Executes the processing of a single event, the next one in the future events list.
+	void stop(); //!<
 public: // old modelInfos
 	void setNumberOfReplications(unsigned int _numberOfReplications);
 	unsigned int getNumberOfReplications() const;
@@ -96,22 +96,22 @@ public:
 	 * PRIVATE
 	 */
 private: // simulation control
-	void _initSimulation(); ///<
-	void _initReplication(); ///< Clear the event list, restarts simulated time, initialize event list and statistics, request components to reinitialize
-	void _clearStatistics(); ///<
-	void _checkWarmUpTime(Event* nextEvent); ///<
-	void _stepSimulation(); ///<
-	void _replicationEnded(); ///<
-	void _simulationEnded(); ///<
+	void _initSimulation(); //!<
+	void _initReplication(); //!< Clear the event list, restarts simulated time, initialize event list and statistics, request components to reinitialize
+	void _clearStatistics(); //!<
+	void _checkWarmUpTime(Event* nextEvent); //!<
+	void _stepSimulation(); //!<
+	void _replicationEnded(); //!<
+	void _simulationEnded(); //!<
 private:
 	void _dispatchEvent(Event* event);
-	bool _checkBreakpointAt(Event* event); ///<
-	bool _isReplicationEndCondition(); ///<
-	void _actualizeSimulationStatistics(); ///<
-	void _showSimulationHeader(); ///<
-	void _traceReplicationEnded(); ///<
+	bool _checkBreakpointAt(Event* event); //!<
+	bool _isReplicationEndCondition(); //!<
+	void _actualizeSimulationStatistics(); //!<
+	void _showSimulationHeader(); //!<
+	void _traceReplicationEnded(); //!<
 private:
-	SimulationEvent* _createSimulationEvent(void* thiscustomObject = nullptr); ///<
+	SimulationEvent* _createSimulationEvent(void* thiscustomObject = nullptr); //!<
 	//friend Entity* Model::createEntity(std::string name, bool insertIntoModel); //@TODO: make it work (only friend functions, not the entire class)
 	//friend void Model::removeEntity(Entity* entity);
 	//friend void Model::sendEntityToComponent(Entity* entity, ModelComponent* component, double timeDelay, unsigned int componentinputPortNumber);

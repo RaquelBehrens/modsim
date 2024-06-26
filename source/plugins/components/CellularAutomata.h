@@ -17,6 +17,7 @@
 #include <string>
 #include "../../kernel/simulator/ModelComponent.h"
 #include "../../kernel/simulator/Entity.h"
+#include "CellularAutomataComp.h"
 
 class CellularAutomata : public ModelComponent {
 public: // constructors

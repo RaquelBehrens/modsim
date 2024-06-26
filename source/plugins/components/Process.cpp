@@ -32,6 +32,41 @@ Process::Process(Model* model, std::string name) : ModelComponent(model, Util::T
 	_flagConstructing = true;
 	_createInternalAndAttachedData(); // its's called by the constructor because internal components can be accessed by process' public methods, so they must exist ever since
 	_flagConstructing = false;
+
+	SimulationControlGeneric<unsigned short>* propPriority = new SimulationControlGeneric<unsigned short>(
+									std::bind(&Process::getPriority, this), std::bind(&Process::setPriority, this, std::placeholders::_1),
+									Util::TypeOf<Process>(), getName(), "Priority", "");
+	SimulationControlGeneric<std::string>* propPriorityExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Process::getPriorityExpression, this), std::bind(&Process::setPriorityExpression, this, std::placeholders::_1),
+									Util::TypeOf<Process>(), getName(), "PriorityExpression", "");
+	SimulationControlGenericEnum<Util::AllocationType>* propAlloc = new SimulationControlGenericEnum<Util::AllocationType>(
+									std::bind(&Process::getAllocationType, this), std::bind(&Process::setAllocationType, this, std::placeholders::_1),
+									Util::TypeOf<Process>(), getName(), "AllocationType", "");
+	// SimulationControlGenericClass<QueueableItem*, Model*, QueueableItem>* propQueueableItem = new SimulationControlGenericClass<QueueableItem*, Model*, QueueableItem>(
+	// 								_parentModel,
+	// 								std::bind(&Process::getQueueableItem, this), std::bind(&Process::setQueueableItem, this, std::placeholders::_1),
+	// 								Util::TypeOf<Process>(), getName(), "QueueableItem", "");
+	// SimulationControlGeneric<std::string>* propdelayExpression = new SimulationControlGeneric<std::string>(
+	// 								std::bind(&Process::delayExpression, this), std::bind(&Process::setDelayExpression, this, std::placeholders::_1),
+	// 								Util::TypeOf<Process>(), getName(), "DelayExpression", "");
+	SimulationControlGenericEnum<Util::TimeUnit>* propdelayTimeUnit = new SimulationControlGenericEnum<Util::TimeUnit>(
+									std::bind(&Process::delayTimeUnit, this), std::bind(&Process::setDelayTimeUnit, this, std::placeholders::_1),
+									Util::TypeOf<Process>(), getName(), "DelayTimeUnit", "");
+
+	_parentModel->getControls()->insert(propPriority);
+	_parentModel->getControls()->insert(propPriorityExpression);
+	_parentModel->getControls()->insert(propAlloc);
+	// _parentModel->getControls()->insert(propQueueableItem);
+	// _parentModel->getControls()->insert(propdelayExpression);
+	_parentModel->getControls()->insert(propdelayTimeUnit);
+
+	// setting properties
+	_addProperty(propPriority);
+	_addProperty(propPriorityExpression);
+	_addProperty(propAlloc);
+	// _addProperty(propQueueableItem);
+	// _addProperty(propdelayExpression);
+	_addProperty(propdelayTimeUnit);
 }
 
 std::string Process::show() {
@@ -80,7 +115,7 @@ void Process::setDelayExpression(std::string _delayExpression) {
 
 void Process::setDelayExpression(std::string _delayExpression, Util::TimeUnit _delayTimeUnit) {
 	_delay->setDelayExpression(_delayExpression);
-	_delay->setDelayTimeUnit(_delayTimeUnit);	
+	_delay->setDelayTimeUnit(_delayTimeUnit);
 }
 
 std::string Process::delayExpression() const {

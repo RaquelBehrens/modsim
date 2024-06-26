@@ -38,7 +38,17 @@ public:
 	ParserManager();
 	virtual ~ParserManager() = default;
 public:
+	/*!
+	 * \brief generateNewParser
+	 * \param changes
+	 * \return
+	 */
 	ParserManager::GenerateNewParserResult generateNewParser(ParserChangesInformation* changes);
+	/*!
+	 * \brief connectNewParser
+	 * \param newParser
+	 * \return
+	 */
 	bool connectNewParser(ParserManager::NewParser newParser);
 private:
 };

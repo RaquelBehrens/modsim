@@ -60,7 +60,7 @@ public:
 				return instance;
 			}
 		}
-		/// innvalid use of incomplete class
+		// innvalid use of incomplete class
 		///_simulator->getTracer()->traceError(TraceManager::Level::L1_errorFatal, "Error: Could not find any plugin with Typename \"" + pluginTypename + "\"");
 		return nullptr;
 	}

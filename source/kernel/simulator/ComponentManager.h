@@ -28,22 +28,84 @@ public:
 	ComponentManager(Model* model);
 	virtual ~ComponentManager() = default;
 public:
+	/*!
+	 * \brief insert
+	 * \param comp
+	 * \return
+	 */
 	bool insert(ModelComponent* comp);
+	/*!
+	/*! * \brief remove
+	/*! * \param comp
+	/*! */
 	void remove(ModelComponent* comp);
+	/*!
+	 * \brief find
+	 * \param name
+	 * \return
+	 */
 	ModelComponent* find(std::string name);
+	/*!
+	 * \brief find
+	 * \param id
+	 * \return
+	 */
 	ModelComponent* find(Util::identification id);
+	/*!
+	/*! * \brief clear
+	*/
 	void clear();
 public:
+	/*!
+	 * \brief getNumberOfComponents
+	 * \return
+	 */
 	unsigned int getNumberOfComponents();
+	/*!
+	 * \brief begin
+	 * \return
+	 */
 	std::list<ModelComponent*>::iterator begin();
+	/*!
+	 * \brief end
+	 * \return
+	 */
 	std::list<ModelComponent*>::iterator end();
+	/*!
+	 * \brief front
+	 * \return
+	 */
 	ModelComponent* front();
+	/*!
+	 * \brief next
+	 * \return
+	 */
 	ModelComponent* next();
+	/*!
+	/*! * \brief hasChanged
+	/*! * \return
+	*/
 	bool hasChanged() const;
+	/*!
+	 * \brief setHasChanged
+	 * \param _hasChanged
+	 */
 	void setHasChanged(bool _hasChanged);
 public:
+	/*!
+	 * \brief getSourceComponents
+	 * \return
+	 */
 	std::list<SourceModelComponent*>* getSourceComponents();
+	/*!
+	 * \brief getTransferInComponents
+	 * \return
+	 */
 	std::list<ModelComponent*>* getTransferInComponents();
+	/*!
+	 * \brief getAllComponents
+	 * \return
+	 */
 	std::list<ModelComponent*>* getAllComponents() const;
 private:
 	List<ModelComponent*>* _components;

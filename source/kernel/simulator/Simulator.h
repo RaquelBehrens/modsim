@@ -45,18 +45,56 @@ public:
 	Simulator();
 	virtual ~Simulator() = default;
 public: // only get
+	/*!
+	 * \brief getVersion
+	 * \return
+	 */
 	std::string getVersion() const;
+	/*!
+	 * \brief getVersionNumber
+	 * \return
+	 */
 	unsigned int getVersionNumber() const;
+	/*!
+	 * \brief getName
+	 * \return
+	 */
 	std::string getName() const;
+	/*!
+	 * \brief getLicence
+	 * \return
+	 */
 	LicenceManager* getLicence() const;
+	/*!
+	 * \brief getPlugins
+	 * \return
+	 */
 	PluginManager* getPlugins() const;
+	/*!
+	 * \brief getModels
+	 * \return
+	 */
 	ModelManager* getModels() const;
+	/*!
+	 * \brief getTracer
+	 * \return
+	 */
 	TraceManager* getTracer() const;
+	/*!
+	 * \brief getParser
+	 * \return
+	 */
 	ParserManager* getParser() const;
+	/*!
+	 * \brief getExperimenter
+	 * \return
+	 */
 	ExperimentManager* getExperimenter() const;
+
 private:
 	bool _completePluginsFieldsAndTemplate();
 	friend class PluginManager; //@TODO: should be only member function PluginManager::completePluginsFieldsAndTemplate()
+
 private: // attributes 1:1 objects
 	LicenceManager* _licenceManager;
 	PluginManager* _pluginManager;

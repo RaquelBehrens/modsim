@@ -30,19 +30,71 @@ public:
 public:
 	std::string show();
 public: // gets and sets
+	/*!
+	 * \brief setName
+	 * \param _name
+	 */
 	void setName(std::string _name);
+	/*!
+	 * \brief getName
+	 * \return
+	 */
 	std::string getName() const;
+	/*!
+	 * \brief setAnalystName
+	 * \param _analystName
+	 */
 	void setAnalystName(std::string _analystName);
+	/*!
+	 * \brief getAnalystName
+	 * \return
+	 */
 	std::string getAnalystName() const;
+	/*!
+	 * \brief setDescription
+	 * \param _description
+	 */
 	void setDescription(std::string _description);
+	/*!
+	 * \brief getDescription
+	 * \return
+	 */
 	std::string getDescription() const;
+	/*!
+	 * \brief setProjectTitle
+	 * \param _projectTitle
+	 */
 	void setProjectTitle(std::string _projectTitle);
+	/*!
+	 * \brief getProjectTitle
+	 * \return
+	 */
 	std::string getProjectTitle() const;
+	/*!
+	 * \brief setVersion
+	 * \param _version
+	 */
 	void setVersion(std::string _version);
+	/*!
+	 * \brief getVersion
+	 * \return
+	 */
 	std::string getVersion() const;
 public:
+	/*!
+	 * \brief loadInstance
+	 * \param fields
+	 */
 	void loadInstance(PersistenceRecord *fields);
+	/*!
+	 * \brief saveInstance
+	 * \param fields
+	 */
 	void saveInstance(PersistenceRecord *fields);
+	/*!
+	 * \brief hasChanged
+	 * \return
+	 */
 	bool hasChanged() const;
 private: // with public access (get & set)
 	// model general information

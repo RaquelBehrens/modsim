@@ -25,16 +25,61 @@ public:
 	virtual Collector_if* getCollector() const = 0;
 	virtual void setCollector(Collector_if* collector) = 0;
 public:
+	/*!
+	 * \brief numElements
+	 * \return
+	 */
 	virtual unsigned int numElements() = 0;
+	/*!
+	 * \brief min
+	 * \return
+	 */
 	virtual double min() = 0;
+	/*!
+	 * \brief max
+	 * \return
+	 */
 	virtual double max() = 0;
+	/*!
+	 * \brief average
+	 * \return
+	 */
 	virtual double average() = 0;
+	/*!
+	 * \brief variance
+	 * \return
+	 */
 	virtual double variance() = 0;
+	/*!
+	 * \brief stddeviation
+	 * \return
+	 */
 	virtual double stddeviation() = 0;
+	/*!
+	 * \brief variationCoef
+	 * \return
+	 */
 	virtual double variationCoef() = 0;
+	/*!
+	 * \brief halfWidthConfidenceInterval
+	 * \return
+	 */
 	virtual double halfWidthConfidenceInterval() = 0;
+	/*!
+	 * \brief confidenceLevel
+	 * \return
+	 */
 	virtual double confidenceLevel() = 0;
+	/*!
+	 * \brief newSampleSize
+	 * \param halfWidth
+	 * \return
+	 */
 	virtual unsigned int newSampleSize(double halfWidth) = 0;
+	/*!
+	 * \brief setConfidenceLevel
+	 * \param confidencelevel
+	 */
 	virtual void setConfidenceLevel(double confidencelevel) = 0;
 };
 

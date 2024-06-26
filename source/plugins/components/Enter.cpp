@@ -28,6 +28,15 @@ ModelDataDefinition* Enter::NewInstance(Model* model, std::string name) {
 }
 
 Enter::Enter(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Enter>(), name) {
+	SimulationControlGenericClass<Station*, Model*, Station>* propStation = new SimulationControlGenericClass<Station*, Model*, Station>(
+									_parentModel,
+									std::bind(&Enter::getStation, this), std::bind(&Enter::setStation, this, std::placeholders::_1),
+									Util::TypeOf<Enter>(), getName(), "Station", "");
+
+	_parentModel->getControls()->insert(propStation);
+
+	// setting properties
+	_addProperty(propStation);
 }
 
 std::string Enter::show() {

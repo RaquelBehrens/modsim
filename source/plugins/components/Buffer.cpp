@@ -28,6 +28,34 @@ ModelDataDefinition* Buffer::NewInstance(Model* model, std::string name) {
 }
 
 Buffer::Buffer(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Buffer>(), name) {
+	SimulationControlGenericEnum<Buffer::ArrivalOnFullBufferRule>* propArrivalRule = new SimulationControlGenericEnum<Buffer::ArrivalOnFullBufferRule>(
+				std::bind(&Buffer::getarrivalOnFullBufferRule, this),
+				std::bind(&Buffer::setArrivalOnFullBufferRule, this, std::placeholders::_1),
+				Util::TypeOf<Buffer>(), getName(), "ArrivalOnFullBufferRule", "");
+	SimulationControlGenericEnum<Buffer::AdvanceOn>* propAdvanceOn = new SimulationControlGenericEnum<Buffer::AdvanceOn>(
+				std::bind(&Buffer::getadvanceOn, this),
+				std::bind(&Buffer::setAdvanceOn, this, std::placeholders::_1),
+				Util::TypeOf<Buffer>(), getName(), "AdvanceOn", "");
+	SimulationControlGeneric<unsigned int>* propCapacity = new SimulationControlGeneric<unsigned int>(
+				std::bind(&Buffer::getcapacity, this),
+				std::bind(&Buffer::setCapacity, this, std::placeholders::_1),
+				Util::TypeOf<Buffer>(), getName(), "Capacity", "");
+	SimulationControlGenericClass<SignalData*, Model*, SignalData>* propSignal = new SimulationControlGenericClass<SignalData*, Model*, SignalData>(
+				_parentModel,
+				std::bind(&Buffer::getsignal, this),
+				std::bind(&Buffer::setSignal, this, std::placeholders::_1),
+				Util::TypeOf<Buffer>(), getName(), "Signal", "");
+
+	_parentModel->getControls()->insert(propArrivalRule);
+	_parentModel->getControls()->insert(propAdvanceOn);
+	_parentModel->getControls()->insert(propCapacity);
+	_parentModel->getControls()->insert(propSignal);
+
+	// setting properties
+	_addProperty(propArrivalRule);
+	_addProperty(propAdvanceOn);
+	_addProperty(propCapacity);
+	_addProperty(propSignal);
 }
 
 std::string Buffer::show() {

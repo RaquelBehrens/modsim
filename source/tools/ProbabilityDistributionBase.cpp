@@ -116,7 +116,7 @@ double ProbabilityDistributionBase::weibull(double x, double shape, double scale
 //************************
 
 double ProbabilityDistributionBase::_gammaFunction(double x) {
-	return tgamma(x); ///@TODO: Implement by myself
+	return tgamma(x); //!@TODO: Implement by myself
 }
 
 double ProbabilityDistributionBase::_betaFunction(double x, double y) {

@@ -45,6 +45,21 @@ Schedule* Create::getTimeBetweenCreationsSchedule() const {
 }
 
 Create::Create(Model* model, std::string name) : SourceModelComponent(model, Util::TypeOf<Create>(), name) {
+	SimulationControlGenericClass<Formula*, Model*, Formula>* propTimeBetweenCreationsFormula = new SimulationControlGenericClass<Formula*, Model*, Formula>(
+									_parentModel,
+									std::bind(&Create::getTimeBetweenCreationsFormula, this), std::bind(&Create::setTimeBetweenCreationsFormula, this, std::placeholders::_1),
+									Util::TypeOf<Create>(), getName(), "TimeBetweenCreationsFormula", "");
+	SimulationControlGenericClass<Schedule*, Model*, Schedule>* propTimeBetweenCreationsSchedule = new SimulationControlGenericClass<Schedule*, Model*, Schedule>(
+									_parentModel,
+									std::bind(&Create::getTimeBetweenCreationsSchedule, this), std::bind(&Create::setTimeBetweenCreationsSchedule, this, std::placeholders::_1),
+									Util::TypeOf<Create>(), getName(), "TimeBetweenCreationsSchedule", "");
+
+	_parentModel->getControls()->insert(propTimeBetweenCreationsFormula);
+	_parentModel->getControls()->insert(propTimeBetweenCreationsSchedule);
+
+	// setting properties
+	_addProperty(propTimeBetweenCreationsFormula);
+	_addProperty(propTimeBetweenCreationsSchedule);
 }
 
 std::string Create::show() {

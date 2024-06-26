@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Search.cpp
  * Author: rlcancian
- * 
+ *
  * Created on 03 de Junho de 2019, 15:20
  */
 
@@ -17,6 +17,7 @@
 #include "../../kernel/simulator/Attribute.h"
 #include "../../plugins/data/EntityGroup.h"
 #include "../../plugins/data/Queue.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 
 #ifdef PLUGINCONNECT_DYNAMIC
 
@@ -97,6 +98,45 @@ std::string Search::getSearchInName() const {
 }
 
 Search::Search(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Search>(), name) {
+	SimulationControlGeneric<std::string>* propStart = new SimulationControlGeneric<std::string>(
+									std::bind(&Search::getStartRank, this), std::bind(&Search::setStartRank, this, std::placeholders::_1),
+									Util::TypeOf<Search>(), getName(), "StartRank", "");
+	SimulationControlGeneric<std::string>* propEnd = new SimulationControlGeneric<std::string>(
+									std::bind(&Search::getEndRank, this), std::bind(&Search::setEndRank, this, std::placeholders::_1),
+									Util::TypeOf<Search>(), getName(), "EndRank", "");
+	SimulationControlGeneric<std::string>* propCondition = new SimulationControlGeneric<std::string>(
+									std::bind(&Search::getSearchCondition, this), std::bind(&Search::setSearchCondition, this, std::placeholders::_1),
+									Util::TypeOf<Search>(), getName(), "SearchCondition", "");
+	SimulationControlGeneric<std::string>* propSaveAttribute = new SimulationControlGeneric<std::string>(
+									std::bind(&Search::getSaveFounRankAttribute, this), std::bind(&Search::setSaveFounRankAttribute, this, std::placeholders::_1),
+									Util::TypeOf<Search>(), getName(), "SaveFounRankAttribute", "");
+	SimulationControlGeneric<std::string>* propSearchInName = new SimulationControlGeneric<std::string>(
+									std::bind(&Search::getSearchInName, this), std::bind(&Search::setSearchInName, this, std::placeholders::_1),
+									Util::TypeOf<Search>(), getName(), "SearchInName", "");
+	// SimulationControlGeneric<ModelDataDefinition*>* propSearchIn = new SimulationControlGeneric<ModelDataDefinition*>(
+	// 								std::bind(&Search::getSearchIn, this), std::bind(&Search::setSearchIn, this, std::placeholders::_1),
+	// 								Util::TypeOf<Search>(), getName(), "SearchIn", "");
+	SimulationControlGenericEnum<Search::SearchInType>* propSearchInType = new SimulationControlGenericEnum<Search::SearchInType>(
+									std::bind(&Search::getSearchInType, this), std::bind(&Search::setSearchInType, this, std::placeholders::_1),
+									Util::TypeOf<Search>(), getName(), "SearchInType", "");
+
+
+	_parentModel->getControls()->insert(propStart);
+	_parentModel->getControls()->insert(propEnd);
+	_parentModel->getControls()->insert(propCondition);
+	_parentModel->getControls()->insert(propSaveAttribute);
+	_parentModel->getControls()->insert(propSearchInName);
+	// _parentModel->getControls()->insert(propSearchIn);
+	_parentModel->getControls()->insert(propSearchInType);
+
+	// setting properties
+	_addProperty(propStart);
+	_addProperty(propEnd);
+	_addProperty(propCondition);
+	_addProperty(propSaveAttribute);
+	_addProperty(propSearchInName);
+	// _addProperty(propSearchIn);
+	_addProperty(propSearchInType);
 }
 
 std::string Search::show() {
@@ -225,5 +265,3 @@ PluginInformation* Search::GetPluginInformation() {
 	// ...  @TODO
 	return info;
 }
-
-

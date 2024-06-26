@@ -32,35 +32,51 @@ class Event;
  * @param model The model this component belongs to
  */
 class ModelComponent : public ModelDataDefinition {
-public: /// constructors
+public: //! constructors
 	ModelComponent(Model* model, std::string componentTypename, std::string name = "");
 	virtual ~ModelComponent();
 
-public: /// new public user methods for this component
-	ConnectionManager* getConnections() const; ///< Returns a list of components directly connected to the output. Usually the components have a single output, but they may have none (such as Dispose) or more than one (as Decide). In addition to the component, NextComponents specifies the inputPortNumber of the next component where the entity will be sent to. Ussually the components have a single input, but they may have none (such as Create) or more than one (as Match).
+public: //! new public user methods for this component
+	/*!
+	 * \brief getConnections
+	 * \return
+	 */
+	ConnectionManager* getConnections() const; //!< Returns a list of components directly connected to the output. Usually the components have a single output, but they may have none (such as Dispose) or more than one (as Decide). In addition to the component, NextComponents specifies the inputPortNumber of the next component where the entity will be sent to. Ussually the components have a single input, but they may have none (such as Create) or more than one (as Match).
+	/*!
+	 * \brief hasBreakpointAt
+	 * \return
+	 */
 	bool hasBreakpointAt();
+	/*!
+	 * \brief setDescription
+	 * \param _description
+	 */
 	void setDescription(std::string _description);
+	/*!
+	 * \brief getDescription
+	 * \return
+	 */
 	std::string getDescription() const;
 	// ...
 
-public: /// virtual public methods
+public: //! virtual public methods
 	virtual std::string show();
 
-public: /// static public methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
+public: //! static public methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
 	static ModelComponent* LoadInstance(Model* model, PersistenceRecord *fields);
-	/// new static methods for all ModelComponents
+	// new static methods for all ModelComponents
 	static bool Check(ModelComponent* component);
 	static void CreateInternalData(ModelComponent* component);
 	static void SaveInstance(PersistenceRecord *fields, ModelComponent* component);
-	static void DispatchEvent(Event* event); ///< This method triggers the simulation of the behavior of the component. It is invoked when an event (corresponding to this component) is taken from the list of future events or when an entity arrives at this component by connection.
+	static void DispatchEvent(Event* event); //!< This method triggers the simulation of the behavior of the component. It is invoked when an event (corresponding to this component) is taken from the list of future events or when an entity arrives at this component by connection.
 
-protected: /// virtual protected method that must be overriden
+protected: //! virtual protected method that must be overriden
 	virtual bool _loadInstance(PersistenceRecord *fields);
 	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
-	/// new virtual methods for all ModelComponents
-	virtual void _onDispatchEvent(Entity* entity, unsigned int inputPortNumber) = 0; ///< This method is only for ModelComponents, not ModelDataElements
+	// new virtual methods for all ModelComponents
+	virtual void _onDispatchEvent(Entity* entity, unsigned int inputPortNumber) = 0; //!< This method is only for ModelComponents, not ModelDataElements
 
-protected: /// virtual protected methods that could be overriden by derived classes, if needed
+protected: //! virtual protected methods that could be overriden by derived classes, if needed
 	/*! This method is called by ModelChecker during model check. The component should check itself to verify if user parameters are ok (ex: correct syntax for the parser) and everithing in its parameters allow the model too run without errors in this component */
 	// virtual bool _check(std::string* errorMessage);
 	/*! This method returns all changes in the parser that are needed by plugins of this ModelDatas. When connecting a new plugin, ParserChangesInformation are used to change parser source code, whch is after compiled and dinamically linked to to simulator kernel to reflect the changes */
@@ -75,12 +91,12 @@ protected: /// virtual protected methods that could be overriden by derived clas
 protected: // new protected attributes for all ModelComponents
 	ConnectionManager* _connections = new ConnectionManager();
 
-private: /// new private user methods
+private: //! new private user methods
 	// ...
 
-private: /// Attributes that should be loaded or saved with this component (Persistent Fields)
+private: //! Attributes that should be loaded or saved with this component (Persistent Fields)
 
-	/// Default values for the attributes. Used on initing, loading and saving
+	// Default values for the attributes. Used on initing, loading and saving
 	const struct DEFAULT_VALUES {
 		const unsigned int nextSize = 1;              // No need for attribute. Taken from _connections
 		const unsigned int nextinputPortNumber = 0;
@@ -88,10 +104,10 @@ private: /// Attributes that should be loaded or saved with this component (Pers
 	} DEFAULT;
 	std::string _description = DEFAULT.description;
 
-private: /// internal DataElements (Composition)
+private: //! internal DataElements (Composition)
 	//...
 
-private: /// attached DataElements (Agrregation)
+private: //! attached DataElements (Agrregation)
 	// ...
 
 };

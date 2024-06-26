@@ -139,59 +139,59 @@ HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testAverage(double
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testProportion(double prop, unsigned int n, double proptest, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testVariance(double var, unsigned int n, double vartest, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 // two populations
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testAverage(double avg1, double stddev1, unsigned int n1, double avg2, double stddev2, unsigned int n2, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testProportion(double prop1, unsigned int n1, double prop2, unsigned int n2, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testVariance(double var1, unsigned int n1, double var2, unsigned int n2, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 // one population based on datafile
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testAverage(std::string sampleDataFilename, double avgSample, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testProportion(std::string sampleDataFilename, checkProportionFunction function, double proptest, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testVariance(std::string sampleDataFilename, double vartest, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 // two populations based on datafile
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testAverage(std::string firstSampleDataFilename, std::string secondSampleDataFilename, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testProportion(std::string firstSampleDataFilename, std::string secondSampleDataFilename, checkProportionFunction function, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 
 HypothesisTester_if::TestResult HypothesisTesterDefaultImpl1::testVariance(std::string firstSampleDataFilename, std::string secondSampleDataFilename, double confidenceLevel, HypothesisTester_if::H1Comparition comp) {
 	double pValue, rejectH0, acceptInfLim, acceptSupLim, testStat;
-	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); ///@TODO: not implemented yet
+	return HypothesisTester_if::TestResult(pValue, rejectH0, acceptInfLim, acceptSupLim, testStat); //!@TODO: not implemented yet
 }
 // @TODO: Add interface for non-parametrical tests, such as chi-square (based on values and on datafile)

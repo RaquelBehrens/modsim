@@ -28,7 +28,7 @@ double ProbabilityDistribution::inverseFFisherSnedecor(double cumulativeProbabil
 		double b, fb;
 		a = 0.0;
 		fa = 0.0;
-		b = 10000.0; ///@TODO: Is there a way to better determine the upper limit?
+		b = 10000.0; //!@TODO: Is there a way to better determine the upper limit?
 		unsigned int savedSteps = integrator->getMaxSteps();
 		integrator->setMaxSteps(1e4);
 		fb = integrator->integrate(a, b, ProbabilityDistributionBase::fisherSnedecor, d1, d2);
@@ -51,7 +51,7 @@ double ProbabilityDistribution::inverseChi2(double cumulativeProbability, double
 		double b, fb;
 		a = 0.0;
 		fa = 0.0;
-		b = 1000.0; ///@TODO: Is there a way to better determine the upper limit?
+		b = 1000.0; //!@TODO: Is there a way to better determine the upper limit?
 		unsigned int savedSteps = integrator->getMaxSteps();
 		integrator->setMaxSteps(1e3);
 		fb = integrator->integrate(a, b, ProbabilityDistributionBase::chi2, m);
@@ -72,7 +72,7 @@ double ProbabilityDistribution::inverseNormal(double cumulativeProbability, doub
 	} else {
 		double a, fa;
 		double b, fb;
-		if (cumulativeProbability <= 0.5) { ///@TODO: Could be better (separate into 1,2,3xstddev)
+		if (cumulativeProbability <= 0.5) { //!@TODO: Could be better (separate into 1,2,3xstddev)
 			a = mean - stddev * 5.0;
 			fa = 0.0;
 			b = mean;
@@ -99,7 +99,7 @@ double ProbabilityDistribution::inverseTStudent(double cumulativeProbability, do
 		double a, fa;
 		double b, fb;
 		double inv;
-		if (cumulativeProbability <= 0.5) { ///@TODO: Could be better
+		if (cumulativeProbability <= 0.5) { //!@TODO: Could be better
 			a = mean - stddev * 5.0;
 			fa = 0.0;
 			b = mean;

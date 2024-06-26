@@ -21,10 +21,30 @@
  */
 class CollectorDatafile_if : public Collector_if {
 public:
+	/*!
+	 * \brief getValue
+	 * \param rank
+	 * \return
+	 */
 	virtual double getValue(unsigned int rank) = 0; /**< Get a value from a specific position */
+	/*!
+	 * \brief seekFirstValue
+	 */
 	virtual void seekFirstValue() = 0; /**< Set the pointer to the first value in the file */
+	/*!
+	 * \brief getNextValue
+	 * \return
+	 */
 	virtual double getNextValue() = 0; /**< Get the next value in the file and advances the pointer */
+	/*!
+	 * \brief getDataFilename
+	 * \return
+	 */
 	virtual std::string getDataFilename() = 0;
+	/*!
+	 * \brief setDataFilename
+	 * \param filename
+	 */
 	virtual void setDataFilename(std::string filename) = 0;
 };
 

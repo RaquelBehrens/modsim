@@ -101,7 +101,7 @@ bool LSODE::_doStep() {
 		time += halfStep;
 		_timeVariable->setValue(time);
 		for (i = 0; i < numEqs; i++) {
-			_variable->setValue(std::to_string(i), valVar[i] + k1[i] * halfStep);
+			_variable->setValue(valVar[i] + k1[i] * halfStep, std::to_string(i));
 		}
 		for (i = 0; i < numEqs; i++) {
 			expression = _diffEquations->getAtRank(i);
@@ -109,7 +109,7 @@ bool LSODE::_doStep() {
 			k2[i] = eqResult;
 		}
 		for (i = 0; i < numEqs; i++) {
-			_variable->setValue(std::to_string(i), valVar[i] + k2[i] * halfStep);
+			_variable->setValue(valVar[i] + k2[i] * halfStep, std::to_string(i));
 		}
 		for (i = 0; i < numEqs; i++) {
 			expression = _diffEquations->getAtRank(i);
@@ -117,7 +117,7 @@ bool LSODE::_doStep() {
 			k3[i] = eqResult;
 		}
 		for (i = 0; i < numEqs; i++) {
-			_variable->setValue(std::to_string(i), valVar[i] + k3[i] * halfStep);
+			_variable->setValue(valVar[i] + k3[i] * halfStep, std::to_string(i));
 		}
 		for (i = 0; i < numEqs; i++) {
 			expression = _diffEquations->getAtRank(i);
@@ -127,7 +127,7 @@ bool LSODE::_doStep() {
 		for (i = 0; i < numEqs; i++) {
 
 			eqResult = _variable->getValue(std::to_string(i)) +(_step / 6) * (k1[i] + 2 * (k2[i] + k3[i]) + k4[i]);
-			_variable->setValue(std::to_string(i), eqResult);
+			_variable->setValue(eqResult, std::to_string(i));
 		}
 		time = initTime + _step;
 		_timeVariable->setValue(time);

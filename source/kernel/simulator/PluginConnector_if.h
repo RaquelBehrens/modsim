@@ -21,9 +21,29 @@
 
 class PluginConnector_if {
 public:
+	/*!
+	 * \brief check
+	 * \param dynamicLibraryFilename
+	 * \return
+	 */
 	virtual Plugin* check(const std::string dynamicLibraryFilename) = 0;
+	/*!
+	 * \brief connect
+	 * \param dynamicLibraryFilename
+	 * \return
+	 */
 	virtual Plugin* connect(const std::string dynamicLibraryFilename) = 0;
+	/*!
+	 * \brief disconnect
+	 * \param dynamicLibraryFilename
+	 * \return
+	 */
 	virtual bool disconnect(const std::string dynamicLibraryFilename) = 0;
+	/*!
+	 * \brief disconnect
+	 * \param plugin
+	 * \return
+	 */
 	virtual bool disconnect(Plugin* plugin) = 0;
 };
 //namespace\\}

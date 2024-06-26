@@ -16,6 +16,7 @@
 
 #include "GenesysApplication_if.h"
 #include "Util.h"
+#include "../../../kernel/simulator/TraceManager.h"
 
 class GenesysShell_if : public GenesysApplication_if {
 public:
@@ -27,7 +28,7 @@ public:
 	virtual void listHosts() = 0;
 	virtual void listPlugins() = 0;
 	virtual void deleteTraceFiles() = 0;
-	virtual void traceLevel(TraceManager::TraceLevel tracelevel) = 0;
+	virtual void traceLevel(TraceManager::Level tracelevel) = 0;
 	virtual void addPlugin(std::string filename) = 0;
 	virtual void addFromFile(std::string filename) = 0;
 	virtual void readCommandsFromFile(std::string filename) = 0;

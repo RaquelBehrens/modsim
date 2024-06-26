@@ -18,7 +18,7 @@
 
 ModelDataManager::ModelDataManager(Model* model) {
 	_parentModel = model;
-	/// Elements are organized as a map from a string (key), the type of an modeldatum, and a list of elements of that type
+	// Elements are organized as a map from a string (key), the type of an modeldatum, and a list of elements of that type
 	_datadefinitions = new std::map<std::string, List<ModelDataDefinition*>*>();
 }
 

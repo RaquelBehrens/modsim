@@ -1,7 +1,8 @@
-access.so
+﻿access.so
 assign.so
 batch.so
 buffer.so
+cellularautomata.so
 clone.so
 cppforg.so
 cppcompiler.so
@@ -13,7 +14,6 @@ dispose.so
 dropoff.so
 dummy.so
 efsm.so
-fsm.so
 efsmData.so
 enter.so
 entitygroup.so
@@ -30,6 +30,7 @@ leave.so
 lsode.so
 markovchain.so
 match.so
+octave.so
 pickup.so
 pickstation.so
 process.so
@@ -56,6 +57,3 @@ stop.so
 unstore.so
 variable.so
 write.so
-spice_circuite.so
-spice_node.so
-spice_runner.so

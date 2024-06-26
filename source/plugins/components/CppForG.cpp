@@ -3,16 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/class.cc to edit this template
  */
 
-/* 
+/*
  * File:   CppForG.cpp
  * Author: rlcancian
- * 
+ *
  * Created on 11 de janeiro de 2022, 22:37
  */
 
 
 #include "CppForG.h"
 #include "../../kernel/simulator/Model.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 
 #include <fstream>
 #include <dlfcn.h>
@@ -31,6 +32,31 @@ ModelDataDefinition* CppForG::NewInstance(Model* model, std::string name) {
 
 CppForG::CppForG(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<CppForG>(), name) {
 	_createInternalAndAttachedData();
+
+	SimulationControlGeneric<std::string>* propDispatchEvent = new SimulationControlGeneric<std::string>(
+									std::bind(&CppForG::getOnDispatchEventCode, this), std::bind(&CppForG::setOnDispatchEventCode, this, std::placeholders::_1),
+									Util::TypeOf<CppForG>(), getName(), "OnDispatchEventCode", "");
+	SimulationControlGeneric<std::string>* propBetweenRep = new SimulationControlGeneric<std::string>(
+									std::bind(&CppForG::getInitBetweenReplicationCode, this), std::bind(&CppForG::setInitBetweenReplicationCode, this, std::placeholders::_1),
+									Util::TypeOf<CppForG>(), getName(), "InitBetweenReplicationCode", "");
+	SimulationControlGeneric<std::string>* propIncludes = new SimulationControlGeneric<std::string>(
+									std::bind(&CppForG::getIncludesCode, this), std::bind(&CppForG::setIncludesCode, this, std::placeholders::_1),
+									Util::TypeOf<CppForG>(), getName(), "IncludesCode", "");
+	SimulationControlGenericClass<CppCompiler*, Model*, CppCompiler>* propCppCompiler = new SimulationControlGenericClass<CppCompiler*, Model*, CppCompiler>(
+									_parentModel,
+									std::bind(&CppForG::getCppCompiler, this), std::bind(&CppForG::setCppCompiler, this, std::placeholders::_1),
+									Util::TypeOf<CppForG>(), getName(), "CppCompiler", "");
+
+	_parentModel->getControls()->insert(propDispatchEvent);
+	_parentModel->getControls()->insert(propBetweenRep);
+	_parentModel->getControls()->insert(propIncludes);
+	_parentModel->getControls()->insert(propCppCompiler);
+
+	// setting properties
+	_addProperty(propDispatchEvent);
+	_addProperty(propBetweenRep);
+	_addProperty(propIncludes);
+	_addProperty(propCppCompiler);
 }
 
 std::string CppForG::show() {

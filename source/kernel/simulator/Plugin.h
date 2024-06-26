@@ -36,15 +36,42 @@ public:
 public:
 	std::string show();
 public:
+	/*!
+	 * \brief isIsValidPlugin
+	 * \return
+	 */
 	bool isIsValidPlugin() const;
+	/*!
+	 * \brief getPluginInfo
+	 * \return
+	 */
 	PluginInformation* getPluginInfo() const;
-public:
-	ModelDataDefinition* loadNew(Model* model, PersistenceRecord *fields); ///< creates a new ModelDataDefinition from fields loaded from a file
+	/*!
+	 * \brief loadNew
+	 * \param model
+	 * \param fields
+	 * \return
+	 */
+	ModelDataDefinition* loadNew(Model* model, PersistenceRecord *fields); //!< creates a new ModelDataDefinition from fields loaded from a file
+	/*!
+	/*! * \brief loadAndInsertNew
+	/*! * \param model
+	/*! * \param fields
+	/*! * \return
+	*/
 	bool loadAndInsertNew(Model* model, PersistenceRecord *fields);
+	/*!
+	 * \brief newInstance
+	 * \param model
+	 * \param name
+	 * \return
+	 */
 	ModelDataDefinition* newInstance(Model* model, std::string name = "");
+
 private:
 	ModelComponent* _loadNewComponent(Model* model, PersistenceRecord *fields);
 	ModelDataDefinition* _loadNewElement(Model* model, PersistenceRecord *fields);
+
 private: // read only
 	bool _isValidPlugin;
 	PluginInformation* _pluginInfo;

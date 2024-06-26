@@ -62,6 +62,6 @@ private:
     bool _isFinalState = false;
     bool _mustBeImmediate = false;
     ExtendedFSM* _refinement = nullptr;
-    ExtendedFSM* _efsm;
+    ExtendedFSM* _efsm = nullptr;
 };
 #endif /* FSM_STATE_H */

@@ -14,6 +14,7 @@
 #include "Wait.h"
 #include "../../kernel/simulator/Model.h"
 #include "../../kernel/simulator/Simulator.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 #include "../../kernel/simulator/PluginManager.h"
 #include "../../plugins/data/Queue.h"
 
@@ -31,6 +32,30 @@ ModelDataDefinition* Wait::NewInstance(Model* model, std::string name) {
 }
 
 Wait::Wait(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Wait>(), name) {
+	SimulationControlGeneric<std::string>* propCondition = new SimulationControlGeneric<std::string>(
+									std::bind(&Wait::getCondition, this), std::bind(&Wait::setCondition, this, std::placeholders::_1),
+									Util::TypeOf<Wait>(), getName(), "Condition", "");
+	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Wait::getlimitExpression, this), std::bind(&Wait::setLimitExpression, this, std::placeholders::_1),
+									Util::TypeOf<Wait>(), getName(), "LimitExpression", "");
+	SimulationControlGenericEnum<Wait::WaitType>* propWaitType = new SimulationControlGenericEnum<Wait::WaitType>(
+									std::bind(&Wait::getWaitType, this), std::bind(&Wait::setWaitType, this, std::placeholders::_1),
+									Util::TypeOf<Wait>(), getName(), "WaitType", "");
+	SimulationControlGenericClass<Queue*, Model*, Queue>* propQueue = new SimulationControlGenericClass<Queue*, Model*, Queue>(
+									_parentModel,
+									std::bind(&Wait::getQueue, this), std::bind(&Wait::setQueue, this, std::placeholders::_1),
+									Util::TypeOf<Wait>(), getName(), "Queue", "");
+
+	_parentModel->getControls()->insert(propQueue);
+	_parentModel->getControls()->insert(propWaitType);
+	_parentModel->getControls()->insert(propCondition);
+	_parentModel->getControls()->insert(propExpression);
+
+	// setting properties
+	_addProperty(propQueue);
+	_addProperty(propWaitType);
+	_addProperty(propCondition);
+	_addProperty(propExpression);
 }
 
 // public
@@ -131,7 +156,7 @@ bool Wait::_check(std::string * errorMessage) {
 	bool resultAll = true;
 	if (_waitType == Wait::WaitType::ScanForCondition) {
 		resultAll = _parentModel->checkExpression(_condition, "Condition", errorMessage);
-		if (resultAll) { // add handler to event AfterProcessEvent 
+		if (resultAll) { // add handler to event AfterProcessEvent
 			_parentModel->getOnEvents()->addOnAfterProcessEventHandler(this, &Wait::_handlerForAfterProcessEventEvent);
 		}
 	}
@@ -196,4 +221,3 @@ void Wait::_handlerForAfterProcessEventEvent(SimulationEvent* event) {
 
 	}
 }
-

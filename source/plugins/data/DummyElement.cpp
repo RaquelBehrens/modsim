@@ -14,14 +14,14 @@
 
 #ifdef PLUGINCONNECT_DYNAMIC
 
-/// Externalize function GetPluginInformation to be accessible throught dynamic linked library
+// Externalize function GetPluginInformation to be accessible throught dynamic linked library
 extern "C" StaticGetPluginInformation GetPluginInformation() {
 	return &DummyElement::GetPluginInformation;
 }
 #endif
 
 //
-// public: /// constructors
+// public: //! constructors
 //
 
 DummyElement::DummyElement(Model* model, std::string name) : ModelDataDefinition(model, Util::TypeOf<DummyElement>(), name) {
@@ -29,14 +29,14 @@ DummyElement::DummyElement(Model* model, std::string name) : ModelDataDefinition
 
 
 //
-// public: /// new public user methods for this component
+// public: //! new public user methods for this component
 //
 
 // ...
 
 
 //
-// public: /// virtual methods
+// public: //! virtual methods
 //
 
 std::string DummyElement::show() {
@@ -46,7 +46,7 @@ std::string DummyElement::show() {
 
 
 //
-// public: /// static methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
+// public: //! static methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
 //
 
 
@@ -89,7 +89,7 @@ ModelDataDefinition* DummyElement::NewInstance(Model* model, std::string name) {
 
 
 //
-// protected: /// virtual method that must be overriden
+// protected: //! virtual method that must be overriden
 //
 
 bool DummyElement::_loadInstance(PersistenceRecord *fields) {
@@ -111,7 +111,7 @@ void DummyElement::_saveInstance(PersistenceRecord *fields, bool saveDefaultValu
 }
 
 //
-// protected: /// virtual methods that could be overriden by derived classes, if needed
+// protected: //! virtual methods that could be overriden by derived classes, if needed
 //
 
 /*

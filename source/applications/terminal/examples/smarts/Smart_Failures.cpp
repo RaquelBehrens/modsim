@@ -31,27 +31,20 @@ int Smart_Failures::main(int argc, char** argv) {
 	Create* create1 = plugins->newInstance<Create>(model);
 	//create1->setTimeBetweenCreationsExpression("100");
 	//create1->setFirstCreation(100);
-	
 	Failure* failure1 = plugins->newInstance<Failure>(model, "failure by time");
 	failure1->setUpTimeExpression("norm(50,2)");
 	failure1->setDownTimeExpression("5");
-
 	Failure* failure2 = plugins->newInstance<Failure>(model, "failure by count");
 	failure2->setFailureType(Failure::FailureType::COUNT);
 	failure2->setCountExpression("10");
 	failure2->setDownTimeExpression("2");
-	
 	Resource* machine1 = plugins->newInstance<Resource>(model, "Machine_1");
 	machine1->insertFailure(failure1);
 	machine1->insertFailure(failure2);
-
 	Queue* queueSeize1 = plugins->newInstance<Queue>(model, "Seize_1.Queue");
-
 	Seize* seize1 = plugins->newInstance<Seize>(model);
 	seize1->getSeizeRequests()->insert(new SeizableItem(machine1, "1"));
 	seize1->setQueue(queueSeize1);
-	
-	
 	Delay* delay1 = plugins->newInstance<Delay>(model);
 	//delay1->setDelay(100);
 	Release* release1 = plugins->newInstance<Release>(model);

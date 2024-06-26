@@ -23,6 +23,9 @@
 class ModelComponent;
 
 //typedef unsigned int ConnectionPort; 
+/*!
+ * \brief The ConnectionChannel class defines an input or output port that connects a ModelComponent to another
+ */
 struct ConnectionChannel { /*< actually a port is only a uint, but it could be more complex, including type, presence or absence of data, etc */
 	unsigned int portNumber = 0;
 	std::string portDescription = "";
@@ -47,28 +50,105 @@ public:
 	ConnectionManager();
 	virtual ~ConnectionManager() = default;
 public:
+	/*!
+	 * \brief size
+	 * \return
+	 */
 	unsigned int size();
-	//ModelComponent* front(); /*!< DEPRECTED. Use  frontConnection instead */
-	//ModelComponent* atRank(unsigned int rank); /*!< DEPRECTED. Use  getConnectionAtRank instead */
+	/*!
+	 * \brief getFrontConnection
+	 * \return
+	 */
 	Connection* getFrontConnection();
+	/*!
+	 * \brief getConnectionAtPort
+	 * \param rank
+	 * \return
+	 */
 	Connection* getConnectionAtPort(unsigned int rank);
+	/*!
+	 * \brief insert
+	 * \param component
+	 * \param inputPortNumber
+	 */
 	void insert(ModelComponent* component, unsigned int inputPortNumber = 0); /*!< Insert a new connection by specifying the destnation component and optionally an input port, if not 0*/
+	/*!
+	 * \brief insert
+	 * \param connection
+	 */
 	void insert(Connection* connection);
+	/*!
+	 * \brief insertAtPort
+	 * \param port
+	 * \param connection
+	 */
 	void insertAtPort(unsigned int port, Connection* connection);
+	/*!
+	 * \brief remove
+	 * \param connection
+	 */
 	void remove(Connection* connection);
+	/*!
+	 * \brief removeAtPort
+	 * \param port
+	 */
 	void removeAtPort(unsigned int port);
+	/*!
+	 * \brief connections
+	 * \return
+	 */
 	std::map<unsigned int, Connection*>* connections() const;
 	//void setCurrentOutputConnections(unsigned int _currentOutputConnections);
+	/*!
+	 * \brief getCurrentOutputConnectionsSize
+	 * \return
+	 */
 	unsigned int getCurrentOutputConnectionsSize() const;
+	/*!
+	 * \brief setMaxOutputConnections
+	 * \param _maxOutputConnections
+	 */
 	void setMaxOutputConnections(unsigned int _maxOutputConnections);
+	/*!
+	 * \brief getMaxOutputConnections
+	 * \return
+	 */
 	unsigned int getMaxOutputConnections() const;
+	/*!
+	 * \brief setMinOutputConnections
+	 * \param _minOutputConnections
+	 */
 	void setMinOutputConnections(unsigned int _minOutputConnections);
+	/*!
+	 * \brief getMinOutputConnections
+	 * \return
+	 */
 	unsigned int getMinOutputConnections() const;
 	//void setCurrentInputConnections(unsigned int _currentInputConnections);
+	/*!
+	 * \brief getCurrentInputConnectionsSize
+	 * \return
+	 */
 	unsigned int getCurrentInputConnectionsSize() const;
+	/*!
+	 * \brief setMaxInputConnections
+	 * \param _maxInputConnections
+	 */
 	void setMaxInputConnections(unsigned int _maxInputConnections);
+	/*!
+	 * \brief getMaxInputConnections
+	 * \return
+	 */
 	unsigned int getMaxInputConnections() const;
+	/*!
+	 * \brief setMinInputConnections
+	 * \param _minInputConnections
+	 */
 	void setMinInputConnections(unsigned int _minInputConnections);
+	/*!
+	 * \brief getMinInputConnections
+	 * \return
+	 */
 	unsigned int getMinInputConnections() const;
 private:
 	std::map<unsigned int, Connection*>* _nextConnections = new std::map<unsigned int, Connection*>();

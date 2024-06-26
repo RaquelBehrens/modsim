@@ -32,6 +32,35 @@ QueueableItem::QueueableItem(Model* model, std::string queueName = "") {
 		_queueOrSet = model->getParentSimulator()->getPlugins()->newInstance<Queue>(model, queueName);
 	}
 	_index = "0";
+
+	// SimulationControlGeneric<std::string>* propIndex = new SimulationControlGeneric<std::string>(
+	// 								std::bind(&QueueableItem::getIndex, this), std::bind(&QueueableItem::setIndex, this, std::placeholders::_1),
+	// 								Util::TypeOf<QueueableItem>(), getName(), "Index", "");
+	// SimulationControlGeneric<Queue*>* propQueue = new SimulationControlGeneric<Queue*>(
+	// 								std::bind(&QueueableItem::getQueue, this), std::bind(&QueueableItem::setQueue, this, std::placeholders::_1),
+	// 								Util::TypeOf<QueueableItem>(), getName(), "Queue", "");
+	// SimulationControlGeneric<Set*>* propSet = new SimulationControlGeneric<Set*>(
+	// 								std::bind(&QueueableItem::getSet, this), std::bind(&QueueableItem::setSet, this, std::placeholders::_1),
+	// 								Util::TypeOf<QueueableItem>(), getName(), "Set", "");
+	// SimulationControlGenericEnum<QueueableItem::QueueableType>* propQueueableType = new SimulationControlGenericEnum<QueueableItem::QueueableType>(
+	// 								std::bind(&QueueableItem::getQueueableType, this), std::bind(&QueueableItem::setQueueableType, this, std::placeholders::_1),
+	// 								Util::TypeOf<QueueableItem>(), getName(), "QueueableType", "");
+	// SimulationControlGeneric<ModelDataDefinition*>* propQueueable = new SimulationControlGeneric<ModelDataDefinition*>(
+	// 								std::bind(&QueueableItem::getQueueable, this), std::bind(&QueueableItem::setElementManager, this, std::placeholders::_1),
+	// 								Util::TypeOf<QueueableItem>(), getName(), "Queueable", "");
+
+	// _parentModel->getControls()->insert(propIndex);
+	// _parentModel->getControls()->insert(propQueue);
+	// _parentModel->getControls()->insert(propSet);
+	// _parentModel->getControls()->insert(propQueueableType);
+	// _parentModel->getControls()->insert(propQueueable);
+
+	// setting properties
+	// _addProperty(propIndex);
+	// _addProperty(propQueue);
+	// _addProperty(propSet);
+	// _addProperty(propQueueableType);
+	// _addProperty(propQueueable);
 }
 
 bool QueueableItem::loadInstance(PersistenceRecord *fields) {

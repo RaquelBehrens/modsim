@@ -1,7 +1,7 @@
 # Genesys Simulation Model
 # Simulator, Model and Simulation infos
-0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=230914 0   ModelInfo  "Model 1" version="1.0" projectTitle="" description="" analystName="" 0   ModelSimulation "" traceLevel=9 warmUpTimeTimeUnit=6 warmUpTime=0.050000 replicationLength=10.000000 numberOfReplications=300 replicationLengthTimeUnit=6 
+0   Simulator  "GenESyS - GENeric and Expansible SYstem Simulator" versionNumber=230914 0   ModelInfo  "Model 1" version="1.0" projectTitle="" description="" analystName="" 0   ModelSimulation "" traceLevel=9 replicationLength=1000.000000 numberOfReplications=30 
 # Model Data Definitions
-66  EntityType "Person" 69  Attribute  "timeIn" 
+68  Resource   "Resource_1" capacity=5 69  Queue      "Queue_1" 
 # Model Components
-67  Create     "Create_1" entityType="Person" timeBetweenCreationsTimeUnit=6 nextId=68 caption="Enter Store" timeBetweenCreations="EXPO(5)" 68  Assign     "Assign_1" assignExpr[0]="tnow" nextId=70 caption="Mark Entry Time" assignDest[0]="timeIn" 70  Delay      "Delay_1" delayExpressionTimeUnit=6 delayExpression="tria(3, 7, 11)" nextId=71 caption="Browse" 71  Record     "Record_1" nextId=72 caption="Time in Store" expressionName="Time in Store" expression="timeIn" 72  Dispose    "Dispose_1" nexts=0 caption="Leave Store" 
+63  Create     "Create_1" entityType="entitytype" nextId=64 64  Process    "Process_1" delayExpression="unif(2, 6)" queueable="Queue_1" nextId=70 requestSeizable[0]="Resource_1" 70  Record     "Record_1" fileName="recordNumberInQueue.txt" nextId=71 expressionName="Number in queue" expression="nq(Queue_1)" 71  Record     "Record_2" fileName="recordNumberBusy.txt" nextId=72 expressionName="resource_1 number busy" expression="NR(Resource_1)" 72  Record     "Record_3" fileName="recordBeta.txt" nextId=73 expressionName="Just a Beta distribution" expression="beta(2,8,0,100)" 73  Dispose    "Dispose_1" nexts=0 

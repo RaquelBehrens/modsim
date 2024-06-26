@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Batch.cpp
  * Author: rlcancian
- * 
+ *
  * Created on 03 de Junho de 2019, 15:14
  */
 
@@ -30,6 +30,41 @@ ModelDataDefinition* Batch::NewInstance(Model* model, std::string name) {
 }
 
 Batch::Batch(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Batch>(), name) {
+	SimulationControlGenericEnum<Batch::Rule>* propRule = new SimulationControlGenericEnum<Batch::Rule>(
+				std::bind(&Batch::getRule, this),
+				std::bind(&Batch::setRule, this, std::placeholders::_1),
+				Util::TypeOf<Batch>(), getName(), "Rule", "");
+	SimulationControlGenericEnum<Batch::GroupedAttribs>* propGroupedAttribs = new SimulationControlGenericEnum<Batch::GroupedAttribs>(
+				std::bind(&Batch::getGroupedAttributes, this),
+				std::bind(&Batch::setGroupedAttributes, this, std::placeholders::_1),
+				Util::TypeOf<Batch>(), getName(), "GroupedAttributes", "");
+	SimulationControlGenericClass<EntityType*, Model*, EntityType>* propGroupedEntity = new SimulationControlGenericClass<EntityType*, Model*, EntityType>(
+				_parentModel,
+				std::bind(&Batch::getGroupedEntityType, this),
+				std::bind(&Batch::setGroupedEntityType, this, std::placeholders::_1),
+				Util::TypeOf<Batch>(), getName(), "GroupedEntityType", "");
+	SimulationControlGeneric<std::string>* propAttributeName = new SimulationControlGeneric<std::string>(
+				std::bind(&Batch::getAttributeName, this),
+				std::bind(&Batch::setAttributeName, this, std::placeholders::_1),
+				Util::TypeOf<Batch>(), getName(), "AttributeName", "");
+	SimulationControlGeneric<std::string>* propSize = new SimulationControlGeneric<std::string>(
+				std::bind(&Batch::getBatchSize, this),
+				std::bind(&Batch::setBatchSize, this, std::placeholders::_1),
+				Util::TypeOf<Batch>(), getName(), "BatchSize", "");
+
+
+	_parentModel->getControls()->insert(propRule);
+	_parentModel->getControls()->insert(propGroupedAttribs);
+	_parentModel->getControls()->insert(propGroupedEntity);
+	_parentModel->getControls()->insert(propAttributeName);
+	_parentModel->getControls()->insert(propSize);
+
+	// setting properties
+	_addProperty(propRule);
+	_addProperty(propGroupedAttribs);
+	_addProperty(propGroupedEntity);
+	_addProperty(propAttributeName);
+	_addProperty(propSize);
 }
 
 std::string Batch::show() {
@@ -134,7 +169,7 @@ void Batch::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 					}
 				}
 				traceSimulation(this,  "Found " + std::to_string(entitiesToGroup->size()) + " elements in queue with the same value (" + std::to_string(value) + ") for attribute \"" + _attributeName + "\", and a group will be created", TraceManager::Level::L7_internal);
-				break; //@TODO //breake? //next? 
+				break; //@TODO //breake? //next?
 			}
 		}
 	} else { // BY EntityType
@@ -282,5 +317,4 @@ PluginInformation * Batch::GetPluginInformation() {
 	info->setDescriptionHelp(help);
 	return info;
 }
-
 

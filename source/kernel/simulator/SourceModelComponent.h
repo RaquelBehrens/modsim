@@ -29,22 +29,86 @@ public:
 	SourceModelComponent(Model* model, std::string componentTypename, std::string name = "");
 	virtual ~SourceModelComponent() = default;
 public: // get & set
+	/*!
+	 * \brief setFirstCreation
+	 * \param _firstCreation
+	 */
 	void setFirstCreation(double _firstCreation);
+	/*!
+	 * \brief getFirstCreation
+	 * \return
+	 */
 	double getFirstCreation() const;
+	/*!
+	 * \brief setEntityType
+	 * \param _entityType
+	 */
 	void setEntityType(EntityType* _entityType);
+	/*!
+	 * \brief setEntityTypeName
+	 * \param entityTypeName
+	 */
 	void setEntityTypeName(std::string entityTypeName);
+	/*!
+	 * \brief getEntityType
+	 * \return
+	 */
 	EntityType* getEntityType() const;
+	/*!
+	 * \brief setTimeUnit
+	 * \param _timeUnit
+	 */
 	void setTimeUnit(Util::TimeUnit _timeUnit);
+	/*!
+	 * \brief getTimeUnit
+	 * \return
+	 */
 	Util::TimeUnit getTimeUnit() const;
-	//void setTimeBetweenCreationsExpression(std::string _timeBetweenCreations);
+	/*!
+	 * \brief setTimeBetweenCreationsExpression
+	 * \param _timeBetweenCreations
+	 * \param _timeUnit
+	 */
 	void setTimeBetweenCreationsExpression(std::string _timeBetweenCreations, Util::TimeUnit _timeUnit=Util::TimeUnit::unknown);
+	/*!
+	 * \brief getTimeBetweenCreationsExpression
+	 * \return
+	 */
 	std::string getTimeBetweenCreationsExpression() const;
+	/*!
+	 * \brief setMaxCreations
+	 * \param _maxCreations
+	 */
 	void setMaxCreations(unsigned long _maxCreations);
+	/*!
+	 * \brief setMaxCreations
+	 * \param _maxCreationsExpression
+	 */
 	void setMaxCreations(std::string _maxCreationsExpression);
+	/*!
+	 * \brief getMaxCreations
+	 * \return
+	 */
 	std::string getMaxCreations() const;
+	/*!
+	 * \brief getEntitiesCreated
+	 * \return
+	 */
 	unsigned int getEntitiesCreated() const;
+	/*!
+	 * \brief setEntitiesCreated
+	 * \param _entitiesCreated
+	 */
 	void setEntitiesCreated(unsigned int _entitiesCreated);
+	/*!
+	 * \brief setEntitiesPerCreation
+	 * \param _entitiesPerCreation
+	 */
 	void setEntitiesPerCreation(unsigned int _entitiesPerCreation);
+	/*!
+	 * \brief getEntitiesPerCreation
+	 * \return
+	 */
 	unsigned int getEntitiesPerCreation() const;
 public:
 	virtual std::string show();

@@ -19,24 +19,26 @@
 #include "../../plugins/components/Assign.h"
 #include "../../plugins/components/Batch.h"
 #include "../../plugins/components/Buffer.h"
+//#include "../../plugins/components/CellularAutomataComp.h"
 #include "../../plugins/components/Clone.h"
 #include "../../plugins/components/CppForG.h"
 #include "../../plugins/components/Create.h"
 #include "../../plugins/components/Decide.h"
 #include "../../plugins/components/Delay.h"
-//#include "../../plugins/components/DiffEquations.h"
+#include "../../plugins/components/DiffEquations.h"
 #include "../../plugins/components/Dispose.h"
 #include "../../plugins/components/DropOff.h"
 #include "../../plugins/components/DummyComponent.h"
 #include "../../plugins/components/Enter.h"
 #include "../../plugins/components/Exit.h"
-#include "../../plugins/components/FSM_State.h"
-#include "../../plugins/components/FSM_Transition.h"
-#include "../../plugins/components/FSM_ModalModel.h"
 #include "../../plugins/components/FiniteStateMachine.h"
+#include "../../plugins/components/FSM_ModalModel.h"
+#include "../../plugins/components/FSM_Transition.h"
+#include "../../plugins/components/FSM_State.h"
 #include "../../plugins/components/Leave.h"
 #include "../../plugins/components/Match.h"
 #include "../../plugins/components/MarkovChain.h"
+//#include "../../plugins/components/Octave.h"
 #include "../../plugins/components/PickStation.h"
 #include "../../plugins/components/PickUp.h"
 #include "../../plugins/components/Seize.h"
@@ -58,9 +60,6 @@
 #include "../../plugins/components/Write.h"
 #include "../../plugins/components/LSODE.h"
 
-//#include "../../plugins/components/ExtendedFinishStateMachine.h"
-
-
 
 // Model data definitions
 #include "../../plugins/data/CppCompiler.h"
@@ -77,13 +76,6 @@
 #include "../../plugins/data/Storage.h"
 #include "../../plugins/data/Variable.h"
 #include "../../plugins/data/EFSM.h"
-#include "../../plugins/data/SPICECircuit.h"
-#include "../../plugins/data/SPICENode.h"
-#include "../../plugins/data/SPICERunner.h"
-
-//#include "../../plugins/data/State.h"
-//#include "../../plugins/data/Transition.h"
-
 //#include "../../plugins/data/Expression.h"
 //#include "../../plugins/data/Conveyor.h"
 //#include "../../plugins/data/Segment.h"
@@ -126,16 +118,8 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Assign::GetPluginInformation;
 	else if (fn == "buffer.so")
 		GetInfo = &Buffer::GetPluginInformation;
-	else if (fn == "fsm.so")
-		GetInfo = &FiniteStateMachine::GetPluginInformation;
 	else if (fn == "efsm.so")
-		GetInfo = &ExtendedFSM::GetPluginInformation;
-	else if (fn == "spice_circuite.so")
-		GetInfo = &SPICECircuit::GetPluginInformation;
-	else if (fn == "spice_node.so")
-		GetInfo = &SPICENode::GetPluginInformation;
-	else if (fn == "spice_runner.so")
-		GetInfo = &SPICERunner::GetPluginInformation;
+		GetInfo = &FiniteStateMachine::GetPluginInformation;
 	else if (fn == "entitygroup.so")
 		GetInfo = &EntityGroup::GetPluginInformation;
 	else if (fn == "failure.so")
@@ -171,6 +155,8 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Access::GetPluginInformation;
 	else if (fn == "batch.so")
 		GetInfo = &Batch::GetPluginInformation;
+	/* else if (fn == "cellularautomata.so")
+		GetInfo = &CellularAutomataComp::GetPluginInformation; */
 	else if (fn == "clone.so")
 		GetInfo = &Clone::GetPluginInformation;
 	else if (fn == "create.so")
@@ -187,10 +173,12 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Dispose::GetPluginInformation;
 	else if (fn == "dummy.so")
 		GetInfo = &DummyComponent::GetPluginInformation;
-//	else if (fn == "diffequations.so")
-//		GetInfo = &DiffEquations::GetPluginInformation;
+	else if (fn == "diffequations.so")
+		GetInfo = &DiffEquations::GetPluginInformation;
 	else if (fn == "dropoff.so")
 		GetInfo = &DropOff::GetPluginInformation;
+	else if (fn == "efsmData.so")
+		GetInfo = &ExtendedFSM::GetPluginInformation;
 	else if (fn == "enter.so")
 		GetInfo = &Enter::GetPluginInformation;
 	else if (fn == "exit.so")
@@ -249,6 +237,9 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Unstore::GetPluginInformation;
 	else if (fn == "write.so")
 		GetInfo = &Write::GetPluginInformation;
+	//else if (fn == "octave.so")
+	//	GetInfo = &Octave::GetPluginInformation;
+
 	//    GetInfo = &Conveyour::GetPluginInformation;
 	//else if (fn == "segment.so")
 	//    GetInfo = &Segment::GetPluginInformation;

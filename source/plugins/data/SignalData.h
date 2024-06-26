@@ -49,7 +49,7 @@ protected: // could be overriden .
 	//virtual void _createInternalAndAttachedData();
 	//virtual ParserChangesInformation* _getParserChangesInformation();
 private: // methods
-	unsigned int  _notifySignalDataEventHandlers(); ///< Notify observer classes that some of the resource capacity has been released. It is useful for allocation components (such as Seize) to know when an entity waiting into a queue can try to seize the resource again
+	unsigned int  _notifySignalDataEventHandlers(); //!< Notify observer classes that some of the resource capacity has been released. It is useful for allocation components (such as Seize) to know when an entity waiting into a queue can try to seize the resource again
 private: //1::1
 	unsigned int _remainsToLimit;
 private: //1::n

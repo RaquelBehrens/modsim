@@ -55,7 +55,7 @@ public: // discrete probability distributions
 	virtual double sampleDiscrete(double *prob, double *value, int size);
 	virtual double sampleGeometric(double p);
 public:
-	void reset(); ///< reinitialize seed and other parameters so (pseudo) random number sequence will be generated again.
+	void reset(); //!< reinitialize seed and other parameters so (pseudo) random number sequence will be generated again.
 public:
 	virtual void setRNGparameters(RNG_Parameters* param);
 	virtual RNG_Parameters* getRNGparameters() const;

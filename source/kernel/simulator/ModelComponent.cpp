@@ -17,7 +17,7 @@
 
 
 //
-// public: /// constructors
+// public: //! constructors
 //
 
 ModelComponent::ModelComponent(Model* model, std::string componentTypename, std::string name) : ModelDataDefinition(model, componentTypename, name, false) {
@@ -31,7 +31,7 @@ ModelComponent::~ModelComponent() {
 
 
 //
-// public: /// new public user methods for this component
+// public: //! new public user methods for this component
 //
 
 ConnectionManager* ModelComponent::getConnections() const {
@@ -58,7 +58,7 @@ std::string ModelComponent::getDescription() const {
 
 
 //
-// public: /// virtual methods
+// public: //! virtual methods
 //
 
 
@@ -68,7 +68,7 @@ std::string ModelComponent::show() {
 
 
 //
-// public: /// static methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
+// public: //! static methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
 //
 
 void ModelComponent::SaveInstance(PersistenceRecord *fields, ModelComponent* component) {
@@ -132,7 +132,7 @@ void ModelComponent::DispatchEvent(Event* event) {
 
 
 //
-// protected: /// virtual method that must be overriden
+// protected: //! virtual method that must be overriden
 //
 
 bool ModelComponent::_loadInstance(PersistenceRecord *fields) {
@@ -166,7 +166,7 @@ void ModelComponent::_saveInstance(PersistenceRecord *fields, bool saveDefaultVa
 
 
 //
-// protected: /// virtual methods that could be overriden by derived classes, if needed
+// protected: //! virtual methods that could be overriden by derived classes, if needed
 //
 
 /*

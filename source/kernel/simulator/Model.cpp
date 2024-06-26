@@ -54,10 +54,10 @@ Model::Model(Simulator* simulator, unsigned int level) {
 	_modelPersistence = new TraitsKernel<ModelPersistence_if>::Implementation(this);
 	_automaticallyCreatesModelDataDefinitions = TraitsKernel<Model>::automaticallyCreatesModelData;
 	// 1:n associations
-	_futureEvents = new List<Event*>(); /// The future events list must be chronologicaly sorted
+	_futureEvents = new List<Event*>(); // The future events list must be chronologicaly sorted
 	//_events->setSortFunc(&EventCompare); // It works too
 	_futureEvents->setSortFunc([](const Event* a, const Event*b){
-		return a->getTime()<b->getTime(); /// Events are sorted chronologically
+		return a->getTime()<b->getTime(); // Events are sorted chronologically
 	});
 
 	//@TODO: Add properties
@@ -437,27 +437,27 @@ bool Model::hasChanged() const {
 	return changed;
 }
 
-ComponentManager*Model::getComponents() const {
+ComponentManager* Model::getComponents() const {
 	return _componentManager;
 }
 
-OnEventManager*Model::getOnEvents() const {
+OnEventManager* Model::getOnEvents() const {
 	return _eventManager;
 }
 
-ModelDataManager*Model::getDataManager() const {
+ModelDataManager* Model::getDataManager() const {
 	return _modeldataManager;
 }
 
-ModelInfo*Model::getInfos() const {
+ModelInfo* Model::getInfos() const {
 	return _modelInfo;
 }
 
-Simulator*Model::getParentSimulator() const {
+Simulator* Model::getParentSimulator() const {
 	return _parentSimulator;
 }
 
-ModelSimulation*Model::getSimulation() const {
+ModelSimulation* Model::getSimulation() const {
 	return _simulation;
 }
 

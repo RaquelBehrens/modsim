@@ -16,10 +16,9 @@
 
 #include <string>
 #include <list>
-#include "../util/List.h"
 #include "ModelDataDefinition.h"
 #include "ModelDataManager.h"
-#include "Plugin.h"
+#include "PluginInformation.h"
 
 //namespace GenesysKernel {
 
@@ -66,13 +65,14 @@ public:
 	virtual ~Attribute() = default;
 public:
 	virtual std::string show();
-public: //static
+public: // public static methods
 	static PluginInformation* GetPluginInformation();
 	static ModelDataDefinition* LoadInstance(Model* model, PersistenceRecord *fields);
 	static ModelDataDefinition* NewInstance(Model* model, std::string name = "");
-protected:
+protected: //! must be overriden by derived classes
 	virtual bool _loadInstance(PersistenceRecord *fields);
 	virtual void _saveInstance(PersistenceRecord *fields, bool saveDefaultValues);
+protected: //! could be overriden by derived classes
 	virtual bool _check(std::string* errorMessage);
 private:
 	//List<unsigned int>* _dimensionSizes = new List<unsigned int>();

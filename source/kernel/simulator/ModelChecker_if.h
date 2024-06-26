@@ -25,11 +25,35 @@
  */
 class ModelChecker_if {
 public:
+	/*!
+	 * \brief checkAll
+	 * \return
+	 */
 	virtual bool checkAll() = 0; /*!< Invoques all other checks and returns true only if all of them returned true */
+	/*!
+	 * \brief checkConnected
+	 * \return
+	 */
 	virtual bool checkConnected() = 0; /*!< Checks if components are consistently connected to other to form a valid process-oriented model, describing how entities proceed to the flow*/
+	/*!
+	 * \brief checkSymbols
+	 * \return
+	 */
 	virtual bool checkSymbols() = 0; /*!< Checks if user-defined strings for symbols required by components, usually expressions or functions, are valid or references existing and valid elements. */
+	/*!
+	 * \brief checkActivationCode
+	 * \return
+	 */
 	virtual bool checkActivationCode() = 0; /*!< Checks if the installed version has acquired a valid activation code for commercial use */
+	/*!
+	 * \brief checkLimits
+	 * \return
+	 */
 	virtual bool checkLimits() = 0; /*!< Checks if the model (its components and elements) fits the limits based on the activation code */
+	/*!
+	 * \brief checkOrphaned
+	 * \return
+	 */
 	virtual bool checkOrphaned() = 0; /*!< Checks if there are ModelDataDefinitions not referred by any ModelComponent, which means they are orphan ModelDataDefinitions */
 };
 

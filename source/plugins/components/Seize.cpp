@@ -33,9 +33,30 @@ ModelDataDefinition* Seize::NewInstance(Model* model, std::string name) {
 
 Seize::Seize(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Seize>(), name) {
 	// controls and Responses
-	_parentModel->getControls()->insert(new SimulationControlUShort(
-					std::bind(&Seize::getPriority, this), std::bind(&Seize::setPriority, this, std::placeholders::_1),
-					Util::TypeOf<Seize>(), getName(), "Priority", ""));
+	SimulationControlGenericEnum<Util::AllocationType>* propAlloc = new SimulationControlGenericEnum<Util::AllocationType>(
+									std::bind(&Seize::getAllocationType, this), std::bind(&Seize::setAllocationType,  this, std::placeholders::_1),
+									Util::TypeOf<Seize>(), getName(), "AllocationType", "");
+	SimulationControlGeneric<unsigned short>* propPriority = new SimulationControlGeneric<unsigned short>(
+									std::bind(&Seize::getPriority, this), std::bind(&Seize::setPriority, this, std::placeholders::_1),
+									Util::TypeOf<Seize>(), getName(), "Priority", "");
+	SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
+									std::bind(&Seize::getPriorityExpression, this), std::bind(&Seize::setPriorityExpression, this, std::placeholders::_1),
+									Util::TypeOf<Seize>(), getName(), "PriorityExpression", "");
+	// SimulationControlGenericClass<QueueableItem*, Model*, QueueableItem>* propQueueableItem = new SimulationControlGenericClass<QueueableItem*, Model*, QueueableItem>(
+	// 								_parentModel,
+	// 								std::bind(&Seize::getQueueableItem, this), std::bind(&Seize::setQueueableItem, this, std::placeholders::_1),
+	// 								Util::TypeOf<Seize>(), getName(), "QueueableItem", "");
+
+	_parentModel->getControls()->insert(propAlloc);
+	_parentModel->getControls()->insert(propPriority);
+	_parentModel->getControls()->insert(propExpression);
+	// _parentModel->getControls()->insert(propQueueableItem);
+
+	// setting properties
+	_addProperty(propAlloc);
+	_addProperty(propPriority);
+	_addProperty(propExpression);
+	// _addProperty(propQueueableItem);
 }
 
 // public
@@ -146,9 +167,10 @@ void Seize::_onDispatchEvent(Entity* entity, unsigned int inputPortNumber) {
 			_parentModel->getTracer()->traceSimulation(this, _parentModel->getSimulation()->getSimulatedTime(), entity, this, "Entity starts to wait for resource in queue \"" + queue->getName() + "\" with " + std::to_string(queue->size()) + " elements");
 			return;
 		} else { // alocate the resource
-			entity->setAttributeValue("Entity.Allocation." + resource->getName(), static_cast<int> (this->_allocationType), true); //@TODO: Check it!
+			std::string attribIndex="";
+			entity->setAttributeValue("Entity.Allocation." + resource->getName(), static_cast<int> (this->_allocationType), attribIndex, true); //@TODO: Check it!
 			if (seizable->getSaveAttribute() != "") {
-				entity->setAttributeValue(seizable->getSaveAttribute(), *index);
+				entity->setAttributeValue(seizable->getSaveAttribute(), *index, attribIndex);
 			}
 			_parentModel->getTracer()->traceSimulation(this, _parentModel->getSimulation()->getSimulatedTime(), entity, this, entity->getName() + " seizes " + std::to_string(quantity) + " elements of resource \"" + resource->getName() + "\" (capacity:" + std::to_string(resource->getCapacity()) + ", numberbusy:" + std::to_string(resource->getNumberBusy()) + ")");
 		}

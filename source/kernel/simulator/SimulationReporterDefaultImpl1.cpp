@@ -219,7 +219,7 @@ void SimulationReporterDefaultImpl1::showSimulationStatistics() {//List<Statisti
 	_model->getTracer()->traceReport(Util::SetW("name", _nameW) + Util::SetW("elems", _w) + Util::SetW("min", _w) + Util::SetW("max", _w) + Util::SetW("average", _w) + Util::SetW("variance", _w) + Util::SetW("stddev", _w) + Util::SetW("varCoef", _w) + Util::SetW("confInterv", _w) + Util::SetW("confLevel", _w));
 	Util::DecIndent();
 	Util::DecIndent();
-	/// @TODO: USE REFERENCE TO MAPITEM TO AVOID COPY
+	// @TODO: USE REFERENCE TO MAPITEM TO AVOID COPY
 	const unsigned short _w1 = _w - 1;
 	for (auto mapmapItem : *mapMapTypeStat) {
 		_model->getTracer()->traceReport("Statistics for " + mapmapItem.first + ":");

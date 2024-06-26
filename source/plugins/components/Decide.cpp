@@ -27,10 +27,22 @@ ModelDataDefinition* Decide::NewInstance(Model* model, std::string name) {
 }
 
 Decide::Decide(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Decide>(), name) {
+	SimulationControlGenericList<std::string, Model*, std::string>* propConditions = new SimulationControlGenericList<std::string, Model*, std::string> (
+										_parentModel,
+										std::bind(&Decide::getConditions, this), std::bind(&Decide::addConditions, this, std::placeholders::_1),
+										Util::TypeOf<Decide>(), getName(), "Conditions", "");
+
+	_parentModel->getControls()->insert(propConditions);
+
+	_addProperty(propConditions);
 }
 
 List<std::string>* Decide::getConditions() const {
 	return _conditions;
+}
+
+void Decide::addConditions(std::string newCondition) {
+	_conditions->insert(newCondition);
 }
 
 std::string Decide::show() {

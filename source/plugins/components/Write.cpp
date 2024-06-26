@@ -13,6 +13,7 @@
 
 #include "Write.h"
 #include "../../kernel/simulator/Model.h"
+#include "../../kernel/simulator/SimulationControlAndResponse.h"
 
 #ifdef PLUGINCONNECT_DYNAMIC
 
@@ -26,6 +27,21 @@ ModelDataDefinition* Write::NewInstance(Model* model, std::string name) {
 }
 
 Write::Write(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<Write>(), name) {
+	SimulationControlGeneric<std::string>* propFilename = new SimulationControlGeneric<std::string>(
+									std::bind(&Write::filename, this), std::bind(&Write::setFilename, this, std::placeholders::_1),
+									Util::TypeOf<Write>(), getName(), "Filename", "");
+	SimulationControlGenericEnum<Write::WriteToType>* propWriteToType = new SimulationControlGenericEnum<Write::WriteToType>(
+									std::bind(&Write::writeToType, this), std::bind(&Write::setWriteToType, this, std::placeholders::_1),
+									Util::TypeOf<Write>(), getName(), "WriteToType", "");
+
+	// _parentModel->getControls()->insert();
+	_parentModel->getControls()->insert(propFilename);
+	_parentModel->getControls()->insert(propWriteToType);
+
+	// setting properties
+	// _addProperty();
+	_addProperty(propFilename);
+	_addProperty(propWriteToType);
 }
 
 std::string Write::show() {
@@ -184,5 +200,3 @@ PluginInformation* Write::GetPluginInformation() {
 	// ...
 	return info;
 }
-
-

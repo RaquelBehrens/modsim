@@ -118,7 +118,7 @@ private: // attributes 1:1
 	const struct DEFAULT_VALUES {
 		const WaitType waitType = Wait::WaitType::WaitForSignal;
 		const std::string condition = "";
-		const std::string limitExpression = 0;
+        const std::string limitExpression = "0";
 	} DEFAULT;
 	WaitType _waitType = DEFAULT.waitType;
 	std::string _condition = DEFAULT.condition;

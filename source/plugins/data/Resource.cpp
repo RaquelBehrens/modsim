@@ -29,7 +29,7 @@ ModelDataDefinition* Resource::NewInstance(Model* model, std::string name) {
 
 Resource::Resource(Model* model, std::string name) : ModelDataDefinition(model, Util::TypeOf<Resource>(), name) {
 	_resourceEventHandlers->setSortFunc([](const SortedResourceEventHandler* a, const SortedResourceEventHandler * b) {
-		return a->second < b->second; /// Handlers are sorted by priority
+		return a->second < b->second; // Handlers are sorted by priority
 	});
 	// OLD
 	//GetterMemberDouble getter = DefineGetterMember<Resource>(this, &Resource::getCapacity);

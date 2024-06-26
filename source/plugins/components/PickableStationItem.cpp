@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/class.cc to edit this template
  */
 
-/* 
+/*
  * File:   PickableStationItem.cpp
  * Author: rlcancian
- * 
+ *
  * Created on 1 de dezembro de 2022, 14:00
  */
 
@@ -25,7 +25,7 @@ PickableStationItem::PickableStationItem(Model* model, std::string stationName, 
 	ModelDataDefinition* queue = model->getDataManager()->getDataDefinition(Util::TypeOf<Queue>(), queueName);
 	if (queue == nullptr) {
 		queue = model->getParentSimulator()->getPlugins()->newInstance<Queue>(model, queueName);
-	}	
+	}
 	if (queue != nullptr) {
 		PickableStationItem(dynamic_cast<Station*>(station), dynamic_cast<Queue*>(queue));
 	} else if (resource != nullptr) {
@@ -39,6 +39,30 @@ PickableStationItem::PickableStationItem(Model* model, std::string stationName, 
 		station = model->getParentSimulator()->getPlugins()->newInstance<Station>(model, stationName);
 	}
 	PickableStationItem(dynamic_cast<Station*>(station),expression);
+
+	// SimulationControlGeneric<std::string>* propExpression = new SimulationControlGeneric<std::string>(
+	// 								std::bind(&PickableStationItem::getExpression, this), std::bind(&PickableStationItem::setExpression, this, std::placeholders::_1),
+	// 								Util::TypeOf<PickableStationItem>(), "", "Expression", "");
+	// SimulationControlGeneric<Queue*>* propQueue = new SimulationControlGeneric<Queue*>(
+	// 								std::bind(&PickableStationItem::getQueue, this), std::bind(&PickableStationItem::setQueue, this, std::placeholders::_1),
+	// 								Util::TypeOf<PickableStationItem>(), "", "Queue", "");
+	// SimulationControlGeneric<Resource*>* propResource = new SimulationControlGeneric<Resource*>(
+	// 								std::bind(&PickableStationItem::getResource, this), std::bind(&PickableStationItem::setResource, this, std::placeholders::_1),
+	// 								Util::TypeOf<PickableStationItem>(), "", "Resource", "");
+	// SimulationControlGeneric<Station*>* propStation = new SimulationControlGeneric<Station*>(
+	// 								std::bind(&PickableStationItem::getStation, this), std::bind(&PickableStationItem::setStation, this, std::placeholders::_1),
+	// 								Util::TypeOf<PickableStationItem>(), "", "Station", "");
+
+	// _parentModel->getControls()->insert(propExpression);
+	// _parentModel->getControls()->insert(propQueue);
+	// _parentModel->getControls()->insert(propResource);
+	// _parentModel->getControls()->insert(propStation);
+
+	// setting properties
+	// _addProperty(propExpression);
+	// _addProperty(propQueue);
+	// _addProperty(propResource);
+	// _addProperty(propStation);
 }
 
 PickableStationItem::PickableStationItem(Station* station, Queue* queue) {
@@ -89,4 +113,3 @@ void PickableStationItem::setResource(Resource* _resource) {
 void PickableStationItem::setStation(Station* _station) {
 	this->_station = _station;
 }
-

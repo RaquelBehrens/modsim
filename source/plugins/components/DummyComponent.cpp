@@ -18,7 +18,7 @@
 
 
 
-/// Externalize function GetPluginInformation to be accessible throught dynamic linked library
+// Externalize function GetPluginInformation to be accessible throught dynamic linked library
 #ifdef PLUGINCONNECT_DYNAMIC
 extern "C" StaticGetPluginInformation GetPluginInformation() {
 	return &DummyComponent::GetPluginInformation;
@@ -27,7 +27,7 @@ extern "C" StaticGetPluginInformation GetPluginInformation() {
 
 
 //
-// public: /// constructors
+// public: //! constructors
 //
 
 DummyComponent::DummyComponent(Model* model, std::string name) : ModelComponent(model, Util::TypeOf<DummyComponent>(), name) {
@@ -35,14 +35,14 @@ DummyComponent::DummyComponent(Model* model, std::string name) : ModelComponent(
 
 
 //
-// public: /// new public user methods for this component
+// public: //! new public user methods for this component
 //
 
 // ...
 
 
 //
-// public: /// virtual methods
+// public: //! virtual methods
 //
 
 std::string DummyComponent::show() {
@@ -51,7 +51,7 @@ std::string DummyComponent::show() {
 
 
 //
-// public: /// static methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
+// public: //! static methods that must have implementations (Load and New just the same. GetInformation must provide specific infos for the new component
 //
 
 PluginInformation* DummyComponent::GetPluginInformation() {
@@ -88,7 +88,7 @@ ModelDataDefinition* DummyComponent::NewInstance(Model* model, std::string name)
 }
 
 //
-// protected: /// virtual method that must be overriden
+// protected: //! virtual method that must be overriden
 //
 
 bool DummyComponent::_loadInstance(PersistenceRecord *fields) {
@@ -111,7 +111,7 @@ void DummyComponent::_onDispatchEvent(Entity* entity, unsigned int inputPortNumb
 
 
 //
-// protected: /// virtual methods that could be overriden by derived classes, if needed
+// protected: //! virtual methods that could be overriden by derived classes, if needed
 //
 
 /*

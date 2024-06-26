@@ -75,7 +75,7 @@ void Failure::setCountExpression(std::string countExpression) {
 }
 
 std::string Failure::getCountExpression() const {
-	_countExpression;
+	return _countExpression;
 }
 
 void Failure::setDownTimeTimeUnit(Util::TimeUnit downTimeTimeUnit) {
@@ -83,7 +83,7 @@ void Failure::setDownTimeTimeUnit(Util::TimeUnit downTimeTimeUnit) {
 }
 
 Util::TimeUnit Failure::getDownTimeTimeUnit() const {
-	_downTimeTimeUnit;
+	return _downTimeTimeUnit;
 }
 
 void Failure::setDownTimeExpression(std::string downTimeExpression) {

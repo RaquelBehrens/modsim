@@ -20,7 +20,15 @@ public:
 	SortFile();
 	~SortFile() = default;
 public:
+	/*!
+	 * \brief sort
+	 * \return
+	 */
 	bool sort();
+	/*!
+	 * \brief setDataFilename
+	 * \param filename
+	 */
 	void setDataFilename(std::string filename);
 private:
 	void run(int start, int end);

@@ -22,14 +22,55 @@ class StatisticsDatafile_if : public Statistics_if {
 	//    virtual CollectorDatafile_if* getCollector() = 0;
 	//    virtual void setCollector(Collector_if* collector) = 0;
 public:
+	/*!
+	 * \brief mode
+	 * \return
+	 */
 	virtual double mode() = 0;
+	/*!
+	 * \brief mediane
+	 * \return
+	 */
 	virtual double mediane() = 0;
+	/*!
+	 * \brief quartil
+	 * \param num
+	 * \return
+	 */
 	virtual double quartil(unsigned short num) = 0;
+	/*!
+	 * \brief decil
+	 * \param num
+	 * \return
+	 */
 	virtual double decil(unsigned short num) = 0;
+	/*!
+	 * \brief centil
+	 * \param num
+	 * \return
+	 */
 	virtual double centil(unsigned short num) = 0;
+	/*!
+	 * \brief setHistogramNumClasses
+	 * \param num
+	 */
 	virtual void setHistogramNumClasses(unsigned short num) = 0;
+	/*!
+	 * \brief histogramNumClasses
+	 * \return
+	 */
 	virtual unsigned short histogramNumClasses() = 0;
+	/*!
+	 * \brief histogramClassLowerLimit
+	 * \param classNum
+	 * \return
+	 */
 	virtual double histogramClassLowerLimit(unsigned short classNum) = 0;
+	/*!
+	 * \brief histogramClassFrequency
+	 * \param classNum
+	 * \return
+	 */
 	virtual unsigned int histogramClassFrequency(unsigned short classNum) = 0;
 
 };

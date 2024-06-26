@@ -224,7 +224,7 @@ std::string Util::StrReplaceSpecialChars(std::string text) {
 }
 
 
-/// returns a string in the form "[<index>] for array indexes"
+// returns a string in the form "[<index>] for array indexes"
 std::string Util::StrIndex(int index) {
 	return "[" + std::to_string(index) + "]";
 }

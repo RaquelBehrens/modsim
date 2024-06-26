@@ -38,12 +38,36 @@ CollectorClearHandler setCollectorClearHandler(void (Class::*function)(), Class 
  */
 class Collector_if {
 public:
+	/*!
+	 * \brief clear
+	 */
 	virtual void clear() = 0;
+	/*!
+	 * \brief addValue
+	 * \param value
+	 * \param weight
+	 */
 	virtual void addValue(double value, double weight=1) = 0;
+	/*!
+	 * \brief getLastValue
+	 * \return
+	 */
 	virtual double getLastValue() = 0;
+	/*!
+	 * \brief numElements
+	 * \return
+	 */
 	virtual unsigned long numElements() = 0;
 public:
+	/*!
+	 * \brief setAddValueHandler
+	 * \param addValueHandler
+	 */
 	virtual void setAddValueHandler(CollectorAddValueHandler addValueHandler) = 0;
+	/*!
+	 * \brief setClearHandler
+	 * \param clearHandler
+	 */
 	virtual void setClearHandler(CollectorClearHandler clearHandler) = 0;
 };
 

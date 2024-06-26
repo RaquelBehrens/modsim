@@ -8,11 +8,10 @@
  * File:   Smart_Record.h
  * Author: rlcancian
  *
- * Created on 3 de Setembro de 2019, 18:34
+ * Created on
  */
 
-#ifndef SMART_RECORD_H
-#define SMART_RECORD_H
+#pragma once
 
 #include "../../../BaseGenesysTerminalApplication.h"
 
@@ -23,5 +22,4 @@ public:
 	virtual int main(int argc, char** argv);
 };
 
-#endif /* SMART_RECORD_H */
 

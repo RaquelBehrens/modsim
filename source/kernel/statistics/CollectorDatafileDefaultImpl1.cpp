@@ -18,6 +18,7 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <cmath>
 
 CollectorDatafileDefaultImpl1::CollectorDatafileDefaultImpl1() {
 }
@@ -31,7 +32,7 @@ void CollectorDatafileDefaultImpl1::clear() {
 		throw "ERROR - can't open the file ";
 	}
 	_numElements = 0;
-	_lastValue = NULL; //@TODO: Change it to NaN or other default/null value
+	_lastValue = NAN;
 }
 
 void CollectorDatafileDefaultImpl1::addValue(double value, double weight) {
