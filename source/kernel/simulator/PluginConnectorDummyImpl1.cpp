@@ -238,6 +238,36 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Signal::GetPluginInformation;
 	else if (fn == "spicecircuit.so")
 		GetInfo = &SPICECircuit::GetPluginInformation;
+	else if (fn == "resistor.so")
+		GetInfo = &Resistor::GetPluginInformation;
+	else if (fn == "vsource.so")
+		GetInfo = &Vsource::GetPluginInformation;
+	else if (fn == "vpulse.so")
+		GetInfo = &Vpulse::GetPluginInformation;
+	else if (fn == "vsine.so")
+		GetInfo = &Vsine::GetPluginInformation;
+	else if (fn == "capacitor.so")
+		GetInfo = &Capacitor::GetPluginInformation;
+	else if (fn == "diode.so")
+		GetInfo = &Diode::GetPluginInformation;
+	else if (fn == "pmos.so")
+		GetInfo = &PMOS::GetPluginInformation;
+	else if (fn == "nmos.so")
+		GetInfo = &NMOS::GetPluginInformation;
+	else if (fn == "not.so")
+		GetInfo = &NOT::GetPluginInformation;
+	else if (fn == "nor.so")
+		GetInfo = &NOR::GetPluginInformation;
+	else if (fn == "nand.so")
+		GetInfo = &NAND::GetPluginInformation;
+	else if (fn == "and.so")
+		GetInfo = &AND::GetPluginInformation;
+	else if (fn == "or.so")
+		GetInfo = &OR::GetPluginInformation;
+	else if (fn == "xor.so")
+		GetInfo = &XOR::GetPluginInformation;
+	else if (fn == "xnor.so")
+		GetInfo = &XNOR::GetPluginInformation;
 	else if (fn == "spicenode.so")
 		GetInfo = &SPICENode::GetPluginInformation;
 	else if (fn == "store.so")
