@@ -113,8 +113,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/296208d5/Smart_WaitSignal.o \
 	${OBJECTDIR}/_ext/18d98d98/AnElectronicAssemblyAndTestSystem.o \
 	${OBJECTDIR}/_ext/18d98d98/FullSimulationOfComplexModel.o \
+	${OBJECTDIR}/_ext/18d98d98/Half_Adder.o \
 	${OBJECTDIR}/_ext/18d98d98/OperatingSystem02.o \
 	${OBJECTDIR}/_ext/18d98d98/OperatingSystem03.o \
+	${OBJECTDIR}/_ext/18d98d98/Rectifier.o \
 	${OBJECTDIR}/_ext/cecf075e/TestingTerminalApp.o \
 	${OBJECTDIR}/_ext/113d9686/Attribute.o \
 	${OBJECTDIR}/_ext/113d9686/ComponentManager.o \
@@ -208,6 +210,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/f13e5db9/Seize.o \
 	${OBJECTDIR}/_ext/f13e5db9/Separate.o \
 	${OBJECTDIR}/_ext/f13e5db9/Signal.o \
+	${OBJECTDIR}/_ext/f13e5db9/SPICECircuit.o \
+	${OBJECTDIR}/_ext/f13e5db9/SPICENode.o \
 	${OBJECTDIR}/_ext/f13e5db9/Start.o \
 	${OBJECTDIR}/_ext/f13e5db9/Stop.o \
 	${OBJECTDIR}/_ext/f13e5db9/Store.o \
@@ -230,6 +234,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/ccae408d/Sequence.o \
 	${OBJECTDIR}/_ext/ccae408d/Set.o \
 	${OBJECTDIR}/_ext/ccae408d/SignalData.o \
+	${OBJECTDIR}/_ext/ccae408d/SPICERunner.o \
 	${OBJECTDIR}/_ext/ccae408d/Station.o \
 	${OBJECTDIR}/_ext/ccae408d/Storage.o \
 	${OBJECTDIR}/_ext/ccae408d/Variable.o \
@@ -588,6 +593,10 @@ ${OBJECTDIR}/_ext/18d98d98/FullSimulationOfComplexModel.o: ../../source/applicat
 	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/18d98d98/FullSimulationOfComplexModel.o ../../source/applications/terminal/examples/teaching/FullSimulationOfComplexModel.cpp
 
+${OBJECTDIR}/_ext/18d98d98/Half_Adder.o: ../../source/applications/terminal/examples/teaching/Half_Adder.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/18d98d98/Half_Adder.o ../../source/applications/terminal/examples/teaching/Half_Adder.cpp
+
 ${OBJECTDIR}/_ext/18d98d98/OperatingSystem02.o: ../../source/applications/terminal/examples/teaching/OperatingSystem02.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/18d98d98/OperatingSystem02.o ../../source/applications/terminal/examples/teaching/OperatingSystem02.cpp
@@ -595,6 +604,10 @@ ${OBJECTDIR}/_ext/18d98d98/OperatingSystem02.o: ../../source/applications/termin
 ${OBJECTDIR}/_ext/18d98d98/OperatingSystem03.o: ../../source/applications/terminal/examples/teaching/OperatingSystem03.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/18d98d98/OperatingSystem03.o ../../source/applications/terminal/examples/teaching/OperatingSystem03.cpp
+
+${OBJECTDIR}/_ext/18d98d98/Rectifier.o: ../../source/applications/terminal/examples/teaching/Rectifier.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/18d98d98/Rectifier.o ../../source/applications/terminal/examples/teaching/Rectifier.cpp
 
 ${OBJECTDIR}/_ext/cecf075e/TestingTerminalApp.o: ../../source/applications/terminal/underDevelopment/TestingTerminalApp.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/cecf075e
@@ -968,6 +981,14 @@ ${OBJECTDIR}/_ext/f13e5db9/Signal.o: ../../source/plugins/components/Signal.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/f13e5db9/Signal.o ../../source/plugins/components/Signal.cpp
 
+${OBJECTDIR}/_ext/f13e5db9/SPICECircuit.o: ../../source/plugins/components/SPICECircuit.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/f13e5db9/SPICECircuit.o ../../source/plugins/components/SPICECircuit.cpp
+
+${OBJECTDIR}/_ext/f13e5db9/SPICENode.o: ../../source/plugins/components/SPICENode.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/f13e5db9/SPICENode.o ../../source/plugins/components/SPICENode.cpp
+
 ${OBJECTDIR}/_ext/f13e5db9/Start.o: ../../source/plugins/components/Start.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/f13e5db9/Start.o ../../source/plugins/components/Start.cpp
@@ -1055,6 +1076,10 @@ ${OBJECTDIR}/_ext/ccae408d/Set.o: ../../source/plugins/data/Set.cpp
 ${OBJECTDIR}/_ext/ccae408d/SignalData.o: ../../source/plugins/data/SignalData.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/ccae408d
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/ccae408d/SignalData.o ../../source/plugins/data/SignalData.cpp
+
+${OBJECTDIR}/_ext/ccae408d/SPICERunner.o: ../../source/plugins/data/SPICERunner.cpp
+	${MKDIR} -p ${OBJECTDIR}/_ext/ccae408d
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/ccae408d/SPICERunner.o ../../source/plugins/data/SPICERunner.cpp
 
 ${OBJECTDIR}/_ext/ccae408d/Station.o: ../../source/plugins/data/Station.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/ccae408d
@@ -2050,6 +2075,18 @@ ${OBJECTDIR}/_ext/18d98d98/FullSimulationOfComplexModel_nomain.o: ${OBJECTDIR}/_
 	    ${CP} ${OBJECTDIR}/_ext/18d98d98/FullSimulationOfComplexModel.o ${OBJECTDIR}/_ext/18d98d98/FullSimulationOfComplexModel_nomain.o;\
 	fi
 
+${OBJECTDIR}/_ext/18d98d98/Half_Adder_nomain.o: ${OBJECTDIR}/_ext/18d98d98/Half_Adder.o ../../source/applications/terminal/examples/teaching/Half_Adder.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/18d98d98/Half_Adder.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/18d98d98/Half_Adder_nomain.o ../../source/applications/terminal/examples/teaching/Half_Adder.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/18d98d98/Half_Adder.o ${OBJECTDIR}/_ext/18d98d98/Half_Adder_nomain.o;\
+	fi
+
 ${OBJECTDIR}/_ext/18d98d98/OperatingSystem02_nomain.o: ${OBJECTDIR}/_ext/18d98d98/OperatingSystem02.o ../../source/applications/terminal/examples/teaching/OperatingSystem02.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/18d98d98/OperatingSystem02.o`; \
@@ -2072,6 +2109,18 @@ ${OBJECTDIR}/_ext/18d98d98/OperatingSystem03_nomain.o: ${OBJECTDIR}/_ext/18d98d9
 	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/18d98d98/OperatingSystem03_nomain.o ../../source/applications/terminal/examples/teaching/OperatingSystem03.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/18d98d98/OperatingSystem03.o ${OBJECTDIR}/_ext/18d98d98/OperatingSystem03_nomain.o;\
+	fi
+
+${OBJECTDIR}/_ext/18d98d98/Rectifier_nomain.o: ${OBJECTDIR}/_ext/18d98d98/Rectifier.o ../../source/applications/terminal/examples/teaching/Rectifier.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/18d98d98
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/18d98d98/Rectifier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/18d98d98/Rectifier_nomain.o ../../source/applications/terminal/examples/teaching/Rectifier.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/18d98d98/Rectifier.o ${OBJECTDIR}/_ext/18d98d98/Rectifier_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/cecf075e/TestingTerminalApp_nomain.o: ${OBJECTDIR}/_ext/cecf075e/TestingTerminalApp.o ../../source/applications/terminal/underDevelopment/TestingTerminalApp.cpp 
@@ -3182,6 +3231,30 @@ ${OBJECTDIR}/_ext/f13e5db9/Signal_nomain.o: ${OBJECTDIR}/_ext/f13e5db9/Signal.o 
 	    ${CP} ${OBJECTDIR}/_ext/f13e5db9/Signal.o ${OBJECTDIR}/_ext/f13e5db9/Signal_nomain.o;\
 	fi
 
+${OBJECTDIR}/_ext/f13e5db9/SPICECircuit_nomain.o: ${OBJECTDIR}/_ext/f13e5db9/SPICECircuit.o ../../source/plugins/components/SPICECircuit.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/f13e5db9/SPICECircuit.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/f13e5db9/SPICECircuit_nomain.o ../../source/plugins/components/SPICECircuit.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/f13e5db9/SPICECircuit.o ${OBJECTDIR}/_ext/f13e5db9/SPICECircuit_nomain.o;\
+	fi
+
+${OBJECTDIR}/_ext/f13e5db9/SPICENode_nomain.o: ${OBJECTDIR}/_ext/f13e5db9/SPICENode.o ../../source/plugins/components/SPICENode.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/f13e5db9/SPICENode.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/f13e5db9/SPICENode_nomain.o ../../source/plugins/components/SPICENode.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/f13e5db9/SPICENode.o ${OBJECTDIR}/_ext/f13e5db9/SPICENode_nomain.o;\
+	fi
+
 ${OBJECTDIR}/_ext/f13e5db9/Start_nomain.o: ${OBJECTDIR}/_ext/f13e5db9/Start.o ../../source/plugins/components/Start.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/f13e5db9
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/f13e5db9/Start.o`; \
@@ -3444,6 +3517,18 @@ ${OBJECTDIR}/_ext/ccae408d/SignalData_nomain.o: ${OBJECTDIR}/_ext/ccae408d/Signa
 	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/ccae408d/SignalData_nomain.o ../../source/plugins/data/SignalData.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/_ext/ccae408d/SignalData.o ${OBJECTDIR}/_ext/ccae408d/SignalData_nomain.o;\
+	fi
+
+${OBJECTDIR}/_ext/ccae408d/SPICERunner_nomain.o: ${OBJECTDIR}/_ext/ccae408d/SPICERunner.o ../../source/plugins/data/SPICERunner.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/ccae408d
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/ccae408d/SPICERunner.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/ccae408d/SPICERunner_nomain.o ../../source/plugins/data/SPICERunner.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/_ext/ccae408d/SPICERunner.o ${OBJECTDIR}/_ext/ccae408d/SPICERunner_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/ccae408d/Station_nomain.o: ${OBJECTDIR}/_ext/ccae408d/Station.o ../../source/plugins/data/Station.cpp 

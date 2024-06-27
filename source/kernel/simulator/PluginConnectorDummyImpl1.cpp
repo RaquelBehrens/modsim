@@ -51,6 +51,8 @@
 #include "../../plugins/components/Start.h"
 #include "../../plugins/components/Search.h"
 #include "../../plugins/components/Signal.h"
+#include "../../plugins/components/SPICECircuit.h"
+#include "../../plugins/components/SPICENode.h"
 #include "../../plugins/components/Stop.h"
 #include "../../plugins/components/Store.h"
 #include "../../plugins/components/Separate.h"
@@ -63,6 +65,7 @@
 
 // Model data definitions
 #include "../../plugins/data/CppCompiler.h"
+#include "../../plugins/data/EFSM.h"
 #include "../../plugins/data/EntityGroup.h"
 #include "../../plugins/data/Failure.h"
 #include "../../plugins/data/File.h"
@@ -72,10 +75,10 @@
 #include "../../plugins/data/Sequence.h"
 #include "../../plugins/data/Set.h"
 #include "../../plugins/data/SignalData.h"
+#include "../../plugins/data/SPICERunner.h"
 #include "../../plugins/data/Station.h"
 #include "../../plugins/data/Storage.h"
 #include "../../plugins/data/Variable.h"
-#include "../../plugins/data/EFSM.h"
 //#include "../../plugins/data/Expression.h"
 //#include "../../plugins/data/Conveyor.h"
 //#include "../../plugins/data/Segment.h"
@@ -144,6 +147,8 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Sequence::GetPluginInformation;
 	else if (fn == "signaldata.so")
 		GetInfo = &SignalData::GetPluginInformation;
+	else if (fn == "spicerunner.so")
+		GetInfo = &SPICERunner::GetPluginInformation;
 	else if (fn == "storage.so")
 		GetInfo = &Storage::GetPluginInformation;
 	else if (fn == "variable.so")
@@ -231,6 +236,10 @@ Plugin* PluginConnectorDummyImpl1::connect(const std::string dynamicLibraryFilen
 		GetInfo = &Search::GetPluginInformation;
 	else if (fn == "signal.so")
 		GetInfo = &Signal::GetPluginInformation;
+	else if (fn == "spicecircuit.so")
+		GetInfo = &SPICECircuit::GetPluginInformation;
+	else if (fn == "spicenode.so")
+		GetInfo = &SPICENode::GetPluginInformation;
 	else if (fn == "store.so")
 		GetInfo = &Store::GetPluginInformation;
 	else if (fn == "unstore.so")

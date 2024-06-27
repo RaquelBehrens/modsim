@@ -49,6 +49,9 @@ separate.so
 search.so
 signal.so
 signaldata.so
+spicecircuit.so
+spicenode.so
+spicerunner.so
 store.so
 storage.so
 sequence.so

@@ -15,6 +15,8 @@
 
 #include "GenesysShell/GenesysShell.h"
 #include "examples/smarts/Smart_EFSM2.h"
+#include "examples/teaching/Rectifier.h"
+#include "examples/teaching/Half_Adder.h"
 
 template <typename T>
 struct TraitsTerminalApp {
@@ -40,7 +42,7 @@ template <> struct TraitsTerminalApp<GenesysApplication_if> {
 	//typedef Smart_Delay Application;
 	//typedef Smart_Dummy Application;
 	//typedef Smart_EFSM1 Application;
-	typedef Smart_EFSM2 Application;
+	//typedef Smart_EFSM2 Application;
 	//typedef Smart_Failures Application;
 	//typedef Smart_FiniteStateMachine Application;
 	//typedef Smart_HoldSearchRemove Application;
@@ -114,6 +116,9 @@ template <> struct TraitsTerminalApp<GenesysApplication_if> {
 	//typedef Example_PortModel Application;
 	//typedef Example_PublicTransport Application;
 
+	// SPICE EXAMPLES
+	//typedef Rectifier Application;
+	typedef Half_Adder Application;
 
 	// TEACHING
 	//typedef AnElectronicAssemblyAndTestSystem Application;
