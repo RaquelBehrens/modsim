@@ -86,8 +86,13 @@ SOURCES += \
 	../../../../plugins/components/DummyComponent.cpp \
 	../../../../plugins/components/Enter.cpp \
 	../../../../plugins/components/Exit.cpp \
+    ../../../../plugins/components/FSM_ModalModel.cpp \
+    ../../../../plugins/components/FSM_State.cpp \
+    ../../../../plugins/components/FSM_Transition.cpp \
 	../../../../plugins/components/FiniteStateMachine.cpp \
 	../../../../plugins/components/PickableStationItem.cpp \
+    ../../../../plugins/components/SPICECircuit.cpp \
+    ../../../../plugins/components/SPICENode.cpp \
 	../../../../plugins/components/Wait.cpp \
 	../../../../plugins/components/LSODE.cpp \
 	../../../../plugins/components/Leave.cpp \
@@ -124,6 +129,7 @@ SOURCES += \
 	../../../../plugins/data/Label.cpp \
 	../../../../plugins/data/Queue.cpp \
 	../../../../plugins/data/Resource.cpp \
+    ../../../../plugins/data/SPICERunner.cpp \
 	../../../../plugins/data/Schedule.cpp \
 	../../../../plugins/data/Sequence.cpp \
 	../../../../plugins/data/Set.cpp \
@@ -139,6 +145,8 @@ SOURCES += \
 	../../../BaseGenesysTerminalApplication.cpp \
 	../../../terminal/GenesysShell/GenesysShell.cpp \
 	../../../terminal/examples/smarts/Smart_CellularAutomata.cpp \
+    ../../../terminal/examples/teaching/Half_Adder.cpp \
+    ../../../terminal/examples/teaching/Rectifier.cpp \
     AnimationTransition.cpp \
 	CodeEditor.cpp \
 	DataComponentProperty.cpp \
@@ -292,8 +300,13 @@ HEADERS += \
 	../../../../plugins/components/DummyComponent.h \
 	../../../../plugins/components/Enter.h \
 	../../../../plugins/components/Exit.h \
+    ../../../../plugins/components/FSM_ModalModel.h \
+    ../../../../plugins/components/FSM_State.h \
+    ../../../../plugins/components/FSM_Transition.h \
 	../../../../plugins/components/FiniteStateMachine.h \
 	../../../../plugins/components/PickableStationItem.h \
+    ../../../../plugins/components/SPICECircuit.h \
+    ../../../../plugins/components/SPICENode.h \
 	../../../../plugins/components/Wait.h \
 	../../../../plugins/components/LSODE.h \
 	../../../../plugins/components/Leave.h \
@@ -330,6 +343,7 @@ HEADERS += \
 	../../../../plugins/data/Label.h \
 	../../../../plugins/data/Queue.h \
 	../../../../plugins/data/Resource.h \
+    ../../../../plugins/data/SPICERunner.h \
 	../../../../plugins/data/Schedule.h \
 	../../../../plugins/data/Sequence.h \
 	../../../../plugins/data/Set.h \
@@ -354,6 +368,8 @@ HEADERS += \
 	../../../terminal/GenesysShell/GenesysShell_if.h \
 	../../../terminal/TraitsTerminalApp.h \
 	../../../terminal/examples/smarts/Smart_CellularAutomata.h \
+    ../../../terminal/examples/teaching/Half_Adder.h \
+    ../../../terminal/examples/teaching/Rectifier.h \
     AnimationTransition.h \
 	CodeEditor.h \
 	LineNumberArea.h \
