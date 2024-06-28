@@ -10,7 +10,7 @@ ARG GENESYS_REPO=https://github.com/RaquelBehrens/modsim
 ENV REMOTE=1
 
 # A branch que o container usa
-ENV GENESYS_MAIN_BRANCH=main
+ENV GENESYS_BRANCH=main
 
 # Caminho onde o GenESyS vai ser clonado
 ENV GENESYS_ROOT=/home/genesys/remote

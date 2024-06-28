@@ -1,4 +1,4 @@
-source ./scripts/config.sh
+source ./scripts/env.sh
 
 if [ $DOCKER_CACHE == 0 ]; then
     docker build -f $GENESYS_DOCKERFILE -t $GENESYS_IMAGE --no-cache .

@@ -1,3 +1,3 @@
-source ./scripts/config.sh
+source ./scripts/env.sh
 
 docker push $GENESYS_IMAGE

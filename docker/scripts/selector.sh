@@ -1,4 +1,4 @@
-source ./scripts/config.sh
+source ./scripts/env.sh
 
 while true
 do

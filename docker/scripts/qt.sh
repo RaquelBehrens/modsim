@@ -1,4 +1,4 @@
-source ./scripts/config.sh
+source ./scripts/env.sh
 
 if docker image inspect $GENESYS_IMAGE >/dev/null 2>&1; then
     xhost local:root
