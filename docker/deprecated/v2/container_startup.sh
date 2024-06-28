@@ -2,7 +2,7 @@
 
 # Garante que a versão do repositório do GenESyS é a última possível
 git -C $GENESYS_CLONE_PATH fetch --all
-git -C $GENESYS_CLONE_PATH reset --hard origin/$GENESYS_MAIN_BRANCH
+git -C $GENESYS_CLONE_PATH reset --hard origin/$GENESYS_BRANCH
 
 if [ $1 == "gui" ]; then
     $GENESYS_CLONE_PATH$GENESYS_GUI_SUBPATH

@@ -2,7 +2,7 @@
 if [[ $REMOTE == 1 ]]; then
     echo "Executando a partir do código remoto"
     git -C $GENESYS_ROOT fetch --all
-    git -C $GENESYS_ROOT reset --hard origin/$GENESYS_MAIN_BRANCH
+    git -C $GENESYS_ROOT reset --hard origin/$GENESYS_BRANCH
 else
     echo "Executando a partir do código local"
 fi
